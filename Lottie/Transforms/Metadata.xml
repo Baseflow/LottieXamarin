@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+	
+	<attr path="/api/package[@name='com.airbnb.lottie.animatable']/class[@name='BaseAnimatableValue']" name="visibility">public</attr>
+	<attr path="/api/package[@name='com.airbnb.lottie.animatable']/interface[@name='AnimatableValue']" name="visibility">public</attr>
+
+	<attr path="/api/package[@name='com.airbnb.lottie.animatable']/class[@name='AnimatableFloatValue']/method[@name='getInitialValue' and count(parameter)=0]" name="return">java.lang.Object</attr>
+	<attr path="/api/package[@name='com.airbnb.lottie.animatable']/class[@name='AnimatableIntegerValue']/method[@name='getInitialValue' and count(parameter)=0]" name="return">java.lang.Object</attr>
+
+	<remove-node path="/api/package[@name='com.airbnb.lottie.animatable']/class[@name='BaseAnimatableValue']/method[@name='valueFromObject' and count(parameter)=2 and parameter[1][@type='java.lang.Object'] and parameter[2][@type='float']]" />
+
+	<remove-node path="/api/package[@name='com.airbnb.lottie.animation']/class[@name='KeyframeAnimation']/method[@name='getValue' and count(parameter)=0]" />
+	
+</metadata>
