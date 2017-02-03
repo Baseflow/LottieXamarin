@@ -17,6 +17,7 @@
         </dependencies>
     </metadata>
     <files>
-        <file src="..\Lottie\bin\Release\Lottie.dll" target="lib\MonoAndroid\Lottie.dll" />
+        <file src="..\Lottie\bin\Release\Lottie.dll" target="lib\MonoAndroid41\Lottie.dll" />
+        <file src="..\Lottie\bin\Release\Lottie.xml" target="lib\MonoAndroid41\Lottie.xml" />
     </files>
 </package>
