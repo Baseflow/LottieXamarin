@@ -1,7 +1,7 @@
 using System;
 namespace Lottie.Forms
 {
-	public class AnimationView : Xamarin.Forms.ContentView
+	public class AnimationView : Xamarin.Forms.View
 	{
 		public static readonly Xamarin.Forms.BindableProperty ProgressProperty = Xamarin.Forms.BindableProperty.Create(nameof(Progress), typeof(float), typeof(Lottie.Forms.AnimationView), default(float));
 		public float Progress
@@ -31,8 +31,9 @@ namespace Lottie.Forms
 			}
 		}
 
-		public event EventHandler OnPlay;
+		// TODO: Loop, Autoplay, IsPlaying, Duration
 
+		public event EventHandler OnPlay;
 		public void Play()
 		{
 			OnPlay?.Invoke(this, new EventArgs());
