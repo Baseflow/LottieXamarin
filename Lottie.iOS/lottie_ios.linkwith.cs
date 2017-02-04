@@ -3,4 +3,5 @@ using ObjCRuntime;
 Frameworks = "UIKit",
 IsCxx = true,
 SmartLink = true,
+LinkerFlags="-ObjC",
 ForceLoad = true)]
