@@ -107,6 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="Renderers\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -119,12 +120,24 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Renderers\AnimationViewRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lottie.Forms\Lottie.Forms.csproj">
       <Project>{F03D2DD6-BBDA-45B9-982E-4DCA43FCB8E1}</Project>
       <Name>Lottie.Forms</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lottie.iOS\Lottie.iOS.csproj">
+      <Project>{8F0CC2B2-88E2-459B-AC92-F3A74071707E}</Project>
+      <Name>Lottie.iOS</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\HamburgerArrow.json" />
+    <BundleResource Include="Resources\LottieLogo1.json" />
+    <BundleResource Include="Resources\LottieLogo2.json" />
+    <BundleResource Include="Resources\PinJump.json" />
+    <BundleResource Include="Resources\TwitterHeart.json" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.3.180\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.3.180\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
