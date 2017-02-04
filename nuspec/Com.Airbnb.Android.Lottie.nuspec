@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Com.Airbnb.Android.Lottie</id>
-        <version>1.0.0.1</version>
+        <version>1.0.0.2</version>
         <title>Lottie for Xamarin.Android</title>
         <authors>Martijn van Dijk</authors>
         <owners>Martijn van Dijk</owners>
@@ -17,7 +17,7 @@
         </dependencies>
     </metadata>
     <files>
-        <file src="..\Lottie\bin\Release\Lottie.dll" target="lib\MonoAndroid41\Lottie.dll" />
-        <file src="..\Lottie\bin\Release\Lottie.xml" target="lib\MonoAndroid41\Lottie.xml" />
+        <file src="..\Lottie.Droid\bin\Release\Lottie.dll" target="lib\MonoAndroid41\Lottie.dll" />
+        <file src="..\Lottie.Droid\bin\Release\Lottie.xml" target="lib\MonoAndroid41\Lottie.xml" />
     </files>
 </package>

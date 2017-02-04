@@ -1,13 +1,13 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lottie.Droid", "Lottie\Lottie.Droid.csproj", "{0183ABDF-F583-4E8A-8055-5369192EE42D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lottie.Droid", "Lottie.Droid\Lottie.Droid.csproj", "{0183ABDF-F583-4E8A-8055-5369192EE42D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lottie.Forms", "Lottie.Forms\Lottie.Forms.csproj", "{F03D2DD6-BBDA-45B9-982E-4DCA43FCB8E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lottie.Forms.iOS", "iOS\Lottie.Forms.iOS.csproj", "{54014744-396B-4965-A996-296FCBED0FF4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lottie.Forms.iOS", "Lottie.Forms.iOS\Lottie.Forms.iOS.csproj", "{54014744-396B-4965-A996-296FCBED0FF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lottie.Forms.Droid", "Droid\Lottie.Forms.Droid.csproj", "{DFD5A4C3-584A-472D-9270-6692A95EEEE8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lottie.Forms.Droid", "Lottie.Forms.Droid\Lottie.Forms.Droid.csproj", "{DFD5A4C3-584A-472D-9270-6692A95EEEE8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lottie.iOS", "Lottie.iOS\Lottie.iOS.csproj", "{8F0CC2B2-88E2-459B-AC92-F3A74071707E}"
 EndProject
