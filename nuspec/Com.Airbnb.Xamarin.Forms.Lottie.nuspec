@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+    <metadata>
+        <id>Com.Airbnb.Xamarin.Forms.Lottie</id>
+        <version>1.0.0</version>
+        <title>Lottie for Xamarin.Forms</title>
+        <authors>Martijn van Dijk</authors>
+        <owners>Martijn van Dijk</owners>
+        <licenseUrl>https://github.com/martijn00/LottieXamarin/blob/master/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/martijn00/LottieXamarin</projectUrl>
+        <iconUrl>https://raw.githubusercontent.com/martijn00/LottieXamarin/master/icon_lottie.png</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Lottie for Xamarin Forms</description>
+        <summary>Render After Effects animations natively on Android and iOS</summary>
+        <tags>xamarin, monodroid, C#, xamarin.android, Forms, android, Lottie, animation, airbnb</tags>
+        <dependencies>
+			<group>
+                <dependency id="Xamarin.Forms" version="2.3.3.180" />
+            </group>
+            <group targetFramework="MonoAndroid0.0">
+                <dependency id="Com.Airbnb.Android.Lottie" version="1.0.0" />
+            </group>
+            <group targetFramework="Xamarin.iOS0.0">
+                <dependency id="Com.Airbnb.iOS.Lottie" version="1.0.0" />
+            </group>
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="..\Droid\bin\Release\Lottie.dll" target="lib\MonoAndroid\Lottie.dll" />
+        <file src="..\Droid\bin\Release\Lottie.dll.mdb" target="lib\MonoAndroid\Lottie.dll.mdb" />
+        <file src="..\Droid\bin\Release\Lottie.Forms.dll" target="lib\MonoAndroid\Lottie.Forms.dll" />
+        <file src="..\Droid\bin\Release\Lottie.Forms.Droid.dll" target="lib\MonoAndroid\Lottie.Forms.Droid.dll" />
+        <file src="..\Droid\bin\Release\Lottie.Forms.Droid.dll.mdb" target="lib\MonoAndroid\Lottie.Forms.Droid.dll.mdb" />
+        <file src="..\Droid\bin\Release\Lottie.xml" target="lib\MonoAndroid\Lottie.xml" />
+        <file src="..\iOS\bin\iPhone\Release\Lottie.Forms.dll" target="lib\xamarinios\Lottie.Forms.dll" />
+    </files>
+</package>
