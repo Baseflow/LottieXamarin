@@ -89,10 +89,6 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Lottie.iOS, Version=1.0.6244.36778, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Com.Airbnb.iOS.Lottie.1.0.0.2\lib\xamarinios\Lottie.iOS.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -131,6 +127,10 @@
     <ProjectReference Include="..\Lottie.Forms\Lottie.Forms.csproj">
       <Project>{F03D2DD6-BBDA-45B9-982E-4DCA43FCB8E1}</Project>
       <Name>Lottie.Forms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lottie.iOS\Lottie.iOS.csproj">
+      <Project>{8F0CC2B2-88E2-459B-AC92-F3A74071707E}</Project>
+      <Name>Lottie.iOS</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
