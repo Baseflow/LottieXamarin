@@ -2,21 +2,38 @@
 using System.ComponentModel;
 using Com.Airbnb.Lottie;
 using Lottie.Forms;
-using Lottie.Forms.Droid.Renderers;
+using Lottie.Forms.Droid;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
 [assembly: ExportRenderer(typeof(AnimationView), typeof(AnimationViewRenderer))]
 
-namespace Lottie.Forms.Droid.Renderers
+namespace Lottie.Forms.Droid
 {
     public class AnimationViewRenderer :
         Xamarin.Forms.Platform.Android.AppCompat.ViewRenderer<AnimationView, LottieAnimationView>
     {
         private LottieAnimationView _animationView;
 
+        /// <summary>
+		///   Used for registration with dependency service
+		/// </summary>
+		public static new void Init()
+        {
+            // needed because of this linker issue: https://bugzilla.xamarin.com/show_bug.cgi?id=31076
+            #pragma warning disable 0219
+            var dummy = new AnimationViewRenderer();
+           #pragma warning restore 0219
+        }
+
+        public AnimationViewRenderer()
+        {
+            var i = 2;
+        }
+
         protected override void OnElementChanged(ElementChangedEventArgs<AnimationView> e)
         {
+            System.Diagnostics.Debug.WriteLine("THINGS ARE HAPPENIGN!!!");
             base.OnElementChanged(e);
 
             if (Control == null)
@@ -35,6 +52,16 @@ namespace Lottie.Forms.Droid.Renderers
             {
                 e.NewElement.OnPlay += OnPlay;
                 e.NewElement.OnPause += OnPause;
+                _animationView.Loop(e.NewElement.Loop);
+                if (!string.IsNullOrEmpty(e.NewElement.Animation))
+                {
+                    _animationView.SetAnimation(e.NewElement.Animation);
+                    Element.Duration = TimeSpan.FromMilliseconds(_animationView.Duration);
+                }
+                if (e.NewElement.AutoPlay)
+                {
+                    _animationView.PlayAnimation();
+                }
             }
         }
 
@@ -60,10 +87,15 @@ namespace Lottie.Forms.Droid.Renderers
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            System.Diagnostics.Debug.WriteLine("FJRWIJFWIEJFEWIJFWEI");
             if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
             {
                 _animationView.SetAnimation(Element.Animation);
                 Element.Duration = TimeSpan.FromMilliseconds(_animationView.Duration);
+                if (Element.AutoPlay)
+                {
+                    _animationView.PlayAnimation();
+                }
             }
 
             if (e.PropertyName == AnimationView.ProgressProperty.PropertyName)
