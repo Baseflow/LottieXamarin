@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using Lottie.Forms;
+using Xamarin.Forms;
 
 namespace Example.Forms
 {
