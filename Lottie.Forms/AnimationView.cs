@@ -20,6 +20,9 @@ namespace Lottie.Forms
         public static readonly BindableProperty AnimationProperty = BindableProperty.Create(nameof(Animation),
             typeof(string), typeof(AnimationView), default(string));
 
+        public static readonly BindableProperty AutoPlayProperty = BindableProperty.Create(nameof(AutoPlay),
+            typeof(bool), typeof(AnimationView), default(bool));
+
         public float Progress
         {
             get { return (float) GetValue(ProgressProperty); }
@@ -46,6 +49,13 @@ namespace Lottie.Forms
             get { return (bool) GetValue(LoopProperty); }
 
             set { SetValue(LoopProperty, value); }
+        }
+
+        public bool AutoPlay
+        {
+            get { return (bool)GetValue(AutoPlayProperty); }
+
+            set { SetValue(AutoPlayProperty, value); }
         }
 
         public bool IsPlaying

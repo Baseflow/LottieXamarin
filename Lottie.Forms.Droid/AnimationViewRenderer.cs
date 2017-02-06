@@ -1,0 +1,114 @@
+﻿using System;
+using System.ComponentModel;
+using Com.Airbnb.Lottie;
+using Lottie.Forms;
+using Lottie.Forms.Droid;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.Android;
+
+[assembly: ExportRenderer(typeof(AnimationView), typeof(AnimationViewRenderer))]
+
+namespace Lottie.Forms.Droid
+{
+    public class AnimationViewRenderer :
+        Xamarin.Forms.Platform.Android.AppCompat.ViewRenderer<AnimationView, LottieAnimationView>
+    {
+        private LottieAnimationView _animationView;
+
+        /// <summary>
+		///   Used for registration with dependency service
+		/// </summary>
+		public static new void Init()
+        {
+            // needed because of this linker issue: https://bugzilla.xamarin.com/show_bug.cgi?id=31076
+            #pragma warning disable 0219
+            var dummy = new AnimationViewRenderer();
+           #pragma warning restore 0219
+        }
+
+        public AnimationViewRenderer()
+        {
+            var i = 2;
+        }
+
+        protected override void OnElementChanged(ElementChangedEventArgs<AnimationView> e)
+        {
+            System.Diagnostics.Debug.WriteLine("THINGS ARE HAPPENIGN!!!");
+            base.OnElementChanged(e);
+
+            if (Control == null)
+            {
+                _animationView = new LottieAnimationView(Context);
+                SetNativeControl(_animationView);
+            }
+
+            if (e.OldElement != null)
+            {
+                e.OldElement.OnPlay -= OnPlay;
+                e.OldElement.OnPause -= OnPause;
+            }
+
+            if (e.NewElement != null)
+            {
+                e.NewElement.OnPlay += OnPlay;
+                e.NewElement.OnPause += OnPause;
+                _animationView.Loop(e.NewElement.Loop);
+                if (!string.IsNullOrEmpty(e.NewElement.Animation))
+                {
+                    _animationView.SetAnimation(e.NewElement.Animation);
+                    Element.Duration = TimeSpan.FromMilliseconds(_animationView.Duration);
+                }
+                if (e.NewElement.AutoPlay)
+                {
+                    _animationView.PlayAnimation();
+                }
+            }
+        }
+
+        private void OnPlay(object sender, EventArgs e)
+        {
+            if ((_animationView != null)
+                && (_animationView.Handle != IntPtr.Zero))
+            {
+                _animationView.PlayAnimation();
+                Element.IsPlaying = true;
+            }
+        }
+
+        private void OnPause(object sender, EventArgs e)
+        {
+            if ((_animationView != null)
+                && (_animationView.Handle != IntPtr.Zero))
+            {
+                _animationView.PauseAnimation();
+                Element.IsPlaying = false;
+            }
+        }
+
+        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("FJRWIJFWIEJFEWIJFWEI");
+            if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
+            {
+                _animationView.SetAnimation(Element.Animation);
+                Element.Duration = TimeSpan.FromMilliseconds(_animationView.Duration);
+                if (Element.AutoPlay)
+                {
+                    _animationView.PlayAnimation();
+                }
+            }
+
+            if (e.PropertyName == AnimationView.ProgressProperty.PropertyName)
+            {
+                _animationView.Progress = Element.Progress;
+            }
+
+            if (e.PropertyName == AnimationView.LoopProperty.PropertyName)
+            {
+                _animationView?.Loop(Element.Loop);
+            }
+
+            base.OnElementPropertyChanged(sender, e);
+        }
+    }
+}
