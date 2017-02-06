@@ -1,14 +1,323 @@
 # LottieXamarin
-Render After Effects animations natively on Android and iOS for Xamarin
+Lottie is a mobile library for Android and iOS that parses [Adobe After Effects](http://www.adobe.com/products/aftereffects.html) animations exported as json with [Bodymovin](https://github.com/bodymovin/bodymovin) and renders them natively on mobile!
 
-* Nuget for Android: https://www.nuget.org/packages/Com.Airbnb.Android.Lottie/
+## Download
 
-[![NuGet Badge](https://buildstats.info/nuget/Com.Airbnb.Android.Lottie)](https://www.nuget.org/packages/Com.Airbnb.Android.Lottie/)
+Android: [![NuGet Badge](https://buildstats.info/nuget/Com.Airbnb.Android.Lottie)](https://www.nuget.org/packages/Com.Airbnb.Android.Lottie/)
+iOS: [![NuGet Badge](https://buildstats.info/nuget/Com.Airbnb.iOS.Lottie)](https://www.nuget.org/packages/Com.Airbnb.iOS.Lottie/)
+Xamarin.Forms: [![NuGet Badge](https://buildstats.info/nuget/Com.Airbnb.Xamarin.Forms.Lottie)](https://www.nuget.org/packages/Com.Airbnb.Xamarin.Forms.Lottie/)
 
-* Nuget for iOS: https://www.nuget.org/packages/Com.Airbnb.iOS.Lottie/
 
-[![NuGet Badge](https://buildstats.info/nuget/Com.Airbnb.iOS.Lottie)](https://www.nuget.org/packages/Com.Airbnb.iOS.Lottie/)
+For the first time, designers can create **and ship** beautiful animations without an engineer painstakingly recreating it by hand. They say a picture is worth 1,000 words so here are 13,000:
 
-* Nuget for Xamarin Forms: https://www.nuget.org/packages/Com.Airbnb.Xamarin.Forms.Lottie/
+![Example1](https://raw.githubusercontent.com/airbnb/lottie-android/master/gifs/Example1.gif)
 
-[![NuGet Badge](https://buildstats.info/nuget/Com.Airbnb.Xamarin.Forms.Lottie)](https://www.nuget.org/packages/Com.Airbnb.Xamarin.Forms.Lottie/)
+
+![Example2](https://raw.githubusercontent.com/airbnb/lottie-android/master/gifs/Example2.gif)
+
+
+![Example3](https://raw.githubusercontent.com/airbnb/lottie-android/master/gifs/Example3.gif)
+
+
+![Community](https://raw.githubusercontent.com/airbnb/lottie-android/master/gifs/Community 2_3.gif)
+
+
+![Example4](https://raw.githubusercontent.com/airbnb/lottie-android/master/gifs/Example4.gif)
+
+All of these animations were created in After Effects, exported with Bodymovin, and rendered natively with no additional engineering effort.
+
+[Bodymovin](https://github.com/bodymovin/bodymovin) is an After Effects plugin created by Hernan Torrisi that exports After effects files as json and includes a javascript web player. We've built on top of his great work to extend its usage to Android, iOS, and React Native.
+
+Read more about it on our [blog post](http://airbnb.design/introducing-lottie/)
+Or get in touch on Twitter ([gpeal8](https://twitter.com/gpeal8)) or via lottie@airbnb.com
+
+## Sample App
+
+You can build the sample app yourself or download it from the [Play Store](https://play.google.com/store/apps/details?id=com.airbnb.lottie). The sample app includes some built in animations but also allows you to load an animation from internal storage or from a url.
+
+## Using Lottie for Android
+Lottie supports Jellybean (API 16) and above.
+The simplest way to use it is with LottieAnimationView:
+
+```xml
+<com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:lottie_fileName="hello-world.json"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true" />
+```
+
+Or you can load it programatically in multiple ways.
+From a json asset in app/src/main/assets:
+```java
+LottieAnimationView animationView = (LottieAnimationView) findViewById(R.id.animation_view);
+animationView.setAnimation("hello-world.json");
+animationView.loop(true);
+```
+This method will load the file and parse the animation in the background and asynchronously start rendering once completed.
+
+If you want to reuse an animation such as in each item of a list or load it from a network request JSONObject:
+```java
+ LottieAnimationView animationView = (LottieAnimationView) findViewById(R.id.animation_view);
+ ...
+ LottieComposition composition = LottieComposition.fromJson(getResources(), jsonObject, (composition) -> {
+     animationView.setComposition(composition);
+     animationView.playAnimation();
+ });
+```
+
+You can then control the animation or add listeners:
+```java
+animationView.addAnimatorUpdateListener((animation) -> {
+    // Do something.
+});
+animationView.playAnimation();
+...
+if (animationView.isAnimating()) {
+    // Do something.
+}
+...
+animationView.setProgress(0.5f);
+...
+// Custom animation speed or duration.
+ValueAnimator animator = ValueAnimator.ofFloat(0f, 1f)
+    .setDuration(500);
+animator.addUpdateListener(animation -> {
+    animationView.setProgress(animation.getAnimatedValue());
+});
+animator.start();
+...
+animationView.cancelAnimation();
+```
+
+
+Under the hood, `LottieAnimationView` uses `LottieDrawable` to render its animations. If you need to, you can use the the drawable form directly:
+```java
+LottieDrawable drawable = new LottieDrawable();
+LottieComposition.fromAssetFileName(getContext(), "hello-world.json", (composition) -> {
+    drawable.setComposition(composition);
+});
+```
+
+If your animation will be frequently reused, `LottieAnimationView` has an optional caching strategy built in. Use `LottieAnimationView#setAnimation(String, CacheStrategy)`. `CacheStrategy` can be `Strong`, `Weak`, or `None` to have `LottieAnimationView` hold a strong or weak reference to the loaded and parsed animation. 
+
+
+## Using Lottie for iOS
+Lottie supports iOS 8 and above.
+Lottie animations can be loaded from bundled JSON or from a URL
+
+The simplest way to use it is with LAAnimationView:
+```objective-c
+LAAnimationView *animation = [LAAnimationView animationNamed:@"Lottie"];
+[self.view addSubview:animation];
+[animation playWithCompletion:^(BOOL animationFinished) {
+  // Do Something
+}];
+```
+
+Or you can load it programmatically from a NSURL
+```objective-c
+LAAnimationView *animation = [[LAAnimationView alloc] initWithContentsOfURL:[NSURL URLWithString:URL]];
+[self.view addSubview:animation];
+```
+
+Lottie supports the iOS `UIViewContentModes` aspectFit and aspectFill
+
+You can also set the animation progress interactively.
+```objective-c
+CGPoint translation = [gesture getTranslationInView:self.view];
+CGFloat progress = translation.y / self.view.bounds.size.height;
+animationView.animationProgress = progress;
+```
+
+Want to mask arbitrary views to animation layers in a Lottie View?
+Easy-peasy as long as you know the name of the layer from After Effects
+
+```objective-c
+UIView *snapshot = [self.view snapshotViewAfterScreenUpdates:YES];
+[lottieAnimation addSubview:snapshot toLayerNamed:@"AfterEffectsLayerName"];
+```
+
+Lottie comes with a `UIViewController` animation-controller for making custom viewController transitions!
+
+```objective-c
+#pragma mark -- View Controller Transitioning
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+                                                                  presentingController:(UIViewController *)presenting
+                                                                      sourceController:(UIViewController *)source {
+  LAAnimationTransitionController *animationController = [[LAAnimationTransitionController alloc] initWithAnimationNamed:@"vcTransition1"
+                                                                                                          fromLayerNamed:@"outLayer"
+                                                                                                            toLayerNamed:@"inLayer"];
+  return animationController;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+  LAAnimationTransitionController *animationController = [[LAAnimationTransitionController alloc] initWithAnimationNamed:@"vcTransition2"
+                                                                                                          fromLayerNamed:@"outLayer"
+                                                                                                            toLayerNamed:@"inLayer"];
+  return animationController;
+}
+
+```
+
+If your animation will be frequently reused, `LAAnimationView` has an built in LRU Caching Strategy.
+
+## Swift Support
+
+Lottie works just fine in Swift too!
+Simply `import Lottie` at the top of your swift class, and use Lottie as follows
+
+```swift
+let animationView = LAAnimationView.animationNamed("hamburger")
+self.view.addSubview(animationView!)
+    
+animationView?.play(completion: { (finished) in
+  // Do Something
+})
+```
+
+## Supported After Effects Features
+
+### Keyframe Interpolation
+
+---
+
+* Linear Interpolation
+
+* Bezier Interpolation
+
+* Hold Interpolation
+
+* Rove Across Time
+
+* Spatial Bezier
+
+### Solids
+
+---
+
+* Transform Anchor Point
+
+* Transform Position
+
+* Transform Scale
+
+* Transform Rotation
+
+* Transform Opacity
+
+### Masks
+
+---
+
+* Path
+
+* Opacity
+
+* Multiple Masks (additive)
+
+### Track Mattes
+
+---
+
+* Alpha Matte
+
+### Parenting
+
+---
+
+* Multiple Parenting
+
+* Nulls
+
+### Shape Layers
+
+---
+
+* Anchor Point
+
+* Position
+
+* Scale
+
+* Rotation
+
+* Opacity
+
+* Path
+
+* Group Transforms (Anchor point, position, scale etc)
+
+* Rectangle (All properties)
+
+* Elipse (All properties)
+
+* Multiple paths in one group
+
+#### Stroke (shape layer)
+
+---
+
+* Stroke Color
+
+* Stroke Opacity
+
+* Stroke Width
+
+* Line Cap
+
+* Dashes
+
+#### Fill (shape layer)
+
+---
+
+* Fill Color
+
+* Fill Opacity
+
+#### Trim Paths (shape layer)
+
+---
+
+* Trim Paths Start
+
+* Trim Paths End
+
+* Trim Paths Offset
+
+## Performance and Memory
+1. If the composition has no masks or mattes then the performance and memory overhead should be quite good. No bitmaps are created and most operations are simple canvas draw operations.
+2. If the composition has mattes, 2-3 bitmaps will be created at the composition size. The bitmaps are created automatically by lottie when the animation view is added to the window and recycled when it is removed from the window. For this reason, it is not recommended to use animations with masks or mattes in a RecyclerView because it will cause significant bitmap churn. In addition to memory churn, additional bitmap.eraseColor() and canvas.drawBitmap() calls are necessary for masks and mattes which will slow down the performance of the animation. For small animations, the performance hit should not be large enough to be obvious when actually used.
+4. If you are using your animation in a list, it is recommended to use a CacheStrategy in LottieAnimationView.setAnimation(String, CacheStrategy) so the animations do not have to be deserialized every time.
+
+## Try it out
+Clone this repository and run the LottieSample module to see a bunch of sample animations. The JSON files for them are located in [LottieSample/src/main/assets](https://github.com/airbnb/lottie-android/tree/master/LottieSample/src/main/assets) and the orignal After Effects files are located in [/After Effects Samples](https://github.com/airbnb/lottie-android/tree/master/After%20Effects%20Samples)
+
+The sample app can also load json files at a given url or locally on your device (like Downloads or on your sdcard).
+
+## Community Contributions
+ * [Xamarin bindings](https://github.com/martijn00/LottieXamarin)
+ * [NativeScript bindings](https://github.com/bradmartin/nativescript-lottie)
+
+## Alternatives
+1. Build animations by hand. Building animations by hand is a huge time commitment for design and engineering across Android and iOS. It's often hard or even impossible to justify spending so much time to get an animation right.
+2. [Facebook Keyframes](https://github.com/facebookincubator/Keyframes). Keyframes is a wonderful new library from Facebook that they built for reactions. However, Keyframes doesn't support some of Lottie's features such as masks, mattes, trim paths, dash patterns, and more.
+2. Gifs. Gifs are more than double the size of a bodymovin JSON and are rendered at a fixed size that can't be scaled up to match large and high density screens.
+3. Png sequences. Png sequences are even worse than gifs in that their file sizes are often 30-50x the size of the bodymovin json and also can't be scaled up.
+
+## Why is it called Lottie?
+Lottie is named after a German film director and the foremost pioneer of silhouette animation. Her best known films are The Adventures of Prince Achmed (1926) – the oldest surviving feature-length animated film, preceding Walt Disney's feature-length Snow White and the Seven Dwarfs (1937) by over ten years
+[The art of Lotte Reineger](https://www.youtube.com/watch?v=LvU55CUw5Ck&feature=youtu.be)
+
+## Contributing
+Contributors are more than welcome. Just upload a PR with a description of your changes.
+Lottie uses [Facebook screenshot tests for Android](https://github.com/facebook/screenshot-tests-for-android) to identify pixel level changes/breakages. Please run `./gradlew --daemon recordMode screenshotTests` before uploading a PR to ensure that nothing has broken. Use a Nexus 5 emulator running Lollipop for this. Changed screenshots will show up in your git diff if you have.
+
+If you would like to add more JSON files and screenshot tests, feel free to do so and add the test to `LottieTest`.
+
+## Issues or feature requests?
+File github issues for anything that is unexpectedly broken. If an After Effects file is not working, please attach it to your issue. Debugging without the original file is much more difficult.
