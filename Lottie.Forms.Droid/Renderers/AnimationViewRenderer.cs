@@ -1,74 +1,82 @@
 ﻿using System;
+using System.ComponentModel;
+using Com.Airbnb.Lottie;
+using Lottie.Forms;
 using Lottie.Forms.Droid.Renderers;
 using Xamarin.Forms;
-using Xamarin.Forms.Platform.Android.AppCompat;
+using Xamarin.Forms.Platform.Android;
 
-[assembly: ExportRenderer(typeof(Lottie.Forms.AnimationView), typeof(AnimationViewRenderer))]
+[assembly: ExportRenderer(typeof(AnimationView), typeof(AnimationViewRenderer))]
 
 namespace Lottie.Forms.Droid.Renderers
 {
-	public class AnimationViewRenderer : ViewRenderer<Lottie.Forms.AnimationView, Com.Airbnb.Lottie.LottieAnimationView>
-	{
-		public AnimationViewRenderer()
-		{
-		}
+    public class AnimationViewRenderer :
+        Xamarin.Forms.Platform.Android.AppCompat.ViewRenderer<AnimationView, LottieAnimationView>
+    {
+        private LottieAnimationView _animationView;
 
-		Com.Airbnb.Lottie.LottieAnimationView animationView;
-
-		protected override void OnElementChanged(Xamarin.Forms.Platform.Android.ElementChangedEventArgs<AnimationView> e)
-		{
-			base.OnElementChanged(e);
+        protected override void OnElementChanged(ElementChangedEventArgs<AnimationView> e)
+        {
+            base.OnElementChanged(e);
 
             if (Control == null)
-			{
-				animationView = new Com.Airbnb.Lottie.LottieAnimationView(Context);
-				SetNativeControl(animationView);
-			}
+            {
+                _animationView = new LottieAnimationView(Context);
+                SetNativeControl(_animationView);
+            }
 
-			if (e.OldElement != null)
-			{
-				e.OldElement.OnPlay -= this.OnPlay;
-				e.OldElement.OnPause -= this.OnPause;
-			}
+            if (e.OldElement != null)
+            {
+                e.OldElement.OnPlay -= OnPlay;
+                e.OldElement.OnPause -= OnPause;
+            }
 
-			if (e.NewElement != null)
-			{
-				e.NewElement.OnPlay += this.OnPlay;
-				e.NewElement.OnPause += this.OnPause;
-			}
-		}
+            if (e.NewElement != null)
+            {
+                e.NewElement.OnPlay += OnPlay;
+                e.NewElement.OnPause += OnPause;
+            }
+        }
 
-		void OnPlay(object sender, EventArgs e)
-		{
-			if (animationView != null 
-			    && animationView.Handle != IntPtr.Zero)
-			{
-				animationView.PlayAnimation();
-			}
-		}
+        private void OnPlay(object sender, EventArgs e)
+        {
+            if ((_animationView != null)
+                && (_animationView.Handle != IntPtr.Zero))
+            {
+                _animationView.PlayAnimation();
+                Element.IsPlaying = true;
+            }
+        }
 
-		void OnPause(object sender, EventArgs e)
-		{
-			if (animationView != null
-				&& animationView.Handle != IntPtr.Zero)
-			{
-				animationView.PauseAnimation();
-			}
-		}
+        private void OnPause(object sender, EventArgs e)
+        {
+            if ((_animationView != null)
+                && (_animationView.Handle != IntPtr.Zero))
+            {
+                _animationView.PauseAnimation();
+                Element.IsPlaying = false;
+            }
+        }
 
-		protected override void OnElementPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-		{
-			if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
-			{
-				animationView.SetAnimation(Element.Animation);
-			}
+        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
+            {
+                _animationView.SetAnimation(Element.Animation);
+                Element.Duration = TimeSpan.FromMilliseconds(_animationView.Duration);
+            }
 
-			if (e.PropertyName == AnimationView.ProgressProperty.PropertyName)
-			{
-				animationView.Progress = Element.Progress;
-			}
-			
-			base.OnElementPropertyChanged(sender, e);
-		}
-	}
+            if (e.PropertyName == AnimationView.ProgressProperty.PropertyName)
+            {
+                _animationView.Progress = Element.Progress;
+            }
+
+            if (e.PropertyName == AnimationView.LoopProperty.PropertyName)
+            {
+                _animationView?.Loop(Element.Loop);
+            }
+
+            base.OnElementPropertyChanged(sender, e);
+        }
+    }
 }
