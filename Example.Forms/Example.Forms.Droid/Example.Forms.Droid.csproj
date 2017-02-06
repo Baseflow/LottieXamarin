@@ -126,6 +126,10 @@
     <AndroidResource Include="Resources\values\styles.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Lottie.Forms.Droid\Lottie.Forms.Droid.csproj">
+      <Project>{a5328112-8844-41d1-9018-9eafca7fe5dc}</Project>
+      <Name>Lottie.Forms.Droid</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Example.Forms\Example.Forms.csproj">
       <Project>{75bf924b-e18f-4b37-8c42-36525eec73bb}</Project>
       <Name>Example.Forms</Name>
