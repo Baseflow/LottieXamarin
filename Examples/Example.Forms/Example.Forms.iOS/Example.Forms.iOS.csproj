@@ -146,8 +146,16 @@
       <IsWatchApp>false</IsWatchApp>
     </ProjectReference>
     <ProjectReference Include="..\Example.Forms\Example.Forms.csproj">
-      <Project>{75bf924b-e18f-4b37-8c42-36525eec73bb}</Project>
+      <Project>{BA40E6BD-F568-4301-A402-3846F176D49E}</Project>
       <Name>Example.Forms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Lottie.Forms\Lottie.Forms.csproj">
+      <Project>{F03D2DD6-BBDA-45B9-982E-4DCA43FCB8E1}</Project>
+      <Name>Lottie.Forms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Lottie.iOS\Lottie.iOS.csproj">
+      <Project>{8F0CC2B2-88E2-459B-AC92-F3A74071707E}</Project>
+      <Name>Lottie.iOS</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
