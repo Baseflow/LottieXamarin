@@ -146,7 +146,7 @@
       <IsWatchApp>false</IsWatchApp>
     </ProjectReference>
     <ProjectReference Include="..\Example.Forms\Example.Forms.csproj">
-      <Project>{75bf924b-e18f-4b37-8c42-36525eec73bb}</Project>
+      <Project>{BA40E6BD-F568-4301-A402-3846F176D49E}</Project>
       <Name>Example.Forms</Name>
     </ProjectReference>
   </ItemGroup>
