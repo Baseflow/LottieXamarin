@@ -1,48 +1,72 @@
 using System;
+using Xamarin.Forms;
+
 namespace Lottie.Forms
 {
-	public class AnimationView : Xamarin.Forms.View
-	{
-		public static readonly Xamarin.Forms.BindableProperty ProgressProperty = Xamarin.Forms.BindableProperty.Create(nameof(Progress), typeof(float), typeof(Lottie.Forms.AnimationView), default(float));
-		public float Progress
-		{
-			get
-			{
-				return (float)GetValue(ProgressProperty);
-			}
+    public class AnimationView : View
+    {
+        public static readonly BindableProperty ProgressProperty = BindableProperty.Create(nameof(Progress),
+            typeof(float), typeof(AnimationView), default(float));
 
-			set
-			{
-				SetValue(ProgressProperty, value);
-			}
-		}
+        public static readonly BindableProperty LoopProperty = BindableProperty.Create(nameof(Loop), typeof(bool),
+            typeof(AnimationView), default(bool));
 
-		public static readonly Xamarin.Forms.BindableProperty AnimationProperty = Xamarin.Forms.BindableProperty.Create(nameof(Animation), typeof(string), typeof(Lottie.Forms.AnimationView), default(string), Xamarin.Forms.BindingMode.OneWay);
-		public string Animation
-		{
-			get
-			{
-				return (string)GetValue(AnimationProperty);
-			}
+        public static readonly BindableProperty IsPlayingProperty = BindableProperty.Create(nameof(IsPlaying),
+            typeof(bool), typeof(AnimationView), default(bool));
 
-			set
-			{
-				SetValue(AnimationProperty, value);
-			}
-		}
+        public static readonly BindableProperty DurationProperty = BindableProperty.Create(nameof(Duration),
+            typeof(TimeSpan), typeof(AnimationView), default(TimeSpan));
 
-		// TODO: Loop, Autoplay, IsPlaying, Duration
+        public static readonly BindableProperty AnimationProperty = BindableProperty.Create(nameof(Animation),
+            typeof(string), typeof(AnimationView), default(string));
 
-		public event EventHandler OnPlay;
-		public void Play()
-		{
-			OnPlay?.Invoke(this, new EventArgs());
-		}
+        public float Progress
+        {
+            get { return (float) GetValue(ProgressProperty); }
 
-		public event EventHandler OnPause;
-		public void Pause()
-		{
-			OnPause?.Invoke(this, new EventArgs());
-		}
-	}
+            set { SetValue(ProgressProperty, value); }
+        }
+
+        public string Animation
+        {
+            get { return (string) GetValue(AnimationProperty); }
+
+            set { SetValue(AnimationProperty, value); }
+        }
+
+        public TimeSpan Duration
+        {
+            get { return (TimeSpan) GetValue(DurationProperty); }
+
+            set { SetValue(DurationProperty, value); }
+        }
+
+        public bool Loop
+        {
+            get { return (bool) GetValue(LoopProperty); }
+
+            set { SetValue(LoopProperty, value); }
+        }
+
+        public bool IsPlaying
+        {
+            get { return (bool) GetValue(IsPlayingProperty); }
+
+            set { SetValue(IsPlayingProperty, value); }
+        }
+
+        public event EventHandler OnPlay;
+
+        public void Play()
+        {
+            OnPlay?.Invoke(this, new EventArgs());
+        }
+
+        public event EventHandler OnPause;
+
+        public void Pause()
+        {
+            OnPause?.Invoke(this, new EventArgs());
+        }
+    }
 }

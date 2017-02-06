@@ -1,91 +1,86 @@
 ﻿using System;
+using System.ComponentModel;
+using Airbnb.Lottie;
+using Lottie.Forms;
 using Lottie.Forms.iOS.Renderers;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
-using Airbnb.Lottie;
 
-[assembly: ExportRenderer(typeof(Lottie.Forms.AnimationView), typeof(AnimationViewRenderer))]
+[assembly: ExportRenderer(typeof(AnimationView), typeof(AnimationViewRenderer))]
 
 namespace Lottie.Forms.iOS.Renderers
 {
-	public class AnimationViewRenderer : ViewRenderer<Lottie.Forms.AnimationView, LAAnimationView>
-	{
-		public AnimationViewRenderer()
-		{
-		}
+    public class AnimationViewRenderer : ViewRenderer<AnimationView, LAAnimationView>
+    {
+        private LAAnimationView _animationView;
 
-		UIKit.UIContentContainer container;
-		LAAnimationView animationView;
+        protected override void OnElementChanged(ElementChangedEventArgs<AnimationView> e)
+        {
+            base.OnElementChanged(e);
 
-		protected override void OnElementChanged(Xamarin.Forms.Platform.iOS.ElementChangedEventArgs<AnimationView> e)
-		{
-			base.OnElementChanged(e);
+            if (e.OldElement != null)
+            {
+                e.OldElement.OnPlay -= OnPlay;
+                e.OldElement.OnPause -= OnPause;
+            }
 
-		//	container = new UIKit.UIContentContainer();
+            if (e.NewElement == null) return;
 
-			if (e.OldElement != null)
-			{
-				e.OldElement.OnPlay -= this.OnPlay;
-				e.OldElement.OnPause -= this.OnPause;
-			}
+            e.NewElement.OnPlay += OnPlay;
+            e.NewElement.OnPause += OnPause;
 
-			if (e.NewElement != null)
-			{
-				e.NewElement.OnPlay += this.OnPlay;
-				e.NewElement.OnPause += this.OnPause;
+            if (!string.IsNullOrEmpty(e.NewElement.Animation))
+            {
+                _animationView = LAAnimationView.AnimationNamed(e.NewElement.Animation);
+            }
 
-				if (!string.IsNullOrEmpty(e.NewElement.Animation))
-				{
-					animationView = LAAnimationView.AnimationNamed(e.NewElement.Animation);
-				}
+            if (_animationView != null)
+            {
+                AddSubview(_animationView);
+                SetNeedsLayout();
+            }
+        }
 
-				if (animationView != null)
-				{
-					AddSubview(animationView);
-					SetNeedsLayout();
-				}
-			}
-		}
+        private void OnPlay(object sender, EventArgs e)
+        {
+            _animationView?.Play();
+            Element.IsPlaying = true;
+        }
 
-		void OnPlay(object sender, EventArgs e)
-		{
-			if (animationView != null )
-			{
-				animationView.Play();
-			}
-		}
+        private void OnPause(object sender, EventArgs e)
+        {
+            _animationView?.Pause();
+            Element.IsPlaying = false;
+        }
 
-		void OnPause(object sender, EventArgs e)
-		{
-			if (animationView != null)
-			{
-				animationView.Pause();
-			}
-		}
+        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
+            {
+                _animationView?.RemoveFromSuperview();
+                _animationView = LAAnimationView.AnimationNamed(Element.Animation);
+                Element.Duration = TimeSpan.FromMilliseconds(_animationView.AnimationDuration);
+                AddSubview(_animationView);
+                SetNeedsLayout();
+            }
 
-		protected override void OnElementPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-		{
-			if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
-			{
-				if (animationView != null)
-				{
-					animationView.RemoveFromSuperview();
-				}
-				animationView = LAAnimationView.AnimationNamed(Element.Animation);
+            if (e.PropertyName == AnimationView.ProgressProperty.PropertyName)
+            {
+                if (_animationView != null)
+                {
+                    _animationView.AnimationProgress = Element.Progress;
+                }
+            }
 
-				AddSubview(animationView);
-				SetNeedsLayout();
-			}
+            if (e.PropertyName == AnimationView.LoopProperty.PropertyName)
+            {
+                if (_animationView != null)
+                {
+                    _animationView.LoopAnimation = Element.Loop;
+                }
+            }
 
-			if (e.PropertyName == AnimationView.ProgressProperty.PropertyName)
-			{
-				if (animationView != null)
-				{
-					animationView.AnimationProgress = Element.Progress;
-				}
-			}
-			
-			base.OnElementPropertyChanged(sender, e);
-		}
-	}
+            base.OnElementPropertyChanged(sender, e);
+        }
+    }
 }
