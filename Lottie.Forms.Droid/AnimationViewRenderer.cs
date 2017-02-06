@@ -26,14 +26,8 @@ namespace Lottie.Forms.Droid
            #pragma warning restore 0219
         }
 
-        public AnimationViewRenderer()
-        {
-            var i = 2;
-        }
-
         protected override void OnElementChanged(ElementChangedEventArgs<AnimationView> e)
         {
-            System.Diagnostics.Debug.WriteLine("THINGS ARE HAPPENIGN!!!");
             base.OnElementChanged(e);
 
             if (Control == null)
@@ -87,7 +81,6 @@ namespace Lottie.Forms.Droid
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine("FJRWIJFWIEJFEWIJFWEI");
             if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
             {
                 _animationView.SetAnimation(Element.Animation);
@@ -100,7 +93,8 @@ namespace Lottie.Forms.Droid
 
             if (e.PropertyName == AnimationView.ProgressProperty.PropertyName)
             {
-                _animationView.Progress = Element.Progress;
+				_animationView.PauseAnimation();
+				_animationView.Progress = Element.Progress;
             }
 
             if (e.PropertyName == AnimationView.LoopProperty.PropertyName)
