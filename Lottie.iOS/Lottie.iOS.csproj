@@ -35,6 +35,7 @@
   <ItemGroup>
     <Compile Include="Linker.cs" />  
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="LAAnimationView.cs" />
   </ItemGroup>
   <ItemGroup>
     <ObjcBindingApiDefinition Include="ApiDefinitions.cs" />
