@@ -35,7 +35,7 @@ Or get in touch on Twitter ([gpeal8](https://twitter.com/gpeal8)) or via lottie@
 
 You can build the sample app yourself or download it from the [Play Store](https://play.google.com/store/apps/details?id=com.airbnb.lottie). The sample app includes some built in animations but also allows you to load an animation from internal storage or from a url.
 
-## Using Lottie for Android
+## Using Lottie for Xamarin Android
 Lottie supports Jellybean (API 16) and above.
 The simplest way to use it is with LottieAnimationView:
 
@@ -51,133 +51,125 @@ The simplest way to use it is with LottieAnimationView:
 
 Or you can load it programatically in multiple ways.
 From a json asset in app/src/main/assets:
-```java
-LottieAnimationView animationView = (LottieAnimationView) findViewById(R.id.animation_view);
-animationView.setAnimation("hello-world.json");
-animationView.loop(true);
+```csharp
+LottieAnimationView animationView = FindViewById<LottieAnimationView>(Resource.Id.animation_view);
+animationView.SetAnimation("hello-world.json");
+animationView.Loop = true;
 ```
 This method will load the file and parse the animation in the background and asynchronously start rendering once completed.
 
 If you want to reuse an animation such as in each item of a list or load it from a network request JSONObject:
-```java
- LottieAnimationView animationView = (LottieAnimationView) findViewById(R.id.animation_view);
+```csharp
+ LottieAnimationView animationView = FindViewById<LottieAnimationView>(Resource.Id.animation_view);
  ...
- LottieComposition composition = LottieComposition.fromJson(getResources(), jsonObject, (composition) -> {
-     animationView.setComposition(composition);
-     animationView.playAnimation();
+ LottieComposition composition = LottieComposition.FromJson(Resources, jsonObject, (composition) => 
+ {
+     animationView.SetComposition(composition);
+     animationView.PlayAnimation();
  });
 ```
 
 You can then control the animation or add listeners:
-```java
-animationView.addAnimatorUpdateListener((animation) -> {
-    // Do something.
-});
-animationView.playAnimation();
+```csharp
+animationView.AddAnimatorUpdateListener(animationListener);
+animationView.PlayAnimation();
 ...
-if (animationView.isAnimating()) {
+if (animationView.IsAnimating) 
+{
     // Do something.
 }
 ...
-animationView.setProgress(0.5f);
+animationView.Progress = 0.5f;
 ...
 // Custom animation speed or duration.
-ValueAnimator animator = ValueAnimator.ofFloat(0f, 1f)
-    .setDuration(500);
-animator.addUpdateListener(animation -> {
-    animationView.setProgress(animation.getAnimatedValue());
-});
-animator.start();
+ValueAnimator animator = ValueAnimator.OfFloat(0f, 1f).SetDuration(500);
+animator.Update += (sender, e) => animationView.Progress = (float)e.Animation.AnimatedValue;
+animator.Start();
 ...
-animationView.cancelAnimation();
+animationView.CancelAnimation();
 ```
 
 
 Under the hood, `LottieAnimationView` uses `LottieDrawable` to render its animations. If you need to, you can use the the drawable form directly:
-```java
+```csharp
 LottieDrawable drawable = new LottieDrawable();
-LottieComposition.fromAssetFileName(getContext(), "hello-world.json", (composition) -> {
-    drawable.setComposition(composition);
+LottieComposition.FromAssetFileName(Context, "hello-world.json", (composition) => {
+    drawable.SetComposition(composition);
 });
 ```
 
-If your animation will be frequently reused, `LottieAnimationView` has an optional caching strategy built in. Use `LottieAnimationView#setAnimation(String, CacheStrategy)`. `CacheStrategy` can be `Strong`, `Weak`, or `None` to have `LottieAnimationView` hold a strong or weak reference to the loaded and parsed animation. 
+If your animation will be frequently reused, `LottieAnimationView` has an optional caching strategy built in. Use `LottieAnimationView#SetAnimation(String, CacheStrategy)`. `CacheStrategy` can be `Strong`, `Weak`, or `None` to have `LottieAnimationView` hold a strong or weak reference to the loaded and parsed animation. 
 
 
-## Using Lottie for iOS
+## Using Lottie for Xamarin iOS
 Lottie supports iOS 8 and above.
 Lottie animations can be loaded from bundled JSON or from a URL
 
 The simplest way to use it is with LAAnimationView:
-```objective-c
-LAAnimationView *animation = [LAAnimationView animationNamed:@"Lottie"];
-[self.view addSubview:animation];
-[animation playWithCompletion:^(BOOL animationFinished) {
+```csharp
+LAAnimationView animation = LAAnimationView.AnimationNamed("LottieLogo1");
+this.View.AddSubview(animation);
+animation.PlayWithCompletion((animationFinished) => {
   // Do Something
-}];
+});
 ```
 
-Or you can load it programmatically from a NSURL
-```objective-c
-LAAnimationView *animation = [[LAAnimationView alloc] initWithContentsOfURL:[NSURL URLWithString:URL]];
-[self.view addSubview:animation];
+Or you can load it programmatically from a NSUrl
+```csharp
+LAAnimationView animation = new LAAnimationView(new NSUrl(url));
+this.View.AddSubview(animation);
 ```
 
-Lottie supports the iOS `UIViewContentModes` aspectFit and aspectFill
+Lottie supports the iOS `UIViewContentModes` ScaleAspectFit and ScaleAspectFill
 
 You can also set the animation progress interactively.
-```objective-c
-CGPoint translation = [gesture getTranslationInView:self.view];
-CGFloat progress = translation.y / self.view.bounds.size.height;
-animationView.animationProgress = progress;
+```csharp
+CGPoint translation = gesture.GetTranslationInView(this.View);
+nfloat progress = translation.Y / this.View.Bounds.Size.Height;
+animationView.AnimationProgress = progress;
 ```
 
 Want to mask arbitrary views to animation layers in a Lottie View?
 Easy-peasy as long as you know the name of the layer from After Effects
 
-```objective-c
-UIView *snapshot = [self.view snapshotViewAfterScreenUpdates:YES];
-[lottieAnimation addSubview:snapshot toLayerNamed:@"AfterEffectsLayerName"];
+```chsarp
+UIView snapshot = this.View.SnapshotView(afterScreenUpdates: true);
+lottieAnimation.AddSubview(snapshot, layer: "AfterEffectsLayerName");
 ```
 
 Lottie comes with a `UIViewController` animation-controller for making custom viewController transitions!
 
-```objective-c
-#pragma mark -- View Controller Transitioning
+```chsarp
+#region View Controller Transitioning
+public class LAAnimationTransitionDelegate : UIViewControllerTransitioningDelegate
+{
+    public override IUIViewControllerAnimatedTransitioning GetAnimationControllerForPresentedController(UIViewController presented, UIViewController presenting, UIViewController source)
+    {
+        LAAnimationTransitionController animationController =
+            new LAAnimationTransitionController(
+            animation: "vcTransition1",
+            fromLayer: "outLayer",
+            toLayer: "inLayer");
 
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
-                                                                  presentingController:(UIViewController *)presenting
-                                                                      sourceController:(UIViewController *)source {
-  LAAnimationTransitionController *animationController = [[LAAnimationTransitionController alloc] initWithAnimationNamed:@"vcTransition1"
-                                                                                                          fromLayerNamed:@"outLayer"
-                                                                                                            toLayerNamed:@"inLayer"];
-  return animationController;
+        return animationController;
+    }
+
+    public override IUIViewControllerAnimatedTransitioning GetAnimationControllerForDismissedController(UIViewController dismissed)
+    {
+        LAAnimationTransitionController animationController = 
+            new LAAnimationTransitionController(
+                animation: "vcTransition2",
+                fromLayer: "outLayer",
+                toLayer: "inLayer");
+
+        return animationController;
+    } 
 }
-
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-  LAAnimationTransitionController *animationController = [[LAAnimationTransitionController alloc] initWithAnimationNamed:@"vcTransition2"
-                                                                                                          fromLayerNamed:@"outLayer"
-                                                                                                            toLayerNamed:@"inLayer"];
-  return animationController;
-}
-
+#endregion
 ```
 
 If your animation will be frequently reused, `LAAnimationView` has an built in LRU Caching Strategy.
 
-## Swift Support
-
-Lottie works just fine in Swift too!
-Simply `import Lottie` at the top of your swift class, and use Lottie as follows
-
-```swift
-let animationView = LAAnimationView.animationNamed("hamburger")
-self.view.addSubview(animationView!)
-    
-animationView?.play(completion: { (finished) in
-  // Do Something
-})
-```
 
 ## Supported After Effects Features
 
