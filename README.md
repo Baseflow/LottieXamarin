@@ -51,7 +51,7 @@ The simplest way to use it is with LottieAnimationView:
 
 Or you can load it programatically in multiple ways.
 From a json asset in app/src/main/assets:
-```csharp
+```c#
 LottieAnimationView animationView = FindViewById<LottieAnimationView>(Resource.Id.animation_view);
 animationView.SetAnimation("hello-world.json");
 animationView.Loop = true;
@@ -59,7 +59,7 @@ animationView.Loop = true;
 This method will load the file and parse the animation in the background and asynchronously start rendering once completed.
 
 If you want to reuse an animation such as in each item of a list or load it from a network request JSONObject:
-```csharp
+```c#
  LottieAnimationView animationView = FindViewById<LottieAnimationView>(Resource.Id.animation_view);
  ...
  LottieComposition composition = LottieComposition.FromJson(Resources, jsonObject, (composition) => 
@@ -70,7 +70,7 @@ If you want to reuse an animation such as in each item of a list or load it from
 ```
 
 You can then control the animation or add listeners:
-```csharp
+```c#
 animationView.AddAnimatorUpdateListener(animationListener);
 animationView.PlayAnimation();
 ...
@@ -91,7 +91,7 @@ animationView.CancelAnimation();
 
 
 Under the hood, `LottieAnimationView` uses `LottieDrawable` to render its animations. If you need to, you can use the the drawable form directly:
-```csharp
+```c#
 LottieDrawable drawable = new LottieDrawable();
 LottieComposition.FromAssetFileName(Context, "hello-world.json", (composition) => {
     drawable.SetComposition(composition);
@@ -100,13 +100,12 @@ LottieComposition.FromAssetFileName(Context, "hello-world.json", (composition) =
 
 If your animation will be frequently reused, `LottieAnimationView` has an optional caching strategy built in. Use `LottieAnimationView#SetAnimation(String, CacheStrategy)`. `CacheStrategy` can be `Strong`, `Weak`, or `None` to have `LottieAnimationView` hold a strong or weak reference to the loaded and parsed animation. 
 
-
 ## Using Lottie for Xamarin iOS
 Lottie supports iOS 8 and above.
 Lottie animations can be loaded from bundled JSON or from a URL
 
 The simplest way to use it is with LAAnimationView:
-```csharp
+```c#
 LAAnimationView animation = LAAnimationView.AnimationNamed("LottieLogo1");
 this.View.AddSubview(animation);
 animation.PlayWithCompletion((animationFinished) => {
@@ -115,7 +114,7 @@ animation.PlayWithCompletion((animationFinished) => {
 ```
 
 Or you can load it programmatically from a NSUrl
-```csharp
+```c#
 LAAnimationView animation = new LAAnimationView(new NSUrl(url));
 this.View.AddSubview(animation);
 ```
@@ -123,7 +122,7 @@ this.View.AddSubview(animation);
 Lottie supports the iOS `UIViewContentModes` ScaleAspectFit and ScaleAspectFill
 
 You can also set the animation progress interactively.
-```csharp
+```c#
 CGPoint translation = gesture.GetTranslationInView(this.View);
 nfloat progress = translation.Y / this.View.Bounds.Size.Height;
 animationView.AnimationProgress = progress;
@@ -132,14 +131,14 @@ animationView.AnimationProgress = progress;
 Want to mask arbitrary views to animation layers in a Lottie View?
 Easy-peasy as long as you know the name of the layer from After Effects
 
-```chsarp
+```c#
 UIView snapshot = this.View.SnapshotView(afterScreenUpdates: true);
 lottieAnimation.AddSubview(snapshot, layer: "AfterEffectsLayerName");
 ```
 
 Lottie comes with a `UIViewController` animation-controller for making custom viewController transitions!
 
-```chsarp
+```c#
 #region View Controller Transitioning
 public class LAAnimationTransitionDelegate : UIViewControllerTransitioningDelegate
 {
@@ -294,7 +293,8 @@ The sample app can also load json files at a given url or locally on your device
 ## Community Contributions
  * [Xamarin bindings](https://github.com/martijn00/LottieXamarin)
  * [NativeScript bindings](https://github.com/bradmartin/nativescript-lottie)
-
+ * [Appcelerator Titanium bindings](https://github.com/m1ga/ti.animation)
+ 
 ## Alternatives
 1. Build animations by hand. Building animations by hand is a huge time commitment for design and engineering across Android and iOS. It's often hard or even impossible to justify spending so much time to get an animation right.
 2. [Facebook Keyframes](https://github.com/facebookincubator/Keyframes). Keyframes is a wonderful new library from Facebook that they built for reactions. However, Keyframes doesn't support some of Lottie's features such as masks, mattes, trim paths, dash patterns, and more.
