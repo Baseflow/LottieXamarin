@@ -14,7 +14,7 @@ namespace Airbnb.Lottie
 	}
 
 	// typedef void (^LAAnimationCompletionBlock)(BOOL);
-	delegate void LAAnimationCompletionBlock (bool arg0);
+	delegate void LAAnimationCompletionBlock (bool animationFinished);
 
 	// @interface LAAnimationView : UIView
 	[BaseType (typeof(UIView))]
