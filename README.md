@@ -100,6 +100,15 @@ LottieComposition.FromAssetFileName(Context, "hello-world.json", (composition) =
 
 If your animation will be frequently reused, `LottieAnimationView` has an optional caching strategy built in. Use `LottieAnimationView#SetAnimation(String, CacheStrategy)`. `CacheStrategy` can be `Strong`, `Weak`, or `None` to have `LottieAnimationView` hold a strong or weak reference to the loaded and parsed animation. 
 
+You can also use the awaitable version of LottieComposition's asynchronous methods:
+```c#
+var composition = await LottieComposition.FromAssetFileNameAsync(this.Context, assetName);
+...
+var composition = await LottieComposition.FromJsonAsync(Resources, jsonObject);
+....
+var composition = await LottieComposition.FromInputStreamAsync(this.Context, stream);
+```
+
 ## Using Lottie for Xamarin iOS
 Lottie supports iOS 8 and above.
 Lottie animations can be loaded from bundled JSON or from a URL
@@ -111,6 +120,8 @@ this.View.AddSubview(animation);
 animation.PlayWithCompletion((animationFinished) => {
   // Do Something
 });
+//You can also use the awaitable version
+//var animationFinished = await animation.PlayAsync();
 ```
 
 Or you can load it programmatically from a NSUrl
