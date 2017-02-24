@@ -121,9 +121,9 @@ If you use `LottieDrawable` directly, you must call `RecycleBitmaps` when you ar
 Lottie supports iOS 8 and above.
 Lottie animations can be loaded from bundled JSON or from a URL
 
-The simplest way to use it is with LAAnimationView:
+The simplest way to use it is with LOTAnimationView:
 ```c#
-LAAnimationView animation = LAAnimationView.AnimationNamed("LottieLogo1");
+LOTAnimationView animation = LOTAnimationView.AnimationNamed("LottieLogo1");
 this.View.AddSubview(animation);
 animation.PlayWithCompletion((animationFinished) => {
   // Do Something
@@ -134,7 +134,7 @@ animation.PlayWithCompletion((animationFinished) => {
 
 Or you can load it programmatically from a NSUrl
 ```c#
-LAAnimationView animation = new LAAnimationView(new NSUrl(url));
+LOTAnimationView animation = new LOTAnimationView(new NSUrl(url));
 this.View.AddSubview(animation);
 ```
 
@@ -159,12 +159,12 @@ Lottie comes with a `UIViewController` animation-controller for making custom vi
 
 ```c#
 #region View Controller Transitioning
-public class LAAnimationTransitionDelegate : UIViewControllerTransitioningDelegate
+public class LOTAnimationTransitionDelegate : UIViewControllerTransitioningDelegate
 {
     public override IUIViewControllerAnimatedTransitioning GetAnimationControllerForPresentedController(UIViewController presented, UIViewController presenting, UIViewController source)
     {
-        LAAnimationTransitionController animationController =
-            new LAAnimationTransitionController(
+        LOTAnimationTransitionController animationController =
+            new LOTAnimationTransitionController(
             animation: "vcTransition1",
             fromLayer: "outLayer",
             toLayer: "inLayer");
@@ -174,8 +174,8 @@ public class LAAnimationTransitionDelegate : UIViewControllerTransitioningDelega
 
     public override IUIViewControllerAnimatedTransitioning GetAnimationControllerForDismissedController(UIViewController dismissed)
     {
-        LAAnimationTransitionController animationController = 
-            new LAAnimationTransitionController(
+        LOTAnimationTransitionController animationController = 
+            new LOTAnimationTransitionController(
                 animation: "vcTransition2",
                 fromLayer: "outLayer",
                 toLayer: "inLayer");
@@ -186,7 +186,7 @@ public class LAAnimationTransitionDelegate : UIViewControllerTransitioningDelega
 #endregion
 ```
 
-If your animation will be frequently reused, `LAAnimationView` has an built in LRU Caching Strategy.
+If your animation will be frequently reused, `LOTAnimationView` has an built in LRU Caching Strategy.
 
 
 ## Supported After Effects Features
@@ -247,6 +247,16 @@ If your animation will be frequently reused, `LAAnimationView` has an built in L
 
 ---
 
+* Rectangle (All properties)
+
+* Ellipse (All properties)
+
+* Polystar (All properties)
+
+* Polygon (All properties. Integer point values only.)
+
+* Path (All properties)
+
 * Anchor Point
 
 * Position
@@ -257,13 +267,7 @@ If your animation will be frequently reused, `LAAnimationView` has an built in L
 
 * Opacity
 
-* Path
-
 * Group Transforms (Anchor point, position, scale etc)
-
-* Rectangle (All properties)
-
-* Elipse (All properties)
 
 * Multiple paths in one group
 
