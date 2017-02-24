@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Airbnb.Lottie
 {
-    partial class LAAnimationView
+    partial class LOTAnimationView
     {
         /// <summary>
         /// Asynchronously play the animation.

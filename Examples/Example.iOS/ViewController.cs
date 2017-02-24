@@ -14,7 +14,7 @@ namespace Example.iOS
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            var lottieView = new LAAnimationView(NSUrl.FromString("https://raw.githubusercontent.com/airbnb/lottie-ios/master/Example/Assets/LottieLogo1.json"));
+            var lottieView = new LOTAnimationView(NSUrl.FromString("https://raw.githubusercontent.com/airbnb/lottie-ios/master/Example/Assets/LottieLogo1.json"));
             lottieView.ContentMode = UIViewContentMode.ScaleAspectFit;
             lottieView.AutoresizingMask = UIViewAutoresizing.All;
             lottieView.Frame = AnimationView.Frame;
