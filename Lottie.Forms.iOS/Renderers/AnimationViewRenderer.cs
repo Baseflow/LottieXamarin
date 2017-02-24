@@ -12,9 +12,9 @@ using Xamarin.Forms.Platform.iOS;
 
 namespace Lottie.Forms.iOS.Renderers
 {
-    public class AnimationViewRenderer : ViewRenderer<AnimationView, LAAnimationView>
+    public class AnimationViewRenderer : ViewRenderer<AnimationView, LOTAnimationView>
     {
-        private LAAnimationView _animationView;
+        private LOTAnimationView _animationView;
 
         /// <summary>
 		///   Used for registration with dependency service
@@ -44,7 +44,7 @@ namespace Lottie.Forms.iOS.Renderers
 
             if (!string.IsNullOrEmpty(e.NewElement.Animation))
             {
-                _animationView = new LAAnimationView(NSUrl.FromFilename(e.NewElement.Animation))
+                _animationView = new LOTAnimationView(NSUrl.FromFilename(e.NewElement.Animation))
                 {
                     AutoresizingMask = UIViewAutoresizing.All,
                     ContentMode = UIViewContentMode.ScaleAspectFit,
@@ -81,7 +81,7 @@ namespace Lottie.Forms.iOS.Renderers
             if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
             {
                 _animationView?.RemoveFromSuperview();
-                _animationView = new LAAnimationView(NSUrl.FromString(Element.Animation));
+                _animationView = new LOTAnimationView(NSUrl.FromString(Element.Animation));
                 Element.Duration = TimeSpan.FromMilliseconds(_animationView.AnimationDuration);
                 SetNativeControl(_animationView);
                 SetNeedsLayout();

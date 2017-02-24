@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Com.Airbnb.Xamarin.Forms.Lottie</id>
-        <version>1.0.1.0</version>
+        <version>1.0.2.0</version>
         <title>Lottie for Xamarin.Forms</title>
         <authors>Martijn van Dijk</authors>
         <owners>Martijn van Dijk</owners>
@@ -21,7 +21,7 @@
                 <dependency id="Com.Airbnb.Android.Lottie" version="1.5.1.0" />
             </group>
             <group targetFramework="Xamarin.iOS0.0">
-                <dependency id="Com.Airbnb.iOS.Lottie" version="1.0.0.7" />
+                <dependency id="Com.Airbnb.iOS.Lottie" version="1.0.5.0" />
             </group>
         </dependencies>
     </metadata>
