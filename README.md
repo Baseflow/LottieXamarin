@@ -36,7 +36,7 @@ Or get in touch on Twitter ([gpeal8](https://twitter.com/gpeal8)) or via lottie@
 You can build the sample app yourself or download it from the [Play Store](https://play.google.com/store/apps/details?id=com.airbnb.lottie). The sample app includes some built in animations but also allows you to load an animation from internal storage or from a url.
 
 ## Using Lottie for Xamarin Android
-Lottie supports Jellybean (API 16) and above.
+Lottie supports Ice Cream Sandwich (API 14) and above.
 The simplest way to use it is with LottieAnimationView:
 
 ```xml
@@ -62,7 +62,7 @@ If you want to reuse an animation such as in each item of a list or load it from
 ```c#
  LottieAnimationView animationView = FindViewById<LottieAnimationView>(Resource.Id.animation_view);
  ...
- LottieComposition composition = LottieComposition.FromJson(Resources, jsonObject, (composition) => 
+ LottieComposition composition = LottieComposition.Factory.FromJson(Resources, jsonObject, (composition) => 
  {
      animationView.SetComposition(composition);
      animationView.PlayAnimation();
@@ -93,7 +93,7 @@ animationView.CancelAnimation();
 Under the hood, `LottieAnimationView` uses `LottieDrawable` to render its animations. If you need to, you can use the the drawable form directly:
 ```c#
 LottieDrawable drawable = new LottieDrawable();
-LottieComposition.FromAssetFileName(Context, "hello-world.json", (composition) => {
+LottieComposition.Factory.FromAssetFileName(Context, "hello-world.json", (composition) => {
     drawable.SetComposition(composition);
 });
 ```
@@ -102,12 +102,20 @@ If your animation will be frequently reused, `LottieAnimationView` has an option
 
 You can also use the awaitable version of LottieComposition's asynchronous methods:
 ```c#
-var composition = await LottieComposition.FromAssetFileNameAsync(this.Context, assetName);
+var composition = await LottieComposition.Factory.FromAssetFileNameAsync(this.Context, assetName);
+..
+var composition = await LottieComposition.Factory.FromJsonAsync(Resources, jsonObject);
 ...
-var composition = await LottieComposition.FromJsonAsync(Resources, jsonObject);
-....
-var composition = await LottieComposition.FromInputStreamAsync(this.Context, stream);
+var composition = await LottieComposition.Factory.FromInputStreamAsync(this.Context, stream);
 ```
+
+### Image Support
+You can animate images if your animation is loaded from assets and your image file is in a 
+subdirectory of assets. Just call `SetImageAssetsFolder` on `LottieAnimationView` or 
+`LottieDrawable` with the relative folder inside of assets and make sure that the images that 
+bodymovin export are in that folder with their names unchanged (should be img_#).
+If you use `LottieDrawable` directly, you must call `RecycleBitmaps` when you are done with it.
+
 
 ## Using Lottie for Xamarin iOS
 Lottie supports iOS 8 and above.
