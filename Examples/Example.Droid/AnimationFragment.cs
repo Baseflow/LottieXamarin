@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Com.Airbnb.Lottie;
-using Com.Airbnb.Lottie.Model;
 using Android.Animation;
 using Android.Content;
 using Android.OS;
@@ -30,6 +29,10 @@ namespace LottieSamples.Droid
         private const int RcFile = 1338;
         private const int RcUrl = 1339;
         public const string ExtraAnimationName = "animation_name";
+        private readonly IDictionary<String, String> assetFolders = new Dictionary<String, String>() 
+        {
+            {"WeAccept.json", "Tests/weaccept"}
+        };
 
         private OkHttpClient client;
 
@@ -48,7 +51,6 @@ namespace LottieSamples.Droid
         {
             View view = inflater.Inflate(Resource.Layout.fragment_animation, container, false);
 
-
             this.toolbar = view.FindViewById<Toolbar>(Resource.Id.toolbar);
             this.instructionsContainer = view.FindViewById<ViewGroup>(Resource.Id.instructions);
             this.animationContainer = view.FindViewById<ViewGroup>(Resource.Id.animation_container);
@@ -59,7 +61,6 @@ namespace LottieSamples.Droid
 
             this.loopButton = view.FindViewById<ImageButton>(Resource.Id.loop);
             this.animationNameView = view.FindViewById<TextView>(Resource.Id.animation_name);
-
 
             ImageButton restartButton = view.FindViewById<ImageButton>(Resource.Id.restart);
             ImageButton loadAssetButton = view.FindViewById<ImageButton>(Resource.Id.load_asset);
@@ -85,7 +86,13 @@ namespace LottieSamples.Droid
             this.animationView.AddAnimatorListener(this);
             this.animationView.AddAnimatorUpdateListener(this);
 
-            this.seekBar.ProgressChanged += (sender, e) => animationView.Progress = e.Progress/100f;
+            this.seekBar.ProgressChanged += (sender, e) =>
+            {
+                if (!animationView.IsAnimating)
+                {
+                    animationView.Progress = e.Progress / 100f;
+                }
+            };
 
             return view;
         }
@@ -106,7 +113,10 @@ namespace LottieSamples.Droid
 
                 case RcAsset:
                     string assetName = data.GetStringExtra(ExtraAnimationName);
-                    LottieComposition.FromAssetFileName(this.Context, assetName, (composition) =>
+                    string assetFolder = null;
+                    assetFolders.TryGetValue(assetName, out assetFolder);
+                    animationView.SetImageAssetsFolder(assetFolder);
+                    LottieComposition.Factory.FromAssetFileName(this.Context, assetName, (composition) =>
                     {
                         SetComposition(composition, assetName);
                     });
@@ -312,7 +322,7 @@ namespace LottieSamples.Droid
                 try
                 {
                     JSONObject json = new JSONObject(response.Body().String());
-                    LottieComposition.FromJson(this.Resources, json, (composition) =>
+                    LottieComposition.Factory.FromJson(this.Resources, json, (composition) =>
                     {
                         SetComposition(composition, "Network Animation");
                     });

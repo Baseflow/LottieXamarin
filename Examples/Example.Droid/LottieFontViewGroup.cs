@@ -8,7 +8,7 @@ using Android.Util;
 using Android.Views;
 
 using Com.Airbnb.Lottie;
-using Com.Airbnb.Lottie.Model;
+using Com.Airbnb.Lottie;
 using Android.Views.InputMethods;
 
 namespace LottieSamples.Droid
@@ -130,7 +130,7 @@ namespace LottieSamples.Droid
                 return true;
             }
 
-            if (!IsValidKey(keyCode))
+            if (!e.HasNoModifiers || !IsValidKey(keyCode))
                 return base.OnKeyUp(keyCode, e);
 
 
@@ -142,7 +142,7 @@ namespace LottieSamples.Droid
             }
             else
             {
-                LottieComposition.FromAssetFileName(this.Context, fileName, (composition) =>
+                LottieComposition.Factory.FromAssetFileName(this.Context, fileName, (composition) =>
                 {
                     if (!compositionMap.ContainsKey(fileName))
                     {
@@ -159,12 +159,12 @@ namespace LottieSamples.Droid
         private void Init()
         {
             FocusableInTouchMode = true;
-            LottieComposition.FromAssetFileName(this.Context, "Mobilo/BlinkingCursor.json", (composition) =>
+            LottieComposition.Factory.FromAssetFileName(this.Context, "Mobilo/BlinkingCursor.json", (composition) =>
             {
                 cursorView = new LottieAnimationView(Context);
                 cursorView.LayoutParameters = new LottieFontViewGroup.LayoutParams(
                     ViewGroup.LayoutParams.WrapContent,
-                        ViewGroup.LayoutParams.WrapContent
+                    ViewGroup.LayoutParams.WrapContent
                 );
                 cursorView.SetComposition(composition);
                 cursorView.Loop(true);
