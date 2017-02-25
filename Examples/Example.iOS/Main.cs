@@ -1,6 +1,6 @@
 ﻿using UIKit;
 
-namespace Example.iOS
+namespace LottieSamples.iOS
 {
     public class Application
     {
