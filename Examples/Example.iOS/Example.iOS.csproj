@@ -128,6 +128,12 @@
     <Compile Include="Animation Explorer\JSONExplorerViewController.designer.cs">
       <DependentUpon>JSONExplorerViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Typing Animation Demo\AnimatedTextField.cs" />
+    <Compile Include="Typing Animation Demo\LOTCharacterCell.cs" />
+    <Compile Include="Typing Animation Demo\TypingDemoViewController.cs" />
+    <Compile Include="Typing Animation Demo\TypingDemoViewController.designer.cs">
+		<DependentUpon>TypingDemoViewController.cs</DependentUpon>
+	</Compile>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\lottie_logo.png" />
