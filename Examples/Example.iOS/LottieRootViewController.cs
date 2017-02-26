@@ -86,7 +86,7 @@ namespace LottieSamples.iOS
             public TableSource()
             {
                 this.listItems.Add(new Tuple<string, Type >("Animation Explorer", typeof(AnimationExplorerViewController)));
-                //this.listItems.Add(new Tuple<string, Type>("Animated Keyboard", typeof(TypingDemoViewController)));
+                this.listItems.Add(new Tuple<string, Type>("Animated Keyboard", typeof(TypingDemoViewController)));
                 this.listItems.Add(new Tuple<string, Type>("Animated Transitions Demo", typeof(AnimationTransitionViewController)));
             }
 
