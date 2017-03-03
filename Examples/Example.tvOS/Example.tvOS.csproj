@@ -90,9 +90,6 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.TVOS" />
-    <Reference Include="Lottie.tvOS">
-      <HintPath>..\..\Lottie.tvOS\bin\Debug\Lottie.tvOS.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\App Icon &amp; Top Shelf Image.brandassets\Contents.json" />
@@ -135,6 +132,12 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\LottieLogo1.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Lottie.tvOS\Lottie.tvOS.csproj">
+      <Project>{5F226A3E-3BD9-452B-A7AB-77F8A96CFE4D}</Project>
+      <Name>Lottie.tvOS</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\TVOS\Xamarin.TVOS.CSharp.targets" />
 </Project>
