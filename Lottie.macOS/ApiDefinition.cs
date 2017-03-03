@@ -1,8 +1,8 @@
 ﻿using System;
 
-using AppKit;
 using Foundation;
 using ObjCRuntime;
+using AppKit;
 
 namespace Airbnb.Lottie
 {
@@ -17,6 +17,11 @@ namespace Airbnb.Lottie
         [Static]
         [Export("animationNamed:")]
         LOTAnimationView AnimationNamed(string animationName);
+
+        // +(instancetype)animationNamed:(NSString *)animationName inBundle:(NSBundle *)bundle;
+        [Static]
+        [Export("animationNamed:inBundle:")]
+        LOTAnimationView AnimationNamed(string animationName, NSBundle bundle);
 
         // +(instancetype)animationFromJSON:(NSDictionary *)animationJSON;
         [Static]

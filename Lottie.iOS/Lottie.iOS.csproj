@@ -38,7 +38,7 @@
     <Compile Include="LOTAnimationView.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ObjcBindingApiDefinition Include="ApiDefinitions.cs" />
+    <ObjcBindingApiDefinition Include="ApiDefinition.cs" />
   </ItemGroup>
   <ItemGroup>
 
@@ -47,11 +47,11 @@
 
   </ItemGroup>
   <ItemGroup>
-    <ObjcBindingNativeLibrary Include="lottie_ios.a" />
+    <ObjcBindingNativeLibrary Include="libLottie.a" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="lottie_ios.linkwith.cs">
-        <DependentUpon>lottie_ios.a</DependentUpon>
+    <Compile Include="libLottie.linkwith.cs">
+        <DependentUpon>libLottie.a</DependentUpon>
     </Compile>
   </ItemGroup>
   

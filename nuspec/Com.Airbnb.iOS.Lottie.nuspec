@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Com.Airbnb.iOS.Lottie</id>
-        <version>1.0.5.1</version>
+        <version>1.5.1.0</version>
         <title>Lottie for Xamarin.iOS and macOS</title>
         <authors>Martijn van Dijk</authors>
         <owners>Martijn van Dijk</owners>
@@ -12,10 +12,11 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Lottie for Xamarin iOS and macOS</description>
         <summary>Render After Effects animations natively on Android, iOS and macOS</summary>
-        <tags>xamarin, monodroid, C#, xamarin.iOS, iOS, macOS, xamarin.mac, Lottie, animation, airbnb</tags>
+        <tags>xamarin, monodroid, C#, xamarin.iOS, iOS, macOS, xamarin.mac, xamarin.tvos, tvOS, Lottie, animation, airbnb</tags>
     </metadata>
     <files>
         <file src="..\Lottie.iOS\bin\Release\Lottie.iOS.dll" target="lib\xamarinios\Lottie.iOS.dll" />
         <file src="..\Lottie.macOS\bin\Release\Lottie.macOS.dll" target="lib\Xamarin.Mac\Lottie.macOS.dll" />
+        <file src="..\Lottie.tvOS\bin\Release\Lottie.tvOS.dll" target="lib\Xamarin.TVOS\Lottie.tvOS.dll" />
     </files>
 </package>
