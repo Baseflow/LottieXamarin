@@ -31,7 +31,7 @@ namespace LottieSamples.Droid
         public const string ExtraAnimationName = "animation_name";
         private readonly IDictionary<String, String> assetFolders = new Dictionary<String, String>() 
         {
-            {"WeAccept.json", "Tests/weaccept"}
+            {"WeAccept.json", "Images/WeAccept"}
         };
 
         private OkHttpClient client;
@@ -110,12 +110,12 @@ namespace LottieSamples.Droid
 
             switch (requestCode)
             {
-
                 case RcAsset:
                     string assetName = data.GetStringExtra(ExtraAnimationName);
                     string assetFolder = null;
                     assetFolders.TryGetValue(assetName, out assetFolder);
                     animationView.SetImageAssetsFolder(assetFolder);
+
                     LottieComposition.Factory.FromAssetFileName(this.Context, assetName, (composition) =>
                     {
                         SetComposition(composition, assetName);
@@ -153,7 +153,7 @@ namespace LottieSamples.Droid
                 {
                     animationView.Progress = 0f;
                 }
-                animationView.PlayAnimation();
+                animationView.ResumeAnimation();
                 PostUpdatePlayButtonText();
             }
         }

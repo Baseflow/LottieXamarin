@@ -116,6 +116,15 @@ subdirectory of assets. Just call `SetImageAssetsFolder` on `LottieAnimationView
 bodymovin export are in that folder with their names unchanged (should be img_#).
 If you use `LottieDrawable` directly, you must call `RecycleBitmaps` when you are done with it.
 
+If you need to provide your own bitmaps if you downloaded them from the network or something, you
+ can provide a delegate to do that:
+ ```c#
+animationView.SetImageAssetDelegate((LottieImageAsset asset) =>
+{
+    retun GetBitmap(asset);
+});
+```
+
 
 ## Using Lottie for Xamarin iOS
 Lottie supports iOS 8 and above.
