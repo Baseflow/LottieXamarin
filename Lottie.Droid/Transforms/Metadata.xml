@@ -27,7 +27,7 @@
 	<!-- Constructor -->
 	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/constructor[@name='LottieAnimationView' and count(parameter)=3 and parameter[1][@type='android.content.Context'] and parameter[2][@type='android.util.AttributeSet'] and parameter[3][@type='int']]/parameter[@name='p2' and @type='int']" name="name">defStyleAttr</attr>
 
-
+	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='setImageAssetDelegate' and count(parameter)=1 and parameter[1][@type='com.airbnb.lottie.ImageAssetDelegate']]/parameter[@name='p0' and @type='com.airbnb.lottie.ImageAssetDelegate']" name="name">assetDelegate</attr>
 
 	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='setAnimation' and count(parameter)=1 and parameter[1][@type='java.lang.String']]/parameter[@name='p0']" name="name">animationName</attr>
 
@@ -85,6 +85,7 @@
 	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='setProgress' and count(parameter)=1 and parameter[1][@type='float']]/parameter[@name='p0' and @type='float']" name="name">progress</attr>
 	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='setAlpha' and count(parameter)=1 and parameter[1][@type='int']]/parameter[@name='p0' and @type='int']" name="name">alpha</attr>
 
+	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='setImageAssetDelegate' and count(parameter)=1 and parameter[1][@type='com.airbnb.lottie.ImageAssetDelegate']]/parameter[@name='p0' and @type='com.airbnb.lottie.ImageAssetDelegate']" name="name">assetDelegate</attr>
 	
 	<!-- AnimatableLayer -->
 	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='AnimatableLayer']/method[@name='setColorFilter' and count(parameter)=1 and parameter[1][@type='android.graphics.ColorFilter']]/parameter[@name='p0' and @type='android.graphics.ColorFilter']" name="name">colorFilter</attr>
@@ -95,4 +96,7 @@
 	<!-- IAnimatableValueFactory -->
 	<attr path="/api/package[@name='com.airbnb.lottie']/interface[@name='AnimatableValue.Factory']/method[@name='valueFromObject' and count(parameter)=2 and parameter[1][@type='java.lang.Object'] and parameter[2][@type='float']]/parameter[@name='p0' and @type='java.lang.Object']" name="name">object</attr>
 	<attr path="/api/package[@name='com.airbnb.lottie']/interface[@name='AnimatableValue.Factory']/method[@name='valueFromObject' and count(parameter)=2 and parameter[1][@type='java.lang.Object'] and parameter[2][@type='float']]/parameter[@name='p1' and @type='float']" name="name">scale</attr>
+
+
+	<attr path="/api/package[@name='com.airbnb.lottie']/interface[@name='ImageAssetDelegate']/method[@name='fetchBitmap' and count(parameter)=1 and parameter[1][@type='com.airbnb.lottie.LottieImageAsset']]/parameter[@name='p0' and @type='com.airbnb.lottie.LottieImageAsset']" name="name">asset</attr>
 </metadata>

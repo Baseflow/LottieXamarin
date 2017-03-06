@@ -216,7 +216,7 @@
     <AndroidAsset Include="Assets\Tests\Star.json" />
     <AndroidAsset Include="Assets\Tests\TrimPathFill.json" />
     <AndroidAsset Include="Assets\Tests\TrimPathsFull.json" />
-    <AndroidAsset Include="Assets\Tests\weaccept\img_0.png" />
+    <AndroidAsset Include="Assets\Images\WeAccept\img_0.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Lottie.Droid\Lottie.Droid.csproj">
