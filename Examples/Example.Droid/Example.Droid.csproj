@@ -217,6 +217,28 @@
     <AndroidAsset Include="Assets\Tests\TrimPathFill.json" />
     <AndroidAsset Include="Assets\Tests\TrimPathsFull.json" />
     <AndroidAsset Include="Assets\Images\WeAccept\img_0.png" />
+    <AndroidAsset Include="Assets\lottiefiles.com - ATM.json" />
+    <AndroidAsset Include="Assets\lottiefiles.com - Camera.json" />
+    <AndroidAsset Include="Assets\lottiefiles.com - Countdown.json" />
+    <AndroidAsset Include="Assets\lottiefiles.com - Emoji Shock.json" />
+    <AndroidAsset Include="Assets\lottiefiles.com - Emoji Tongue.json" />
+    <AndroidAsset Include="Assets\lottiefiles.com - Emoji Wink.json" />
+    <AndroidAsset Include="Assets\lottiefiles.com - Favorite Star.json" />
+    <AndroidAsset Include="Assets\lottiefiles.com - Gears.json" />
+    <AndroidAsset Include="Assets\lottiefiles.com - Loading 1.json" />
+    <AndroidAsset Include="Assets\lottiefiles.com - Loading 2.json" />
+    <AndroidAsset Include="Assets\lottiefiles.com - Loading 3.json" />
+    <AndroidAsset Include="Assets\lottiefiles.com - Loading 4.json" />
+    <AndroidAsset Include="Assets\lottiefiles.com - Octopus.json" />
+    <AndroidAsset Include="Assets\lottiefiles.com - Play and Like It.json" />
+    <AndroidAsset Include="Assets\lottiefiles.com - Postcard.json" />
+    <AndroidAsset Include="Assets\lottiefiles.com - Preloader.json" />
+    <AndroidAsset Include="Assets\lottiefiles.com - Progress Success.json" />
+    <AndroidAsset Include="Assets\lottiefiles.com - Retweet.json" />
+    <AndroidAsset Include="Assets\lottiefiles.com - Tadah Image.json" />
+    <AndroidAsset Include="Assets\lottiefiles.com - Tadah Video.json" />
+    <AndroidAsset Include="Assets\lottiefiles.com - Touch ID.json" />
+    <AndroidAsset Include="Assets\lottiefiles.com - Video Camera.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Lottie.Droid\Lottie.Droid.csproj">

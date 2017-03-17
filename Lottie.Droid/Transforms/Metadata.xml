@@ -12,9 +12,6 @@
 	<attr path="/api/package//parameter[@type='android.content.Context']" name="name">context</attr>
 
 	
-	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='AnimatableLayer']" name="visibility">public</attr>
-
-
 	<attr path="/api/package[@name='com.airbnb.lottie']/interface[@name='Cancellable']" name="visibility">public</attr>
 	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='BaseAnimatableValue']" name="visibility">public</attr>
 	<attr path="/api/package[@name='com.airbnb.lottie']/interface[@name='AnimatableValue']" name="visibility">public</attr>
@@ -55,6 +52,8 @@
 	
 	<attr path="/api/package[@name='com.airbnb.lottie']/interface[@name='OnCompositionLoadedListener']/method[@name='onCompositionLoaded' and count(parameter)=1 and parameter[1][@type='com.airbnb.lottie.LottieComposition']]/parameter[@name='p0' and @type='com.airbnb.lottie.LottieComposition']" name="name">composition</attr>
 
+	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='enableMergePathsForKitKatAndAbove' and count(parameter)=1 and parameter[1][@type='boolean']]/parameter[@name='p0' and @type='boolean']" name="name">enable</attr>
+	
 	<!-- LottieComposition.Factory -->
 	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieComposition.Factory']/method[@name='fromAssetFileName' and count(parameter)=3 and parameter[1][@type='android.content.Context'] and parameter[2][@type='java.lang.String'] and parameter[3][@type='com.airbnb.lottie.OnCompositionLoadedListener']]/parameter[@name='p1' and @type='java.lang.String']" name="name">fileName</attr>
 	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieComposition.Factory']/method[@name='fromAssetFileName' and count(parameter)=3 and parameter[1][@type='android.content.Context'] and parameter[2][@type='java.lang.String'] and parameter[3][@type='com.airbnb.lottie.OnCompositionLoadedListener']]/parameter[@name='p2' and @type='com.airbnb.lottie.OnCompositionLoadedListener']" name="name">stream</attr>
@@ -86,17 +85,47 @@
 	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='setAlpha' and count(parameter)=1 and parameter[1][@type='int']]/parameter[@name='p0' and @type='int']" name="name">alpha</attr>
 
 	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='setImageAssetDelegate' and count(parameter)=1 and parameter[1][@type='com.airbnb.lottie.ImageAssetDelegate']]/parameter[@name='p0' and @type='com.airbnb.lottie.ImageAssetDelegate']" name="name">assetDelegate</attr>
-	
-	<!-- AnimatableLayer -->
-	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='AnimatableLayer']/method[@name='setColorFilter' and count(parameter)=1 and parameter[1][@type='android.graphics.ColorFilter']]/parameter[@name='p0' and @type='android.graphics.ColorFilter']" name="name">colorFilter</attr>
-	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='AnimatableLayer']/method[@name='draw' and count(parameter)=1 and parameter[1][@type='android.graphics.Canvas']]/parameter[@name='p0' and @type='android.graphics.Canvas']" name="name">canvas</attr>
-	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='AnimatableLayer']/method[@name='setProgress' and count(parameter)=1 and parameter[1][@type='float']]/parameter[@name='p0' and @type='float']" name="name">progress</attr>
-	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='AnimatableLayer']/method[@name='setAlpha' and count(parameter)=1 and parameter[1][@type='int']]/parameter[@name='p0' and @type='int']" name="name">alpha</attr>
 
+	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='addAnimatorListener' and count(parameter)=1 and parameter[1][@type='android.animation.Animator.AnimatorListener']]/parameter[@name='p0' and @type='android.animation.Animator.AnimatorListener']" name="name">listener</attr>
+	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='addAnimatorUpdateListener' and count(parameter)=1 and parameter[1][@type='android.animation.ValueAnimator.AnimatorUpdateListener']]/parameter[@name='p0' and @type='android.animation.ValueAnimator.AnimatorUpdateListener']" name="name">updateListener</attr>
+
+	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='loop' and count(parameter)=1 and parameter[1][@type='boolean']]/parameter[@name='p0' and @type='boolean']" name="name">loop</attr>
+
+	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='removeAnimatorListener' and count(parameter)=1 and parameter[1][@type='android.animation.Animator.AnimatorListener']]/parameter[@name='p0' and @type='android.animation.Animator.AnimatorListener']" name="name">listener</attr>
+	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='removeAnimatorUpdateListener' and count(parameter)=1 and parameter[1][@type='android.animation.ValueAnimator.AnimatorUpdateListener']]/parameter[@name='p0' and @type='android.animation.ValueAnimator.AnimatorUpdateListener']" name="name">updateListener</attr>
+
+	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='setSpeed' and count(parameter)=1 and parameter[1][@type='float']]/parameter[@name='p0' and @type='float']" name="name">speed</attr>
+
+	
 	<!-- IAnimatableValueFactory -->
 	<attr path="/api/package[@name='com.airbnb.lottie']/interface[@name='AnimatableValue.Factory']/method[@name='valueFromObject' and count(parameter)=2 and parameter[1][@type='java.lang.Object'] and parameter[2][@type='float']]/parameter[@name='p0' and @type='java.lang.Object']" name="name">object</attr>
 	<attr path="/api/package[@name='com.airbnb.lottie']/interface[@name='AnimatableValue.Factory']/method[@name='valueFromObject' and count(parameter)=2 and parameter[1][@type='java.lang.Object'] and parameter[2][@type='float']]/parameter[@name='p1' and @type='float']" name="name">scale</attr>
 
 
 	<attr path="/api/package[@name='com.airbnb.lottie']/interface[@name='ImageAssetDelegate']/method[@name='fetchBitmap' and count(parameter)=1 and parameter[1][@type='com.airbnb.lottie.LottieImageAsset']]/parameter[@name='p0' and @type='com.airbnb.lottie.LottieImageAsset']" name="name">asset</attr>
+
+	<!-- LottieComposition.Factory -->
+	<add-node path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieComposition.Factory']">
+		<method abstract="false" deprecated="not deprecated" final="false" name="fromAssetFileName" native="false" return="com.airbnb.lottie.Cancellable" static="true" synchronized="false" visibility="public">
+			<parameter name="context" type="android.content.Context"/>
+			<parameter name="fileName" type="java.lang.String"/>
+			<parameter name="loadedListener" type="com.airbnb.lottie.OnCompositionLoadedListener"/>
+		</method>
+	</add-node>
+
+	<add-node path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieComposition.Factory']">
+		<method abstract="false" deprecated="not deprecated" final="false" name="fromInputStream" native="false" return="com.airbnb.lottie.Cancellable" static="true" synchronized="false" visibility="public">
+			<parameter name="context" type="android.content.Context"/>
+			<parameter name="stream" type="java.io.InputStream"/>
+			<parameter name="loadedListener" type="com.airbnb.lottie.OnCompositionLoadedListener"/>
+		</method>
+	</add-node>
+
+	<add-node path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieComposition.Factory']">
+		<method abstract="false" deprecated="not deprecated" final="false" name="fromJson" native="false" return="com.airbnb.lottie.Cancellable" static="true" synchronized="false" visibility="public">
+			<parameter name="res" type="android.content.res.Resources"/>
+			<parameter name="json" type="org.json.JSONObject"/>
+			<parameter name="loadedListener" type="com.airbnb.lottie.OnCompositionLoadedListener"/>
+		</method>
+	</add-node>
 </metadata>
