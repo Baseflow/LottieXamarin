@@ -7,6 +7,22 @@
 	<remove-node path="/api/package[@name='com.airbnb.lottie']/class[@name='BaseKeyframeAnimation']" />
 	<remove-node path="/api/package[@name='com.airbnb.lottie']/interface[@name='BaseKeyframeAnimation.AnimationListener']" />
 
+
+	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='BaseStrokeContent']" name="visibility">public</attr>
+	<attr path="/api/package[@name='com.airbnb.lottie']/interface[@name='DrawingContent']" name="visibility">public</attr>
+	<attr path="/api/package[@name='com.airbnb.lottie']/interface[@name='DrawingContent']/method[@name='draw' and count(parameter)=3 and parameter[1][@type='android.graphics.Canvas'] and parameter[2][@type='android.graphics.Matrix'] and parameter[3][@type='int']]/parameter[@name='p0' and @type='android.graphics.Canvas']" name="name">canvas</attr>
+	<attr path="/api/package[@name='com.airbnb.lottie']/interface[@name='DrawingContent']/method[@name='draw' and count(parameter)=3 and parameter[1][@type='android.graphics.Canvas'] and parameter[2][@type='android.graphics.Matrix'] and parameter[3][@type='int']]/parameter[@name='p1' and @type='android.graphics.Matrix']" name="name">parentMatrix</attr>
+	<attr path="/api/package[@name='com.airbnb.lottie']/interface[@name='DrawingContent']/method[@name='draw' and count(parameter)=3 and parameter[1][@type='android.graphics.Canvas'] and parameter[2][@type='android.graphics.Matrix'] and parameter[3][@type='int']]/parameter[@name='p2' and @type='int']" name="name">alpha</attr>
+
+	<attr path="/api/package[@name='com.airbnb.lottie']/interface[@name='Content']" name="visibility">public</attr>
+	<attr path="/api/package[@name='com.airbnb.lottie']/interface[@name='Content']/method[@name='setContents' and count(parameter)=2 and parameter[1][@type='java.util.List&lt;com.airbnb.lottie.Content&gt;'] and parameter[2][@type='java.util.List&lt;com.airbnb.lottie.Content&gt;']]/parameter[@name='p0' and @type='java.util.List&lt;com.airbnb.lottie.Content&gt;']" name="name">contentsBefore</attr>
+	<attr path="/api/package[@name='com.airbnb.lottie']/interface[@name='Content']/method[@name='setContents' and count(parameter)=2 and parameter[1][@type='java.util.List&lt;com.airbnb.lottie.Content&gt;'] and parameter[2][@type='java.util.List&lt;com.airbnb.lottie.Content&gt;']]/parameter[@name='p1' and @type='java.util.List&lt;com.airbnb.lottie.Content&gt;']" name="name">contentsAfter</attr>
+	
+	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='BaseStrokeContent']/method[@name='setContents' and count(parameter)=2 and parameter[1][@type='java.util.List&lt;com.airbnb.lottie.Content&gt;'] and parameter[2][@type='java.util.List&lt;com.airbnb.lottie.Content&gt;']]/parameter[@name='p0' and @type='java.util.List&lt;com.airbnb.lottie.Content&gt;']" name="name">contentsBefore</attr>
+	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='BaseStrokeContent']/method[@name='setContents' and count(parameter)=2 and parameter[1][@type='java.util.List&lt;com.airbnb.lottie.Content&gt;'] and parameter[2][@type='java.util.List&lt;com.airbnb.lottie.Content&gt;']]/parameter[@name='p1' and @type='java.util.List&lt;com.airbnb.lottie.Content&gt;']" name="name">contentsAfter</attr>
+
+	<remove-node path="/api/package[@name='com.airbnb.lottie']/class[@name='GradientStrokeContent']/method[@name='setContents' and count(parameter)=2 and parameter[1][@type='java.util.List'] and parameter[2][@type='java.util.List']]" />
+	
 	<!-- All packages parameters -->
 	<attr path="/api/package//parameter[@type='android.util.AttributeSet']" name="name">attrs</attr>
 	<attr path="/api/package//parameter[@type='android.content.Context']" name="name">context</attr>

@@ -79,7 +79,7 @@ namespace LottieSamples.Droid
             toolbar.SetNavigationIcon(Resource.Drawable.ic_back);
             toolbar.NavigationClick += (sender, e) => FragmentManager.PopBackStack();
 
-
+            this.HasOptionsMenu = true;
             PostUpdatePlayButtonText();
             LoopButton_Click(null, EventArgs.Empty);
 
@@ -101,6 +101,34 @@ namespace LottieSamples.Droid
         {
             this.animationView.CancelAnimation();
             base.OnStop();
+        }
+
+        public override void OnCreateOptionsMenu(IMenu menu, MenuInflater inflater)
+        {
+            inflater.Inflate(Resource.Menu.fragment_animation, menu);
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            if (item.IsCheckable)
+            {
+                item.SetChecked(!item.IsChecked);
+            }
+
+            switch (item.ItemId)
+            {
+                case Resource.Id.hardware_acceleration:
+                    var layerType = item.IsChecked ? LayerType.Hardware : LayerType.Software;
+                    this.animationView.SetLayerType(layerType, null);
+                    return true;
+                
+                case Resource.Id.merge_paths:
+                    this.animationView.EnableMergePathsForKitKatAndAbove(item.IsChecked);
+                    return true;
+                    
+                default:
+                    return base.OnOptionsItemSelected(item);
+            }
         }
 
         public override void OnActivityResult(int requestCode, int resultCode, Intent data)
