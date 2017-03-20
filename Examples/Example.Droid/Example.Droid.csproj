@@ -148,6 +148,7 @@
     <AndroidResource Include="Resources\values\dimens.xml" />
     <AndroidResource Include="Resources\values\styles.xml" />
     <AndroidResource Include="Resources\values-w820dp\dimens.xml" />
+    <AndroidResource Include="Resources\menu\fragment_animation.xml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
@@ -239,6 +240,10 @@
     <AndroidAsset Include="Assets\lottiefiles.com - Tadah Video.json" />
     <AndroidAsset Include="Assets\lottiefiles.com - Touch ID.json" />
     <AndroidAsset Include="Assets\lottiefiles.com - Video Camera.json" />
+    <AndroidAsset Include="Assets\lottiefiles.com - Animated Graph.json" />
+    <AndroidAsset Include="Assets\lottiefiles.com - Beating Heart.json" />
+    <AndroidAsset Include="Assets\lottiefiles.com - Mail Sent.json" />
+    <AndroidAsset Include="Assets\lottiefiles.com - Star Wars Rey.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Lottie.Droid\Lottie.Droid.csproj">
