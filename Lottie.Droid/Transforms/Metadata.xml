@@ -112,7 +112,13 @@
 
 	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='setSpeed' and count(parameter)=1 and parameter[1][@type='float']]/parameter[@name='p0' and @type='float']" name="name">speed</attr>
 
-	
+	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='addColorFilter' and count(parameter)=1 and parameter[1][@type='android.graphics.ColorFilter']]/parameter[@name='p0' and @type='android.graphics.ColorFilter']" name="name">colorFilter</attr>
+	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='addColorFilterToContent' and count(parameter)=3 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.String'] and parameter[3][@type='android.graphics.ColorFilter']]/parameter[@name='p0' and @type='java.lang.String']" name="name">layerName</attr>
+	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='addColorFilterToContent' and count(parameter)=3 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.String'] and parameter[3][@type='android.graphics.ColorFilter']]/parameter[@name='p1' and @type='java.lang.String']" name="name">contentName</attr>
+	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='addColorFilterToContent' and count(parameter)=3 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.String'] and parameter[3][@type='android.graphics.ColorFilter']]/parameter[@name='p2' and @type='android.graphics.ColorFilter']" name="name">colorFilter</attr>
+
+	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='addColorFilterToLayer' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='android.graphics.ColorFilter']]/parameter[@name='p0' and @type='java.lang.String']" name="name">layerName</attr>
+	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='addColorFilterToLayer' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='android.graphics.ColorFilter']]/parameter[@name='p1' and @type='android.graphics.ColorFilter']" name="name">colorFilter</attr>
 	<!-- IAnimatableValueFactory -->
 	<attr path="/api/package[@name='com.airbnb.lottie']/interface[@name='AnimatableValue.Factory']/method[@name='valueFromObject' and count(parameter)=2 and parameter[1][@type='java.lang.Object'] and parameter[2][@type='float']]/parameter[@name='p0' and @type='java.lang.Object']" name="name">object</attr>
 	<attr path="/api/package[@name='com.airbnb.lottie']/interface[@name='AnimatableValue.Factory']/method[@name='valueFromObject' and count(parameter)=2 and parameter[1][@type='java.lang.Object'] and parameter[2][@type='float']]/parameter[@name='p1' and @type='float']" name="name">scale</attr>
