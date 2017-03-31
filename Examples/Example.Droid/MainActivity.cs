@@ -10,6 +10,7 @@ namespace LottieSamples.Droid
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            AppCompatDelegate.CompatVectorFromResourcesEnabled = true;
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.activity_main);
