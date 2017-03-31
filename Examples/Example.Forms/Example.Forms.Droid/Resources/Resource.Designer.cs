@@ -228,6 +228,7 @@ namespace Example.Forms.Droid
 			global::Lottie.Forms.Droid.Resource.Attribute.lottie_fileName = global::Example.Forms.Droid.Resource.Attribute.lottie_fileName;
 			global::Lottie.Forms.Droid.Resource.Attribute.lottie_imageAssetsFolder = global::Example.Forms.Droid.Resource.Attribute.lottie_imageAssetsFolder;
 			global::Lottie.Forms.Droid.Resource.Attribute.lottie_loop = global::Example.Forms.Droid.Resource.Attribute.lottie_loop;
+			global::Lottie.Forms.Droid.Resource.Attribute.lottie_progress = global::Example.Forms.Droid.Resource.Attribute.lottie_progress;
 			global::Lottie.Forms.Droid.Resource.Attribute.maxActionInlineWidth = global::Example.Forms.Droid.Resource.Attribute.maxActionInlineWidth;
 			global::Lottie.Forms.Droid.Resource.Attribute.maxButtonHeight = global::Example.Forms.Droid.Resource.Attribute.maxButtonHeight;
 			global::Lottie.Forms.Droid.Resource.Attribute.measureWithLargestChild = global::Example.Forms.Droid.Resource.Attribute.measureWithLargestChild;
@@ -1495,6 +1496,7 @@ namespace Example.Forms.Droid
 			global::Lottie.Forms.Droid.Resource.Styleable.LottieAnimationView_lottie_fileName = global::Example.Forms.Droid.Resource.Styleable.LottieAnimationView_lottie_fileName;
 			global::Lottie.Forms.Droid.Resource.Styleable.LottieAnimationView_lottie_imageAssetsFolder = global::Example.Forms.Droid.Resource.Styleable.LottieAnimationView_lottie_imageAssetsFolder;
 			global::Lottie.Forms.Droid.Resource.Styleable.LottieAnimationView_lottie_loop = global::Example.Forms.Droid.Resource.Styleable.LottieAnimationView_lottie_loop;
+			global::Lottie.Forms.Droid.Resource.Styleable.LottieAnimationView_lottie_progress = global::Example.Forms.Droid.Resource.Styleable.LottieAnimationView_lottie_progress;
 			global::Lottie.Forms.Droid.Resource.Styleable.MediaRouteButton = global::Example.Forms.Droid.Resource.Styleable.MediaRouteButton;
 			global::Lottie.Forms.Droid.Resource.Styleable.MediaRouteButton_android_minHeight = global::Example.Forms.Droid.Resource.Styleable.MediaRouteButton_android_minHeight;
 			global::Lottie.Forms.Droid.Resource.Styleable.MediaRouteButton_android_minWidth = global::Example.Forms.Droid.Resource.Styleable.MediaRouteButton_android_minWidth;
@@ -2291,8 +2293,8 @@ namespace Example.Forms.Droid
 			// aapt resource value: 0x7f01013d
 			public const int lottie_autoPlay = 2130772285;
 			
-			// aapt resource value: 0x7f010140
-			public const int lottie_cacheStrategy = 2130772288;
+			// aapt resource value: 0x7f010141
+			public const int lottie_cacheStrategy = 2130772289;
 			
 			// aapt resource value: 0x7f01013c
 			public const int lottie_fileName = 2130772284;
@@ -2302,6 +2304,9 @@ namespace Example.Forms.Droid
 			
 			// aapt resource value: 0x7f01013e
 			public const int lottie_loop = 2130772286;
+			
+			// aapt resource value: 0x7f010140
+			public const int lottie_progress = 2130772288;
 			
 			// aapt resource value: 0x7f010122
 			public const int maxActionInlineWidth = 2130772258;
@@ -6936,13 +6941,14 @@ namespace Example.Forms.Droid
 					2130772285,
 					2130772286,
 					2130772287,
-					2130772288};
+					2130772288,
+					2130772289};
 			
 			// aapt resource value: 1
 			public const int LottieAnimationView_lottie_autoPlay = 1;
 			
-			// aapt resource value: 4
-			public const int LottieAnimationView_lottie_cacheStrategy = 4;
+			// aapt resource value: 5
+			public const int LottieAnimationView_lottie_cacheStrategy = 5;
 			
 			// aapt resource value: 0
 			public const int LottieAnimationView_lottie_fileName = 0;
@@ -6952,6 +6958,9 @@ namespace Example.Forms.Droid
 			
 			// aapt resource value: 2
 			public const int LottieAnimationView_lottie_loop = 2;
+			
+			// aapt resource value: 4
+			public const int LottieAnimationView_lottie_progress = 4;
 			
 			public static int[] MediaRouteButton = new int[]
 			{

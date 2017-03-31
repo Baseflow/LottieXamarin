@@ -100,12 +100,6 @@
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="packages.config" />
-    <None Include="Resources\drawable-xhdpi\ic_assets.png" />
-    <None Include="Resources\drawable-xhdpi\ic_file.png" />
-    <None Include="Resources\drawable-xhdpi\ic_network.png" />
-    <None Include="Resources\drawable-xxxhdpi\ic_assets.png" />
-    <None Include="Resources\drawable-xxxhdpi\ic_file.png" />
-    <None Include="Resources\drawable-xxxhdpi\ic_network.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -164,6 +158,12 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_assets.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_file.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_network.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_assets.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_file.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_network.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_assets.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_file.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_network.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
