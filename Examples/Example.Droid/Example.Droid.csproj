@@ -106,16 +106,13 @@
     <AndroidResource Include="Resources\anim\hold.xml" />
     <AndroidResource Include="Resources\anim\slide_in_right.xml" />
     <AndroidResource Include="Resources\anim\slide_out_right.xml" />
-    <AndroidResource Include="Resources\drawable\ic_assets.xml" />
     <AndroidResource Include="Resources\drawable\ic_back.xml" />
-    <AndroidResource Include="Resources\drawable\ic_file.xml" />
     <AndroidResource Include="Resources\drawable\ic_invert.xml" />
     <AndroidResource Include="Resources\drawable\ic_invert_black.xml" />
     <AndroidResource Include="Resources\drawable\ic_invert_white.xml" />
     <AndroidResource Include="Resources\drawable\ic_loop.xml" />
     <AndroidResource Include="Resources\drawable\ic_loop_disabled.xml" />
     <AndroidResource Include="Resources\drawable\ic_loop_enabled.xml" />
-    <AndroidResource Include="Resources\drawable\ic_network.xml" />
     <AndroidResource Include="Resources\drawable\ic_pause.xml" />
     <AndroidResource Include="Resources\drawable\ic_play.xml" />
     <AndroidResource Include="Resources\drawable\ic_play_pause.xml" />
@@ -149,9 +146,28 @@
     <AndroidResource Include="Resources\values\styles.xml" />
     <AndroidResource Include="Resources\values-w820dp\dimens.xml" />
     <AndroidResource Include="Resources\menu\fragment_animation.xml" />
+    <AndroidResource Include="Resources\drawable-anydpi-v21\ic_assets.xml" />
+    <AndroidResource Include="Resources\drawable-anydpi-v21\ic_file.xml" />
+    <AndroidResource Include="Resources\drawable-anydpi-v21\ic_network.xml" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_assets.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_file.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ic_network.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_assets.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_file.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ic_network.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_assets.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_file.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ic_network.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_assets.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_file.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ic_network.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_assets.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_file.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ic_network.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
+    <Folder Include="Resources\drawable-anydpi-v21\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\9squares-AlBoardman.json" />
