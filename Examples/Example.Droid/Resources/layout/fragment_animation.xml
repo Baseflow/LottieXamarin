@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@drawable/outline"
+            android:scaleType="centerCrop"
             android:duplicateParentState="true" />
         <LinearLayout
             android:id="@+id/instructions"
@@ -134,14 +135,54 @@
             android:background="?selectableItemBackgroundBorderless"
             app:srcCompat="@drawable/ic_network" />
     </LinearLayout>
-    <android.support.v7.widget.AppCompatSeekBar
-        android:id="@+id/seek_bar"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="64dp"
-        android:layout_marginRight="64dp"
-        android:layout_marginBottom="8dp" />
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="16dp"
+            android:gravity="right"
+            android:text="Progress" />
+        <android.support.v7.widget.AppCompatSeekBar
+            android:id="@+id/seek_bar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3" />
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="16dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="16dp"
+            android:gravity="right"
+            android:text="Scale" />
+        <android.support.v7.widget.AppCompatSeekBar
+            android:id="@+id/scale_seek_bar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3" />
+        <TextView
+            android:id="@+id/scale_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="16dp"
+            android:gravity="left" />
+    </LinearLayout>
     <TextView
         android:id="@+id/animation_name"
         android:layout_width="wrap_content"
