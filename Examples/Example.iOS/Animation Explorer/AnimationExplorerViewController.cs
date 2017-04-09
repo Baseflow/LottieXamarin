@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Airbnb.Lottie;
 using CoreGraphics;
 using UIKit;
+using ZXing.Mobile;
 
 namespace LottieSamples.iOS
 {
@@ -40,7 +42,7 @@ namespace LottieSamples.iOS
             UIBarButtonItem open = new UIBarButtonItem(UIBarButtonSystemItem.Bookmarks, OpenEventHandler);
             UIBarButtonItem flx1 = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace, null);
 
-            UIBarButtonItem openWeb = new UIBarButtonItem(UIBarButtonSystemItem.Action, ShowUrlInputEventHandler);
+            UIBarButtonItem openWeb = new UIBarButtonItem(UIBarButtonSystemItem.Action, RemoteJsonEventHandler);
             UIBarButtonItem flx2 = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace, null);
 
             UIBarButtonItem play = new UIBarButtonItem(UIBarButtonSystemItem.Play, PlayEventHandler);
@@ -89,6 +91,16 @@ namespace LottieSamples.iOS
             this.ShowJsonExplorer();
         }
 
+        private void RemoteJsonEventHandler(object sender, EventArgs e)
+        {
+            UIAlertController actionSheet = UIAlertController.Create(null, null, UIAlertControllerStyle.ActionSheet);
+            actionSheet.AddAction(UIAlertAction.Create("Load animation from URL", UIAlertActionStyle.Default, (action) => ShowUrlInput()));
+            actionSheet.AddAction(UIAlertAction.Create("Scan LottieFiles QR Code", UIAlertActionStyle.Default, async (action) => await ShowQRCodeScannerAsync()));
+            actionSheet.AddAction(UIAlertAction.Create("Cancel", UIAlertActionStyle.Cancel, null));
+
+            this.PresentViewController(actionSheet, true, null);
+        }
+
         private async void ZoomEventHandler(object sender, EventArgs e)
         {
             switch (this.laAnimation.ContentMode)
@@ -123,7 +135,7 @@ namespace LottieSamples.iOS
         }
 
 
-        private void ShowUrlInputEventHandler(object sender, EventArgs e)
+        private void ShowUrlInput()
         {
             UIAlertController alert = UIAlertController.Create("Load From URL", null, UIAlertControllerStyle.Alert);
             alert.AddTextField((UITextField obj) => obj.Placeholder = "Enter URL");
@@ -137,6 +149,20 @@ namespace LottieSamples.iOS
             this.PresentViewController(alert, animated: true, completionHandler: null);
         }
 
+        private async Task ShowQRCodeScannerAsync()
+        {
+            var options = new ZXing.Mobile.MobileBarcodeScanningOptions();
+            options.PossibleFormats = new List<ZXing.BarcodeFormat>() {ZXing.BarcodeFormat.QR_CODE};
+
+            var scanner = new ZXing.Mobile.MobileBarcodeScanner(this);
+            scanner.TopText = "Scan QR Code from lottiefiles.com";
+            scanner.AutoFocus();
+
+            var result = await scanner.Scan(options,true);
+            if (result != null)
+                LoadAnimationFromUrl(result.Text);
+
+        }
 
         private void ShowJsonExplorer()
         {
@@ -275,7 +301,6 @@ namespace LottieSamples.iOS
                            ()=> messageLabel.Alpha=0f, 
                            () => messageLabel.RemoveFromSuperview());
         }
-
     }
 }
 
