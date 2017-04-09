@@ -84,6 +84,18 @@
     <Reference Include="Xamarin.Android.Support.Design">
       <HintPath>..\..\packages\Xamarin.Android.Support.Design.25.1.1\lib\MonoAndroid70\Xamarin.Android.Support.Design.dll</HintPath>
     </Reference>
+    <Reference Include="ZXing.Net.Mobile.Core">
+      <HintPath>..\..\packages\ZXing.Net.Mobile.2.1.47\lib\MonoAndroid403\ZXing.Net.Mobile.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.portable">
+      <HintPath>..\..\packages\ZXing.Net.Mobile.2.1.47\lib\MonoAndroid403\zxing.portable.dll</HintPath>
+    </Reference>
+    <Reference Include="ZXingNetMobile">
+      <HintPath>..\..\packages\ZXing.Net.Mobile.2.1.47\lib\MonoAndroid403\ZXingNetMobile.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v4">
+      <HintPath>..\..\packages\Xamarin.Android.Support.v4.25.1.1\lib\MonoAndroid70\Xamarin.Android.Support.v4.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -149,21 +161,28 @@
     <AndroidResource Include="Resources\drawable-anydpi-v21\ic_assets.xml" />
     <AndroidResource Include="Resources\drawable-anydpi-v21\ic_file.xml" />
     <AndroidResource Include="Resources\drawable-anydpi-v21\ic_network.xml" />
+	<AndroidResource Include="Resources\drawable-anydpi-v21\ic_qr_scan.xml" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_assets.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_file.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ic_network.png" />
+	<AndroidResource Include="Resources\drawable-mdpi\ic_qr_scan.png" />
     <AndroidResource Include="Resources\drawable-hdpi\ic_assets.png" />
     <AndroidResource Include="Resources\drawable-hdpi\ic_file.png" />
     <AndroidResource Include="Resources\drawable-hdpi\ic_network.png" />
+	<AndroidResource Include="Resources\drawable-hdpi\ic_qr_scan.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_assets.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_file.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_network.png" />
+	<AndroidResource Include="Resources\drawable-xxhdpi\ic_qr_scan.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ic_assets.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ic_file.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ic_network.png" />
+	<AndroidResource Include="Resources\drawable-xhdpi\ic_qr_scan.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_assets.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_file.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_network.png" />
+	<AndroidResource Include="Resources\drawable-xxxhdpi\ic_qr_scan.png" />
+	<AndroidResource Include="Resources\drawable\ic_qr_overlay.xml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
@@ -280,4 +299,5 @@
   <Import Project="..\..\packages\Xamarin.Android.Support.v7.AppCompat.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.v7.AppCompat.targets" Condition="Exists('..\..\packages\Xamarin.Android.Support.v7.AppCompat.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.v7.AppCompat.targets')" />
   <Import Project="..\..\packages\Xamarin.Android.Support.Design.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.Design.targets" Condition="Exists('..\..\packages\Xamarin.Android.Support.Design.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.Design.targets')" />
   <Import Project="..\..\packages\Xamarin.Build.Download.0.4.3\build\Xamarin.Build.Download.targets" Condition="Exists('..\..\packages\Xamarin.Build.Download.0.4.3\build\Xamarin.Build.Download.targets')" />
+  <Import Project="..\..\packages\Xamarin.Android.Support.v4.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.v4.targets" Condition="Exists('..\..\packages\Xamarin.Android.Support.v4.25.1.1\build\MonoAndroid70\Xamarin.Android.Support.v4.targets')" />
 </Project>
