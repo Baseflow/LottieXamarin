@@ -69,6 +69,15 @@
 	<attr path="/api/package[@name='com.airbnb.lottie']/interface[@name='OnCompositionLoadedListener']/method[@name='onCompositionLoaded' and count(parameter)=1 and parameter[1][@type='com.airbnb.lottie.LottieComposition']]/parameter[@name='p0' and @type='com.airbnb.lottie.LottieComposition']" name="name">composition</attr>
 
 	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='enableMergePathsForKitKatAndAbove' and count(parameter)=1 and parameter[1][@type='boolean']]/parameter[@name='p0' and @type='boolean']" name="name">enable</attr>
+
+	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='addColorFilter' and count(parameter)=1 and parameter[1][@type='android.graphics.ColorFilter']]/parameter[@name='p0' and @type='android.graphics.ColorFilter']" name="name">colorFilter</attr>
+	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='addColorFilterToContent' and count(parameter)=3 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.String'] and parameter[3][@type='android.graphics.ColorFilter']]/parameter[@name='p0' and @type='java.lang.String']" name="name">layerName</attr>
+	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='addColorFilterToContent' and count(parameter)=3 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.String'] and parameter[3][@type='android.graphics.ColorFilter']]/parameter[@name='p1' and @type='java.lang.String']" name="name">contentName</attr>
+	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='addColorFilterToContent' and count(parameter)=3 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.String'] and parameter[3][@type='android.graphics.ColorFilter']]/parameter[@name='p2' and @type='android.graphics.ColorFilter']" name="name">colorFilter</attr>
+
+	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='addColorFilterToLayer' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='android.graphics.ColorFilter']]/parameter[@name='p0' and @type='java.lang.String']" name="name">layerName</attr>
+	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='addColorFilterToLayer' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='android.graphics.ColorFilter']]/parameter[@name='p1' and @type='android.graphics.ColorFilter']" name="name">colorFilter</attr>
+
 	
 	<!-- LottieComposition.Factory -->
 	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieComposition.Factory']/method[@name='fromAssetFileName' and count(parameter)=3 and parameter[1][@type='android.content.Context'] and parameter[2][@type='java.lang.String'] and parameter[3][@type='com.airbnb.lottie.OnCompositionLoadedListener']]/parameter[@name='p1' and @type='java.lang.String']" name="name">fileName</attr>
@@ -119,6 +128,9 @@
 
 	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='addColorFilterToLayer' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='android.graphics.ColorFilter']]/parameter[@name='p0' and @type='java.lang.String']" name="name">layerName</attr>
 	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='addColorFilterToLayer' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='android.graphics.ColorFilter']]/parameter[@name='p1' and @type='android.graphics.ColorFilter']" name="name">colorFilter</attr>
+
+	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='enableMergePathsForKitKatAndAbove' and count(parameter)=1 and parameter[1][@type='boolean']]/parameter[@name='p0' and @type='boolean']" name="name">enable</attr>
+
 	<!-- IAnimatableValueFactory -->
 	<attr path="/api/package[@name='com.airbnb.lottie']/interface[@name='AnimatableValue.Factory']/method[@name='valueFromObject' and count(parameter)=2 and parameter[1][@type='java.lang.Object'] and parameter[2][@type='float']]/parameter[@name='p0' and @type='java.lang.Object']" name="name">object</attr>
 	<attr path="/api/package[@name='com.airbnb.lottie']/interface[@name='AnimatableValue.Factory']/method[@name='valueFromObject' and count(parameter)=2 and parameter[1][@type='java.lang.Object'] and parameter[2][@type='float']]/parameter[@name='p1' and @type='float']" name="name">scale</attr>

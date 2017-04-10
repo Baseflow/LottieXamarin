@@ -21,6 +21,7 @@ using Android.Database;
 using Square.OkHttp3;
 using Org.Json;
 
+
 namespace LottieSamples.Droid
 {
     public class AnimationFragment : Fragment, Animator.IAnimatorListener, ValueAnimator.IAnimatorUpdateListener
@@ -33,6 +34,8 @@ namespace LottieSamples.Droid
         {
             {"WeAccept.json", "Images/WeAccept"}
         };
+        public const float ScaleSliderFactor = 50f;
+
 
         private OkHttpClient client;
 
@@ -41,6 +44,8 @@ namespace LottieSamples.Droid
         private ViewGroup animationContainer;
         private LottieAnimationView animationView;
         private AppCompatSeekBar seekBar;
+        private AppCompatSeekBar scaleSeekBar;
+        private TextView scaleTextView;
         private ImageButton invertButton;
         private ImageButton playButton;
 
@@ -58,6 +63,9 @@ namespace LottieSamples.Droid
             this.seekBar = view.FindViewById<AppCompatSeekBar>(Resource.Id.seek_bar);
             this.invertButton = view.FindViewById<ImageButton>(Resource.Id.invert_colors);
             this.playButton = view.FindViewById<ImageButton>(Resource.Id.play_button);
+
+            this.scaleSeekBar = view.FindViewById<AppCompatSeekBar>(Resource.Id.scale_seek_bar);
+            this.scaleTextView = view.FindViewById<TextView>(Resource.Id.scale_text);
 
             this.loopButton = view.FindViewById<ImageButton>(Resource.Id.loop);
             this.animationNameView = view.FindViewById<TextView>(Resource.Id.animation_name);
@@ -93,6 +101,15 @@ namespace LottieSamples.Droid
                     animationView.Progress = e.Progress / 100f;
                 }
             };
+
+            this.scaleSeekBar.ProgressChanged += (sender, e) =>
+            {
+                this.animationView.Scale = e.Progress / ScaleSliderFactor;
+                this.scaleTextView.Text = String.Format("{0:0.00}", this.animationView.Scale);
+
+            };
+
+
 
             return view;
         }
@@ -370,6 +387,8 @@ namespace LottieSamples.Droid
             seekBar.Progress = 0;
             animationView.SetComposition(composition);
             animationNameView.Text = name;
+            this.scaleTextView.Text = String.Format("{0:0.00}", animationView.Scale);
+            this.scaleSeekBar.Progress = (int)(animationView.Scale * ScaleSliderFactor);
         }
     
         private void PostUpdatePlayButtonText()
