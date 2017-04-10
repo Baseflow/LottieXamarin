@@ -20,7 +20,9 @@ using Android.Support.Design.Widget;
 using Android.Database;
 using Square.OkHttp3;
 using Org.Json;
-
+using ZXing.Mobile;
+using Android.Support.Graphics.Drawable;
+using Android.Util;
 
 namespace LottieSamples.Droid
 {
@@ -51,6 +53,7 @@ namespace LottieSamples.Droid
 
         private ImageButton loopButton;
         private TextView animationNameView;
+        private ViewGroup qrcodeOverlay;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -72,6 +75,7 @@ namespace LottieSamples.Droid
 
             ImageButton restartButton = view.FindViewById<ImageButton>(Resource.Id.restart);
             ImageButton loadAssetButton = view.FindViewById<ImageButton>(Resource.Id.load_asset);
+            ImageButton qrscanButton = view.FindViewById<ImageButton>(Resource.Id.qrscan);
             ImageButton loadFieButton = view.FindViewById<ImageButton>(Resource.Id.load_file);
             ImageButton loadUrlButton = view.FindViewById<ImageButton>(Resource.Id.load_url);
 
@@ -82,6 +86,7 @@ namespace LottieSamples.Droid
             loadAssetButton.Click += LoadAssetButton_Click;
             loadFieButton.Click += LoadFileButton_Click;
             loadUrlButton.Click += LoadUrlButton_Click;
+            qrscanButton.Click += QRScanButton_Click;
 
             (this.Activity as AppCompatActivity).SetSupportActionBar(toolbar);
             toolbar.SetNavigationIcon(Resource.Drawable.ic_back);
@@ -272,6 +277,58 @@ namespace LottieSamples.Droid
                            .Show();
         }
 
+        private async void QRScanButton_Click(object sender, EventArgs e)
+        {
+            MobileBarcodeScanner.Initialize(this.Activity.Application);
+
+            var options = new ZXing.Mobile.MobileBarcodeScanningOptions();
+            options.PossibleFormats = new List<ZXing.BarcodeFormat>() {
+                ZXing.BarcodeFormat.QR_CODE
+            };
+
+            var scanner = new ZXing.Mobile.MobileBarcodeScanner();
+            scanner.AutoFocus();
+            scanner.UseCustomOverlay = true;
+            scanner.CustomOverlay = GetQRCodeCustomOverlay();
+
+            var result = await scanner.Scan(options);
+            if (result != null)
+                LoadUrl(result.Text);
+        }
+
+        private ViewGroup GetQRCodeCustomOverlay()
+        {
+            if (this.qrcodeOverlay != null)
+                return this.qrcodeOverlay;
+            
+            this.qrcodeOverlay = new RelativeLayout(this.Activity);
+
+            TextView title = new TextView(this.Activity);
+            title.SetTextColor(Android.Graphics.Color.White);
+            title.SetText(Resource.String.scan_prompt);
+            RelativeLayout.LayoutParams tl = new RelativeLayout.LayoutParams(
+                ViewGroup.LayoutParams.WrapContent,
+                ViewGroup.LayoutParams.WrapContent);
+            tl.TopMargin = (int)TypedValue.ApplyDimension(ComplexUnitType.Dip, 80, Context.Resources.DisplayMetrics);
+            tl.AddRule(LayoutRules.CenterHorizontal);
+
+            title.LayoutParameters = tl;
+
+            this.qrcodeOverlay.AddView(title);
+
+            int pixel = (int)TypedValue.ApplyDimension(ComplexUnitType.Dip, 200, Context.Resources.DisplayMetrics);
+            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(pixel, pixel);
+            lp.AddRule(LayoutRules.CenterInParent);
+
+            AppCompatImageView img = new AppCompatImageView(this.Activity);
+            img.SetImageResource(Resource.Drawable.ic_qr_overlay);
+            img.LayoutParameters = lp;
+
+            this.qrcodeOverlay.AddView(img);
+
+            return this.qrcodeOverlay;
+        }
+
         #region Animator.IAnimatorListener
         public void OnAnimationCancel(Animator animation)
         {
@@ -354,7 +411,7 @@ namespace LottieSamples.Droid
             }
 
 
-            if (this.client != null)
+            if (this.client == null)
                 this.client = new OkHttpClient();
 
             client.NewCall(request).Enqueue((ICall call, Response response) =>

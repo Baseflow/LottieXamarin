@@ -225,6 +225,7 @@ namespace Example.Forms.Droid
 			global::Lottie.Forms.Droid.Resource.Attribute.logoDescription = global::Example.Forms.Droid.Resource.Attribute.logoDescription;
 			global::Lottie.Forms.Droid.Resource.Attribute.lottie_autoPlay = global::Example.Forms.Droid.Resource.Attribute.lottie_autoPlay;
 			global::Lottie.Forms.Droid.Resource.Attribute.lottie_cacheStrategy = global::Example.Forms.Droid.Resource.Attribute.lottie_cacheStrategy;
+			global::Lottie.Forms.Droid.Resource.Attribute.lottie_enableMergePathsForKitKatAndAbove = global::Example.Forms.Droid.Resource.Attribute.lottie_enableMergePathsForKitKatAndAbove;
 			global::Lottie.Forms.Droid.Resource.Attribute.lottie_fileName = global::Example.Forms.Droid.Resource.Attribute.lottie_fileName;
 			global::Lottie.Forms.Droid.Resource.Attribute.lottie_imageAssetsFolder = global::Example.Forms.Droid.Resource.Attribute.lottie_imageAssetsFolder;
 			global::Lottie.Forms.Droid.Resource.Attribute.lottie_loop = global::Example.Forms.Droid.Resource.Attribute.lottie_loop;
@@ -1493,6 +1494,7 @@ namespace Example.Forms.Droid
 			global::Lottie.Forms.Droid.Resource.Styleable.LottieAnimationView = global::Example.Forms.Droid.Resource.Styleable.LottieAnimationView;
 			global::Lottie.Forms.Droid.Resource.Styleable.LottieAnimationView_lottie_autoPlay = global::Example.Forms.Droid.Resource.Styleable.LottieAnimationView_lottie_autoPlay;
 			global::Lottie.Forms.Droid.Resource.Styleable.LottieAnimationView_lottie_cacheStrategy = global::Example.Forms.Droid.Resource.Styleable.LottieAnimationView_lottie_cacheStrategy;
+			global::Lottie.Forms.Droid.Resource.Styleable.LottieAnimationView_lottie_enableMergePathsForKitKatAndAbove = global::Example.Forms.Droid.Resource.Styleable.LottieAnimationView_lottie_enableMergePathsForKitKatAndAbove;
 			global::Lottie.Forms.Droid.Resource.Styleable.LottieAnimationView_lottie_fileName = global::Example.Forms.Droid.Resource.Styleable.LottieAnimationView_lottie_fileName;
 			global::Lottie.Forms.Droid.Resource.Styleable.LottieAnimationView_lottie_imageAssetsFolder = global::Example.Forms.Droid.Resource.Styleable.LottieAnimationView_lottie_imageAssetsFolder;
 			global::Lottie.Forms.Droid.Resource.Styleable.LottieAnimationView_lottie_loop = global::Example.Forms.Droid.Resource.Styleable.LottieAnimationView_lottie_loop;
@@ -2293,8 +2295,11 @@ namespace Example.Forms.Droid
 			// aapt resource value: 0x7f01013d
 			public const int lottie_autoPlay = 2130772285;
 			
+			// aapt resource value: 0x7f010142
+			public const int lottie_cacheStrategy = 2130772290;
+			
 			// aapt resource value: 0x7f010141
-			public const int lottie_cacheStrategy = 2130772289;
+			public const int lottie_enableMergePathsForKitKatAndAbove = 2130772289;
 			
 			// aapt resource value: 0x7f01013c
 			public const int lottie_fileName = 2130772284;
@@ -6942,13 +6947,17 @@ namespace Example.Forms.Droid
 					2130772286,
 					2130772287,
 					2130772288,
-					2130772289};
+					2130772289,
+					2130772290};
 			
 			// aapt resource value: 1
 			public const int LottieAnimationView_lottie_autoPlay = 1;
 			
+			// aapt resource value: 6
+			public const int LottieAnimationView_lottie_cacheStrategy = 6;
+			
 			// aapt resource value: 5
-			public const int LottieAnimationView_lottie_cacheStrategy = 5;
+			public const int LottieAnimationView_lottie_enableMergePathsForKitKatAndAbove = 5;
 			
 			// aapt resource value: 0
 			public const int LottieAnimationView_lottie_fileName = 0;
