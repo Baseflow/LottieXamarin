@@ -36,7 +36,7 @@ namespace LottieSamples.Droid
         {
             {"WeAccept.json", "Images/WeAccept"}
         };
-        public const float ScaleSliderFactor = 50f;
+        private const float ScaleSliderFactor = 50f;
 
 
         private OkHttpClient client;
@@ -165,7 +165,6 @@ namespace LottieSamples.Droid
                     string assetFolder = null;
                     assetFolders.TryGetValue(assetName, out assetFolder);
                     animationView.SetImageAssetsFolder(assetFolder);
-
                     LottieComposition.Factory.FromAssetFileName(this.Context, assetName, (composition) =>
                     {
                         SetComposition(composition, assetName);
