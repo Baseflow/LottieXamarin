@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
     <metadata>
         <id>Com.Airbnb.Android.Lottie</id>
         <version>2.0.0.0-rc1</version>
@@ -14,11 +14,11 @@
         <summary>Render After Effects animations natively on Android and iOS</summary>
         <tags>xamarin, monodroid, C#, xamarin.android, android, Lottie, animation, airbnb</tags>
         <dependencies>
-			<dependency id="Xamarin.Android.Support.v7.AppCompat" version="25.3.1" />
-		</dependencies>
-    </metadata>    
+            <dependency id="Xamarin.Android.Support.v7.AppCompat" version="25.3.1" />
+        </dependencies>
+    </metadata>
     <files>
         <file src="..\Lottie.Droid\bin\Release\Lottie.dll" target="lib\MonoAndroid40\Lottie.dll" />
-        <file src="..\Lottie.Droid\bin\Release\Lottie.xml" target="lib\MonoAndroid40\Lottie.xml" />
+        <file src="..\Lottie.Droid\bin\Release\Lottie.pdb" target="lib\MonoAndroid40\Lottie.pdb" />
     </files>
 </package>

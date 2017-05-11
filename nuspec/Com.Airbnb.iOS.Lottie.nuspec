@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Com.Airbnb.iOS.Lottie</id>
-        <version>1.5.1.0</version>
+        <version>1.5.1.1</version>
         <title>Lottie for Xamarin.iOS, macOS and tvOS</title>
         <authors>Martijn van Dijk</authors>
         <owners>Martijn van Dijk</owners>
@@ -15,8 +15,11 @@
         <tags>xamarin, monodroid, C#, xamarin.iOS, iOS, macOS, xamarin.mac, xamarin.tvos, tvOS, Lottie, animation, airbnb</tags>
     </metadata>
     <files>
-        <file src="..\Lottie.iOS\bin\Release\Lottie.iOS.dll" target="lib\xamarinios\Lottie.iOS.dll" />
         <file src="..\Lottie.macOS\bin\Release\Lottie.macOS.dll" target="lib\Xamarin.Mac\Lottie.macOS.dll" />
+        <file src="..\Lottie.macOS\bin\Release\Lottie.macOS.pdb" target="lib\Xamarin.Mac\Lottie.macOS.pdb" />
         <file src="..\Lottie.tvOS\bin\Release\Lottie.tvOS.dll" target="lib\Xamarin.TVOS\Lottie.tvOS.dll" />
+        <file src="..\Lottie.tvOS\bin\Release\Lottie.tvOS.pdb" target="lib\Xamarin.TVOS\Lottie.tvOS.pdb" />
+        <file src="..\Lottie.iOS\bin\Release\Lottie.iOS.dll" target="lib\xamarinios\Lottie.iOS.dll" />
+        <file src="..\Lottie.iOS\bin\Release\Lottie.iOS.pdb" target="lib\xamarinios\Lottie.iOS.pdb" />
     </files>
 </package>
