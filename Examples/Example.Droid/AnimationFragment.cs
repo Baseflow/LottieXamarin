@@ -21,7 +21,6 @@ using Android.Database;
 using Square.OkHttp3;
 using Org.Json;
 using ZXing.Mobile;
-using Android.Support.Graphics.Drawable;
 using Android.Util;
 
 namespace LottieSamples.Droid
@@ -164,7 +163,7 @@ namespace LottieSamples.Droid
                     string assetName = data.GetStringExtra(ExtraAnimationName);
                     string assetFolder = null;
                     assetFolders.TryGetValue(assetName, out assetFolder);
-                    animationView.SetImageAssetsFolder(assetFolder);
+                    animationView.ImageAssetsFolder = assetFolder;
                     LottieComposition.Factory.FromAssetFileName(this.Context, assetName, (composition) =>
                     {
                         SetComposition(composition, assetName);
