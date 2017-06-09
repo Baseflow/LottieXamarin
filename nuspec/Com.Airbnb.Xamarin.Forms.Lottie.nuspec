@@ -29,6 +29,9 @@
             <group targetFramework="Xamarin.TVOS0.0">
                 <dependency id="Com.Airbnb.iOS.Lottie" version="1.5.1.1" />
             </group>
+            <group targetFramework="uap10.0">
+                <dependency id="LottieUWP" version="2.0.0-alpha1" />
+            </group>
         </dependencies>
     </metadata>
     <files>
@@ -46,5 +49,9 @@
         <file src="..\Lottie.Forms.macOS\bin\Release\Lottie.Forms.macOS.dll" target="lib\xamarinmac\Lottie.Forms.macOS.dll" />
         <file src="..\Lottie.Forms.macOS\bin\Release\Lottie.Forms.macOS.pdb" target="lib\xamarinmac\Lottie.Forms.macOS.pdb" />
         <file src="..\Lottie.Forms.macOS\bin\Release\Lottie.Forms.pdb" target="lib\xamarinmac\Lottie.Forms.pdb" />
+		<file src="..\Lottie.Forms.UWP\bin\Release\Lottie.Forms.dll" target="lib\uap10.0\Lottie.Forms.dll" />
+        <file src="..\Lottie.Forms.UWP\bin\Release\Lottie.Forms.UWP.dll" target="lib\uap10.0\Lottie.Forms.UWP.dll" />
+        <file src="..\Lottie.Forms.UWP\bin\Release\Lottie.Forms.UWP.pdb" target="lib\uap10.0\Lottie.Forms.UWP.pdb" />
+        <file src="..\Lottie.Forms.UWP\bin\Release\Lottie.Forms.pdb" target="lib\uap10.0\Lottie.Forms.pdb" />
     </files>
 </package>
