@@ -30,7 +30,7 @@
                 <dependency id="Com.Airbnb.iOS.Lottie" version="1.5.1.1" />
             </group>
             <group targetFramework="uap10.0">
-                <dependency id="LottieUWP" version="2.0.0-alpha1" />
+                <dependency id="LottieUWP" version="2.0.0-alpha2" />
             </group>
         </dependencies>
     </metadata>

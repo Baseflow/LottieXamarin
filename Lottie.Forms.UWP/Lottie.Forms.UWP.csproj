@@ -112,7 +112,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="LottieUWP">
-      <Version>2.0.0-alpha1</Version>
+      <Version>2.0.0-alpha2</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>5.3.3</Version>
