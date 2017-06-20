@@ -15,7 +15,7 @@
         <tags>xamarin, monodroid, C#, xamarin.android, Forms, android, Lottie, animation, airbnb</tags>
         <dependencies>
             <group>
-                <dependency id="Xamarin.Forms" version="2.3.4.231" />
+                <dependency id="Xamarin.Forms" version="2.3.4.247" />
             </group>
             <group targetFramework="MonoAndroid7.0">
                 <dependency id="Com.Airbnb.Android.Lottie" version="2.0.0.0" />
