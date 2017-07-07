@@ -19,7 +19,7 @@ For the first time, designers can create **and ship** beautiful animations witho
 ![Example3](https://raw.githubusercontent.com/airbnb/lottie-android/master/gifs/Example3.gif)
 
 
-![Community](https://raw.githubusercontent.com/airbnb/lottie-android/master/gifs/Community 2_3.gif)
+![Community](https://raw.githubusercontent.com/airbnb/lottie-android/master/gifs/Community%202_3.gif)
 
 
 ![Example4](https://raw.githubusercontent.com/airbnb/lottie-android/master/gifs/Example4.gif)
