@@ -12,6 +12,10 @@ namespace Airbnb.Lottie
         // -(instancetype)initWithAnimationNamed:(NSString *)animation fromLayerNamed:(NSString *)fromLayer toLayerNamed:(NSString *)toLayer;
         [Export("initWithAnimationNamed:fromLayerNamed:toLayerNamed:")]
         IntPtr Constructor(string animation, string fromLayer, string toLayer);
+
+        //
+		[Export("initWithAnimationNamed:fromLayerNamed:toLayerNamed:inBundle:")]
+		IntPtr Constructor(string animation, string fromLayer, string toLayer, NSBundle bundle);
     }
 
     // typedef void (^LOTAnimationCompletionBlock)(BOOL);
@@ -36,9 +40,20 @@ namespace Airbnb.Lottie
         [Export("animationFromJSON:")]
         LOTAnimationView AnimationFromJSON(NSDictionary animationJSON);
 
-        // -(instancetype)initWithContentsOfURL:(NSURL *)url;
-        [Export("initWithContentsOfURL:")]
+		// +(instancetype)animationFromJSON:(NSDictionary *)animationJSON inBundle:(NSBundle *)bundle;
+		[Static]
+		[Export("animationFromJSON:inBundle:")]
+		LOTAnimationView AnimationFromJSON(NSDictionary animationJSON, NSBundle bundle);
+
+
+		// -(instancetype)initWithContentsOfURL:(NSURL *)url;
+		[Export("initWithContentsOfURL:")]
         IntPtr Constructor(NSUrl url);
+
+		// +(instancetype)animationWithFilePath:(NSString *)filePath;
+		[Static]
+		[Export("animationWithFilePath:")]
+		LOTAnimationView AnimationWithFilePath(string filePath);
 
         // @property (readonly, nonatomic) BOOL isAnimationPlaying;
         [Export("isAnimationPlaying")]

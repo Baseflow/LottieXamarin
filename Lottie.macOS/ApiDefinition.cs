@@ -28,6 +28,11 @@ namespace Airbnb.Lottie
         [Export("animationFromJSON:")]
         LOTAnimationView AnimationFromJSON(NSDictionary animationJSON);
 
+		// +(instancetype)animationFromJSON:(NSDictionary *)animationJSON inBundle:(NSBundle *)bundle;
+		[Static]
+		[Export("animationFromJSON:inBundle:")]
+		LOTAnimationView AnimationFromJSON(NSDictionary animationJSON, NSBundle bundle);
+
         // -(instancetype)initWithContentsOfURL:(NSURL *)url;
         [Export("initWithContentsOfURL:")]
         IntPtr Constructor(NSUrl url);
