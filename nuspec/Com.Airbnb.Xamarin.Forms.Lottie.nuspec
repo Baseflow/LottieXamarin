@@ -29,8 +29,8 @@
             <group targetFramework="Xamarin.TVOS0.0">
                 <dependency id="Com.Airbnb.iOS.Lottie" version="1.5.2.1" />
             </group>
-            <group targetFramework="UAP10.0">
-                <dependency id="LottieUWP" version="2.1.0-beta2" />
+            <group targetFramework="uap10.0">
+                <dependency id="LottieUWP" version="2.1.0-beta3" />
             </group>
         </dependencies>
     </metadata>
