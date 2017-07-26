@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Com.Airbnb.Xamarin.Forms.Lottie</id>
-        <version>2.0.0.0</version>
+        <version>2.1.0.0</version>
         <title>Lottie for Xamarin.Forms</title>
         <authors>Martijn van Dijk</authors>
         <owners>Martijn van Dijk</owners>
@@ -18,19 +18,19 @@
                 <dependency id="Xamarin.Forms" version="2.3.4.247" />
             </group>
             <group targetFramework="MonoAndroid7.0">
-                <dependency id="Com.Airbnb.Android.Lottie" version="2.0.0.0" />
+                <dependency id="Com.Airbnb.Android.Lottie" version="2.1.0.0" />
             </group>
             <group targetFramework="Xamarin.iOS0.0">
-                <dependency id="Com.Airbnb.iOS.Lottie" version="1.5.1.1" />
+                <dependency id="Com.Airbnb.iOS.Lottie" version="1.5.2.1" />
             </group>
             <group targetFramework="Xamarin.Mac0.0">
-                <dependency id="Com.Airbnb.iOS.Lottie" version="1.5.1.1" />
+                <dependency id="Com.Airbnb.iOS.Lottie" version="1.5.2.1" />
             </group>
             <group targetFramework="Xamarin.TVOS0.0">
-                <dependency id="Com.Airbnb.iOS.Lottie" version="1.5.1.1" />
+                <dependency id="Com.Airbnb.iOS.Lottie" version="1.5.2.1" />
             </group>
-            <group targetFramework="uap10.0">
-                <dependency id="LottieUWP" version="2.0.0-beta3" />
+            <group targetFramework="UAP10.0">
+                <dependency id="LottieUWP" version="2.1.0-beta2" />
             </group>
         </dependencies>
     </metadata>
@@ -41,6 +41,10 @@
         <file src="..\Lottie.Forms.Droid\bin\Release\Lottie.Forms.pdb" target="lib\MonoAndroid70\Lottie.Forms.pdb" />
         <file src="..\Lottie.Forms\bin\Release\Lottie.Forms.dll" target="lib\portable-net45+wp8+win+wpa81+dnxcore50\Lottie.Forms.dll" />
         <file src="..\Lottie.Forms\bin\Release\Lottie.Forms.pdb" target="lib\portable-net45+wp8+win+wpa81+dnxcore50\Lottie.Forms.pdb" />
+        <file src="..\Lottie.Forms.UWP\bin\Release\Lottie.Forms.dll" target="lib\uap10.0\Lottie.Forms.dll" />
+        <file src="..\Lottie.Forms.UWP\bin\Release\Lottie.Forms.pdb" target="lib\uap10.0\Lottie.Forms.pdb" />
+        <file src="..\Lottie.Forms.UWP\bin\Release\Lottie.Forms.UWP.dll" target="lib\uap10.0\Lottie.Forms.UWP.dll" />
+        <file src="..\Lottie.Forms.UWP\bin\Release\Lottie.Forms.UWP.pdb" target="lib\uap10.0\Lottie.Forms.UWP.pdb" />
         <file src="..\Lottie.Forms.iOS\bin\iPhone\Release\Lottie.Forms.dll" target="lib\xamarinios\Lottie.Forms.dll" />
         <file src="..\Lottie.Forms.iOS\bin\iPhone\Release\Lottie.Forms.iOS.dll" target="lib\xamarinios\Lottie.Forms.iOS.dll" />
         <file src="..\Lottie.Forms.iOS\bin\iPhone\Release\Lottie.Forms.iOS.pdb" target="lib\xamarinios\Lottie.Forms.iOS.pdb" />
@@ -49,9 +53,5 @@
         <file src="..\Lottie.Forms.macOS\bin\Release\Lottie.Forms.macOS.dll" target="lib\xamarinmac\Lottie.Forms.macOS.dll" />
         <file src="..\Lottie.Forms.macOS\bin\Release\Lottie.Forms.macOS.pdb" target="lib\xamarinmac\Lottie.Forms.macOS.pdb" />
         <file src="..\Lottie.Forms.macOS\bin\Release\Lottie.Forms.pdb" target="lib\xamarinmac\Lottie.Forms.pdb" />
-		<file src="..\Lottie.Forms.UWP\bin\Release\Lottie.Forms.dll" target="lib\uap10.0\Lottie.Forms.dll" />
-        <file src="..\Lottie.Forms.UWP\bin\Release\Lottie.Forms.UWP.dll" target="lib\uap10.0\Lottie.Forms.UWP.dll" />
-        <file src="..\Lottie.Forms.UWP\bin\Release\Lottie.Forms.UWP.pdb" target="lib\uap10.0\Lottie.Forms.UWP.pdb" />
-        <file src="..\Lottie.Forms.UWP\bin\Release\Lottie.Forms.pdb" target="lib\uap10.0\Lottie.Forms.pdb" />
     </files>
 </package>
