@@ -40,13 +40,16 @@
       <Link>libLottie.linkwith.cs</Link>
 	<DependentUpon>libLottie.a</DependentUpon>
     </Compile>
+    <Compile Include="..\Lottie.iOS\StructsAndEnums.cs">
+      <Link>StructsAndEnums.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ObjcBindingNativeLibrary Include="libLottie.a" />
   </ItemGroup>
   <ItemGroup>
-    <ObjcBindingApiDefinition Include="..\Lottie.iOS\ApiDefinition.cs">
-      <Link>ApiDefinition.cs</Link>
+    <ObjcBindingApiDefinition Include="..\Lottie.iOS\ApiDefinitions.cs">
+      <Link>ApiDefinitions.cs</Link>
     </ObjcBindingApiDefinition>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\TVOS\Xamarin.TVOS.ObjCBinding.CSharp.targets" />
