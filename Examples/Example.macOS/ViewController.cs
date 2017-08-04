@@ -1,16 +1,11 @@
 ﻿using System;
 
 using AppKit;
-using Foundation;
-
-using Airbnb.Lottie;
 
 namespace Example.macOS
 {
     public partial class ViewController : NSViewController
     {
-        private LOTAnimationView lottieLogo;
-
         public ViewController(IntPtr handle) : base(handle)
         {
         }
@@ -18,24 +13,20 @@ namespace Example.macOS
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            this.lottieLogo = LOTAnimationView.AnimationNamed("LottieLogo1");
-            this.lottieLogo.ContentMode = LOTViewContentMode.ScaleAspectFill;
-            this.lottieLogo.Frame = this.View.Bounds;
-            this.lottieLogo.AutoresizingMask = NSViewResizingMask.WidthSizable | NSViewResizingMask.HeightSizable;
-            this.lottieLogo.LoopAnimation = true;
-            this.View.AddSubview(this.lottieLogo);
-        }
 
-        public override void ViewDidAppear()
-        {
-            base.ViewDidAppear();
-            this.lottieLogo.Play();
-        }
+            this.rewindButton.Activated += (sender, e) =>
+                (this.View as LAMainView).RewindAnimation();
 
-        public override void ViewDidDisappear()
-        {
-            base.ViewDidDisappear();
-            this.lottieLogo.Pause();
+            this.loopButton.Activated += (sender, e) => 
+                (this.View as LAMainView).ToogleLoop();
+
+            this.playButton.Activated += (sender, e) => 
+                (this.View as LAMainView).PlayAnimation();
+
+            this.progressSlider.Activated  += (object sender, EventArgs e) => {
+                (this.View as LAMainView).AnimationProgress = this.progressSlider.FloatValue;
+            };
+
         }
     }
 }
