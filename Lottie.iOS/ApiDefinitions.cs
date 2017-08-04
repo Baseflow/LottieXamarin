@@ -6,6 +6,7 @@ using UIKit;
 
 namespace Airbnb.Lottie
 {
+
     // @interface LOTAnimationTransitionController : NSObject <UIViewControllerAnimatedTransitioning>
     [BaseType(typeof(NSObject))]
     interface LOTAnimationTransitionController : IUIViewControllerAnimatedTransitioning
@@ -17,6 +18,33 @@ namespace Airbnb.Lottie
         // -(instancetype _Nonnull)initWithAnimationNamed:(NSString * _Nonnull)animation fromLayerNamed:(NSString * _Nullable)fromLayer toLayerNamed:(NSString * _Nullable)toLayer applyAnimationTransform:(BOOL)applyAnimationTransform inBundle:(NSBundle * _Nonnull)bundle;
         [Export("initWithAnimationNamed:fromLayerNamed:toLayerNamed:applyAnimationTransform:inBundle:")]
         IntPtr Constructor(string animation, [NullAllowed] string fromLayer, [NullAllowed] string toLayer, bool applyAnimationTransform, NSBundle bundle);
+    }
+
+    // @interface LOTCacheProvider : NSObject
+    [BaseType(typeof(NSObject))]
+    interface LOTCacheProvider
+    {
+        // +(id<LOTImageCache>)imageCache;
+        // +(void)setImageCache:(id<LOTImageCache>)cache;
+        [Static]
+        [Export("imageCache")]
+        LOTImageCache ImageCache { get; set; }
+    }
+
+    // @protocol LOTImageCache <NSObject>
+    [Protocol, Model]
+    [BaseType(typeof(NSObject))]
+    interface LOTImageCache
+    {
+        // @required -(UIImage *)imageForKey:(NSString *)key;
+        [Abstract]
+        [Export("imageForKey:")]
+        UIImage ImageForKey(string key);
+
+        // @required -(void)setImage:(UIImage *)image forKey:(NSString *)key;
+        [Abstract]
+        [Export("setImage:forKey:")]
+        void SetImage(UIImage image, string key);
     }
 
     // @interface LOTComposition : NSObject
@@ -47,12 +75,12 @@ namespace Airbnb.Lottie
         [Export("timeDuration")]
         double TimeDuration { get; }
 
-        // @property (readonly, nonatomic) LOTLayerGroup * layerGroup;
-        //[Export ("layerGroup")]
+        //// @property (readonly, nonatomic) LOTLayerGroup * layerGroup;
+        //[Export("layerGroup")]
         //LOTLayerGroup LayerGroup { get; }
 
-        // @property (readonly, nonatomic) LOTAssetGroup * assetGroup;
-        //[Export ("assetGroup")]
+        //// @property (readonly, nonatomic) LOTAssetGroup * assetGroup;
+        //[Export("assetGroup")]
         //LOTAssetGroup AssetGroup { get; }
 
         // @property (readwrite, nonatomic) NSString * rootDirectory;

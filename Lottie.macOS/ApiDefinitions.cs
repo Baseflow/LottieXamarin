@@ -6,6 +6,7 @@ using ObjCRuntime;
 
 namespace Airbnb.Lottie
 {
+
     // @interface LOTComposition : NSObject
     [BaseType(typeof(NSObject))]
     interface LOTComposition
@@ -34,12 +35,12 @@ namespace Airbnb.Lottie
         [Export("timeDuration")]
         double TimeDuration { get; }
 
-        // @property (readonly, nonatomic) LOTLayerGroup * layerGroup;
-        //[Export ("layerGroup")]
+        //// @property (readonly, nonatomic) LOTLayerGroup * layerGroup;
+        //[Export("layerGroup")]
         //LOTLayerGroup LayerGroup { get; }
 
-        // @property (readonly, nonatomic) LOTAssetGroup * assetGroup;
-        //[Export ("assetGroup")]
+        //// @property (readonly, nonatomic) LOTAssetGroup * assetGroup;
+        //[Export("assetGroup")]
         //LOTAssetGroup AssetGroup { get; }
 
         // @property (readwrite, nonatomic) NSString * rootDirectory;

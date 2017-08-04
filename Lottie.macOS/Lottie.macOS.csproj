@@ -53,8 +53,5 @@
   <ItemGroup>
     <ObjcBindingNativeLibrary Include="libLottie.a" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="ApiDefinition.cs" />
-  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.ObjcBinding.CSharp.targets" />
 </Project>

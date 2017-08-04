@@ -33,7 +33,7 @@ namespace Example.macOS
             RegisterForDraggedTypes(new string[] { NSPasteboard.NSFilenamesType });
 
             this.lottieLogo = LOTAnimationView.AnimationNamed("LottieLogo1");
-            this.lottieLogo.ContentMode = LOTViewContentMode.ScaleAspectFit;
+            this.lottieLogo.ContentMode = LOTViewContentMode.ScaleAspectFill;
             this.lottieLogo.Frame = this.Bounds;
             this.lottieLogo.AutoresizingMask = NSViewResizingMask.WidthSizable |
                 NSViewResizingMask.HeightSizable;
@@ -154,8 +154,7 @@ namespace Example.macOS
 			this.lottieLogo.AutoresizingMask = NSViewResizingMask.WidthSizable |
 				NSViewResizingMask.HeightSizable;
 
-			this.lottieLogo.Layer.ZPosition = -10000;
-			this.AddSubview(this.lottieLogo);
+            this.AddSubview(this.lottieLogo, place:NSWindowOrderingMode.Below, otherView:null);
             this.lottieLogo.Play();
 		}
     }
