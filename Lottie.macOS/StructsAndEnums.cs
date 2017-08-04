@@ -1,23 +1,20 @@
-﻿using System;
+using System;
 using ObjCRuntime;
 
-namespace Airbnb.Lottie
+[Native]
+public enum LOTViewContentMode : ulong
 {
-    [Native]
-    public enum LOTViewContentMode : ulong
-    {
-        ScaleToFill,
-        ScaleAspectFit,
-        ScaleAspectFill,
-        Redraw,
-        Center,
-        Top,
-        Bottom,
-        Left,
-        Right,
-        TopLeft,
-        TopRight,
-        BottomLeft,
-        BottomRight
-    }
+	ScaleToFill,
+	ScaleAspectFit,
+	ScaleAspectFill,
+	Redraw,
+	Center,
+	Top,
+	Bottom,
+	Left,
+	Right,
+	TopLeft,
+	TopRight,
+	BottomLeft,
+	BottomRight
 }
