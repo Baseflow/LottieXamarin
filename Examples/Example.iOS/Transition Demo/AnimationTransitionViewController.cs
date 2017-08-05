@@ -89,7 +89,9 @@ namespace LottieSamples.iOS
             LOTAnimationTransitionController animationController = new LOTAnimationTransitionController(
                 animation: "vcTransition1",
                 fromLayer: "outLayer",
-                toLayer: "inLayer");
+                toLayer: "inLayer",
+                applyAnimationTransform: false
+            );
 
             return animationController;
         }
@@ -101,7 +103,10 @@ namespace LottieSamples.iOS
             LOTAnimationTransitionController animationController = new LOTAnimationTransitionController(
                animation: "vcTransition2",
                fromLayer: "outLayer",
-               toLayer: "inLayer");
+               toLayer: "inLayer",
+               applyAnimationTransform: false
+            );
+
 
             return animationController;
         }
