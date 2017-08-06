@@ -38,9 +38,10 @@
     <Compile Include="Linker.cs" />  
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LOTAnimationView.cs" />
+    <Compile Include="StructsAndEnums.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ObjcBindingApiDefinition Include="ApiDefinition.cs" />
+    <ObjcBindingApiDefinition Include="ApiDefinitions.cs" />
   </ItemGroup>
   <ItemGroup>
 
