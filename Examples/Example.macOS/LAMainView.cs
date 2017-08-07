@@ -110,6 +110,8 @@ namespace Example.macOS
             return true;
         }
 
+
+
         public void PlayAnimation()
         {
             if (this.lottieLogo.IsAnimationPlaying)
@@ -132,6 +134,15 @@ namespace Example.macOS
             this.lottieLogo.LoopAnimation = !this.lottieLogo.LoopAnimation;
         }
 
+		public void OpenAnimationUrl(NSUrl url)
+		{
+			this.lottieLogo.RemoveFromSuperview();
+			this.lottieLogo = null;
+
+			this.lottieLogo = new LOTAnimationView(url);
+			setDefaultViewProperties();
+		}
+
         public nfloat AnimationProgress
         {
             get {
@@ -149,13 +160,18 @@ namespace Example.macOS
             this.lottieLogo = null;
 
             this.lottieLogo = LOTAnimationView.AnimationWithFilePath(file);
+            setDefaultViewProperties();
+		}
+
+        private void setDefaultViewProperties()
+        {
 			this.lottieLogo.ContentMode = LOTViewContentMode.ScaleAspectFit;
 			this.lottieLogo.Frame = this.Bounds;
 			this.lottieLogo.AutoresizingMask = NSViewResizingMask.WidthSizable |
 				NSViewResizingMask.HeightSizable;
 
-            this.AddSubview(this.lottieLogo, place:NSWindowOrderingMode.Below, otherView:null);
-            this.lottieLogo.Play();
-		}
+			this.AddSubview(this.lottieLogo, place: NSWindowOrderingMode.Below, otherView: null);
+			this.lottieLogo.Play();
+        }
     }
 }
