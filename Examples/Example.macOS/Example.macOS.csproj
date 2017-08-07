@@ -89,6 +89,11 @@
     <Compile Include="LAMainView.designer.cs">
       <DependentUpon>LAMainView.cs</DependentUpon>
     </Compile>
+    <Compile Include="LottieFilesUrl.cs" />
+    <Compile Include="AppDelegate.designer.cs">
+      <DependentUpon>AppDelegate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditMenuDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />

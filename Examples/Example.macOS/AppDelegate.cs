@@ -1,10 +1,10 @@
-﻿using AppKit;
+using AppKit;
 using Foundation;
 
 namespace Example.macOS
 {
     [Register("AppDelegate")]
-    public class AppDelegate : NSApplicationDelegate
+    public partial class AppDelegate : NSApplicationDelegate
     {
         public AppDelegate()
         {
@@ -12,7 +12,9 @@ namespace Example.macOS
 
         public override void DidFinishLaunching(NSNotification notification)
         {
-            // Insert code here to initialize your application
+			// Disable automatice item enabling on the Edit menu
+			editMenu.AutoEnablesItems = false;
+			editMenu.Delegate = new EditMenuDelegate();
         }
 
         public override void WillTerminate(NSNotification notification)
