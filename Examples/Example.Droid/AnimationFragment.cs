@@ -139,8 +139,7 @@ namespace LottieSamples.Droid
             switch (item.ItemId)
             {
                 case Resource.Id.hardware_acceleration:
-                    var layerType = item.IsChecked ? LayerType.Hardware : LayerType.Software;
-                    this.animationView.SetLayerType(layerType, null);
+                    this.animationView.UseHardwareAcceleration( item.IsChecked );
                     return true;
                 
                 case Resource.Id.merge_paths:

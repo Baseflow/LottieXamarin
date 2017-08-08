@@ -89,7 +89,8 @@
     <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='updateBitmap' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='android.graphics.Bitmap']]/parameter[@name='p0']" name="name">id</attr>
     <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='updateBitmap' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='android.graphics.Bitmap']]/parameter[@name='p1']" name="name">bitmap</attr>
 
-	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='useExperimentalHardwareAcceleration' and count(parameter)=1 and parameter[1][@type='boolean']]/parameter[@name='p0']" name="name">use</attr>
+    <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='useHardwareAcceleration' and count(parameter)=1 and parameter[1][@type='boolean']]/parameter[@name='p0']" name="name">use</attr>
+    <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='useExperimentalHardwareAcceleration' and count(parameter)=1 and parameter[1][@type='boolean']]/parameter[@name='p0']" name="name">use</attr>
 	
 	<!-- LottieComposition.Factory -->
 	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieComposition']/method[@name='setPerformanceTrackingEnabled' and count(parameter)=1 and parameter[1][@type='boolean']]/parameter[@name='p0']" name="name">enabled</attr>
