@@ -44,23 +44,7 @@ namespace Lottie.Forms.iOS.Renderers
 
             if (!string.IsNullOrEmpty(e.NewElement.Animation))
             {
-                _animationView = new LOTAnimationView(NSUrl.FromFilename(e.NewElement.Animation))
-                {
-                    AutoresizingMask = UIViewAutoresizing.All,
-                    ContentMode = UIViewContentMode.ScaleAspectFit,
-                    LoopAnimation = e.NewElement.Loop
-                };
-                Element.Duration = TimeSpan.FromMilliseconds(_animationView.AnimationDuration);
-                if (e.NewElement.AutoPlay)
-                {
-                    _animationView.Play();
-                }
-            }
-
-            if (_animationView != null)
-            {
-                SetNativeControl(_animationView);
-                SetNeedsLayout();
+                InitAnimationViewForElement(e.NewElement);
             }
         }
 
@@ -81,14 +65,7 @@ namespace Lottie.Forms.iOS.Renderers
             if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
             {
                 _animationView?.RemoveFromSuperview();
-                _animationView = new LOTAnimationView(NSUrl.FromString(Element.Animation));
-                Element.Duration = TimeSpan.FromMilliseconds(_animationView.AnimationDuration);
-                SetNativeControl(_animationView);
-                SetNeedsLayout();
-                if (Element.AutoPlay)
-                {
-                    _animationView.Play();
-                }
+                InitAnimationViewForElement(Element);
             }
 
             if (e.PropertyName == AnimationView.ProgressProperty.PropertyName)
@@ -108,6 +85,29 @@ namespace Lottie.Forms.iOS.Renderers
             }
 
             base.OnElementPropertyChanged(sender, e);
+        }
+
+        private void InitAnimationViewForElement(AnimationView theElement)
+        {
+            _animationView = new LOTAnimationView(NSUrl.FromFilename(theElement.Animation))
+            {
+                AutoresizingMask = UIViewAutoresizing.All,
+                ContentMode = UIViewContentMode.ScaleAspectFit,
+                LoopAnimation = theElement.Loop
+            };
+
+            Element.Duration = TimeSpan.FromMilliseconds(_animationView.AnimationDuration);
+
+            if (theElement.AutoPlay)
+            {
+                _animationView.Play();
+            }
+
+            if (_animationView != null)
+            {
+                SetNativeControl(_animationView);
+                SetNeedsLayout();
+            }
         }
     }
 }
