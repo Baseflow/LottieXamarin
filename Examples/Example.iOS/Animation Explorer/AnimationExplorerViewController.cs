@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Airbnb.Lottie;
+using CoreAnimation;
 using CoreGraphics;
+using Foundation;
 using UIKit;
 using ZXing.Mobile;
 
@@ -272,9 +274,11 @@ namespace LottieSamples.iOS
             }
             else
             {
+                CADisplayLink displayLink = CADisplayLink.Create(UpdateProgressSlider);
+                displayLink.AddToRunLoop(NSRunLoop.Current, NSRunLoopMode.Common);
                 this.ResetButton(button, highlighted: true);
                 this.laAnimation.PlayWithCompletion((arg0) => {
-                    this.slider.Value = (float)  this.laAnimation.AnimationProgress;
+                    displayLink.Invalidate();
                     this.ResetButton(button, highlighted: false);
                 });
             }
@@ -300,6 +304,11 @@ namespace LottieSamples.iOS
             UIView.Animate(0.3f, 1f, UIViewAnimationOptions.CurveEaseInOut, 
                            ()=> messageLabel.Alpha=0f, 
                            () => messageLabel.RemoveFromSuperview());
+        }
+
+        private void UpdateProgressSlider()
+        {
+			this.slider.Value = (float)this.laAnimation.AnimationProgress;
         }
     }
 }
