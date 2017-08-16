@@ -91,7 +91,25 @@
 
     <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='useHardwareAcceleration' and count(parameter)=1 and parameter[1][@type='boolean']]/parameter[@name='p0']" name="name">use</attr>
     <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='useExperimentalHardwareAcceleration' and count(parameter)=1 and parameter[1][@type='boolean']]/parameter[@name='p0']" name="name">use</attr>
-	
+
+    <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='setMinProgress' and count(parameter)=1 and parameter[1][@type='float']]/parameter[@name='p0']" name="name">startProgress</attr>
+	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='setMinFrame' and count(parameter)=1 and parameter[1][@type='int']]/parameter[@name='p0']" name="name">startFrame</attr>
+		
+    <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='setMaxFrame' and count(parameter)=1 and parameter[1][@type='int']]/parameter[@name='p0']" name="name">endFrame</attr>
+    <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='setMaxProgress' and count(parameter)=1 and parameter[1][@type='float']]/parameter[@name='p0']" name="name">endProgress</attr>
+
+    <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='setMinAndMaxFrame' and count(parameter)=2 and parameter[1][@type='int'] and parameter[2][@type='int']]/parameter[@name='p0']" name="name">minFrame</attr>
+    <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='setMinAndMaxFrame' and count(parameter)=2 and parameter[1][@type='int'] and parameter[2][@type='int']]/parameter[@name='p1']" name="name">maxFrame</attr>
+
+    <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='setMinAndMaxProgress' and count(parameter)=2 and parameter[1][@type='float'] and parameter[2][@type='float']]/parameter[@name='p0']" name="name">minProgress</attr>
+    <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='setMinAndMaxProgress' and count(parameter)=2 and parameter[1][@type='float'] and parameter[2][@type='float']]/parameter[@name='p1']" name="name">maxProgress</attr>
+
+    <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='playAnimation' and count(parameter)=2 and parameter[1][@type='float'] and parameter[2][@type='float']]/parameter[@name='p0']" name="name">startProgress</attr>
+    <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='playAnimation' and count(parameter)=2 and parameter[1][@type='float'] and parameter[2][@type='float']]/parameter[@name='p1']" name="name">endProgress</attr>
+
+    <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='playAnimation' and count(parameter)=2 and parameter[1][@type='int'] and parameter[2][@type='int']]/parameter[@name='p0']" name="name">startFrame</attr>
+    <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='playAnimation' and count(parameter)=2 and parameter[1][@type='int'] and parameter[2][@type='int']]/parameter[@name='p1']" name="name">endFrame</attr>
+
 	<!-- LottieComposition.Factory -->
 	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieComposition']/method[@name='setPerformanceTrackingEnabled' and count(parameter)=1 and parameter[1][@type='boolean']]/parameter[@name='p0']" name="name">enabled</attr>
 	
@@ -159,6 +177,25 @@
     <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='updateBitmap' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='android.graphics.Bitmap']]/parameter[@name='p0']" name="name">id</attr>
     <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='updateBitmap' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='android.graphics.Bitmap']]/parameter[@name='p1']" name="name">bitmap</attr>
 
+    <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='setMinProgress' and count(parameter)=1 and parameter[1][@type='float']]/parameter[@name='p0']" name="name">startProgress</attr>
+    <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='setMinFrame' and count(parameter)=1 and parameter[1][@type='int']]/parameter[@name='p0']" name="name">startFrame</attr>
+        
+    <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='setMaxFrame' and count(parameter)=1 and parameter[1][@type='int']]/parameter[@name='p0']" name="name">endFrame</attr>
+    <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='setMaxProgress' and count(parameter)=1 and parameter[1][@type='float']]/parameter[@name='p0']" name="name">endProgress</attr>
+
+    <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='setMinAndMaxFrame' and count(parameter)=2 and parameter[1][@type='int'] and parameter[2][@type='int']]/parameter[@name='p0']" name="name">minFrame</attr>
+    <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='setMinAndMaxFrame' and count(parameter)=2 and parameter[1][@type='int'] and parameter[2][@type='int']]/parameter[@name='p1']" name="name">maxFrame</attr>
+
+    <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='setMinAndMaxProgress' and count(parameter)=2 and parameter[1][@type='float'] and parameter[2][@type='float']]/parameter[@name='p0']" name="name">minProgress</attr>
+    <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='setMinAndMaxProgress' and count(parameter)=2 and parameter[1][@type='float'] and parameter[2][@type='float']]/parameter[@name='p1']" name="name">maxProgress</attr>
+
+    <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='playAnimation' and count(parameter)=2 and parameter[1][@type='float'] and parameter[2][@type='float']]/parameter[@name='p0']" name="name">startProgress</attr>
+    <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='playAnimation' and count(parameter)=2 and parameter[1][@type='float'] and parameter[2][@type='float']]/parameter[@name='p1']" name="name">endProgress</attr>
+
+    <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='playAnimation' and count(parameter)=2 and parameter[1][@type='int'] and parameter[2][@type='int']]/parameter[@name='p0']" name="name">startFrame</attr>
+    <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieDrawable']/method[@name='playAnimation' and count(parameter)=2 and parameter[1][@type='int'] and parameter[2][@type='int']]/parameter[@name='p1']" name="name">endFrame</attr>
+
+	
     <!-- SimpleColorFilter -->
 	<attr path="/api/package[@name='com.airbnb.lottie']/class[@name='SimpleColorFilter']/constructor[@name='SimpleColorFilter' and count(parameter)=1 and parameter[1][@type='int']]/parameter[@name='p0']" name="name">color</attr>
 
