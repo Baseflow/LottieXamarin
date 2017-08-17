@@ -113,8 +113,6 @@ namespace LottieSamples.Droid
 
             };
 
-
-
             return view;
         }
 
