@@ -139,6 +139,10 @@
     <Compile Include="Typing Animation Demo\TypingDemoViewController.designer.cs">
       <DependentUpon>TypingDemoViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="LAControlsViewController.cs" />
+    <Compile Include="LAControlsViewController.designer.cs">
+      <DependentUpon>LAControlsViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\lottie_logo.png" />
@@ -184,6 +188,8 @@
     <BundleResource Include="Resources\vcTransition1.json" />
     <BundleResource Include="Resources\vcTransition2.json" />
     <BundleResource Include="Resources\Watermelon.json" />
+    <BundleResource Include="Resources\Switch_States.json" />
+    <BundleResource Include="Resources\Switch.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Lottie.iOS\Lottie.iOS.csproj">

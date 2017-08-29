@@ -10,45 +10,77 @@ namespace Airbnb.Lottie
 	[BaseType (typeof(NSObject))]
 	interface LOTComposition
 	{
-		// -(instancetype)initWithJSON:(NSDictionary *)jsonDictionary withAssetBundle:(NSBundle *)bundle;
+		// +(instancetype _Nullable)animationNamed:(NSString * _Nonnull)animationName;
+		[Static]
+		[Export ("animationNamed:")]
+		[return: NullAllowed]
+		LOTComposition AnimationNamed (string animationName);
+
+		// +(instancetype _Nullable)animationNamed:(NSString * _Nonnull)animationName inBundle:(NSBundle * _Nonnull)bundle;
+		[Static]
+		[Export ("animationNamed:inBundle:")]
+		[return: NullAllowed]
+		LOTComposition AnimationNamed (string animationName, NSBundle bundle);
+
+		// +(instancetype _Nullable)animationWithFilePath:(NSString * _Nonnull)filePath;
+		[Static]
+		[Export ("animationWithFilePath:")]
+		[return: NullAllowed]
+		LOTComposition AnimationWithFilePath (string filePath);
+
+		// +(instancetype _Nonnull)animationFromJSON:(NSDictionary * _Nonnull)animationJSON;
+		[Static]
+		[Export ("animationFromJSON:")]
+		LOTComposition AnimationFromJSON (NSDictionary animationJSON);
+
+		// +(instancetype _Nonnull)animationFromJSON:(NSDictionary * _Nullable)animationJSON inBundle:(NSBundle * _Nullable)bundle;
+		[Static]
+		[Export ("animationFromJSON:inBundle:")]
+		LOTComposition AnimationFromJSON ([NullAllowed] NSDictionary animationJSON, [NullAllowed] NSBundle bundle);
+
+		// -(instancetype _Nonnull)initWithJSON:(NSDictionary * _Nullable)jsonDictionary withAssetBundle:(NSBundle * _Nullable)bundle;
 		[Export ("initWithJSON:withAssetBundle:")]
-		IntPtr Constructor (NSDictionary jsonDictionary, NSBundle bundle);
+		IntPtr Constructor ([NullAllowed] NSDictionary jsonDictionary, [NullAllowed] NSBundle bundle);
 
 		// @property (readonly, nonatomic) CGRect compBounds;
 		[Export ("compBounds")]
 		CGRect CompBounds { get; }
 
-		// @property (readonly, nonatomic) NSNumber * startFrame;
-		[Export ("startFrame")]
+		// @property (readonly, nonatomic) NSNumber * _Nullable startFrame;
+		[NullAllowed, Export ("startFrame")]
 		NSNumber StartFrame { get; }
 
-		// @property (readonly, nonatomic) NSNumber * endFrame;
-		[Export ("endFrame")]
+		// @property (readonly, nonatomic) NSNumber * _Nullable endFrame;
+		[NullAllowed, Export ("endFrame")]
 		NSNumber EndFrame { get; }
 
-		// @property (readonly, nonatomic) NSNumber * framerate;
-		[Export ("framerate")]
+		// @property (readonly, nonatomic) NSNumber * _Nullable framerate;
+		[NullAllowed, Export ("framerate")]
 		NSNumber Framerate { get; }
 
 		// @property (readonly, nonatomic) NSTimeInterval timeDuration;
 		[Export ("timeDuration")]
 		double TimeDuration { get; }
 
-		//// @property (readonly, nonatomic) LOTLayerGroup * layerGroup;
-		//[Export ("layerGroup")]
+		// @property (readonly, nonatomic) LOTLayerGroup * _Nullable layerGroup;
+		//[NullAllowed, Export ("layerGroup")]
 		//LOTLayerGroup LayerGroup { get; }
 
-		//// @property (readonly, nonatomic) LOTAssetGroup * assetGroup;
-		//[Export ("assetGroup")]
+		// @property (readonly, nonatomic) LOTAssetGroup * _Nullable assetGroup;
+		//[NullAllowed, Export ("assetGroup")]
 		//LOTAssetGroup AssetGroup { get; }
 
-		// @property (readwrite, nonatomic) NSString * rootDirectory;
-		[Export ("rootDirectory")]
+		// @property (readwrite, nonatomic) NSString * _Nullable rootDirectory;
+		[NullAllowed, Export ("rootDirectory")]
 		string RootDirectory { get; set; }
 
-		// @property (readonly, nonatomic) NSBundle * assetBundle;
-		[Export ("assetBundle")]
+		// @property (readonly, nonatomic) NSBundle * _Nullable assetBundle;
+		[NullAllowed, Export ("assetBundle")]
 		NSBundle AssetBundle { get; }
+
+		// @property (copy, nonatomic) NSString * _Nullable cacheKey;
+		[NullAllowed, Export ("cacheKey")]
+		string CacheKey { get; set; }
 	}
 
 	// typedef void (^LOTAnimationCompletionBlock)(BOOL);
@@ -175,6 +207,10 @@ namespace Airbnb.Lottie
 		[Export ("addSubview:toLayerNamed:applyTransform:")]
 		void AddSubview (NSView view, string layer, bool applyTransform);
 
+		// -(CGRect)convertRect:(CGRect)rect toLayerNamed:(NSString * _Nullable)layerName;
+		[Export ("convertRect:toLayerNamed:")]
+		CGRect ConvertRect (CGRect rect, [NullAllowed] string layerName);
+
 		// @property (nonatomic) LOTViewContentMode contentMode;
 		[Export ("contentMode", ArgumentSemantic.Assign)]
 		LOTViewContentMode ContentMode { get; set; }
@@ -205,5 +241,9 @@ namespace Airbnb.Lottie
 		// -(void)clearCache;
 		[Export ("clearCache")]
 		void ClearCache ();
+
+		// -(void)disableCaching;
+		[Export ("disableCaching")]
+		void DisableCaching ();
 	}
 }
