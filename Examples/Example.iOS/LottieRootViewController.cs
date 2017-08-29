@@ -80,15 +80,16 @@ namespace LottieSamples.iOS
             public event EventHandler<Type> ItemSelected;
 
             private const string CellIdentifier = "Cell";
-            private readonly IList<Tuple<string, Type>> listItems = new List<Tuple<string, Type>>(3);
+            private readonly IList<Tuple<string, Type>> listItems = new List<Tuple<string, Type>>(4);
 
 
             public TableSource()
             {
                 this.listItems.Add(new Tuple<string, Type >("Animation Explorer", typeof(AnimationExplorerViewController)));
                 this.listItems.Add(new Tuple<string, Type>("Animated Keyboard", typeof(TypingDemoViewController)));
-                this.listItems.Add(new Tuple<string, Type>("Animated Transitions Demo", typeof(AnimationTransitionViewController)));
-            }
+				this.listItems.Add(new Tuple<string, Type>("Animated Transitions Demo", typeof(AnimationTransitionViewController)));
+				this.listItems.Add(new Tuple<string, Type>("Animated UIControls Demo", typeof(LAControlsViewController)));
+			}
 
 
             public override nint RowsInSection(UITableView tableview, nint section)
