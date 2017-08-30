@@ -24,6 +24,9 @@ namespace LottieSamples.iOS
             closeButton.SetTitle("Close", UIControlState.Normal);
             closeButton.TouchUpInside += CloseButton_TouchUpInside;
             this.View.AddSubview(closeButton);
+            var buttonSize = closeButton.SizeThatFits(this.View.Bounds.Size);
+            closeButton.Frame = new CGRect(10, 30, buttonSize.Width, 50);
+
 
             /// An animated toggle with different ON and OFF animations.
             LOTAnimatedSwitch toggle1 = LOTAnimatedSwitch.SwitchNamed("Switch");
