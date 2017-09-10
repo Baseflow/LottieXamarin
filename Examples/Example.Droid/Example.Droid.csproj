@@ -47,12 +47,6 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
-    <Reference Include="Square.OkIO">
-      <HintPath>..\..\packages\Square.OkIO.1.11.0\lib\MonoAndroid\Square.OkIO.dll</HintPath>
-    </Reference>
-    <Reference Include="Square.OkHttp3">
-      <HintPath>..\..\packages\Square.OkHttp3.3.5.0\lib\MonoAndroid\Square.OkHttp3.dll</HintPath>
-    </Reference>
     <Reference Include="Xamarin.Android.Support.Annotations">
       <HintPath>..\..\packages\Xamarin.Android.Support.Annotations.25.3.1\lib\MonoAndroid70\Xamarin.Android.Support.Annotations.dll</HintPath>
     </Reference>
@@ -103,6 +97,12 @@
     </Reference>
     <Reference Include="ZXingNetMobile">
       <HintPath>..\..\packages\ZXing.Net.Mobile.2.2.9\lib\MonoAndroid403\ZXingNetMobile.dll</HintPath>
+    </Reference>
+    <Reference Include="Square.OkIO">
+      <HintPath>..\..\packages\Square.OkIO.1.13.0\lib\MonoAndroid\Square.OkIO.dll</HintPath>
+    </Reference>
+    <Reference Include="Square.OkHttp3">
+      <HintPath>..\..\packages\Square.OkHttp3.3.8.1\lib\MonoAndroid\Square.OkHttp3.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -298,6 +298,7 @@
     <AndroidAsset Include="Assets\fonts\Open Sans.ttf" />
     <AndroidAsset Include="Assets\fonts\PT Serif.ttf" />
     <AndroidAsset Include="Assets\fonts\Roboto.ttf" />
+    <AndroidAsset Include="Assets\City.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Lottie.Droid\Lottie.Droid.csproj">
