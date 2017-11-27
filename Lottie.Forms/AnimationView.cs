@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using Xamarin.Forms;
 
 namespace Lottie.Forms
@@ -77,6 +78,14 @@ namespace Lottie.Forms
         public void Pause()
         {
             OnPause?.Invoke(this, new EventArgs());
+        }
+
+        public event EventHandler OnEnd;
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void FireOnEnd()
+        {
+            OnEnd?.Invoke(this, EventArgs.Empty);
         }
     }
 }
