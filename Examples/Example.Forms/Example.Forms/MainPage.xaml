@@ -8,9 +8,10 @@
   <forms:AnimationView 
     x:Name="AnimationView"
     Animation="LottieLogo1.json"
-    Loop="True"
+    Loop="false"
     AutoPlay="True"
     VerticalOptions="FillAndExpand"
+    OnEnd="Handle_OnEnd"
     HorizontalOptions="FillAndExpand" />
     <Slider ValueChanged="Slider_OnValueChanged"/>
   </StackLayout>

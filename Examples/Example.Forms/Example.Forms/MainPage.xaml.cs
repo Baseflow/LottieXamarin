@@ -14,5 +14,10 @@ namespace Example.Forms
         {
             AnimationView.Progress = (float) e.NewValue;
         }
+
+        void Handle_OnEnd(object sender, System.EventArgs e)
+        {
+            DisplayAlert(string.Empty, "Animation ended!", "OK");
+        }
     }
 }
