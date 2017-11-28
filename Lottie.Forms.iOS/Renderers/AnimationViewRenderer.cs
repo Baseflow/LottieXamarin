@@ -114,7 +114,7 @@ namespace Lottie.Forms.iOS.Renderers
         {
             if (animationFinished)
             {
-                Element.FireOnEnd();
+                Element.FireOnFinish();
             }
         }
     }

@@ -1,23 +1,46 @@
-﻿using Lottie.Forms;
+﻿using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Example.Forms
 {
     public partial class MainPage : ContentPage
     {
+        private readonly ICommand playingCommand;
+        private readonly ICommand finishedCommand;
+
+        public ICommand PlayingCommand => playingCommand;
+
+        public ICommand FinishedCommand => finishedCommand;
+
         public MainPage()
         {
+            playingCommand = new Command(_ =>
+                DisplayAlert($"{nameof(animationView.PlayingCommand)} executed!"));
+
+            finishedCommand = new Command(_ =>
+                DisplayAlert($"{nameof(animationView.FinishedCommand)} executed!"));
+
             InitializeComponent();
+
+            playButton.Clicked += (sender, e) => animationView.Play();
+            pauseButton.Clicked += (sender, e) => animationView.Pause();
+
+            BindingContext = this;
         }
 
         private void Slider_OnValueChanged(object sender, ValueChangedEventArgs e)
         {
-            AnimationView.Progress = (float) e.NewValue;
+            animationView.Progress = (float) e.NewValue;
         }
 
-        void Handle_OnEnd(object sender, System.EventArgs e)
+        private void Handle_OnFinish(object sender, System.EventArgs e)
         {
-            DisplayAlert(string.Empty, "Animation ended!", "OK");
+            DisplayAlert($"{nameof(animationView.OnFinish)} invoked!");
+        }
+
+        private void DisplayAlert(string message)
+        {
+            DisplayAlert(string.Empty, message, "OK");
         }
     }
 }

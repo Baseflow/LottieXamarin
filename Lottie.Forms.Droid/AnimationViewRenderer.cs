@@ -84,7 +84,7 @@ namespace Lottie.Forms.Droid
 
         private void FireOnEnd()
         {
-            Element.FireOnEnd();
+            Element.FireOnFinish();
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)

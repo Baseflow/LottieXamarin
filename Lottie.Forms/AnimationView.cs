@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Lottie.Forms
@@ -23,6 +24,12 @@ namespace Lottie.Forms
 
         public static readonly BindableProperty AutoPlayProperty = BindableProperty.Create(nameof(AutoPlay),
             typeof(bool), typeof(AnimationView), default(bool));
+
+        public static readonly BindableProperty PlayingCommandProperty = BindableProperty.Create(nameof(PlayingCommand),
+            typeof(ICommand), typeof(AnimationView));
+
+        public static readonly BindableProperty FinishedCommandProperty = BindableProperty.Create(nameof(FinishedCommand), 
+            typeof(ICommand), typeof(AnimationView));
 
         public float Progress
         {
@@ -66,11 +73,27 @@ namespace Lottie.Forms
             set { SetValue(IsPlayingProperty, value); }
         }
 
+        public ICommand PlayingCommand
+        {
+            get { return (ICommand)GetValue(PlayingCommandProperty); }
+
+            set { SetValue(PlayingCommandProperty, value); }
+        }
+
+        public ICommand FinishedCommand
+        {
+            get { return (ICommand)GetValue(FinishedCommandProperty); }
+
+            set { SetValue(FinishedCommandProperty, value); }
+        }
+
         public event EventHandler OnPlay;
 
         public void Play()
         {
             OnPlay?.Invoke(this, new EventArgs());
+
+            ExecuteCommandIfPossible(PlayingCommand);
         }
 
         public event EventHandler OnPause;
@@ -80,12 +103,22 @@ namespace Lottie.Forms
             OnPause?.Invoke(this, new EventArgs());
         }
 
-        public event EventHandler OnEnd;
+        public event EventHandler OnFinish;
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public void FireOnEnd()
+        public void FireOnFinish()
         {
-            OnEnd?.Invoke(this, EventArgs.Empty);
+            OnFinish?.Invoke(this, EventArgs.Empty);
+
+            ExecuteCommandIfPossible(FinishedCommand);
+        }
+
+        private void ExecuteCommandIfPossible(ICommand command)
+        {
+            if (command != null && command.CanExecute(null))
+            {
+                command.Execute(null);
+            }
         }
     }
 }
