@@ -17,14 +17,14 @@ namespace Lottie.Forms.iOS.Renderers
         private LOTAnimationView _animationView;
 
         /// <summary>
-		///   Used for registration with dependency service
-		/// </summary>
-		public static new void Init()
+        ///   Used for registration with dependency service
+        /// </summary>
+        public new static void Init()
         {
             // needed because of this linker issue: https://bugzilla.xamarin.com/show_bug.cgi?id=31076
-            #pragma warning disable 0219
+#pragma warning disable 0219
             var dummy = new AnimationViewRenderer();
-            #pragma warning restore 0219
+#pragma warning restore 0219
         }
 
         protected override void OnElementChanged(ElementChangedEventArgs<AnimationView> e)
@@ -62,29 +62,31 @@ namespace Lottie.Forms.iOS.Renderers
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            base.OnElementPropertyChanged(sender, e);
+
             if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
             {
                 _animationView?.RemoveFromSuperview();
                 InitAnimationViewForElement(Element);
             }
 
+            if (_animationView == null)
+                return;
+
             if (e.PropertyName == AnimationView.ProgressProperty.PropertyName)
             {
-                if (_animationView != null)
-                {
-                    _animationView.AnimationProgress = Element.Progress;
-                }
+                _animationView.AnimationProgress = Element.Progress;
             }
 
             if (e.PropertyName == AnimationView.LoopProperty.PropertyName)
             {
-                if (_animationView != null)
-                {
-                    _animationView.LoopAnimation = Element.Loop;
-                }
+                _animationView.LoopAnimation = Element.Loop;
             }
 
-            base.OnElementPropertyChanged(sender, e);
+            if (e.PropertyName == AnimationView.SpeedProperty.PropertyName)
+            {
+                _animationView.AnimationSpeed = Element.Speed;
+            }
         }
 
         private void InitAnimationViewForElement(AnimationView theElement)
@@ -93,7 +95,8 @@ namespace Lottie.Forms.iOS.Renderers
             {
                 AutoresizingMask = UIViewAutoresizing.All,
                 ContentMode = UIViewContentMode.ScaleAspectFit,
-                LoopAnimation = theElement.Loop
+                LoopAnimation = theElement.Loop,
+                AnimationSpeed = theElement.Speed
             };
 
             Element.Duration = TimeSpan.FromMilliseconds(_animationView.AnimationDuration);

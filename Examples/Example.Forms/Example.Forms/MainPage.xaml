@@ -11,6 +11,7 @@
             Animation="LottieLogo1.json" 
             Loop="false" 
             AutoPlay="true" 
+            Speed="1"
             OnFinish="Handle_OnFinish"
             PlayingCommand="{Binding PlayingCommand}"
             FinishedCommand="{Binding FinishedCommand}" 
