@@ -22,6 +22,9 @@ namespace Lottie.Forms
 
         public static readonly BindableProperty AutoPlayProperty = BindableProperty.Create(nameof(AutoPlay),
             typeof(bool), typeof(AnimationView), default(bool));
+        
+        public static readonly BindableProperty SpeedProperty = BindableProperty.Create(nameof(Speed),
+            typeof(float), typeof(AnimationView), default(float));
 
         public float Progress
         {
@@ -63,6 +66,13 @@ namespace Lottie.Forms
             get { return (bool) GetValue(IsPlayingProperty); }
 
             set { SetValue(IsPlayingProperty, value); }
+        }
+        
+        public float Speed
+        {
+            get { return (float) GetValue(SpeedProperty); }
+
+            set { SetValue(SpeedProperty, value); }
         }
 
         public event EventHandler OnPlay;
