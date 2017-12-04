@@ -15,10 +15,10 @@ namespace Example.Forms
         public MainPage()
         {
             playingCommand = new Command(_ =>
-                DisplayAlert($"{nameof(animationView.PlayingCommand)} executed!"));
+                DisplayAlert($"{nameof(animationView.PlaybackStartedCommand)} executed!"));
 
             finishedCommand = new Command(_ =>
-                DisplayAlert($"{nameof(animationView.FinishedCommand)} executed!"));
+                DisplayAlert($"{nameof(animationView.PlaybackFinishedCommand)} executed!"));
 
             InitializeComponent();
 

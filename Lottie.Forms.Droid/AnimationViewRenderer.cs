@@ -34,7 +34,7 @@ namespace Lottie.Forms.Droid
             if (Control == null)
             {
                 _animationView = new LottieAnimationView(Context);
-                _animatorListener = new AnimatorListener(FireOnEnd);
+                _animatorListener = new AnimatorListener(PlaybackFinished);
                 _animationView.AddAnimatorListener(_animatorListener);
                 SetNativeControl(_animationView);
             }
@@ -81,9 +81,9 @@ namespace Lottie.Forms.Droid
             }
         }
 
-        private void FireOnEnd()
+        private void PlaybackFinished()
         {
-            Element.FireOnFinish();
+            Element.PlaybackFinished();
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)

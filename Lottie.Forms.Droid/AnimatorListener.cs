@@ -5,18 +5,18 @@ namespace Lottie.Forms.Droid
 {
     public class AnimatorListener : AnimatorListenerAdapter
     {
-        private Action _fireOnEnd;
+        private Action _playbackFinished;
 
-        public AnimatorListener(Action fireOnEnd)
+        public AnimatorListener(Action playbackFinished)
         {
-            _fireOnEnd = fireOnEnd;
+            _playbackFinished = playbackFinished;
         }
 
         public override void OnAnimationEnd(Animator animation)
         {
             base.OnAnimationEnd(animation);
 
-            _fireOnEnd?.Invoke();
+            _playbackFinished?.Invoke();
         }
 
         // TODO support notifying end while looping through below

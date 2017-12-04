@@ -50,7 +50,7 @@ namespace Lottie.Forms.iOS.Renderers
 
         private void OnPlay(object sender, EventArgs e)
         {
-            _animationView?.PlayWithCompletion(FireOnEndIfFinished);
+            _animationView?.PlayWithCompletion(PlaybackFinishedIfActually);
             Element.IsPlaying = true;
         }
 
@@ -103,7 +103,7 @@ namespace Lottie.Forms.iOS.Renderers
 
             if (theElement.AutoPlay)
             {
-                _animationView.PlayWithCompletion(FireOnEndIfFinished);
+                _animationView.PlayWithCompletion(PlaybackFinishedIfActually);
             }
 
             if (_animationView != null)
@@ -113,11 +113,11 @@ namespace Lottie.Forms.iOS.Renderers
             }
         }
 
-        void FireOnEndIfFinished(bool animationFinished)
+        void PlaybackFinishedIfActually(bool animationFinished)
         {
             if (animationFinished)
             {
-                Element.FireOnFinish();
+                Element.PlaybackFinished();
             }
         }
     }

@@ -28,10 +28,10 @@ namespace Lottie.Forms
         public static readonly BindableProperty SpeedProperty = BindableProperty.Create(nameof(Speed),
             typeof(float), typeof(AnimationView), default(float));
 
-        public static readonly BindableProperty PlayingCommandProperty = BindableProperty.Create(nameof(PlayingCommand),
+        public static readonly BindableProperty PlaybackStartedCommandProperty = BindableProperty.Create(nameof(PlaybackStartedCommand),
             typeof(ICommand), typeof(AnimationView));
 
-        public static readonly BindableProperty FinishedCommandProperty = BindableProperty.Create(nameof(FinishedCommand), 
+        public static readonly BindableProperty PlaybackFinishedCommandProperty = BindableProperty.Create(nameof(PlaybackFinishedCommand), 
             typeof(ICommand), typeof(AnimationView));
 
         public float Progress
@@ -83,18 +83,18 @@ namespace Lottie.Forms
             set { SetValue(SpeedProperty, value); }
         }
 
-        public ICommand PlayingCommand
+        public ICommand PlaybackStartedCommand
         {
-            get { return (ICommand)GetValue(PlayingCommandProperty); }
+            get { return (ICommand)GetValue(PlaybackStartedCommandProperty); }
 
-            set { SetValue(PlayingCommandProperty, value); }
+            set { SetValue(PlaybackStartedCommandProperty, value); }
         }
 
-        public ICommand FinishedCommand
+        public ICommand PlaybackFinishedCommand
         {
-            get { return (ICommand)GetValue(FinishedCommandProperty); }
+            get { return (ICommand)GetValue(PlaybackFinishedCommandProperty); }
 
-            set { SetValue(FinishedCommandProperty, value); }
+            set { SetValue(PlaybackFinishedCommandProperty, value); }
         }
 
         public event EventHandler OnPlay;
@@ -103,7 +103,7 @@ namespace Lottie.Forms
         {
             OnPlay?.Invoke(this, new EventArgs());
 
-            ExecuteCommandIfPossible(PlayingCommand);
+            ExecuteCommandIfPossible(PlaybackStartedCommand);
         }
 
         public event EventHandler OnPause;
@@ -116,11 +116,11 @@ namespace Lottie.Forms
         public event EventHandler OnFinish;
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public void FireOnFinish()
+        public void PlaybackFinished()
         {
             OnFinish?.Invoke(this, EventArgs.Empty);
 
-            ExecuteCommandIfPossible(FinishedCommand);
+            ExecuteCommandIfPossible(PlaybackFinishedCommand);
         }
 
         private void ExecuteCommandIfPossible(ICommand command)

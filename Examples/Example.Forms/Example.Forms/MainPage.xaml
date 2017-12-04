@@ -13,18 +13,20 @@
             AutoPlay="true" 
             Speed="1"
             OnFinish="Handle_OnFinish"
-            PlayingCommand="{Binding PlayingCommand}"
-            FinishedCommand="{Binding FinishedCommand}" 
+            PlaybackStartedCommand="{Binding PlayingCommand}"
+            PlaybackFinishedCommand="{Binding FinishedCommand}" 
             VerticalOptions="FillAndExpand" 
             HorizontalOptions="FillAndExpand" />
         <Button x:Name="playButton"
             AbsoluteLayout.LayoutFlags="PositionProportional"
             AbsoluteLayout.LayoutBounds="0, 0, AutoSize, AutoSize"
-            Text="Play" />
+            Text="Play"
+            Margin="10" />
         <Button x:Name="pauseButton"
             AbsoluteLayout.LayoutFlags="PositionProportional"
             AbsoluteLayout.LayoutBounds="1, 0, AutoSize, AutoSize"
-            Text="Pause" />
+            Text="Pause"
+            Margin="10" />
         <Slider 
             AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
             AbsoluteLayout.LayoutBounds="0, 1, 1, AutoSize"

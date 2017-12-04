@@ -31,7 +31,7 @@ namespace Lottie.Forms.UWP.Renderers
             if (Control == null)
             {
                 _animationView = new LottieAnimationView();
-                _animationView.AnimatorUpdate += FireOnFinishIfProgressReachesOne;
+                _animationView.AnimatorUpdate += PlaybackFinishedIfProgressReachesOne;
                 SetNativeControl(_animationView);
             }
 
@@ -57,11 +57,11 @@ namespace Lottie.Forms.UWP.Renderers
             }
         }
 
-        private void FireOnFinishIfProgressReachesOne(object sender, ValueAnimator.ValueAnimatorUpdateEventArgs e)
+        private void PlaybackFinishedIfProgressReachesOne(object sender, ValueAnimator.ValueAnimatorUpdateEventArgs e)
         {
             if (e.Animation.Progress >= 1)
             {
-                Element.FireOnFinish();
+                Element.PlaybackFinished();
             }
         }
 
