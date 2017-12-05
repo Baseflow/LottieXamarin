@@ -1,4 +1,6 @@
 using System;
+using System.ComponentModel;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Lottie.Forms
@@ -25,6 +27,12 @@ namespace Lottie.Forms
         
         public static readonly BindableProperty SpeedProperty = BindableProperty.Create(nameof(Speed),
             typeof(float), typeof(AnimationView), default(float));
+
+        public static readonly BindableProperty PlaybackStartedCommandProperty = BindableProperty.Create(nameof(PlaybackStartedCommand),
+            typeof(ICommand), typeof(AnimationView));
+
+        public static readonly BindableProperty PlaybackFinishedCommandProperty = BindableProperty.Create(nameof(PlaybackFinishedCommand), 
+            typeof(ICommand), typeof(AnimationView));
 
         public float Progress
         {
@@ -75,11 +83,27 @@ namespace Lottie.Forms
             set { SetValue(SpeedProperty, value); }
         }
 
+        public ICommand PlaybackStartedCommand
+        {
+            get { return (ICommand)GetValue(PlaybackStartedCommandProperty); }
+
+            set { SetValue(PlaybackStartedCommandProperty, value); }
+        }
+
+        public ICommand PlaybackFinishedCommand
+        {
+            get { return (ICommand)GetValue(PlaybackFinishedCommandProperty); }
+
+            set { SetValue(PlaybackFinishedCommandProperty, value); }
+        }
+
         public event EventHandler OnPlay;
 
         public void Play()
         {
             OnPlay?.Invoke(this, new EventArgs());
+
+            ExecuteCommandIfPossible(PlaybackStartedCommand);
         }
 
         public event EventHandler OnPause;
@@ -87,6 +111,24 @@ namespace Lottie.Forms
         public void Pause()
         {
             OnPause?.Invoke(this, new EventArgs());
+        }
+
+        public event EventHandler OnFinish;
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public void PlaybackFinished()
+        {
+            OnFinish?.Invoke(this, EventArgs.Empty);
+
+            ExecuteCommandIfPossible(PlaybackFinishedCommand);
+        }
+
+        private void ExecuteCommandIfPossible(ICommand command)
+        {
+            if (command != null && command.CanExecute(null))
+            {
+                command.Execute(null);
+            }
         }
     }
 }

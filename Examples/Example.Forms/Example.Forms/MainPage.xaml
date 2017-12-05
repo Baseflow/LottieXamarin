@@ -1,18 +1,35 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
-             x:Class="Example.Forms.MainPage">
-
-  <StackLayout>
-  <forms:AnimationView 
-    x:Name="AnimationView"
-    Animation="LottieLogo1.json"
-    Loop="True"
-    AutoPlay="True"
-    VerticalOptions="FillAndExpand"
-    Speed="1"
-    HorizontalOptions="FillAndExpand" />
-    <Slider ValueChanged="Slider_OnValueChanged"/>
-  </StackLayout>
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms" 
+    x:Class="Example.Forms.MainPage">
+    <AbsoluteLayout>
+        <forms:AnimationView x:Name="animationView" 
+            AbsoluteLayout.LayoutFlags="All"
+            AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+            Animation="LottieLogo1.json" 
+            Loop="false" 
+            AutoPlay="true" 
+            Speed="1"
+            OnFinish="Handle_OnFinish"
+            PlaybackStartedCommand="{Binding PlayingCommand}"
+            PlaybackFinishedCommand="{Binding FinishedCommand}" 
+            VerticalOptions="FillAndExpand" 
+            HorizontalOptions="FillAndExpand" />
+        <Button x:Name="playButton"
+            AbsoluteLayout.LayoutFlags="PositionProportional"
+            AbsoluteLayout.LayoutBounds="0, 0, AutoSize, AutoSize"
+            Text="Play"
+            Margin="10" />
+        <Button x:Name="pauseButton"
+            AbsoluteLayout.LayoutFlags="PositionProportional"
+            AbsoluteLayout.LayoutBounds="1, 0, AutoSize, AutoSize"
+            Text="Pause"
+            Margin="10" />
+        <Slider 
+            AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
+            AbsoluteLayout.LayoutBounds="0, 1, 1, AutoSize"
+            ValueChanged="Slider_OnValueChanged" />
+    </AbsoluteLayout>
 </ContentPage>

@@ -210,3 +210,5 @@ tools/nuget.exe
 tools/packages.config.md5sum
 artifacts/
 *.nupkg
+
+\.droidres/

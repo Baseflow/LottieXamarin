@@ -14,6 +14,7 @@ namespace Lottie.Forms.Droid
         LottieAnimationView>
     {
         private LottieAnimationView _animationView;
+        private AnimatorListener _animatorListener;
 
         /// <summary>
         ///     Used for registration with dependency service
@@ -33,6 +34,8 @@ namespace Lottie.Forms.Droid
             if (Control == null)
             {
                 _animationView = new LottieAnimationView(Context);
+                _animatorListener = new AnimatorListener(PlaybackFinished);
+                _animationView.AddAnimatorListener(_animatorListener);
                 SetNativeControl(_animationView);
             }
 
@@ -76,6 +79,11 @@ namespace Lottie.Forms.Droid
                 _animationView.PauseAnimation();
                 Element.IsPlaying = false;
             }
+        }
+
+        private void PlaybackFinished()
+        {
+            Element.PlaybackFinished();
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
