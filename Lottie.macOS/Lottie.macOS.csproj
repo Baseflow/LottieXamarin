@@ -9,6 +9,8 @@
     <RootNamespace>Lottie.macOS</RootNamespace>
     <AssemblyName>Lottie.macOS</AssemblyName>
     <MacResourcePrefix>Resources</MacResourcePrefix>
+    <ReleaseVersion>2.1.5.0</ReleaseVersion>
+    <SynchReleaseVersion>false</SynchReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
