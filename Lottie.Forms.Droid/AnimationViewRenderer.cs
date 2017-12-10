@@ -49,7 +49,7 @@ namespace Lottie.Forms.Droid
             {
                 e.NewElement.OnPlay += OnPlay;
                 e.NewElement.OnPause += OnPause;
-                _animationView.SetSpeed(e.NewElement.Speed);
+                _animationView.Speed = e.NewElement.Speed;
                 _animationView.Loop(e.NewElement.Loop);
                 if (!string.IsNullOrEmpty(e.NewElement.Animation))
                 {
@@ -96,7 +96,7 @@ namespace Lottie.Forms.Droid
             }
 
             if (e.PropertyName == AnimationView.SpeedProperty.PropertyName)
-                _animationView.SetSpeed(Element.Speed);
+                _animationView.Speed = Element.Speed;
 
             if (e.PropertyName == AnimationView.ProgressProperty.PropertyName)
             {
