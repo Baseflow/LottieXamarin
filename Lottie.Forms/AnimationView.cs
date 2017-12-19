@@ -26,7 +26,7 @@ namespace Lottie.Forms
             typeof(bool), typeof(AnimationView), default(bool));
         
         public static readonly BindableProperty SpeedProperty = BindableProperty.Create(nameof(Speed),
-            typeof(float), typeof(AnimationView), default(float));
+            typeof(float), typeof(AnimationView), 1.0f);
 
         public static readonly BindableProperty PlaybackStartedCommandProperty = BindableProperty.Create(nameof(PlaybackStartedCommand),
             typeof(ICommand), typeof(AnimationView));
