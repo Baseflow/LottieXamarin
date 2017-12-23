@@ -14,7 +14,7 @@
         <summary>Render After Effects animations natively on Android and iOS</summary>
         <tags>xamarin, monodroid, C#, xamarin.android, android, Lottie, animation, airbnb</tags>
         <dependencies>
-            <dependency id="Xamarin.Android.Support.v7.AppCompat" version="26.1.0.1" />
+            <dependency id="Xamarin.Android.Support.v7.AppCompat" version="25.3.1" />
         </dependencies>
     </metadata>
     <files>
