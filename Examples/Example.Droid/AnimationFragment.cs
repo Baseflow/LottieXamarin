@@ -217,7 +217,7 @@ namespace LottieSamples.Droid
         void LoopButton_Click(object sender, EventArgs e)
         {
             loopButton.Activated = !loopButton.Activated;
-            animationView.Loop(loopButton.Enabled);
+            animationView.Loop(loopButton.Activated);
         }
 
         void InvertButton_Click(object sender, EventArgs e)
