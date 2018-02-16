@@ -22,17 +22,17 @@ namespace Com.Airbnb.Lottie
             /// <summary>
             /// Asynchronously loads a composition from an arbitrary input stream.
             /// </summary>
-            public static ICancellable FromInputStream(Context context, System.IO.Stream stream, Action<LottieComposition> onLoaded)
+            public static ICancellable FromInputStream(System.IO.Stream stream, Action<LottieComposition> onLoaded)
             {
-                return Factory.FromInputStream(context, stream, new ActionCompositionLoaded(onLoaded));
+                return Factory.FromInputStream(stream, new ActionCompositionLoaded(onLoaded));
             }
 
             /// <summary>
-            ///  Asynchronously loads a composition from a raw json object. This is useful for animations loaded from the network.
+            ///  Asynchronously loads a composition from a json string. This is useful for animations loaded from the network.
             /// </summary>
-            public static ICancellable FromJson(Android.Content.Res.Resources res, JSONObject json, Action<LottieComposition> onLoaded)
+            public static ICancellable FromJsonString(String jsonString, Action<LottieComposition> onLoaded)
             {
-                return Factory.FromJson(res, json, new ActionCompositionLoaded(onLoaded));
+                return Factory.FromJsonString(jsonString, new ActionCompositionLoaded(onLoaded));
             }
 
             ///// <summary>
@@ -75,19 +75,19 @@ namespace Com.Airbnb.Lottie
             ///// </summary>
             public static Task<LottieComposition> FromInputStreamAsync(Context context, System.IO.Stream stream)
             {
-                return FromInputStreamAsync(context, stream, CancellationToken.None);
+                return FromInputStreamAsync(stream, CancellationToken.None);
             }
 
             ///// <summary>
             ///// Asynchronously loads a composition from an arbitrary input stream.
             ///// </summary>
-            public static Task<LottieComposition> FromInputStreamAsync(Context context, System.IO.Stream stream, CancellationToken cancellationToken)
+            public static Task<LottieComposition> FromInputStreamAsync(System.IO.Stream stream, CancellationToken cancellationToken)
             {
                 if (cancellationToken.IsCancellationRequested)
                     return Task.FromCanceled<LottieComposition>(cancellationToken);
 
                 var tcs = new TaskCompletionSource<LottieComposition>();
-                var cancelable = Factory.FromInputStream(context, stream, (composition) =>
+                var cancelable = Factory.FromInputStream(stream, (composition) =>
                 {
                     cancellationToken.ThrowIfCancellationRequested();
                     tcs.SetResult(composition);
@@ -108,21 +108,21 @@ namespace Com.Airbnb.Lottie
             ///// <summary>
             /////  Asynchronously loads a composition from a raw json object. This is useful for animations loaded from the network.
             ///// </summary>
-            public static Task<LottieComposition> FromJsonAsync(Resources res, JSONObject json)
+            public static Task<LottieComposition> FromJsonStringAsync(String jsonString)
             {
-                return FromJsonAsync(res, json, CancellationToken.None);
+                return FromJsonStringAsync(jsonString, CancellationToken.None);
             }
 
             ///// <summary>
             /////  Asynchronously loads a composition from a raw json object. This is useful for animations loaded from the network.
             ///// </summary>
-            public static Task<LottieComposition> FromJsonAsync(Resources res, JSONObject json, CancellationToken cancellationToken)
+            public static Task<LottieComposition> FromJsonStringAsync(String jsonString, CancellationToken cancellationToken)
             {
                 if (cancellationToken.IsCancellationRequested)
                     return Task.FromCanceled<LottieComposition>(cancellationToken);
 
                 var tcs = new TaskCompletionSource<LottieComposition>();
-                var cancelable = Factory.FromJson(res, json, (composition) =>
+                var cancelable = Factory.FromJsonString(jsonString, (composition) =>
                 {
                     cancellationToken.ThrowIfCancellationRequested();
                     tcs.SetResult(composition);

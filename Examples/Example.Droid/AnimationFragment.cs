@@ -418,13 +418,12 @@ namespace LottieSamples.Droid
 
                 try
                 {
-                    JSONObject json = new JSONObject(response.Body().String());
-                    LottieComposition.Factory.FromJson(this.Resources, json, (composition) =>
+                    LottieComposition.Factory.FromJsonString(response.Body().String(), (composition) =>
                     {
                         SetComposition(composition, "Network Animation");
                     });
                 }
-                catch(JSONException ex)
+                catch
                 {
                     OnLoadError();
                 }
@@ -437,7 +436,7 @@ namespace LottieSamples.Droid
         {
             instructionsContainer.Visibility = ViewStates.Gone;
             seekBar.Progress = 0;
-            animationView.SetComposition(composition);
+            animationView.Composition =composition;
             animationNameView.Text = name;
             this.scaleTextView.Text = String.Format("{0:0.00}", animationView.Scale);
             this.scaleSeekBar.Progress = (int)(animationView.Scale * ScaleSliderFactor);
