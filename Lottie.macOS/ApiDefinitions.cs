@@ -83,8 +83,130 @@ namespace Airbnb.Lottie
 		string CacheKey { get; set; }
 	}
 
+
+	// @interface LOTKeypath : NSObject
+	[BaseType (typeof(NSObject))]
+	interface LOTKeypath
+	{
+		// +(LOTKeypath * _Nonnull)keypathWithString:(NSString * _Nonnull)keypath;
+		[Static]
+		[Export ("keypathWithString:")]
+		LOTKeypath KeypathWithString (string keypath);
+
+		// +(LOTKeypath * _Nonnull)keypathWithKeys:(NSString * _Nonnull)firstKey, ... __attribute__((sentinel(0, 1)));
+		[Static, Internal]
+		[Export ("keypathWithKeys:", IsVariadic = true)]
+		LOTKeypath KeypathWithKeys (string firstKey, IntPtr varArgs);
+
+		// @property (readonly, nonatomic) NSString * _Nonnull absoluteKeypath;
+		[Export ("absoluteKeypath")]
+		string AbsoluteKeypath { get; }
+
+		// @property (readonly, nonatomic) NSString * _Nonnull currentKey;
+		[Export ("currentKey")]
+		string CurrentKey { get; }
+
+		// @property (readonly, nonatomic) NSString * _Nonnull currentKeyPath;
+		[Export ("currentKeyPath")]
+		string CurrentKeyPath { get; }
+
+		// @property (readonly, nonatomic) NSDictionary * _Nonnull searchResults;
+		[Export ("searchResults")]
+		NSDictionary SearchResults { get; }
+
+		// @property (readonly, nonatomic) BOOL hasFuzzyWildcard;
+		[Export ("hasFuzzyWildcard")]
+		bool HasFuzzyWildcard { get; }
+
+		// @property (readonly, nonatomic) BOOL hasWildcard;
+		[Export ("hasWildcard")]
+		bool HasWildcard { get; }
+
+		// @property (readonly, nonatomic) BOOL endOfKeypath;
+		[Export ("endOfKeypath")]
+		bool EndOfKeypath { get; }
+
+		// -(BOOL)pushKey:(NSString * _Nonnull)key;
+		[Export ("pushKey:")]
+		bool PushKey (string key);
+
+		// -(void)popKey;
+		[Export ("popKey")]
+		void PopKey ();
+
+		// -(void)popToRootKey;
+		[Export ("popToRootKey")]
+		void PopToRootKey ();
+
+		// -(void)addSearchResultForCurrentPath:(id _Nonnull)result;
+		[Export ("addSearchResultForCurrentPath:")]
+		void AddSearchResultForCurrentPath (NSObject result);
+	}
+
+	// @protocol LOTValueDelegate <NSObject>
+	[Protocol, Model]
+	[BaseType (typeof(NSObject))]
+	interface LOTValueDelegate
+	{
+	}
+
+	// @protocol LOTColorValueDelegate <LOTValueDelegate>
+	[Protocol, Model]
+    [BaseType(typeof(LOTValueDelegate))]
+	interface LOTColorValueDelegate
+	{
+		// @required -(CGColorRef)colorForFrame:(CGFloat)currentFrame startKeyframe:(CGFloat)startKeyframe endKeyframe:(CGFloat)endKeyframe interpolatedProgress:(CGFloat)interpolatedProgress startColor:(CGColorRef)startColor endColor:(CGColorRef)endColor currentColor:(CGColorRef)interpolatedColor;
+		[Abstract]
+		[Export ("colorForFrame:startKeyframe:endKeyframe:interpolatedProgress:startColor:endColor:currentColor:")]
+		unsafe CGColor StartKeyframe (nfloat currentFrame, nfloat startKeyframe, nfloat endKeyframe, nfloat interpolatedProgress, CGColor startColor, CGColor endColor, CGColor interpolatedColor);
+	}
+
+	// @protocol LOTNumberValueDelegate <LOTValueDelegate>
+	[Protocol, Model]
+    [BaseType(typeof(LOTValueDelegate))]
+	interface LOTNumberValueDelegate
+	{
+		// @required -(CGFloat)floatValueForFrame:(CGFloat)currentFrame startKeyframe:(CGFloat)startKeyframe endKeyframe:(CGFloat)endKeyframe interpolatedProgress:(CGFloat)interpolatedProgress startValue:(CGFloat)startValue endValue:(CGFloat)endValue currentValue:(CGFloat)interpolatedValue;
+		[Abstract]
+		[Export ("floatValueForFrame:startKeyframe:endKeyframe:interpolatedProgress:startValue:endValue:currentValue:")]
+		nfloat StartKeyframe (nfloat currentFrame, nfloat startKeyframe, nfloat endKeyframe, nfloat interpolatedProgress, nfloat startValue, nfloat endValue, nfloat interpolatedValue);
+	}
+
+	// @protocol LOTPointValueDelegate <LOTValueDelegate>
+	[Protocol, Model]
+    [BaseType(typeof(LOTValueDelegate))]
+	interface LOTPointValueDelegate
+	{
+		// @required -(CGPoint)pointForFrame:(CGFloat)currentFrame startKeyframe:(CGFloat)startKeyframe endKeyframe:(CGFloat)endKeyframe interpolatedProgress:(CGFloat)interpolatedProgress startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint currentPoint:(CGPoint)interpolatedPoint;
+		[Abstract]
+		[Export ("pointForFrame:startKeyframe:endKeyframe:interpolatedProgress:startPoint:endPoint:currentPoint:")]
+		CGPoint StartKeyframe (nfloat currentFrame, nfloat startKeyframe, nfloat endKeyframe, nfloat interpolatedProgress, CGPoint startPoint, CGPoint endPoint, CGPoint interpolatedPoint);
+	}
+
+	// @protocol LOTSizeValueDelegate <LOTValueDelegate>
+	[Protocol, Model]
+    [BaseType(typeof(LOTValueDelegate))]
+	interface LOTSizeValueDelegate
+	{
+		// @required -(CGSize)sizeForFrame:(CGFloat)currentFrame startKeyframe:(CGFloat)startKeyframe endKeyframe:(CGFloat)endKeyframe interpolatedProgress:(CGFloat)interpolatedProgress startSize:(CGSize)startSize endSize:(CGSize)endSize currentSize:(CGSize)interpolatedSize;
+		[Abstract]
+		[Export ("sizeForFrame:startKeyframe:endKeyframe:interpolatedProgress:startSize:endSize:currentSize:")]
+		CGSize StartKeyframe (nfloat currentFrame, nfloat startKeyframe, nfloat endKeyframe, nfloat interpolatedProgress, CGSize startSize, CGSize endSize, CGSize interpolatedSize);
+	}
+
+	// @protocol LOTPathValueDelegate <LOTValueDelegate>
+	[Protocol, Model]
+    [BaseType(typeof(LOTValueDelegate))]
+	interface LOTPathValueDelegate
+	{
+		// @required -(CGPathRef)pathForFrame:(CGFloat)currentFrame startKeyframe:(CGFloat)startKeyframe endKeyframe:(CGFloat)endKeyframe interpolatedProgress:(CGFloat)interpolatedProgress;
+		[Abstract]
+		[Export ("pathForFrame:startKeyframe:endKeyframe:interpolatedProgress:")]
+		unsafe CGPath StartKeyframe (nfloat currentFrame, nfloat startKeyframe, nfloat endKeyframe, nfloat interpolatedProgress);
+	}
+
 	// typedef void (^LOTAnimationCompletionBlock)(BOOL);
-	delegate void LOTAnimationCompletionBlock (bool animationFinished);
+    delegate void LOTAnimationCompletionBlock (bool animationFinished);
 
 	// @interface LOTAnimationView : NSView
 	[BaseType (typeof(NSView))]
@@ -123,6 +245,10 @@ namespace Airbnb.Lottie
 		[Export ("initWithContentsOfURL:")]
 		IntPtr Constructor (NSUrl url);
 
+		// -(void)setAnimationNamed:(NSString * _Nonnull)animationName;
+		[Export ("setAnimationNamed:")]
+		void SetAnimationNamed (string animationName);
+
 		// @property (readonly, nonatomic) BOOL isAnimationPlaying;
 		[Export ("isAnimationPlaying")]
 		bool IsAnimationPlaying { get; }
@@ -155,8 +281,8 @@ namespace Airbnb.Lottie
 		[NullAllowed, Export ("completionBlock", ArgumentSemantic.Copy)]
 		LOTAnimationCompletionBlock CompletionBlock { get; set; }
 
-		// @property (nonatomic, strong) LOTComposition * _Nonnull sceneModel;
-		[Export ("sceneModel", ArgumentSemantic.Strong)]
+		// @property (nonatomic, strong) LOTComposition * _Nullable sceneModel;
+		[NullAllowed, Export ("sceneModel", ArgumentSemantic.Strong)]
 		LOTComposition SceneModel { get; set; }
 
 		// -(void)playToProgress:(CGFloat)toProgress withCompletion:(LOTAnimationCompletionBlock _Nullable)completion;
@@ -195,25 +321,62 @@ namespace Airbnb.Lottie
 		[Export ("setProgressWithFrame:")]
 		void SetProgressWithFrame (NSNumber currentFrame);
 
-		// -(void)setValue:(id _Nonnull)value forKeypath:(NSString * _Nonnull)keypath atFrame:(NSNumber * _Nullable)frame;
-		[Export ("setValue:forKeypath:atFrame:")]
-		void SetValue (NSObject value, string keypath, [NullAllowed] NSNumber frame);
+		// -(void)forceDrawingUpdate;
+		[Export ("forceDrawingUpdate")]
+		void ForceDrawingUpdate ();
 
 		// -(void)logHierarchyKeypaths;
 		[Export ("logHierarchyKeypaths")]
 		void LogHierarchyKeypaths ();
 
-		// -(void)addSubview:(NSView * _Nonnull)view toLayerNamed:(NSString * _Nonnull)layer applyTransform:(BOOL)applyTransform;
-		[Export ("addSubview:toLayerNamed:applyTransform:")]
-		void AddSubview (NSView view, string layer, bool applyTransform);
+		// -(void)setValueDelegate:(id<LOTValueDelegate> _Nonnull)delegates forKeypath:(LOTKeypath * _Nonnull)keypath;
+		[Export ("setValueDelegate:forKeypath:")]
+        void SetValueDelegate (NSObject delegates, LOTKeypath keypath);
 
-		// -(CGRect)convertRect:(CGRect)rect toLayerNamed:(NSString * _Nullable)layerName;
-		[Export ("convertRect:toLayerNamed:")]
-		CGRect ConvertRect (CGRect rect, [NullAllowed] string layerName);
+		// -(NSArray * _Nullable)keysForKeyPath:(LOTKeypath * _Nonnull)keypath;
+		[Export ("keysForKeyPath:")]
+		[return: NullAllowed]
+        LOTKeypath[] KeysForKeyPath (LOTKeypath keypath);
+
+		// -(CGPoint)convertPoint:(CGPoint)point toKeypathLayer:(LOTKeypath * _Nonnull)keypath;
+		[Export ("convertPoint:toKeypathLayer:")]
+		CGPoint ConvertPointToKeypath (CGPoint point, LOTKeypath keypath);
+
+		// -(CGRect)convertRect:(CGRect)rect toKeypathLayer:(LOTKeypath * _Nonnull)keypath;
+		[Export ("convertRect:toKeypathLayer:")]
+        CGRect ConvertRectToKeypath (CGRect rect, LOTKeypath keypath);
+
+		// -(CGPoint)convertPoint:(CGPoint)point fromKeypathLayer:(LOTKeypath * _Nonnull)keypath;
+		[Export ("convertPoint:fromKeypathLayer:")]
+		CGPoint ConvertPointFromKeypath (CGPoint point, LOTKeypath keypath);
+
+		// -(CGRect)convertRect:(CGRect)rect fromKeypathLayer:(LOTKeypath * _Nonnull)keypath;
+		[Export ("convertRect:fromKeypathLayer:")]
+        CGRect ConvertRectFromKeypath (CGRect rect, LOTKeypath keypath);
+
+		// -(void)addSubview:(NSView * _Nonnull)view toKeypathLayer:(LOTKeypath * _Nonnull)keypath;
+		[Export ("addSubview:toKeypathLayer:")]
+		void AddSubview (NSView view, LOTKeypath keypath);
+
+		// -(void)maskSubview:(NSView * _Nonnull)view toKeypathLayer:(LOTKeypath * _Nonnull)keypath;
+		[Export ("maskSubview:toKeypathLayer:")]
+		void MaskSubview (NSView view, LOTKeypath keypath);
 
 		// @property (nonatomic) LOTViewContentMode contentMode;
 		[Export ("contentMode", ArgumentSemantic.Assign)]
 		LOTViewContentMode ContentMode { get; set; }
+
+		// -(void)setValue:(id _Nonnull)value forKeypath:(NSString * _Nonnull)keypath atFrame:(NSNumber * _Nullable)frame __attribute__((deprecated("")));
+		[Export ("setValue:forKeypath:atFrame:")]
+		void SetValue (NSObject value, string keypath, [NullAllowed] NSNumber frame);
+
+		// -(void)addSubview:(NSView * _Nonnull)view toLayerNamed:(NSString * _Nonnull)layer applyTransform:(BOOL)applyTransform __attribute__((deprecated("")));
+		[Export ("addSubview:toLayerNamed:applyTransform:")]
+		void AddSubview (NSView view, string layer, bool applyTransform);
+
+		// -(CGRect)convertRect:(CGRect)rect toLayerNamed:(NSString * _Nullable)layerName __attribute__((deprecated("")));
+		[Export ("convertRect:toLayerNamed:")]
+		CGRect ConvertRect (CGRect rect, [NullAllowed] string layerName);
 	}
 
 	// @interface LOTAnimationCache : NSObject
@@ -245,5 +408,226 @@ namespace Airbnb.Lottie
 		// -(void)disableCaching;
 		[Export ("disableCaching")]
 		void DisableCaching ();
+	}
+
+	// typedef CGColorRef _Nonnull (^LOTColorValueCallbackBlock)(CGFloat, CGFloat, CGFloat, CGFloat, CGColorRef _Nullable, CGColorRef _Nullable, CGColorRef _Nullable);
+    unsafe delegate CGColor LOTColorValueCallbackBlock (nfloat currentFrame, nfloat startKeyFrame, nfloat endKeyFrame, nfloat interpolatedProgress, [NullAllowed] CGColor startColor, [NullAllowed] CGColor endColor, [NullAllowed] CGColor interpolatedColor);
+
+	// typedef CGFloat (^LOTNumberValueCallbackBlock)(CGFloat, CGFloat, CGFloat, CGFloat, CGFloat, CGFloat, CGFloat);
+    delegate nfloat LOTNumberValueCallbackBlock (nfloat currentFrame, nfloat startKeyFrame, nfloat endKeyFrame, nfloat interpolatedProgress, nfloat startValue, nfloat endValue, nfloat interpolatedValue);
+
+	// typedef CGPoint (^LOTPointValueCallbackBlock)(CGFloat, CGFloat, CGFloat, CGFloat, CGPoint, CGPoint, CGPoint);
+    delegate CGPoint LOTPointValueCallbackBlock (nfloat currentFrame, nfloat startKeyFrame, nfloat endKeyFrame, nfloat interpolatedProgress, CGPoint startPoint, CGPoint endPoint, CGPoint interpolatedPoint);
+
+	// typedef CGSize (^LOTSizeValueCallbackBlock)(CGFloat, CGFloat, CGFloat, CGFloat, CGSize, CGSize, CGSize);
+    delegate CGSize LOTSizeValueCallbackBlock (nfloat currentFrame, nfloat startKeyFrame, nfloat endKeyFrame, nfloat interpolatedProgress, CGSize startSize, CGSize endSize, CGSize interpolatedSize);
+
+	// typedef CGPathRef _Nonnull (^LOTPathValueCallbackBlock)(CGFloat, CGFloat, CGFloat, CGFloat);
+    unsafe delegate CGPath LOTPathValueCallbackBlock (nfloat currentFrame, nfloat startKeyFrame, nfloat endKeyFrame, nfloat interpolatedProgress);
+
+	// @interface LOTColorBlockCallback : NSObject <LOTColorValueDelegate>
+	[BaseType (typeof(NSObject))]
+	interface LOTColorBlockCallback : LOTColorValueDelegate
+	{
+		// +(instancetype _Nonnull)withBlock:(LOTColorValueCallbackBlock _Nonnull)block;
+		[Static]
+		[Export ("withBlock:")]
+		LOTColorBlockCallback WithBlock (LOTColorValueCallbackBlock block);
+
+		// @property (copy, nonatomic) LOTColorValueCallbackBlock _Nonnull callback;
+		[Export ("callback", ArgumentSemantic.Copy)]
+		LOTColorValueCallbackBlock Callback { get; set; }
+	}
+
+	// @interface LOTNumberBlockCallback : NSObject <LOTNumberValueDelegate>
+	[BaseType (typeof(NSObject))]
+	interface LOTNumberBlockCallback : LOTNumberValueDelegate
+	{
+		// +(instancetype _Nonnull)withBlock:(LOTNumberValueCallbackBlock _Nonnull)block;
+		[Static]
+		[Export ("withBlock:")]
+		LOTNumberBlockCallback WithBlock (LOTNumberValueCallbackBlock block);
+
+		// @property (copy, nonatomic) LOTNumberValueCallbackBlock _Nonnull callback;
+		[Export ("callback", ArgumentSemantic.Copy)]
+		LOTNumberValueCallbackBlock Callback { get; set; }
+	}
+
+	// @interface LOTPointBlockCallback : NSObject <LOTPointValueDelegate>
+	[BaseType (typeof(NSObject))]
+	interface LOTPointBlockCallback : LOTPointValueDelegate
+	{
+		// +(instancetype _Nonnull)withBlock:(LOTPointValueCallbackBlock _Nonnull)block;
+		[Static]
+		[Export ("withBlock:")]
+		LOTPointBlockCallback WithBlock (LOTPointValueCallbackBlock block);
+
+		// @property (copy, nonatomic) LOTPointValueCallbackBlock _Nonnull callback;
+		[Export ("callback", ArgumentSemantic.Copy)]
+		LOTPointValueCallbackBlock Callback { get; set; }
+	}
+
+	// @interface LOTSizeBlockCallback : NSObject <LOTSizeValueDelegate>
+	[BaseType (typeof(NSObject))]
+	interface LOTSizeBlockCallback : LOTSizeValueDelegate
+	{
+		// +(instancetype _Nonnull)withBlock:(LOTSizeValueCallbackBlock _Nonnull)block;
+		[Static]
+		[Export ("withBlock:")]
+		LOTSizeBlockCallback WithBlock (LOTSizeValueCallbackBlock block);
+
+		// @property (copy, nonatomic) LOTSizeValueCallbackBlock _Nonnull callback;
+		[Export ("callback", ArgumentSemantic.Copy)]
+		LOTSizeValueCallbackBlock Callback { get; set; }
+	}
+
+	// @interface LOTPathBlockCallback : NSObject <LOTPathValueDelegate>
+	[BaseType (typeof(NSObject))]
+	interface LOTPathBlockCallback : LOTPathValueDelegate
+	{
+		// +(instancetype _Nonnull)withBlock:(LOTPathValueCallbackBlock _Nonnull)block;
+		[Static]
+		[Export ("withBlock:")]
+		LOTPathBlockCallback WithBlock (LOTPathValueCallbackBlock block);
+
+		// @property (copy, nonatomic) LOTPathValueCallbackBlock _Nonnull callback;
+		[Export ("callback", ArgumentSemantic.Copy)]
+		LOTPathValueCallbackBlock Callback { get; set; }
+	}
+
+	// @interface LOTPointInterpolatorCallback : NSObject <LOTPointValueDelegate>
+	[BaseType (typeof(NSObject))]
+	interface LOTPointInterpolatorCallback : LOTPointValueDelegate
+	{
+		// +(instancetype _Nonnull)withFromPoint:(CGPoint)fromPoint toPoint:(CGPoint)toPoint;
+		[Static]
+		[Export ("withFromPoint:toPoint:")]
+		LOTPointInterpolatorCallback WithFromPoint (CGPoint fromPoint, CGPoint toPoint);
+
+		// @property (nonatomic) CGPoint fromPoint;
+		[Export ("fromPoint", ArgumentSemantic.Assign)]
+		CGPoint FromPoint { get; set; }
+
+		// @property (nonatomic) CGPoint toPoint;
+		[Export ("toPoint", ArgumentSemantic.Assign)]
+		CGPoint ToPoint { get; set; }
+
+		// @property (assign, nonatomic) CGFloat currentProgress;
+		[Export ("currentProgress")]
+		nfloat CurrentProgress { get; set; }
+	}
+
+	// @interface LOTSizeInterpolatorCallback : NSObject <LOTSizeValueDelegate>
+	[BaseType (typeof(NSObject))]
+	interface LOTSizeInterpolatorCallback : LOTSizeValueDelegate
+	{
+		// +(instancetype _Nonnull)withFromSize:(CGSize)fromSize toSize:(CGSize)toSize;
+		[Static]
+		[Export ("withFromSize:toSize:")]
+		LOTSizeInterpolatorCallback WithFromSize (CGSize fromSize, CGSize toSize);
+
+		// @property (nonatomic) CGSize fromSize;
+		[Export ("fromSize", ArgumentSemantic.Assign)]
+		CGSize FromSize { get; set; }
+
+		// @property (nonatomic) CGSize toSize;
+		[Export ("toSize", ArgumentSemantic.Assign)]
+		CGSize ToSize { get; set; }
+
+		// @property (assign, nonatomic) CGFloat currentProgress;
+		[Export ("currentProgress")]
+		nfloat CurrentProgress { get; set; }
+	}
+
+	// @interface LOTFloatInterpolatorCallback : NSObject <LOTNumberValueDelegate>
+	[BaseType (typeof(NSObject))]
+	interface LOTFloatInterpolatorCallback : LOTNumberValueDelegate
+	{
+		// +(instancetype _Nonnull)withFromFloat:(CGFloat)fromFloat toFloat:(CGFloat)toFloat;
+		[Static]
+		[Export ("withFromFloat:toFloat:")]
+		LOTFloatInterpolatorCallback WithFromFloat (nfloat fromFloat, nfloat toFloat);
+
+		// @property (nonatomic) CGFloat fromFloat;
+		[Export ("fromFloat")]
+		nfloat FromFloat { get; set; }
+
+		// @property (nonatomic) CGFloat toFloat;
+		[Export ("toFloat")]
+		nfloat ToFloat { get; set; }
+
+		// @property (assign, nonatomic) CGFloat currentProgress;
+		[Export ("currentProgress")]
+		nfloat CurrentProgress { get; set; }
+	}
+
+	// @interface LOTColorValueCallback : NSObject <LOTColorValueDelegate>
+	[BaseType (typeof(NSObject))]
+	interface LOTColorValueCallback : LOTColorValueDelegate
+	{
+		// +(instancetype _Nonnull)withCGColor:(CGColorRef _Nonnull)color;
+		[Static]
+		[Export ("withCGColor:")]
+		unsafe LOTColorValueCallback WithCGColor (CGColor color);
+
+		// @property (nonatomic) CGColorRef _Nonnull colorValue;
+		[Export ("colorValue", ArgumentSemantic.Assign)]
+		unsafe CGColor ColorValue { get; set; }
+	}
+
+	// @interface LOTNumberValueCallback : NSObject <LOTNumberValueDelegate>
+	[BaseType (typeof(NSObject))]
+	interface LOTNumberValueCallback : LOTNumberValueDelegate
+	{
+		// +(instancetype _Nonnull)withFloatValue:(CGFloat)numberValue;
+		[Static]
+		[Export ("withFloatValue:")]
+		LOTNumberValueCallback WithFloatValue (nfloat numberValue);
+
+		// @property (assign, nonatomic) CGFloat numberValue;
+		[Export ("numberValue")]
+		nfloat NumberValue { get; set; }
+	}
+
+	// @interface LOTPointValueCallback : NSObject <LOTPointValueDelegate>
+	[BaseType (typeof(NSObject))]
+	interface LOTPointValueCallback : LOTPointValueDelegate
+	{
+		// +(instancetype _Nonnull)withPointValue:(CGPoint)pointValue;
+		[Static]
+		[Export ("withPointValue:")]
+		LOTPointValueCallback WithPointValue (CGPoint pointValue);
+
+		// @property (assign, nonatomic) CGPoint pointValue;
+		[Export ("pointValue", ArgumentSemantic.Assign)]
+		CGPoint PointValue { get; set; }
+	}
+
+	// @interface LOTSizeValueCallback : NSObject <LOTSizeValueDelegate>
+	[BaseType (typeof(NSObject))]
+	interface LOTSizeValueCallback : LOTSizeValueDelegate
+	{
+		// +(instancetype _Nonnull)withPointValue:(CGSize)sizeValue;
+		[Static]
+		[Export ("withPointValue:")]
+		LOTSizeValueCallback WithPointValue (CGSize sizeValue);
+
+		// @property (assign, nonatomic) CGSize sizeValue;
+		[Export ("sizeValue", ArgumentSemantic.Assign)]
+		CGSize SizeValue { get; set; }
+	}
+
+	// @interface LOTPathValueCallback : NSObject <LOTPathValueDelegate>
+	[BaseType (typeof(NSObject))]
+	interface LOTPathValueCallback : LOTPathValueDelegate
+	{
+		// +(instancetype _Nonnull)withCGPath:(CGPathRef _Nonnull)path;
+		[Static]
+		[Export ("withCGPath:")]
+        unsafe LOTPathValueCallback WithCGPath (CGPath path);
+
+		// @property (nonatomic) CGPathRef _Nonnull pathValue;
+		[Export ("pathValue", ArgumentSemantic.Assign)]
+		unsafe CGPath PathValue { get; set; }
 	}
 }
