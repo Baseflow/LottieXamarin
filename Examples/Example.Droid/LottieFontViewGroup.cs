@@ -166,7 +166,7 @@ namespace LottieSamples.Droid
                     ViewGroup.LayoutParams.WrapContent,
                     ViewGroup.LayoutParams.WrapContent
                 );
-                cursorView.SetComposition(composition);
+                cursorView.Composition = composition;
                 cursorView.Loop(true);
                 cursorView.PlayAnimation();
                 AddView(cursorView);
@@ -207,7 +207,7 @@ namespace LottieSamples.Droid
                 ViewGroup.LayoutParams.WrapContent
             );
             
-            lottieAnimationView.SetComposition(composition);
+            lottieAnimationView.Composition = composition;
             lottieAnimationView.PlayAnimation();
             if (cursorView == null)
             {
