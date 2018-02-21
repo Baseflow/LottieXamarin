@@ -61,7 +61,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml" />
@@ -245,4 +244,24 @@
     <AndroidAsset Include="Assets\City.json" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+    <ItemGroup>
+    <PackageReference Include="FastAndroidCamera" version="2.0.0" />
+  <PackageReference Include="Square.OkHttp3" version="3.8.1" />
+  <PackageReference Include="Square.OkIO" version="1.13.0" />
+  <PackageReference Include="Xamarin.Android.Support.Animated.Vector.Drawable" version="26.1.0.1" />
+  <PackageReference Include="Xamarin.Android.Support.Annotations" version="26.1.0.1" />
+  <PackageReference Include="Xamarin.Android.Support.Compat" version="26.1.0.1" />
+  <PackageReference Include="Xamarin.Android.Support.Core.UI" version="26.1.0.1" />
+  <PackageReference Include="Xamarin.Android.Support.Core.Utils" version="26.1.0.1" />
+  <PackageReference Include="Xamarin.Android.Support.Design" version="26.1.0.1" />
+  <PackageReference Include="Xamarin.Android.Support.Fragment" version="26.1.0.1" />
+  <PackageReference Include="Xamarin.Android.Support.Media.Compat" version="26.1.0.1" />
+  <PackageReference Include="Xamarin.Android.Support.Transition" version="26.1.0.1" />
+  <PackageReference Include="Xamarin.Android.Support.v4" version="26.1.0.1" />
+  <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" version="26.1.0.1" />
+  <PackageReference Include="Xamarin.Android.Support.v7.RecyclerView" version="26.1.0.1" />
+  <PackageReference Include="Xamarin.Android.Support.Vector.Drawable" version="26.1.0.1" />
+  <PackageReference Include="Xamarin.Build.Download" version="0.4.7" />
+  <PackageReference Include="ZXing.Net.Mobile" version="2.3.2" />
+    </ItemGroup>
 </Project>

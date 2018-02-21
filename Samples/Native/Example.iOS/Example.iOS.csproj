@@ -101,7 +101,6 @@
   <ItemGroup>
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -187,5 +186,8 @@
       <Name>Lottie.iOS</Name>
     </ProjectReference>
   </ItemGroup>
+    <ItemGroup>
+          <PackageReference Include="ZXing.Net.Mobile" Version="2.3.2" />
+    </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
