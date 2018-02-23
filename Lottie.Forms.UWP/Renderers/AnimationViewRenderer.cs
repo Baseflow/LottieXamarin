@@ -3,6 +3,7 @@ using System.ComponentModel;
 using Lottie.Forms;
 using Lottie.Forms.UWP.Renderers;
 using LottieUWP;
+using LottieUWP.Utils;
 using Xamarin.Forms.Platform.UWP;
 
 [assembly: ExportRenderer(typeof(AnimationView), typeof(AnimationViewRenderer))]
@@ -59,7 +60,7 @@ namespace Lottie.Forms.UWP.Renderers
 
         private void PlaybackFinishedIfProgressReachesOne(object sender, ValueAnimator.ValueAnimatorUpdateEventArgs e)
         {
-            if (e.Animation.Progress >= 1)
+            if (((LottieValueAnimator)e.Animation).AnimatedValueAbsolute >= 1)
             {
                 Element.PlaybackFinished();
             }
