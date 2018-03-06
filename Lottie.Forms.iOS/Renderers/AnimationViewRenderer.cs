@@ -99,6 +99,8 @@ namespace Lottie.Forms.iOS.Renderers
                 AnimationSpeed = theElement.Speed
             };
 
+            _animationView.AddGestureRecognizer(new UITapGestureRecognizer(theElement.Click));
+
             Element.Duration = TimeSpan.FromMilliseconds(_animationView.AnimationDuration);
 
             if (theElement.AutoPlay)
