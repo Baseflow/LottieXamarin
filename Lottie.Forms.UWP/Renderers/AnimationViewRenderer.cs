@@ -40,6 +40,7 @@ namespace Lottie.Forms.UWP.Renderers
             {
                 e.OldElement.OnPlay -= OnPlay;
                 e.OldElement.OnPause -= OnPause;
+                _animationView.Tapped -= AnimationViewTapped;
             }
 
             if (e.NewElement != null)
@@ -48,14 +49,22 @@ namespace Lottie.Forms.UWP.Renderers
                 e.NewElement.OnPause += OnPause;
                 _animationView.Loop = e.NewElement.Loop;
                 _animationView.Speed = e.NewElement.Speed;
+                _animationView.Tapped += AnimationViewTapped;
+
                 if (!string.IsNullOrEmpty(e.NewElement.Animation))
                 {
                     await _animationView.SetAnimationAsync(e.NewElement.Animation);
                     Element.Duration = TimeSpan.FromMilliseconds(_animationView.Duration);
                 }
+
                 if (e.NewElement.AutoPlay)
                     _animationView.PlayAnimation();
             }
+        }
+
+        private void AnimationViewTapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            Element?.Click();
         }
 
         private void PlaybackFinishedIfProgressReachesOne(object sender, ValueAnimator.ValueAnimatorUpdateEventArgs e)
