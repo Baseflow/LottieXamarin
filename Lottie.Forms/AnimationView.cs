@@ -34,6 +34,9 @@ namespace Lottie.Forms
         public static readonly BindableProperty PlaybackFinishedCommandProperty = BindableProperty.Create(nameof(PlaybackFinishedCommand), 
             typeof(ICommand), typeof(AnimationView));
 
+        public static readonly BindableProperty ClickedCommandProperty = BindableProperty.Create(nameof(ClickedCommand), 
+            typeof(ICommand), typeof(AnimationView));
+
         public float Progress
         {
             get { return (float) GetValue(ProgressProperty); }
@@ -97,6 +100,13 @@ namespace Lottie.Forms
             set { SetValue(PlaybackFinishedCommandProperty, value); }
         }
 
+        public ICommand ClickedCommand
+        {
+            get { return (ICommand)GetValue(ClickedCommandProperty); }
+
+            set { SetValue(ClickedCommandProperty, value); }
+        }
+
         public event EventHandler OnPlay;
 
         public void Play()
@@ -111,6 +121,15 @@ namespace Lottie.Forms
         public void Pause()
         {
             OnPause?.Invoke(this, new EventArgs());
+        }
+
+        public event EventHandler OnClick;
+
+        public void Click()
+        {
+            OnClick?.Invoke(this, new EventArgs());
+
+            ExecuteCommandIfPossible(ClickedCommand);
         }
 
         public event EventHandler OnFinish;

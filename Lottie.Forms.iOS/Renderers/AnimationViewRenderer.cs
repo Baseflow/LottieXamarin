@@ -15,6 +15,7 @@ namespace Lottie.Forms.iOS.Renderers
     public class AnimationViewRenderer : ViewRenderer<AnimationView, LOTAnimationView>
     {
         private LOTAnimationView _animationView;
+        private UITapGestureRecognizer _gestureRecognizer;
 
         /// <summary>
         ///   Used for registration with dependency service
@@ -67,6 +68,7 @@ namespace Lottie.Forms.iOS.Renderers
             if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
             {
                 _animationView?.RemoveFromSuperview();
+                _animationView?.RemoveGestureRecognizer(_gestureRecognizer);
                 InitAnimationViewForElement(Element);
             }
 
@@ -98,6 +100,9 @@ namespace Lottie.Forms.iOS.Renderers
                 LoopAnimation = theElement.Loop,
                 AnimationSpeed = theElement.Speed
             };
+
+            _gestureRecognizer = new UITapGestureRecognizer(theElement.Click);
+            _animationView.AddGestureRecognizer(_gestureRecognizer);
 
             Element.Duration = TimeSpan.FromMilliseconds(_animationView.AnimationDuration);
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using Android.Views;
 using Com.Airbnb.Lottie;
 using Lottie.Forms;
 using Lottie.Forms.Droid;
@@ -43,6 +44,7 @@ namespace Lottie.Forms.Droid
             {
                 e.OldElement.OnPlay -= OnPlay;
                 e.OldElement.OnPause -= OnPause;
+                _animationView.SetOnClickListener(null);
             }
 
             if (e.NewElement != null)
@@ -51,6 +53,9 @@ namespace Lottie.Forms.Droid
                 e.NewElement.OnPause += OnPause;
                 _animationView.Speed = e.NewElement.Speed;
                 _animationView.Loop(e.NewElement.Loop);
+
+                _animationView.SetOnClickListener(new ClickListener(e.NewElement));
+
                 if (!string.IsNullOrEmpty(e.NewElement.Animation))
                 {
                     _animationView.SetAnimation(e.NewElement.Animation);
@@ -108,6 +113,21 @@ namespace Lottie.Forms.Droid
                 _animationView?.Loop(Element.Loop);
 
             base.OnElementPropertyChanged(sender, e);
+        }
+
+        public class ClickListener : Java.Lang.Object, IOnClickListener
+        {
+            private readonly AnimationView _animationView;
+
+            public ClickListener(AnimationView animationView)
+            {
+                _animationView = animationView;
+            }
+
+            public void OnClick(Android.Views.View v)
+            {
+                _animationView.Click();
+            }
         }
     }
 }

@@ -7,10 +7,11 @@ namespace Example.Forms
     {
         private readonly ICommand playingCommand;
         private readonly ICommand finishedCommand;
+        private readonly ICommand clickedCommand;
 
         public ICommand PlayingCommand => playingCommand;
-
         public ICommand FinishedCommand => finishedCommand;
+        public ICommand ClickedCommand => clickedCommand;
 
         public MainPage()
         {
@@ -20,6 +21,9 @@ namespace Example.Forms
             finishedCommand = new Command(_ =>
                 DisplayAlert($"{nameof(animationView.PlaybackFinishedCommand)} executed!"));
 
+            clickedCommand = new Command(_ =>
+                 DisplayAlert($"{nameof(animationView.ClickedCommand)} executed!"));
+            
             InitializeComponent();
 
             playButton.Clicked += (sender, e) => animationView.Play();

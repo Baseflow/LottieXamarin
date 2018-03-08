@@ -14,6 +14,7 @@
             OnFinish="Handle_OnFinish"
             PlaybackStartedCommand="{Binding PlayingCommand}"
             PlaybackFinishedCommand="{Binding FinishedCommand}" 
+            ClickedCommand="{Binding ClickedCommand}"
             VerticalOptions="FillAndExpand" 
             HorizontalOptions="FillAndExpand" />
         <Button x:Name="playButton"
