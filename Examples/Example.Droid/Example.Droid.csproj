@@ -21,6 +21,7 @@
     <AndroidTlsProvider>
     </AndroidTlsProvider>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <ReleaseVersion>2.5</ReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -87,9 +88,6 @@
     <Reference Include="Xamarin.Android.Support.Design">
       <HintPath>..\..\packages\Xamarin.Android.Support.Design.25.3.1\lib\MonoAndroid70\Xamarin.Android.Support.Design.dll</HintPath>
     </Reference>
-    <Reference Include="FastAndroidCamera">
-      <HintPath>..\..\packages\FastAndroidCamera.2.0.0\lib\MonoAndroid403\FastAndroidCamera.dll</HintPath>
-    </Reference>
     <Reference Include="Square.OkIO">
       <HintPath>..\..\packages\Square.OkIO.1.13.0\lib\MonoAndroid\Square.OkIO.dll</HintPath>
     </Reference>
@@ -104,6 +102,9 @@
     </Reference>
     <Reference Include="ZXingNetMobile, Version=2.3.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\ZXing.Net.Mobile.2.3.2\lib\MonoAndroid403\ZXingNetMobile.dll</HintPath>
+    </Reference>
+    <Reference Include="FastAndroidCamera">
+      <HintPath>..\..\packages\FastAndroidCamera.2.0.0\lib\MonoAndroid403\FastAndroidCamera.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

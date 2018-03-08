@@ -9,7 +9,7 @@
     <RootNamespace>Lottie.tvOS</RootNamespace>
     <AssemblyName>Lottie.tvOS</AssemblyName>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <ReleaseVersion>2.1.5.0</ReleaseVersion>
+    <ReleaseVersion>2.5.0.0</ReleaseVersion>
     <SynchReleaseVersion>false</SynchReleaseVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
