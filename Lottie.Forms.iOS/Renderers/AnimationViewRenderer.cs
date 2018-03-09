@@ -36,12 +36,14 @@ namespace Lottie.Forms.iOS.Renderers
             {
                 e.OldElement.OnPlay -= OnPlay;
                 e.OldElement.OnPause -= OnPause;
+                e.OldElement.OnPlaySegment -= OnPlaySegment;
             }
 
             if (e.NewElement == null) return;
 
             e.NewElement.OnPlay += OnPlay;
             e.NewElement.OnPause += OnPause;
+            e.NewElement.OnPlaySegment += OnPlaySegment;
 
             if (!string.IsNullOrEmpty(e.NewElement.Animation))
             {
@@ -52,6 +54,12 @@ namespace Lottie.Forms.iOS.Renderers
         private void OnPlay(object sender, EventArgs e)
         {
             _animationView?.PlayWithCompletion(PlaybackFinishedIfActually);
+            Element.IsPlaying = true;
+        }
+
+        private void OnPlaySegment(object sender, SegmentEventArgs e)
+        {
+            _animationView?.PlayFromProgress(e.From, e.To, PlaybackFinishedIfActually);
             Element.IsPlaying = true;
         }
 

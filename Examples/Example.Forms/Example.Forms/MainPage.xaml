@@ -22,6 +22,11 @@
             AbsoluteLayout.LayoutBounds="0, 0, AutoSize, AutoSize"
             Text="Play"
             Margin="10" />
+        <Button x:Name="playSegmentsButton"
+            AbsoluteLayout.LayoutFlags="PositionProportional"
+            AbsoluteLayout.LayoutBounds="0.5, 0, AutoSize, AutoSize"
+            Text="Play Segment"
+            Margin="10" />
         <Button x:Name="pauseButton"
             AbsoluteLayout.LayoutFlags="PositionProportional"
             AbsoluteLayout.LayoutBounds="1, 0, AutoSize, AutoSize"

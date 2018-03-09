@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using Android.Views;
 using Com.Airbnb.Lottie;
 using Lottie.Forms;
 using Lottie.Forms.Droid;
@@ -11,11 +10,13 @@ using Xamarin.Forms.Platform.Android;
 
 namespace Lottie.Forms.Droid
 {
+#pragma warning disable 0618
     public class AnimationViewRenderer : Xamarin.Forms.Platform.Android.AppCompat.ViewRenderer<AnimationView,
         LottieAnimationView>
     {
         private LottieAnimationView _animationView;
         private AnimatorListener _animatorListener;
+        private bool _needToReverseAnimationSpeed;
 
         /// <summary>
         ///     Used for registration with dependency service
@@ -37,6 +38,7 @@ namespace Lottie.Forms.Droid
                 _animationView = new LottieAnimationView(Context);
                 _animatorListener = new AnimatorListener(PlaybackFinished);
                 _animationView.AddAnimatorListener(_animatorListener);
+
                 SetNativeControl(_animationView);
             }
 
@@ -44,6 +46,8 @@ namespace Lottie.Forms.Droid
             {
                 e.OldElement.OnPlay -= OnPlay;
                 e.OldElement.OnPause -= OnPause;
+                e.OldElement.OnPlaySegment -= OnPlaySegment;
+
                 _animationView.SetOnClickListener(null);
             }
 
@@ -51,6 +55,8 @@ namespace Lottie.Forms.Droid
             {
                 e.NewElement.OnPlay += OnPlay;
                 e.NewElement.OnPause += OnPause;
+                e.NewElement.OnPlaySegment += OnPlaySegment;
+
                 _animationView.Speed = e.NewElement.Speed;
                 _animationView.Loop(e.NewElement.Loop);
 
@@ -62,7 +68,8 @@ namespace Lottie.Forms.Droid
                     Element.Duration = TimeSpan.FromMilliseconds(_animationView.Duration);
                 }
 
-                if (e.NewElement.AutoPlay) _animationView.PlayAnimation();
+                if (e.NewElement.AutoPlay) 
+                    _animationView.PlayAnimation();
             }
         }
 
@@ -77,8 +84,32 @@ namespace Lottie.Forms.Droid
                 }
                 else
                 {
+                    ResetReverse();
                     _animationView.PlayAnimation();
                 }
+                Element.IsPlaying = true;
+            }
+        }
+
+        private void OnPlaySegment(object sender, SegmentEventArgs e)
+        {
+            if (_animationView != null 
+                && _animationView.Handle != IntPtr.Zero)
+            {
+                // To avoid 'Frame must be [125.000000,0.000000]. It is 0.000000' error
+                var minValue = Math.Min(e.From, e.To);
+                var maxValue = Math.Max(e.From, e.To);
+                var needReverse = e.From > e.To;
+
+                _animationView.SetMinAndMaxProgress(minValue, maxValue);
+
+                if (needReverse && !_needToReverseAnimationSpeed)
+                {
+                    _needToReverseAnimationSpeed = true;
+                    _animationView.ReverseAnimationSpeed();
+                }
+                
+                _animationView.PlayAnimation();
                 Element.IsPlaying = true;
             }
         }
@@ -104,7 +135,9 @@ namespace Lottie.Forms.Droid
             {
                 _animationView.SetAnimation(Element.Animation);
                 Element.Duration = TimeSpan.FromMilliseconds(_animationView.Duration);
-                if (Element.AutoPlay) _animationView.PlayAnimation();
+
+                if (Element.AutoPlay) 
+                    _animationView.PlayAnimation();
             }
 
             if (e.PropertyName == AnimationView.SpeedProperty.PropertyName)
@@ -122,6 +155,15 @@ namespace Lottie.Forms.Droid
             base.OnElementPropertyChanged(sender, e);
         }
 
+        private void ResetReverse()
+        {
+            if (_needToReverseAnimationSpeed)
+            {
+                _needToReverseAnimationSpeed = false;
+                _animationView.ReverseAnimationSpeed();
+            }
+        }
+
         public class ClickListener : Java.Lang.Object, IOnClickListener
         {
             private readonly AnimationView _animationView;
@@ -137,4 +179,5 @@ namespace Lottie.Forms.Droid
             }
         }
     }
+#pragma warning restore 0618
 }

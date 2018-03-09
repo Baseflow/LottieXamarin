@@ -27,6 +27,7 @@ namespace Example.Forms
             InitializeComponent();
 
             playButton.Clicked += (sender, e) => animationView.Play();
+            playSegmentsButton.Clicked += (sender, e) => animationView.PlaySegment(0.65f, 0.0f);
             pauseButton.Clicked += (sender, e) => animationView.Pause();
 
             BindingContext = this;

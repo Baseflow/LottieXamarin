@@ -116,6 +116,21 @@ namespace Lottie.Forms
             ExecuteCommandIfPossible(PlaybackStartedCommand);
         }
 
+        public event EventHandler<SegmentEventArgs> OnPlaySegment;
+
+        public void PlaySegment(float from, float to)
+        {
+            if (from < 0f || from > 1f)
+                throw new ArgumentException($"Parameter {nameof(from)} should have a valid value.", nameof(from));
+
+            if (to < 0f || to > 1f)
+                throw new ArgumentException($"Parameter {nameof(to)} should have a valid value.", nameof(to));
+            
+            OnPlaySegment?.Invoke(this, new SegmentEventArgs(from, to));
+
+            ExecuteCommandIfPossible(PlaybackStartedCommand);
+        }
+
         public event EventHandler OnPause;
 
         public void Pause()
