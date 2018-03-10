@@ -71,7 +71,14 @@ namespace Lottie.Forms.Droid
             if (_animationView != null
                 && _animationView.Handle != IntPtr.Zero)
             {
-                _animationView.PlayAnimation();
+                if (_animationView.Progress > 0f)
+                {
+                    _animationView.ResumeAnimation();
+                }
+                else
+                {
+                    _animationView.PlayAnimation();
+                }
                 Element.IsPlaying = true;
             }
         }
