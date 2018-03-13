@@ -1,36 +1,36 @@
 ﻿using System.Windows.Input;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
 namespace Example.Forms
 {
     public partial class MainPage : ContentPage
     {
-        private readonly ICommand playingCommand;
-        private readonly ICommand finishedCommand;
-        private readonly ICommand clickedCommand;
-
-        public ICommand PlayingCommand => playingCommand;
-        public ICommand FinishedCommand => finishedCommand;
-        public ICommand ClickedCommand => clickedCommand;
+        public ICommand PlayingCommand { get; private set; }
+        public ICommand FinishedCommand { get; private set; }
+        public ICommand ClickedCommand { get; private set; }
 
         public MainPage()
         {
-            playingCommand = new Command(_ =>
+            PlayingCommand = new Command(_ =>
                 DisplayAlert($"{nameof(animationView.PlaybackStartedCommand)} executed!"));
 
-            finishedCommand = new Command(_ =>
+            FinishedCommand = new Command(_ =>
                 DisplayAlert($"{nameof(animationView.PlaybackFinishedCommand)} executed!"));
 
-            clickedCommand = new Command(_ =>
+            ClickedCommand = new Command(_ =>
                  DisplayAlert($"{nameof(animationView.ClickedCommand)} executed!"));
             
             InitializeComponent();
 
             playButton.Clicked += (sender, e) => animationView.Play();
-            playSegmentsButton.Clicked += (sender, e) => animationView.PlaySegment(0.65f, 0.0f);
+            playSegmentsButton.Clicked += (sender, e) => animationView.PlayProgressSegment(0.65f, 0.0f);
+            playFramesButton.Clicked += (sender, e) => animationView.PlayFrameSegment(50, 1);
             pauseButton.Clicked += (sender, e) => animationView.Pause();
 
             BindingContext = this;
+
+            On<Xamarin.Forms.PlatformConfiguration.iOS>().SetUseSafeArea(true);
         }
 
         private void Slider_OnValueChanged(object sender, ValueChangedEventArgs e)

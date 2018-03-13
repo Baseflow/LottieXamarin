@@ -1,18 +1,18 @@
 ﻿using System;
 
-namespace Lottie.Forms
+namespace Lottie.Forms.EventArguments
 {
-    public class SegmentEventArgs : EventArgs
+    public class ProgressSegmentEventArgs : EventArgs
     {
         public float From { get; set; }
         public float To { get; set; }
 
-        public SegmentEventArgs()
+        public ProgressSegmentEventArgs()
             :base()
         {
         }
 
-        public SegmentEventArgs(float from, float to)
+        public ProgressSegmentEventArgs(float from, float to)
         {
             From = from;
             To = to;

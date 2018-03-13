@@ -3,6 +3,7 @@ using System.ComponentModel;
 using Com.Airbnb.Lottie;
 using Lottie.Forms;
 using Lottie.Forms.Droid;
+using Lottie.Forms.EventArguments;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
@@ -17,6 +18,7 @@ namespace Lottie.Forms.Droid
         private LottieAnimationView _animationView;
         private AnimatorListener _animatorListener;
         private bool _needToReverseAnimationSpeed;
+        private bool _needToResetFrames;
 
         /// <summary>
         ///     Used for registration with dependency service
@@ -46,7 +48,8 @@ namespace Lottie.Forms.Droid
             {
                 e.OldElement.OnPlay -= OnPlay;
                 e.OldElement.OnPause -= OnPause;
-                e.OldElement.OnPlaySegment -= OnPlaySegment;
+                e.OldElement.OnPlayProgressSegment -= OnPlayProgressSegment;
+                e.OldElement.OnPlayFrameSegment -= OnPlayFrameSegment;
 
                 _animationView.SetOnClickListener(null);
             }
@@ -55,7 +58,8 @@ namespace Lottie.Forms.Droid
             {
                 e.NewElement.OnPlay += OnPlay;
                 e.NewElement.OnPause += OnPause;
-                e.NewElement.OnPlaySegment += OnPlaySegment;
+                e.NewElement.OnPlayProgressSegment += OnPlayProgressSegment;
+                e.NewElement.OnPlayFrameSegment += OnPlayFrameSegment;
 
                 _animationView.Speed = e.NewElement.Speed;
                 _animationView.Loop(e.NewElement.Loop);
@@ -91,26 +95,47 @@ namespace Lottie.Forms.Droid
             }
         }
 
-        private void OnPlaySegment(object sender, SegmentEventArgs e)
+        private void OnPlayProgressSegment(object sender, ProgressSegmentEventArgs e)
         {
             if (_animationView != null 
                 && _animationView.Handle != IntPtr.Zero)
             {
-                // To avoid 'Frame must be [125.000000,0.000000]. It is 0.000000' error
-                var minValue = Math.Min(e.From, e.To);
-                var maxValue = Math.Max(e.From, e.To);
-                var needReverse = e.From > e.To;
-
-                _animationView.SetMinAndMaxProgress(minValue, maxValue);
-
-                if (needReverse && !_needToReverseAnimationSpeed)
+                PrepareReverseAnimation((min, max) => 
                 {
-                    _needToReverseAnimationSpeed = true;
-                    _animationView.ReverseAnimationSpeed();
-                }
-                
-                _animationView.PlayAnimation();
-                Element.IsPlaying = true;
+                    _animationView.SetMinAndMaxProgress(min, max);
+                }, e.From, e.To);
+            }
+        }
+
+        private void PrepareReverseAnimation(Action<float, float> action, 
+                                             float from, float to)
+        {
+            var minValue = Math.Min(from, to);
+            var maxValue = Math.Max(from, to);
+            var needReverse = from > to;
+
+            action(minValue, maxValue);
+
+            if (needReverse && !_needToReverseAnimationSpeed)
+            {
+                _needToReverseAnimationSpeed = true;
+                _animationView.ReverseAnimationSpeed();
+            }
+
+            _animationView.PlayAnimation();
+            Element.IsPlaying = true;
+        }
+
+        private void OnPlayFrameSegment(object sender, FrameSegmentEventArgs e)
+        {
+            if (_animationView != null
+                && _animationView.Handle != IntPtr.Zero)
+            {
+                PrepareReverseAnimation((min, max) =>
+                {
+                    _animationView.SetMinAndMaxFrame((int)min, (int)max);
+                    _needToResetFrames = true;
+                }, e.From, e.To);
             }
         }
 
@@ -157,10 +182,18 @@ namespace Lottie.Forms.Droid
 
         private void ResetReverse()
         {
+            if (_needToResetFrames)
+            {
+                var composition = _animationView.Composition;
+
+                _animationView.SetMinAndMaxFrame((int)composition.StartFrame, (int)composition.EndFrame);
+                _needToResetFrames = false;
+            }
+                          
             if (_needToReverseAnimationSpeed)
             {
-                _needToReverseAnimationSpeed = false;
                 _animationView.ReverseAnimationSpeed();
+                _needToReverseAnimationSpeed = false;
             }
         }
 

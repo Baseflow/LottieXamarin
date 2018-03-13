@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Input;
+using Lottie.Forms.EventArguments;
 using Xamarin.Forms;
 
 namespace Lottie.Forms
@@ -116,9 +117,9 @@ namespace Lottie.Forms
             ExecuteCommandIfPossible(PlaybackStartedCommand);
         }
 
-        public event EventHandler<SegmentEventArgs> OnPlaySegment;
+        public event EventHandler<ProgressSegmentEventArgs> OnPlayProgressSegment;
 
-        public void PlaySegment(float from, float to)
+        public void PlayProgressSegment(float from, float to)
         {
             if (from < 0f || from > 1f)
                 throw new ArgumentException($"Parameter {nameof(from)} should have a valid value.", nameof(from));
@@ -126,7 +127,22 @@ namespace Lottie.Forms
             if (to < 0f || to > 1f)
                 throw new ArgumentException($"Parameter {nameof(to)} should have a valid value.", nameof(to));
             
-            OnPlaySegment?.Invoke(this, new SegmentEventArgs(from, to));
+            OnPlayProgressSegment?.Invoke(this, new ProgressSegmentEventArgs(from, to));
+
+            ExecuteCommandIfPossible(PlaybackStartedCommand);
+        }
+
+        public event EventHandler<FrameSegmentEventArgs> OnPlayFrameSegment;
+
+        public void PlayFrameSegment(int from, int to)
+        {
+            if (from < 0)
+                throw new ArgumentException($"Parameter {nameof(from)} should have a valid value.", nameof(from));
+
+            if (to < 0)
+                throw new ArgumentException($"Parameter {nameof(to)} should have a valid value.", nameof(to));
+
+            OnPlayFrameSegment?.Invoke(this, new FrameSegmentEventArgs(from, to));
 
             ExecuteCommandIfPossible(PlaybackStartedCommand);
         }
