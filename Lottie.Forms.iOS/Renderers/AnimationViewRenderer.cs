@@ -3,6 +3,7 @@ using System.ComponentModel;
 using Airbnb.Lottie;
 using Foundation;
 using Lottie.Forms;
+using Lottie.Forms.EventArguments;
 using Lottie.Forms.iOS.Renderers;
 using UIKit;
 using Xamarin.Forms;
@@ -36,12 +37,16 @@ namespace Lottie.Forms.iOS.Renderers
             {
                 e.OldElement.OnPlay -= OnPlay;
                 e.OldElement.OnPause -= OnPause;
+                e.OldElement.OnPlayProgressSegment -= OnPlayProgressSegment;
+                e.OldElement.OnPlayFrameSegment -= OnPlayFrameSegment;
             }
 
             if (e.NewElement == null) return;
 
             e.NewElement.OnPlay += OnPlay;
             e.NewElement.OnPause += OnPause;
+            e.NewElement.OnPlayProgressSegment += OnPlayProgressSegment;
+            e.NewElement.OnPlayFrameSegment += OnPlayFrameSegment;
 
             if (!string.IsNullOrEmpty(e.NewElement.Animation))
             {
@@ -52,6 +57,18 @@ namespace Lottie.Forms.iOS.Renderers
         private void OnPlay(object sender, EventArgs e)
         {
             _animationView?.PlayWithCompletion(PlaybackFinishedIfActually);
+            Element.IsPlaying = true;
+        }
+
+        private void OnPlayProgressSegment(object sender, ProgressSegmentEventArgs e)
+        {
+            _animationView?.PlayFromProgress(e.From, e.To, PlaybackFinishedIfActually);
+            Element.IsPlaying = true;
+        }
+
+        private void OnPlayFrameSegment(object sender, FrameSegmentEventArgs e)
+        {
+            _animationView?.PlayFromFrame(e.From, e.To, PlaybackFinishedIfActually);
             Element.IsPlaying = true;
         }
 

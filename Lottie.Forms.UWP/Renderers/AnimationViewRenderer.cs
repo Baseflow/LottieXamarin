@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using Lottie.Forms;
+using Lottie.Forms.EventArguments;
 using Lottie.Forms.UWP.Renderers;
 using LottieUWP;
 using LottieUWP.Utils;
@@ -13,6 +14,8 @@ namespace Lottie.Forms.UWP.Renderers
     public class AnimationViewRenderer : ViewRenderer<AnimationView, LottieAnimationView>
     {
         private LottieAnimationView _animationView;
+        private bool _needToReverseAnimationSpeed;
+        private bool _needToResetFrames;
 
         /// <summary>
         ///     Used for registration with dependency service
@@ -33,6 +36,7 @@ namespace Lottie.Forms.UWP.Renderers
             {
                 _animationView = new LottieAnimationView();
                 _animationView.AnimatorUpdate += PlaybackFinishedIfProgressReachesOne;
+
                 SetNativeControl(_animationView);
             }
 
@@ -40,6 +44,9 @@ namespace Lottie.Forms.UWP.Renderers
             {
                 e.OldElement.OnPlay -= OnPlay;
                 e.OldElement.OnPause -= OnPause;
+                e.OldElement.OnPlayProgressSegment -= OnPlayProgressSegment;
+                e.OldElement.OnPlayFrameSegment -= OnPlayFrameSegment;
+
                 _animationView.Tapped -= AnimationViewTapped;
             }
 
@@ -47,7 +54,10 @@ namespace Lottie.Forms.UWP.Renderers
             {
                 e.NewElement.OnPlay += OnPlay;
                 e.NewElement.OnPause += OnPause;
-                _animationView.Loop = e.NewElement.Loop;
+                e.NewElement.OnPlayProgressSegment += OnPlayProgressSegment;
+                e.NewElement.OnPlayFrameSegment += OnPlayFrameSegment;
+
+                _animationView.RepeatCount = e.NewElement.Loop ? -1 : 0;
                 _animationView.Speed = e.NewElement.Speed;
                 _animationView.Tapped += AnimationViewTapped;
 
@@ -79,8 +89,51 @@ namespace Lottie.Forms.UWP.Renderers
         {
             if (_animationView != null)
             {
+                ResetReverse();
                 _animationView.PlayAnimation();
                 Element.IsPlaying = true;
+            }
+        }
+
+        private void PrepareReverseAnimation(Action<float, float> action,
+                                             float from, float to)
+        {
+            var minValue = Math.Min(from, to);
+            var maxValue = Math.Max(from, to);
+            var needReverse = from > to;
+
+            action(minValue, maxValue);
+
+            if (needReverse && !_needToReverseAnimationSpeed)
+            {
+                _needToReverseAnimationSpeed = true;
+                _animationView.ReverseAnimationSpeed();
+            }
+
+            _animationView.PlayAnimation();
+            Element.IsPlaying = true;
+        }
+
+        private void OnPlayProgressSegment(object sender, ProgressSegmentEventArgs e)
+        {
+            if (_animationView != null)
+            {
+                PrepareReverseAnimation((min, max) =>
+                {
+                    _animationView.SetMinAndMaxProgress(min, max);
+                }, e.From, e.To);
+            }
+        }
+
+        private void OnPlayFrameSegment(object sender, FrameSegmentEventArgs e)
+        {
+            if (_animationView != null)
+            {
+                PrepareReverseAnimation((min, max) =>
+                {
+                    _animationView.SetMinAndMaxFrame((int)min, (int)max);
+                    _needToResetFrames = true;
+                }, e.From, e.To);
             }
         }
 
@@ -102,10 +155,9 @@ namespace Lottie.Forms.UWP.Renderers
             {
                 await _animationView.SetAnimationAsync(Element.Animation);
                 Element.Duration = TimeSpan.FromMilliseconds(_animationView.Duration);
+
                 if (Element.AutoPlay)
-                {
                     _animationView.PlayAnimation();
-                }
             }
 
             if (e.PropertyName == AnimationView.ProgressProperty.PropertyName)
@@ -116,15 +168,32 @@ namespace Lottie.Forms.UWP.Renderers
 
             if (e.PropertyName == AnimationView.LoopProperty.PropertyName)
             {
-                _animationView.Loop = Element.Loop;
+                _animationView.RepeatCount = Element.Loop ? -1 : 0;
             }
 
-            if (e.PropertyName == AnimationView.LoopProperty.PropertyName)
+            if (e.PropertyName == AnimationView.SpeedProperty.PropertyName)
             {
                 _animationView.Speed = Element.Speed;
             }
 
             base.OnElementPropertyChanged(sender, e);
+        }
+
+        private void ResetReverse()
+        {
+            if (_needToResetFrames)
+            {
+                var composition = _animationView.Composition;
+
+                _animationView.SetMinAndMaxFrame((int)composition.StartFrame, (int)composition.EndFrame);
+                _needToResetFrames = false;
+            }
+
+            if (_needToReverseAnimationSpeed)
+            {
+                _needToReverseAnimationSpeed = false;
+                _animationView.ReverseAnimationSpeed();
+            }
         }
     }
 }

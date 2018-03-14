@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Input;
+using Lottie.Forms.EventArguments;
 using Xamarin.Forms;
 
 namespace Lottie.Forms
@@ -112,6 +113,36 @@ namespace Lottie.Forms
         public void Play()
         {
             OnPlay?.Invoke(this, new EventArgs());
+
+            ExecuteCommandIfPossible(PlaybackStartedCommand);
+        }
+
+        public event EventHandler<ProgressSegmentEventArgs> OnPlayProgressSegment;
+
+        public void PlayProgressSegment(float from, float to)
+        {
+            if (from < 0f || from > 1f)
+                throw new ArgumentException($"Parameter {nameof(from)} should have a valid value.", nameof(from));
+
+            if (to < 0f || to > 1f)
+                throw new ArgumentException($"Parameter {nameof(to)} should have a valid value.", nameof(to));
+            
+            OnPlayProgressSegment?.Invoke(this, new ProgressSegmentEventArgs(from, to));
+
+            ExecuteCommandIfPossible(PlaybackStartedCommand);
+        }
+
+        public event EventHandler<FrameSegmentEventArgs> OnPlayFrameSegment;
+
+        public void PlayFrameSegment(int from, int to)
+        {
+            if (from < 0)
+                throw new ArgumentException($"Parameter {nameof(from)} should have a valid value.", nameof(from));
+
+            if (to < 0)
+                throw new ArgumentException($"Parameter {nameof(to)} should have a valid value.", nameof(to));
+
+            OnPlayFrameSegment?.Invoke(this, new FrameSegmentEventArgs(from, to));
 
             ExecuteCommandIfPossible(PlaybackStartedCommand);
         }
