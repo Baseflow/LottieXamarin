@@ -32,10 +32,9 @@ namespace Lottie.Forms.UWP.Renderers
         {
             base.OnElementChanged(e);
 
-            if (Control == null)
+            if (Control == null && e.NewElement != null)
             {
                 _animationView = new LottieAnimationView();
-                _animationView.AnimatorUpdate += PlaybackFinishedIfProgressReachesOne;
 
                 SetNativeControl(_animationView);
             }
@@ -48,6 +47,10 @@ namespace Lottie.Forms.UWP.Renderers
                 e.OldElement.OnPlayFrameSegment -= OnPlayFrameSegment;
 
                 _animationView.Tapped -= AnimationViewTapped;
+
+                _animationView.AnimatorUpdate -= PlaybackFinishedIfProgressReachesOne;
+
+                _animationView = null;
             }
 
             if (e.NewElement != null)
@@ -60,6 +63,7 @@ namespace Lottie.Forms.UWP.Renderers
                 _animationView.RepeatCount = e.NewElement.Loop ? -1 : 0;
                 _animationView.Speed = e.NewElement.Speed;
                 _animationView.Tapped += AnimationViewTapped;
+                _animationView.AnimatorUpdate += PlaybackFinishedIfProgressReachesOne;
 
                 if (!string.IsNullOrEmpty(e.NewElement.Animation))
                 {
