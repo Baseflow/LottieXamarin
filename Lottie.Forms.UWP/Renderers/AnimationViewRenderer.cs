@@ -93,8 +93,15 @@ namespace Lottie.Forms.UWP.Renderers
         {
             if (_animationView != null)
             {
-                ResetReverse();
-                _animationView.PlayAnimation();
+                if (_animationView.Progress > 0f)
+                {
+                    _animationView.ResumeAnimation();
+                }
+                else
+                {
+                    ResetReverse();
+                    _animationView.PlayAnimation();
+                }
                 Element.IsPlaying = true;
             }
         }
