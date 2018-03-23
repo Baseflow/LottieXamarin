@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;MonoAndroid80;uap10.0.16299</TargetFrameworks>
-    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;Xamarin.Mac20;MonoAndroid80</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;netstandard1.0;Xamarin.iOS10;MonoAndroid80;uap10.0.16299</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;netstandard1.0;Xamarin.iOS10;Xamarin.Mac20;MonoAndroid80</TargetFrameworks>
     <AssemblyName>Lottie.Forms</AssemblyName>
     <RootNamespace>Lottie.Forms</RootNamespace>
     <Description>Render After Effects animations natively on Android, iOS, MacOS, TVOs and UWP</Description>
@@ -78,6 +78,10 @@
     <Compile Include="Platforms\Tizen\**\*.cs" />
     <Compile Include="Platforms\Xamarin-common\**\*.cs" />
     <PackageReference Include="Tizen.NET" Version="4.0.0" />
+  </ItemGroup>
+
+  <ItemGroup Label="Package">
+    <None Include="..\Lottie.Forms.UWP\bin\release\uap10.0.16299\*.*" PackagePath="lib\uap10.0.16299" Pack="true" Visible="false" />
   </ItemGroup>
   
   <ItemGroup>
