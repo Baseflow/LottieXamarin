@@ -1,0 +1,34 @@
+﻿<Project>
+  <PropertyGroup>
+    <Copyright>Copyright (c) Martijn van Dijk</Copyright>
+    <PackageLicenseUrl>https://github.com/martijn00/LottieXamarin/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/martijn00/LottieXamarin</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/martijn00/LottieXamarin/master/icon_lottie.png</PackageIconUrl>
+    <Authors>Martijn van Dijk</Authors>
+    <Owners>martijn00</Owners>
+    <PackageTags>xamarin, monodroid, C#, xamarin.android, Forms, android, Lottie, animation, airbnb</PackageTags>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <RepositoryUrl>https://github.com/martijn00/LottieXamarin</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Product>$(AssemblyName) ($(TargetFramework))</Product>
+    <NeutralLanguage>en</NeutralLanguage>
+    <Version>2.5.2</Version>
+
+    <LangVersion>latest</LangVersion>
+    <NoWarn>$(NoWarn);1591;1701;1702;1705</NoWarn>
+    <GenerateDocumentationFile Condition=" '$(Configuration)' == 'Release' ">true</GenerateDocumentationFile>
+    <GeneratePackageOnBuild Condition=" '$(Configuration)' == 'Release' and '$(IsTestProject)' != 'true'">true</GeneratePackageOnBuild>
+
+    <Platform>AnyCPU</Platform>
+    <DebugType>full</DebugType>
+    <IsTestProject>$(MSBuildProjectName.Contains('UnitTest'))</IsTestProject>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="MSBuild.Sdk.Extras" Version="1.3.0-build.16" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(IsTestProject)' != 'true' and '$(SourceLinkEnabled)' != 'false'">
+    <PackageReference Include="SourceLink.Create.CommandLine" Version="2.8.0" PrivateAssets="All" /> 
+  </ItemGroup>
+</Project>

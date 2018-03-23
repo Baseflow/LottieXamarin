@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>MonoAndroid80</TargetFrameworks>
+    <AssemblyName>Lottie.Android</AssemblyName>
+    <RootNamespace>Lottie.Android</RootNamespace>
+    <Description>Render After Effects animations natively on Android, iOS, MacOS, TVOs and UWP</Description>
+    <PackageId>Com.Airbnb.Android.Lottie</PackageId>
+    <IsBindingProject>true</IsBindingProject>
+    <EnableDefaultItems>false</EnableDefaultItems>
+  </PropertyGroup>
+  
+  <ItemGroup>
+	  <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="26.1.0.1" />
+    <LibraryProjectZip Include="Jars\lottie-2.5.2.aar" />
+	  <TransformFile Include="Transforms\EnumFields.xml" />
+	  <TransformFile Include="Transforms\EnumMethods.xml" />
+	  <TransformFile Include="Transforms\Metadata.xml" />
+	  <Compile Include="Additions\LottieComposition.cs" />
+    <Compile Include="Additions\LottieAnimationView.cs" />
+    <None Include="readme.txt" pack="true" PackagePath="." />
+  </ItemGroup>
+  
+  <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
+</Project>

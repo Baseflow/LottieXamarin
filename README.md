@@ -352,3 +352,8 @@ If you would like to add more JSON files and screenshot tests, feel free to do s
 
 ## Issues or feature requests?
 File github issues for anything that is unexpectedly broken. If an After Effects file is not working, please attach it to your issue. Debugging without the original file is much more difficult.
+
+# To build the source code from command line
+
+* msbuild Lottie.sln /t:restore
+* msbuild Lottie.sln /p:Configuration=Release 
