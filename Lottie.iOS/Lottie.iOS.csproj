@@ -18,6 +18,7 @@
     <Compile Include="libLottie.linkwith.cs">
       <DependentUpon>libLottie.a</DependentUpon>
     </Compile>
+    <None Include="readme.txt" pack="true" PackagePath="." />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">

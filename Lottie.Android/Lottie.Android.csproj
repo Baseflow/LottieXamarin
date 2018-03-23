@@ -17,6 +17,7 @@
 	  <TransformFile Include="Transforms\Metadata.xml" />
 	  <Compile Include="Additions\LottieComposition.cs" />
     <Compile Include="Additions\LottieAnimationView.cs" />
+    <None Include="readme.txt" pack="true" PackagePath="." />
   </ItemGroup>
   
   <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
