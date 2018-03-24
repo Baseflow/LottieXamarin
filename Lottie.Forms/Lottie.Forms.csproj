@@ -81,7 +81,7 @@
   </ItemGroup>
 
   <ItemGroup Label="Package">
-    <None Include="..\Lottie.Forms.UWP\bin\release\uap10.0.16299\*.*" PackagePath="lib\uap10.0.16299" Pack="true" Visible="false" />
+    <None Include="..\Lottie.Forms\bin\release\uap10.0.16299\*.*" PackagePath="lib\uap10.0.16299" Pack="true" Visible="false" />
   </ItemGroup>
   
   <ItemGroup>
