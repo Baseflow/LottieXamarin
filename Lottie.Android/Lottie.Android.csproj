@@ -11,7 +11,7 @@
   
   <ItemGroup>
 	  <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="26.1.0.1" />
-    <LibraryProjectZip Include="Jars\lottie-2.5.2.aar" />
+    <LibraryProjectZip Include="Jars\lottie-2.5.3.aar" />
 	  <TransformFile Include="Transforms\EnumFields.xml" />
 	  <TransformFile Include="Transforms\EnumMethods.xml" />
 	  <TransformFile Include="Transforms\Metadata.xml" />
