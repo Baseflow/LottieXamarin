@@ -11,12 +11,10 @@
   
   <ItemGroup>
 	  <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="26.1.0.1" />
-    <LibraryProjectZip Include="Jars\lottie-2.5.4.aar" />
-	  <TransformFile Include="Transforms\EnumFields.xml" />
-	  <TransformFile Include="Transforms\EnumMethods.xml" />
-	  <TransformFile Include="Transforms\Metadata.xml" />
-	  <Compile Include="Additions\LottieComposition.cs" />
-    <Compile Include="Additions\LottieAnimationView.cs" />
+    <None Include="Additions\*;Jars\*;Transforms\*" />
+    <LibraryProjectZip Include="Jars\*.aar" />
+    <TransformFile Include="Transforms\*.xml" />
+    <Compile Include="Additions\*.cs" />
     <None Include="readme.txt" pack="true" PackagePath="." />
   </ItemGroup>
   
