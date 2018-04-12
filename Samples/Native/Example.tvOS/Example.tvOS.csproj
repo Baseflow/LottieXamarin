@@ -145,9 +145,7 @@
       <Visible>false</Visible>
     </ImageAsset>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
@@ -167,9 +165,9 @@
     <BundleResource Include="Resources\LottieLogo1.json" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Lottie.tvOS\Lottie.tvOS.csproj">
-      <Project>{5F226A3E-3BD9-452B-A7AB-77F8A96CFE4D}</Project>
-      <Name>Lottie.tvOS</Name>
+    <ProjectReference Include="..\..\..\Lottie.iOS\Lottie.iOS.csproj">
+      <Project>{8f0cc2b2-88e2-459b-ac92-f3a74071707e}</Project>
+      <Name>Lottie.iOS</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\TVOS\Xamarin.TVOS.CSharp.targets" />

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>MonoAndroid80</TargetFrameworks>
     <AssemblyName>Lottie.Android</AssemblyName>
@@ -11,6 +11,7 @@
   
   <ItemGroup>
 	  <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="26.1.0.1" />
+	  <PackageReference Include="Xamarin.Build.Download" Version="0.4.9" PrivateAssets="All" />
     <None Include="Additions\*;Jars\*;Transforms\*" />
     <LibraryProjectZip Include="Jars\*.aar" />
     <TransformFile Include="Transforms\*.xml" />
