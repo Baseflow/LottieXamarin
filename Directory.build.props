@@ -8,6 +8,7 @@
     <Owners>martijn00</Owners>
     <PackageTags>xamarin, monodroid, C#, xamarin.android, Forms, android, Lottie, animation, airbnb</PackageTags>
     <PackageReleaseNotes></PackageReleaseNotes>
+	<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <RepositoryUrl>https://github.com/martijn00/LottieXamarin</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
