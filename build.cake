@@ -7,15 +7,18 @@
 
 using Polly;
 
-var sln = new FilePath("./Lottie.sln");
+var solutionName = "Lottie";
+var repoName = "martijn00/LottieXamarin";
+var sln = new FilePath("./" + solutionName + ".sln");
 var outputDir = new DirectoryPath("./artifacts");
 var nuspecDir = new DirectoryPath("./nuspec");
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
+var verbosityArg = Argument("verbosity", "Minimal");
+var verbosity = Verbosity.Minimal;
 
 var isRunningOnAppVeyor = AppVeyor.IsRunningOnAppVeyor;
 GitVersion versionInfo = null;
-
 
 Setup(context => {
     versionInfo = context.GitVersion(new GitVersionSettings {
@@ -32,7 +35,7 @@ Setup(context => {
 
     var cakeVersion = typeof(ICakeContext).Assembly.GetName().Version.ToString();
 
-    Information(Figlet("Lottie"));
+    Information(Figlet(solutionName));
     Information("Building version {0}, ({1}, {2}) using version {3} of Cake.",
         versionInfo.SemVer,
         configuration,
@@ -41,6 +44,8 @@ Setup(context => {
 
     Debug("Will push NuGet packages {0}", 
         ShouldPushNugetPackages(versionInfo.BranchName));
+
+    verbosity = (Verbosity) Enum.Parse(typeof(Verbosity), verbosityArg, true);
 });
 
 Task("Clean").Does(() =>
@@ -57,16 +62,28 @@ Task("ResolveBuildTools")
     .WithCriteria(() => IsRunningOnWindows())
     .Does(() => 
 {
-    var vsLatest = VSWhereLatest();
+    var vsWhereSettings = new VSWhereLatestSettings
+    {
+        IncludePrerelease = true,
+        Requires = "Component.Xamarin"
+    };
+    
+    var vsLatest = VSWhereLatest(vsWhereSettings);
     msBuildPath = (vsLatest == null)
         ? null
         : vsLatest.CombineWithFilePath("./MSBuild/15.0/Bin/MSBuild.exe");
+
+    if (msBuildPath != null)
+        Information("Found MSBuild at {0}", msBuildPath.ToString());
 });
 
 Task("Restore")
     .IsDependentOn("ResolveBuildTools")
-    .Does(() => {
-    MSBuild(sln, settings => settings.WithTarget("Restore"));
+    .Does(() => 
+{
+    var settings = GetDefaultBuildSettings()
+        .WithTarget("Restore");
+    MSBuild(sln, settings);
 });
 
 Task("PatchBuildProps")
@@ -83,23 +100,32 @@ Task("Build")
     .IsDependentOn("Restore")
     .Does(() =>  {
 
-    var settings = new MSBuildSettings 
-    {
-        Configuration = configuration,
-        ToolPath = msBuildPath,
-        Verbosity = Verbosity.Minimal,
-        ArgumentCustomization = args => args.Append("/m")
-    };
-
-    settings = settings
+    var settings = GetDefaultBuildSettings()
         .WithProperty("DebugSymbols", "True")
         .WithProperty("DebugType", "Embedded")
         .WithProperty("Version", versionInfo.SemVer)
         .WithProperty("PackageVersion", versionInfo.SemVer)
         .WithProperty("InformationalVersion", versionInfo.InformationalVersion)
-        .WithProperty("NoPackageAnalysis", "True");
+        .WithProperty("NoPackageAnalysis", "True")
+        .WithTarget("Build");
+
+    settings.BinaryLogger = new MSBuildBinaryLogSettings 
+    {
+        Enabled = true,
+        FileName = "log.binlog"
+    };
 
     MSBuild(sln, settings);
+
+    var testItems = GetFiles("./UnitTests/*.UnitTest/*.UnitTest.csproj");
+    foreach(var testItem in testItems)
+    {
+        var name = testItem.GetFilenameWithoutExtension();
+
+        settings.BinaryLogger.FileName = name + ".binlog";
+
+        MSBuild(testItem, settings);
+    }
 });
 
 Task("UnitTest")
@@ -138,7 +164,7 @@ Task("UnitTest")
 
 Task("PublishPackages")
     .WithCriteria(() => !BuildSystem.IsLocalBuild)
-    .WithCriteria(() => IsRepository("martijn00/LottieXamarin"))
+    .WithCriteria(() => IsRepository(repoName))
     .WithCriteria(() => ShouldPushNugetPackages(versionInfo.BranchName))
     .Does (() =>
 {
@@ -147,7 +173,7 @@ Task("PublishPackages")
     var apiKey = nugetKeySource.Item1;
     var source = nugetKeySource.Item2;
 
-    var nugetFiles = GetFiles("Lottie*/**/bin/" + configuration + "/**/*.nupkg");
+    var nugetFiles = GetFiles(solutionName + "*/**/bin/" + configuration + "/**/*.nupkg");
 
     var policy = Policy
         .Handle<Exception>()
@@ -167,19 +193,20 @@ Task("PublishPackages")
 
 Task("UploadAppVeyorArtifact")
     .WithCriteria(() => isRunningOnAppVeyor)
-    .Does(() => {
+    .Does(() => 
+{
 
     Information("Artifacts Dir: {0}", outputDir.FullPath);
 
     var uploadSettings = new AppVeyorUploadArtifactsSettings();
 
-    var artifacts = GetFiles("Lottie*/**/bin/" + configuration + "/**/*.nupkg")
+    var artifacts = GetFiles(solutionName + "*/**/bin/" + configuration + "/**/*.nupkg")
         + GetFiles(outputDir.FullPath + "/**/*");
 
     foreach(var file in artifacts) {
         Information("Uploading {0}", file.FullPath);
 
-        if (file.GetExtension() == "nupkg")
+        if (file.GetExtension().Contains("nupkg"))
             uploadSettings.ArtifactType = AppVeyorUploadArtifactType.NuGetPackage;
         else
             uploadSettings.ArtifactType = AppVeyorUploadArtifactType.Auto;
@@ -198,6 +225,20 @@ Task("Default")
 });
 
 RunTarget(target);
+
+MSBuildSettings GetDefaultBuildSettings()
+{
+    var settings = new MSBuildSettings 
+    {
+        Configuration = configuration,
+        ToolPath = msBuildPath,
+        Verbosity = verbosity,
+        ArgumentCustomization = args => args.Append("/m"),
+        ToolVersion = MSBuildToolVersion.VS2017
+    };
+
+    return settings;
+}
 
 bool ShouldPushNugetPackages(string branchName)
 {
