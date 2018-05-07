@@ -62,6 +62,7 @@ namespace Lottie.Forms.UWP.Renderers
 
                 _animationView.RepeatCount = e.NewElement.Loop ? -1 : 0;
                 _animationView.Speed = e.NewElement.Speed;
+                _animationView.ImageAssetsFolder = e.NewElement.ImageAssetsFolder;
                 _animationView.Tapped += AnimationViewTapped;
                 _animationView.AnimatorUpdate += PlaybackFinishedIfProgressReachesOne;
 
@@ -185,6 +186,11 @@ namespace Lottie.Forms.UWP.Renderers
             if (e.PropertyName == AnimationView.SpeedProperty.PropertyName)
             {
                 _animationView.Speed = Element.Speed;
+            }
+
+            if (e.PropertyName == AnimationView.ImageAssetsFolderProperty.PropertyName)
+            {
+                _animationView.ImageAssetsFolder = Element.ImageAssetsFolder;
             }
 
             base.OnElementPropertyChanged(sender, e);
