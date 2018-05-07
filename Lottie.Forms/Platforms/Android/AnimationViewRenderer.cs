@@ -63,7 +63,7 @@ namespace Lottie.Forms.Droid
 
                 _animationView.Speed = e.NewElement.Speed;
                 _animationView.Loop(e.NewElement.Loop);
-                _animationView.ImageAssetsFolder = Control.ImageAssetsFolder;
+                _animationView.ImageAssetsFolder = e.NewElement.ImageAssetsFolder;
 
                 _animationView.SetOnClickListener(new ClickListener(e.NewElement));
 
