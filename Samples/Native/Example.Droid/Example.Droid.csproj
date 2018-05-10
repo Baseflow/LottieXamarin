@@ -137,11 +137,11 @@
     <PackageReference Include="Square.OkHttp3">
       <Version>3.8.1</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Android.Support.Design">
-      <Version>26.1.0.1</Version>
-    </PackageReference>
     <PackageReference Include="Xamarin.Build.Download">
-      <Version>0.4.9</Version>
+      <Version>0.4.11</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Android.Support.Design">
+      <Version>27.0.2</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

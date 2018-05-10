@@ -157,6 +157,9 @@ namespace Lottie.Forms.Droid
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+			if (_animationView == null)
+                return;
+
             if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
             {
                 _animationView.SetAnimation(Element.Animation);
@@ -176,7 +179,7 @@ namespace Lottie.Forms.Droid
             }
 
             if (e.PropertyName == AnimationView.LoopProperty.PropertyName) 
-                _animationView?.Loop(Element.Loop);
+                _animationView.Loop(Element.Loop);
 
             if (e.PropertyName == AnimationView.ImageAssetsFolderProperty.PropertyName)
                 _animationView.ImageAssetsFolder = Element.ImageAssetsFolder;
