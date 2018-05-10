@@ -38,6 +38,9 @@ namespace Lottie.Forms
         public static readonly BindableProperty ClickedCommandProperty = BindableProperty.Create(nameof(ClickedCommand), 
             typeof(ICommand), typeof(AnimationView));
 
+        public static readonly BindableProperty ImageAssetsFolderProperty = BindableProperty.Create(nameof(ImageAssetsFolder),
+            typeof(string), typeof(AnimationView), default(string));
+
         public float Progress
         {
             get { return (float) GetValue(ProgressProperty); }
@@ -106,6 +109,12 @@ namespace Lottie.Forms
             get { return (ICommand)GetValue(ClickedCommandProperty); }
 
             set { SetValue(ClickedCommandProperty, value); }
+        }
+
+        public string ImageAssetsFolder
+        {
+            get { return (string)GetValue(ImageAssetsFolderProperty); }
+            set { SetValue(ImageAssetsFolderProperty, value); }
         }
 
         public event EventHandler OnPlay;
