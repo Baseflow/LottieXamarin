@@ -86,7 +86,7 @@ namespace Lottie.Forms.UWP.Renderers
         {
             if (((LottieValueAnimator)e.Animation).AnimatedValueAbsolute >= 1)
             {
-                Element.PlaybackFinished();
+                Element?.PlaybackFinished();
             }
         }
 

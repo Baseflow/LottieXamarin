@@ -152,7 +152,7 @@ namespace Lottie.Forms.Droid
 
         private void PlaybackFinished()
         {
-            Element.PlaybackFinished();
+            Element?.PlaybackFinished();
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)

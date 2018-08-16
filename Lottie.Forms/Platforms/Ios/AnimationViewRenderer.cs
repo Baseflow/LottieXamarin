@@ -139,7 +139,7 @@ namespace Lottie.Forms.iOS.Renderers
         {
             if (animationFinished)
             {
-                Element.PlaybackFinished();
+                Element?.PlaybackFinished();
             }
         }
     }
