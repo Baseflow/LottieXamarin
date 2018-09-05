@@ -8,6 +8,9 @@
     <IsBindingProject>true</IsBindingProject>
     <EnableDefaultItems>false</EnableDefaultItems>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <ServerPort>59690</ServerPort>
+    <ServerAddress>192.168.1.245</ServerAddress>
+    <ServerUser>martijn</ServerUser>
   </PropertyGroup>
   
   <ItemGroup>
@@ -19,6 +22,7 @@
       <DependentUpon>libLottie.a</DependentUpon>
     </Compile>
     <None Include="readme.txt" pack="true" PackagePath="." />
+    <None Include="**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
@@ -31,6 +35,10 @@
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.TVOS')) ">
     <ObjcBindingApiDefinition Include="ApiDefinitions.Ios.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(OS)' == 'Windows_NT' " Label="Package">
+    <None Include="..\Dlls\Xamarin.Mac20\*.*" PackagePath="lib\Xamarin.Mac20" Pack="true" Visible="false" />
   </ItemGroup>
   
 </Project>

@@ -12,6 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		build.cake = build.cake
 		Directory.build.props = Directory.build.props
 		Directory.build.targets = Directory.build.targets
+		global.json = global.json
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lottie.Android", "Lottie.Android\Lottie.Android.csproj", "{284C8E3C-3352-41AF-8A5A-AC2CFD918737}"
@@ -26,7 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Forms", "Forms", "{DD5FE1BA
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Native", "Native", "{46FDD0BB-356C-450A-A0F7-5AF6F4B3C082}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.Forms", "Samples\Forms\Example.Forms\Example.Forms.csproj", "{BA40E6BD-F568-4301-A402-3846F176D49E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example.Forms", "Samples\Forms\Example.Forms\Example.Forms.csproj", "{BA40E6BD-F568-4301-A402-3846F176D49E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.Forms.Droid", "Samples\Forms\Example.Forms.Droid\Example.Forms.Droid.csproj", "{7E32A11A-AA96-4DAA-9181-FCB6C36250EC}"
 EndProject
@@ -41,6 +42,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.macOS", "Samples\Native\Example.macOS\Example.macOS.csproj", "{34527F69-F4D9-4775-99D9-FC59A15AEFD0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.tvOS", "Samples\Native\Example.tvOS\Example.tvOS.csproj", "{0A4C14BD-FD41-470F-8235-FE5A97405519}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dlls", "Dlls", "{C9228BE7-BA4D-4EF4-BBD5-D880BDC09C20}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
