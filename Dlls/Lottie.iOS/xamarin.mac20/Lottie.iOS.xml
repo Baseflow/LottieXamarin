@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Lottie.iOS</name>
+    </assembly>
+    <members>
+        <member name="M:Airbnb.Lottie.LOTAnimationView.PlayAsync">
+            <summary>
+            Asynchronously play the animation.
+            </summary>
+        </member>
+        <member name="M:Airbnb.Lottie.LOTAnimationView.PlayToProgressAsync(System.nfloat)">
+            <summary>
+            Plays the animation from its current position to a specific progress.
+            The animation will start from its current position.
+            </summary>
+        </member>
+    </members>
+</doc>

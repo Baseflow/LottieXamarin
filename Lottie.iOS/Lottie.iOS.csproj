@@ -38,7 +38,7 @@
   </ItemGroup>
 
   <ItemGroup Condition=" '$(OS)' == 'Windows_NT' " Label="Package">
-    <None Include="..\Dlls\Xamarin.Mac20\*.*" PackagePath="lib\Xamarin.Mac20" Pack="true" Visible="false" />
+    <None Include="..\Dlls\Lottie.iOS\xamarin.mac20\*.*" PackagePath="lib\Xamarin.Mac20" Pack="true" Visible="false" />
   </ItemGroup>
   
 </Project>
