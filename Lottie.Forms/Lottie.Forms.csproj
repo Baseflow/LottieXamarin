@@ -51,21 +51,30 @@
     <Compile Include="Platforms\Apple\**\*.cs" />
     <Compile Include="Platforms\Ios\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
-	<ProjectReference Include="..\Lottie.iOS\Lottie.iOS.csproj" />
+    <PackageReference Include="Com.Airbnb.iOS.Lottie">
+      <Version>2.5.4</Version>
+    </PackageReference>
+	  <!--<ProjectReference Include="..\Lottie.iOS\Lottie.iOS.csproj" />-->
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.Mac')) ">
     <Compile Include="Platforms\Apple\**\*.cs" />
     <Compile Include="Platforms\Mac\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
-	<ProjectReference Include="..\Lottie.iOS\Lottie.iOS.csproj" />
+    <PackageReference Include="Com.Airbnb.iOS.Lottie">
+      <Version>2.5.4</Version>
+    </PackageReference>
+	  <!--<ProjectReference Include="..\Lottie.iOS\Lottie.iOS.csproj" />-->
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.TVOS')) ">
     <Compile Include="Platforms\Apple\**\*.cs" />
     <Compile Include="Platforms\Tvos\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
-	<ProjectReference Include="..\Lottie.iOS\Lottie.iOS.csproj" />
+    <PackageReference Include="Com.Airbnb.iOS.Lottie">
+      <Version>2.5.4</Version>
+    </PackageReference>
+	  <!--<ProjectReference Include="..\Lottie.iOS\Lottie.iOS.csproj" />-->
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.WatchOS')) ">
