@@ -160,7 +160,7 @@ namespace Lottie.Forms.UWP.Renderers
 
         protected override async void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (_animationView == null || Element == null)
+            if (_animationView == null || Element?.Animation == null)
                 return;
 
             if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
