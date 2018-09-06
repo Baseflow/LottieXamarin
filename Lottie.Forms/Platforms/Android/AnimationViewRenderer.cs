@@ -159,7 +159,7 @@ namespace Lottie.Forms.Droid
         {
             base.OnElementPropertyChanged(sender, e);
 
-            if (_animationView == null || Element == null)
+            if (_animationView == null || Element == null || Element.Animation == null)
                 return;
 
             if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)

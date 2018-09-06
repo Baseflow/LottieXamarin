@@ -82,7 +82,7 @@ namespace Lottie.Forms.iOS.Renderers
         {
             base.OnElementPropertyChanged(sender, e);
 
-            if (Element == null)
+            if (Element == null || Element.Animation == null)
                 return;
 
             if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
