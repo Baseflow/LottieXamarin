@@ -82,6 +82,9 @@ namespace Lottie.Forms.iOS.Renderers
         {
             base.OnElementPropertyChanged(sender, e);
 
+            if (Element == null)
+                return;
+
             if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
             {
                 _animationView?.RemoveFromSuperview();

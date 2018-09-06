@@ -157,7 +157,9 @@ namespace Lottie.Forms.Droid
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-			if (_animationView == null)
+            base.OnElementPropertyChanged(sender, e);
+
+            if (_animationView == null || Element == null)
                 return;
 
             if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
