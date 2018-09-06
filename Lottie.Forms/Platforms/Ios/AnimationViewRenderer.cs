@@ -85,7 +85,7 @@ namespace Lottie.Forms.iOS.Renderers
             if (Element == null)
                 return;
 
-            if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
+            if (e.PropertyName == AnimationView.AnimationProperty.PropertyName && !string.IsNullOrEmpty(Element.Animation))
             {
                 _animationView?.RemoveFromSuperview();
                 _animationView?.RemoveGestureRecognizer(_gestureRecognizer);

@@ -163,7 +163,7 @@ namespace Lottie.Forms.UWP.Renderers
             if (_animationView == null || Element == null)
                 return;
 
-            if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
+            if (e.PropertyName == AnimationView.AnimationProperty.PropertyName && !string.IsNullOrEmpty(Element.Animation))
             {
                 await _animationView.SetAnimationAsync(Element.Animation);
                 Element.Duration = TimeSpan.FromMilliseconds(_animationView.Duration);
@@ -188,7 +188,7 @@ namespace Lottie.Forms.UWP.Renderers
                 _animationView.Speed = Element.Speed;
             }
 
-            if (e.PropertyName == AnimationView.ImageAssetsFolderProperty.PropertyName)
+            if (e.PropertyName == AnimationView.ImageAssetsFolderProperty.PropertyName && !string.IsNullOrEmpty(Element.ImageAssetsFolder))
             {
                 _animationView.ImageAssetsFolder = Element.ImageAssetsFolder;
             }

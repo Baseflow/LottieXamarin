@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Windows.Input;
 using Lottie.Forms.EventArguments;
@@ -44,70 +44,60 @@ namespace Lottie.Forms
         public float Progress
         {
             get { return (float) GetValue(ProgressProperty); }
-
             set { SetValue(ProgressProperty, value); }
         }
 
         public string Animation
         {
             get { return (string) GetValue(AnimationProperty); }
-
             set { SetValue(AnimationProperty, value); }
         }
 
         public TimeSpan Duration
         {
             get { return (TimeSpan) GetValue(DurationProperty); }
-
             set { SetValue(DurationProperty, value); }
         }
 
         public bool Loop
         {
             get { return (bool) GetValue(LoopProperty); }
-
             set { SetValue(LoopProperty, value); }
         }
 
         public bool AutoPlay
         {
             get { return (bool)GetValue(AutoPlayProperty); }
-
             set { SetValue(AutoPlayProperty, value); }
         }
 
         public bool IsPlaying
         {
             get { return (bool) GetValue(IsPlayingProperty); }
-
             set { SetValue(IsPlayingProperty, value); }
         }
         
         public float Speed
         {
             get { return (float) GetValue(SpeedProperty); }
-
             set { SetValue(SpeedProperty, value); }
         }
 
         public ICommand PlaybackStartedCommand
         {
             get { return (ICommand)GetValue(PlaybackStartedCommandProperty); }
-
             set { SetValue(PlaybackStartedCommandProperty, value); }
         }
 
         public ICommand PlaybackFinishedCommand
         {
             get { return (ICommand)GetValue(PlaybackFinishedCommandProperty); }
-
             set { SetValue(PlaybackFinishedCommandProperty, value); }
         }
 
         public ICommand ClickedCommand
         {
             get { return (ICommand)GetValue(ClickedCommandProperty); }
-
             set { SetValue(ClickedCommandProperty, value); }
         }
 
@@ -122,7 +112,6 @@ namespace Lottie.Forms
         public void Play()
         {
             OnPlay?.Invoke(this, new EventArgs());
-
             ExecuteCommandIfPossible(PlaybackStartedCommand);
         }
 

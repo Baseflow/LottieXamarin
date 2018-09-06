@@ -157,12 +157,10 @@ namespace Lottie.Forms.Droid
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            base.OnElementPropertyChanged(sender, e);
-
             if (_animationView == null || Element == null)
                 return;
 
-            if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
+            if (e.PropertyName == AnimationView.AnimationProperty.PropertyName && !string.IsNullOrEmpty(Element.Animation))
             {
                 _animationView.SetAnimation(Element.Animation);
                 Element.Duration = TimeSpan.FromMilliseconds(_animationView.Duration);
@@ -183,7 +181,7 @@ namespace Lottie.Forms.Droid
             if (e.PropertyName == AnimationView.LoopProperty.PropertyName) 
                 _animationView.Loop(Element.Loop);
 
-            if (e.PropertyName == AnimationView.ImageAssetsFolderProperty.PropertyName)
+            if (e.PropertyName == AnimationView.ImageAssetsFolderProperty.PropertyName && !string.IsNullOrEmpty(Element.ImageAssetsFolder))
                 _animationView.ImageAssetsFolder = Element.ImageAssetsFolder;
 
             base.OnElementPropertyChanged(sender, e);
