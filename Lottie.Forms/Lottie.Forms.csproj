@@ -15,6 +15,7 @@
     <RootNamespace>Lottie.Forms</RootNamespace>
     <Description>Render After Effects animations natively on Android, iOS, MacOS, TVOs and UWP</Description>
     <PackageId>Com.Airbnb.Xamarin.Forms.Lottie</PackageId>
+    <Version>2.6.3</Version>
   </PropertyGroup>
   
   <ItemGroup>
@@ -92,7 +93,9 @@
     <PackageReference Include="Xamarin.Android.Support.v7.CardView" Version="27.0.2" />
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="27.0.2" />
     <PackageReference Include="Xamarin.Build.Download" Version="0.4.11" PrivateAssets="All" />
-    <ProjectReference Include="..\Lottie.Android\Lottie.Android.csproj" />
+    <PackageReference Include="Com.Airbnb.Android.Lottie">
+      <Version>2.6.0</Version>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('tizen')) ">

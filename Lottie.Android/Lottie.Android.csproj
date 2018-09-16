@@ -7,6 +7,7 @@
     <PackageId>Com.Airbnb.Android.Lottie</PackageId>
     <IsBindingProject>true</IsBindingProject>
     <EnableDefaultItems>false</EnableDefaultItems>
+    <Version>2.6.0</Version>
   </PropertyGroup>
   
   <ItemGroup>
