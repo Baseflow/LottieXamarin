@@ -1,6 +1,6 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup>
-    <TargetFrameworks>Xamarin.iOS10;Xamarin.TVOS10;Xamarin.Mac20</TargetFrameworks>
+   <TargetFrameworks>Xamarin.iOS10;Xamarin.TVOS10;Xamarin.Mac20</TargetFrameworks>
     <AssemblyName>Lottie.iOS</AssemblyName>
     <RootNamespace>Lottie.iOS</RootNamespace>
     <Description>Render After Effects animations natively on Android, iOS, MacOS, TVOs and UWP</Description>
@@ -15,27 +15,33 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <ObjcBindingNativeLibrary Include="libLottie.a" />
     <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
     <Compile Include="Linker.cs" />
     <Compile Include="LOTAnimationView.cs" />
-    <Compile Include="libLottie.linkwith.cs">
-      <DependentUpon>libLottie.a</DependentUpon>
-    </Compile>
     <None Include="readme.txt" pack="true" PackagePath="." />
-    <None Include="**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+      <ObjcBindingApiDefinition Include="ApiDefinitions.Ios.cs" Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) OR $(TargetFramework.StartsWith('Xamarin.TVOS'))"/>
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
-    <ObjcBindingApiDefinition Include="ApiDefinitions.Ios.cs" />
+    <ObjcBindingNativeLibrary Include="libLottie-ios.a" />
+    <Compile Include="libLottie-ios.linkwith.cs">
+      <DependentUpon>libLottie-ios.a</DependentUpon>
+    </Compile>    
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.Mac')) ">
     <ObjcBindingApiDefinition Include="ApiDefinitions.Mac.cs" />
+    <ObjcBindingNativeLibrary Include="libLottie-macos.a" />
+    <Compile Include="libLottie-macos.linkwith.cs">
+      <DependentUpon>libLottie-macos.a</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.TVOS')) ">
-    <ObjcBindingApiDefinition Include="ApiDefinitions.Ios.cs" />
+    <ObjcBindingNativeLibrary Include="libLottie-tvos.a" />
+    <Compile Include="libLottie-tvos.linkwith.cs">
+      <DependentUpon>libLottie-tvos.a</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup Condition=" '$(OS)' == 'Windows_NT' " Label="Package">
