@@ -370,6 +370,10 @@ namespace Airbnb.Lottie
         [Export("cacheEnable")]
         bool CacheEnable { get; set; }
 
+        // @property (assign, nonatomic) BOOL shouldRasterizeWhenIdle;
+        [Export("shouldRasterizeWhenIdle")]
+        bool ShouldRasterizeWhenIdle { get; set; }
+
         // @property (copy, nonatomic) LOTAnimationCompletionBlock _Nullable completionBlock;
         [NullAllowed, Export("completionBlock", ArgumentSemantic.Copy)]
         LOTAnimationCompletionBlock CompletionBlock { get; set; }
