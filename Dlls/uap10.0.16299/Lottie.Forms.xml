@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Lottie.Forms</name>
+    </assembly>
+    <members>
+        <member name="M:Lottie.Forms.UWP.Renderers.AnimationViewRenderer.Init">
+            <summary>
+                Used for registration with dependency service
+            </summary>
+        </member>
+    </members>
+</doc>
