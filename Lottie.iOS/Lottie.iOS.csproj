@@ -1,20 +1,18 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup>
-   <TargetFrameworks>Xamarin.iOS10;Xamarin.TVOS10;Xamarin.Mac20</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">Xamarin.iOS10</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">Xamarin.iOS10;Xamarin.TVOS10;Xamarin.Mac20</TargetFrameworks>
     <AssemblyName>Lottie.iOS</AssemblyName>
     <RootNamespace>Lottie.iOS</RootNamespace>
     <Description>Render After Effects animations natively on Android, iOS, MacOS, TVOs and UWP</Description>
     <PackageId>Com.Airbnb.iOS.Lottie</PackageId>
-    <IsBindingProject>true</IsBindingProject>
+    <IsBindingProject Condition=" '$(OS)' != 'Windows_NT' ">true</IsBindingProject>
     <EnableDefaultItems>false</EnableDefaultItems>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <ServerPort>54962</ServerPort>
-    <ServerAddress>192.168.1.245</ServerAddress>
-    <ServerUser>martijn</ServerUser>
     <Version>2.5.6</Version>
   </PropertyGroup>
   
-  <ItemGroup>
+  <ItemGroup Condition=" '$(OS)' != 'Windows_NT' ">
     <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
     <Compile Include="Linker.cs" />
     <Compile Include="LOTAnimationView.cs" />
@@ -42,10 +40,6 @@
     <Compile Include="libLottie-tvos.linkwith.cs">
       <DependentUpon>libLottie-tvos.a</DependentUpon>
     </Compile>
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(OS)' == 'Windows_NT' " Label="Package">
-    <None Include="..\Dlls\Lottie.iOS\xamarin.mac20\*.*" PackagePath="lib\Xamarin.Mac20" Pack="true" Visible="false" />
   </ItemGroup>
   
 </Project>
