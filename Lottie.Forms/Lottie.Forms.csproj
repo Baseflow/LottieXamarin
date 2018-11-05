@@ -53,7 +53,7 @@
     <Compile Include="Platforms\Ios\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
     <PackageReference Include="Com.Airbnb.iOS.Lottie">
-      <Version>2.5.4</Version>
+      <Version>2.5.6</Version>
     </PackageReference>
 	  <!--<ProjectReference Include="..\Lottie.iOS\Lottie.iOS.csproj" />-->
   </ItemGroup>
@@ -63,7 +63,7 @@
     <Compile Include="Platforms\Mac\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
     <PackageReference Include="Com.Airbnb.iOS.Lottie">
-      <Version>2.5.4</Version>
+      <Version>2.5.6</Version>
     </PackageReference>
 	  <!--<ProjectReference Include="..\Lottie.iOS\Lottie.iOS.csproj" />-->
   </ItemGroup>
@@ -73,7 +73,7 @@
     <Compile Include="Platforms\Tvos\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
     <PackageReference Include="Com.Airbnb.iOS.Lottie">
-      <Version>2.5.4</Version>
+      <Version>2.5.6</Version>
     </PackageReference>
 	  <!--<ProjectReference Include="..\Lottie.iOS\Lottie.iOS.csproj" />-->
   </ItemGroup>
