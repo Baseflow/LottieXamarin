@@ -184,11 +184,11 @@ Task("SignPackages")
             .Append("sign")
             .AppendSwitchQuoted("-c", MakeAbsolute(settings.Path).FullPath)
             .AppendSwitchQuoted("-i", MakeAbsolute(file).FullPath)
+			.AppendSwitchQuotedSecret("-s", signingSecret)
+            .AppendSwitchQuotedSecret("-r", signingUser)
             .AppendSwitchQuoted("-n", "LottieXamarin")
             .AppendSwitchQuoted("-d", "Lottie is a mobile library for Android and iOS that parses Adobe After Effects animations exported as json with Bodymovin and renders them natively on mobile!")
             .AppendSwitchQuoted("-u", "https://baseflow.com");
-            .AppendSwitchQuotedSecret("-s", signingSecret)
-            .AppendSwitchQuotedSecret("-r", signingUser)
 
         // Sign the binary.
         var result = StartProcess("SignClient.exe", new ProcessSettings { Arguments = arguments });
