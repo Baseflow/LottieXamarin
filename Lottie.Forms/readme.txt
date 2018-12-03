@@ -6,6 +6,10 @@ Lottie is a mobile library for Android and iOS that parses Adobe After Effects a
 
 Using Lottie on Xamarin.Forms:
 
+Namespace :
+xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms" 
+
+Example :
 <forms:AnimationView 
 	x:Name="animationView" 
 	Grid.Row="1"
