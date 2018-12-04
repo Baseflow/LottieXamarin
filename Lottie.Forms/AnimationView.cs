@@ -41,6 +41,15 @@ namespace Lottie.Forms
         public static readonly BindableProperty ImageAssetsFolderProperty = BindableProperty.Create(nameof(ImageAssetsFolder),
             typeof(string), typeof(AnimationView), default(string));
 
+        public static readonly BindableProperty HardwareAccelerationProperty = BindableProperty.Create(nameof(HardwareAcceleration),
+            typeof(bool), typeof(AnimationView), default(bool));
+
+        public static readonly BindableProperty ExperimentalHardwareAccelerationProperty = BindableProperty.Create(nameof(ExperimentalHardwareAcceleration),
+            typeof(bool), typeof(AnimationView), default(bool));
+
+        public static readonly BindableProperty GetHardwareAccelerationProperty = BindableProperty.Create(nameof(GetHardwareAcceleration),
+            typeof(object), typeof(AnimationView),BindingMode.TwoWay);
+
         public float Progress
         {
             get { return (float) GetValue(ProgressProperty); }
@@ -105,6 +114,23 @@ namespace Lottie.Forms
         {
             get { return (string)GetValue(ImageAssetsFolderProperty); }
             set { SetValue(ImageAssetsFolderProperty, value); }
+        }
+
+        public bool HardwareAcceleration
+        {
+            get { return (bool)GetValue(HardwareAccelerationProperty); }
+            set { SetValue(HardwareAccelerationProperty, value); }
+        }
+        public bool ExperimentalHardwareAcceleration
+        {
+            get { return (bool)GetValue(ExperimentalHardwareAccelerationProperty); }
+            set { SetValue(ExperimentalHardwareAccelerationProperty, value); }
+        }
+
+        public object GetHardwareAcceleration
+        {
+            get { return GetValue(GetHardwareAccelerationProperty); }
+            set { SetValue(GetHardwareAccelerationProperty, value); }
         }
 
         public event EventHandler OnPlay;
