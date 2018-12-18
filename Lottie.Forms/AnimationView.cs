@@ -23,6 +23,7 @@ namespace Lottie.Forms
         public static readonly BindableProperty AnimationProperty = BindableProperty.Create(nameof(Animation),
             typeof(string), typeof(AnimationView), default(string));
 
+        [Obsolete("AutoPlay is obsolete, use IsPlaying instead")]
         public static readonly BindableProperty AutoPlayProperty = BindableProperty.Create(nameof(AutoPlay),
             typeof(bool), typeof(AnimationView), default(bool));
         
@@ -65,6 +66,7 @@ namespace Lottie.Forms
             set { SetValue(LoopProperty, value); }
         }
 
+        [Obsolete("AutoPlay is obsolete, use IsPlaying instead")]
         public bool AutoPlay
         {
             get { return (bool)GetValue(AutoPlayProperty); }

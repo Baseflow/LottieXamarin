@@ -109,6 +109,15 @@ namespace Lottie.Forms.iOS.Renderers
             {
                 _animationView.AnimationSpeed = Element.Speed;
             }
+
+            if (e.PropertyName == AnimationView.IsPlayingProperty.PropertyName &&
+                !string.IsNullOrEmpty(Element.Animation))
+            {
+                if (Element.IsPlaying)
+                    _animationView.PlayWithCompletion(PlaybackFinishedIfActually);
+                else
+                    _animationView.Pause();
+            }
         }
 
         private void InitAnimationViewForElement(AnimationView theElement)
@@ -126,7 +135,9 @@ namespace Lottie.Forms.iOS.Renderers
 
             Element.Duration = TimeSpan.FromMilliseconds(_animationView.AnimationDuration);
 
-            if (theElement.AutoPlay)
+#pragma warning disable CS0618 // Type or member is obsolete
+            if (theElement.AutoPlay || theElement.IsPlaying)
+#pragma warning restore CS0618 // Type or member is obsolete
             {
                 _animationView.PlayWithCompletion(PlaybackFinishedIfActually);
             }
