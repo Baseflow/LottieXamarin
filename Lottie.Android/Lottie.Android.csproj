@@ -11,11 +11,7 @@
   </PropertyGroup>
   
   <ItemGroup>
-	  <PackageReference Include="Xamarin.Android.Support.Design" Version="27.0.2.1" />
-	  <PackageReference Include="Xamarin.Android.Support.v4" Version="27.0.2.1" />
-	  <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="27.0.2.1" />
-	  <PackageReference Include="Xamarin.Android.Support.v7.CardView" Version="27.0.2.1" />
-	  <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="27.0.2.1" />
+	  <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="27.0.2" />
 	  <PackageReference Include="Xamarin.Build.Download" Version="0.4.11" PrivateAssets="All" />
     <None Include="Additions\*;Jars\*;Transforms\*" />
     <LibraryProjectZip Include="Jars\*.aar" />
