@@ -44,12 +44,6 @@ namespace Lottie.Forms
         public static readonly BindableProperty HardwareAccelerationProperty = BindableProperty.Create(nameof(HardwareAcceleration),
             typeof(bool), typeof(AnimationView), default(bool));
 
-        public static readonly BindableProperty ExperimentalHardwareAccelerationProperty = BindableProperty.Create(nameof(ExperimentalHardwareAcceleration),
-            typeof(bool), typeof(AnimationView), default(bool));
-
-        public static readonly BindableProperty GetHardwareAccelerationProperty = BindableProperty.Create(nameof(GetHardwareAcceleration),
-            typeof(object), typeof(AnimationView),BindingMode.TwoWay);
-
         public float Progress
         {
             get { return (float) GetValue(ProgressProperty); }
@@ -116,21 +110,14 @@ namespace Lottie.Forms
             set { SetValue(ImageAssetsFolderProperty, value); }
         }
 
+        /// <summary>
+        /// Where possible/supported render the animation using hardware (GPU) rather than software (CPU) More information: https://airbnb.io/lottie/android/performance.html#hardware-acceleration
+        /// No Effect on iOS
+        /// </summary>
         public bool HardwareAcceleration
         {
             get { return (bool)GetValue(HardwareAccelerationProperty); }
             set { SetValue(HardwareAccelerationProperty, value); }
-        }
-        public bool ExperimentalHardwareAcceleration
-        {
-            get { return (bool)GetValue(ExperimentalHardwareAccelerationProperty); }
-            set { SetValue(ExperimentalHardwareAccelerationProperty, value); }
-        }
-
-        public object GetHardwareAcceleration
-        {
-            get { return GetValue(GetHardwareAccelerationProperty); }
-            set { SetValue(GetHardwareAccelerationProperty, value); }
         }
 
         public event EventHandler OnPlay;

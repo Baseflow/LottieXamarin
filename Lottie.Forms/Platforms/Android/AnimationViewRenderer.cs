@@ -61,9 +61,7 @@ namespace Lottie.Forms.Droid
                 e.NewElement.OnPlayProgressSegment += OnPlayProgressSegment;
                 e.NewElement.OnPlayFrameSegment += OnPlayFrameSegment;
 
-                e.NewElement.GetHardwareAcceleration = _animationView.GetUseHardwareAcceleration();
                 _animationView.UseHardwareAcceleration(e.NewElement.HardwareAcceleration);
-                _animationView.UseExperimentalHardwareAcceleration(e.NewElement.ExperimentalHardwareAcceleration);
                 _animationView.Speed = e.NewElement.Speed;
                 _animationView.Loop(e.NewElement.Loop);
                 _animationView.ImageAssetsFolder = e.NewElement.ImageAssetsFolder;
@@ -189,9 +187,6 @@ namespace Lottie.Forms.Droid
 
             if(e.PropertyName == AnimationView.HardwareAccelerationProperty.PropertyName)
                 _animationView.UseHardwareAcceleration(Element.HardwareAcceleration);
-
-            if(e.PropertyName == AnimationView.ExperimentalHardwareAccelerationProperty.PropertyName)
-                _animationView.UseExperimentalHardwareAcceleration(Element.HardwareAcceleration);
 
             base.OnElementPropertyChanged(sender, e);
         }
