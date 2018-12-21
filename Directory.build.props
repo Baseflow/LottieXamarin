@@ -14,7 +14,7 @@
     <RepositoryType>git</RepositoryType>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
     <NeutralLanguage>en</NeutralLanguage>
-    <Version>2.9.0-HardwareAcceleration.1</Version>
+    <Version>2.7.0</Version>
 
     <LangVersion>latest</LangVersion>
     <NoWarn>$(NoWarn);1591;1701;1702;1705</NoWarn>
