@@ -61,6 +61,7 @@ namespace Lottie.Forms.Droid
                 e.NewElement.OnPlayProgressSegment += OnPlayProgressSegment;
                 e.NewElement.OnPlayFrameSegment += OnPlayFrameSegment;
 
+                _animationView.UseHardwareAcceleration(e.NewElement.HardwareAcceleration);
                 _animationView.Speed = e.NewElement.Speed;
                 _animationView.Loop(e.NewElement.Loop);
                 _animationView.ImageAssetsFolder = e.NewElement.ImageAssetsFolder;
@@ -183,6 +184,9 @@ namespace Lottie.Forms.Droid
 
             if (e.PropertyName == AnimationView.ImageAssetsFolderProperty.PropertyName && !string.IsNullOrEmpty(Element.ImageAssetsFolder))
                 _animationView.ImageAssetsFolder = Element.ImageAssetsFolder;
+
+            if(e.PropertyName == AnimationView.HardwareAccelerationProperty.PropertyName)
+                _animationView.UseHardwareAcceleration(Element.HardwareAcceleration);
 
             base.OnElementPropertyChanged(sender, e);
         }
