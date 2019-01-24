@@ -19,7 +19,7 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
+    <PackageReference Include="Xamarin.Forms" Version="3.4.0.1029999" />
     <Compile Remove="Platforms\**\*.cs" />
     <None Include="Platforms\**\*.cs" />
     <None Include="Resources\*.cs" />
@@ -45,7 +45,7 @@
   <ItemGroup Condition=" $(TargetFramework.StartsWith('uap')) ">
     <Compile Include="Platforms\Windows\**\*.cs" />
     <Compile Include="Platforms\Uap\**\*.cs" />
-    <PackageReference Include="LottieUWP" Version="2.8.0" />
+    <PackageReference Include="LottieUWP" Version="2.8.2" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
@@ -108,6 +108,12 @@
 
   <ItemGroup Condition=" '$(OS)' != 'Windows_NT' " Label="Package">
     <None Include="..\Dlls\uap10.0.16299\*.*" PackagePath="lib\uap10.0.16299" Pack="true" Visible="false" />
+  </ItemGroup>
+
+  <!-- There is something not working correctly w.r.t. multi-targetting so adding
+    direct reference seems to help get the build to work -->
+  <ItemGroup>
+    <Reference Include="netstandard" />
   </ItemGroup>
   
 </Project>
