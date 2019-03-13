@@ -1,7 +1,7 @@
 ﻿<Project>
   <PropertyGroup>
     <Copyright>Copyright (c) Martijn van Dijk</Copyright>
-    <PackageLicenseUrl>https://github.com/martijn00/LottieXamarin/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/martijn00/LottieXamarin</PackageProjectUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/martijn00/LottieXamarin/master/icon_lottie.png</PackageIconUrl>
     <Authors>Martijn van Dijk</Authors>

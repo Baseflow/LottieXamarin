@@ -15,7 +15,7 @@
     <RootNamespace>Lottie.Forms</RootNamespace>
     <Description>Render After Effects animations natively on Android, iOS, MacOS, TVOs and UWP</Description>
     <PackageId>Com.Airbnb.Xamarin.Forms.Lottie</PackageId>
-    <Version>2.7.0</Version>
+    <Version>2.7.1</Version>
   </PropertyGroup>
   
   <ItemGroup>
