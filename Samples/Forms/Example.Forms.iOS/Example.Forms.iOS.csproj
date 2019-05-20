@@ -127,9 +127,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Lottie.iOS\Lottie.iOS.csproj">
-      <Project>{8f0cc2b2-88e2-459b-ac92-f3a74071707e}</Project>
-      <Name>Lottie.iOS</Name>
+    <ProjectReference Include="..\..\..\Lottie.Forms\Lottie.Forms.csproj">
+      <Project>{f03d2dd6-bbda-45b9-982e-4dca43fcb8e1}</Project>
+      <Name>Lottie.Forms</Name>
     </ProjectReference>
     <ProjectReference Include="..\Example.Forms\Example.Forms.csproj">
       <Project>{ba40e6bd-f568-4301-a402-3846f176d49e}</Project>

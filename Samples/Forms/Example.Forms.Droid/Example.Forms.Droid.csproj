@@ -97,9 +97,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Lottie.Android\Lottie.Android.csproj">
-      <Project>{284c8e3c-3352-41af-8a5a-ac2cfd918737}</Project>
-      <Name>Lottie.Android</Name>
+    <ProjectReference Include="..\..\..\Lottie.Forms\Lottie.Forms.csproj">
+      <Project>{f03d2dd6-bbda-45b9-982e-4dca43fcb8e1}</Project>
+      <Name>Lottie.Forms</Name>
     </ProjectReference>
     <ProjectReference Include="..\Example.Forms\Example.Forms.csproj">
       <Project>{ba40e6bd-f568-4301-a402-3846f176d49e}</Project>
