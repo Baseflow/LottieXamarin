@@ -43,8 +43,11 @@
             x:Name="animationView" 
             Grid.Row="1"
             Animation="LottieLogo1.json" 
-            Loop="true" 
-            AutoPlay="True"
+            Loop="false" 
+            AutoPlay="false"
+            OnFinish="Handle_OnFinish"
+            PlaybackStartedCommand="{Binding PlayingCommand}"
+            PlaybackFinishedCommand="{Binding FinishedCommand}" 
             ClickedCommand="{Binding ClickedCommand}"
             VerticalOptions="FillAndExpand" 
             HorizontalOptions="FillAndExpand" />
