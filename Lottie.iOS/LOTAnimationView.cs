@@ -17,7 +17,7 @@ namespace Airbnb.Lottie
             
             this.Play();
 
-            await tcs.Task;
+            return await tcs.Task;
         }
 
 		/// <summary>
