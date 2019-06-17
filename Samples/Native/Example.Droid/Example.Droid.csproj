@@ -15,7 +15,6 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
     <AndroidTlsProvider>
     </AndroidTlsProvider>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
@@ -32,9 +31,6 @@
     <AndroidLinkMode>None</AndroidLinkMode>
     <EmbedAssembliesIntoApk>false</EmbedAssembliesIntoApk>
     <AndroidSupportedAbis>armeabi-v7a;x86</AndroidSupportedAbis>
-    <AotAssemblies>false</AotAssemblies>
-    <EnableLLVM>false</EnableLLVM>
-    <BundleAssemblies>false</BundleAssemblies>
     <AndroidUseSharedRuntime>true</AndroidUseSharedRuntime>
     <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
   </PropertyGroup>
@@ -46,9 +42,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
-    <AotAssemblies>false</AotAssemblies>
-    <EnableLLVM>false</EnableLLVM>
-    <BundleAssemblies>false</BundleAssemblies>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -149,7 +142,10 @@
       <Version>0.4.11</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Android.Support.Design">
-      <Version>27.0.2</Version>
+      <Version>28.0.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Android.Support.v7.AppCompat">
+      <Version>28.0.0.1</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -258,7 +254,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Lottie.Android\Lottie.Android.csproj">
-      <Project>{284c8e3c-3352-41af-8a5a-ac2cfd918737}</Project>
+      <Project>{284C8E3C-3352-41AF-8A5A-AC2CFD918737}</Project>
       <Name>Lottie.Android</Name>
     </ProjectReference>
   </ItemGroup>
