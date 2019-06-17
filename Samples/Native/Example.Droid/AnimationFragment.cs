@@ -20,7 +20,6 @@ using Android.Support.Design.Widget;
 using Android.Database;
 using Square.OkHttp3;
 using Org.Json;
-using ZXing.Mobile;
 using Android.Util;
 
 namespace LottieSamples.Droid
@@ -110,7 +109,6 @@ namespace LottieSamples.Droid
             {
                 this.animationView.Scale = e.Progress / ScaleSliderFactor;
                 this.scaleTextView.Text = String.Format("{0:0.00}", this.animationView.Scale);
-
             };
 
             return view;
@@ -137,7 +135,7 @@ namespace LottieSamples.Droid
             switch (item.ItemId)
             {
                 case Resource.Id.hardware_acceleration:
-                    this.animationView.UseHardwareAcceleration( item.IsChecked );
+                    this.animationView.SetRenderMode(item.IsChecked ? RenderMode.Hardware : RenderMode.Software);
                     return true;
                 
                 case Resource.Id.merge_paths:
@@ -274,21 +272,21 @@ namespace LottieSamples.Droid
 
         private async void QRScanButton_Click(object sender, EventArgs e)
         {
-            MobileBarcodeScanner.Initialize(this.Activity.Application);
+            //MobileBarcodeScanner.Initialize(this.Activity.Application);
 
-            var options = new ZXing.Mobile.MobileBarcodeScanningOptions();
-            options.PossibleFormats = new List<ZXing.BarcodeFormat>() {
-                ZXing.BarcodeFormat.QR_CODE
-            };
+            //var options = new ZXing.Mobile.MobileBarcodeScanningOptions();
+            //options.PossibleFormats = new List<ZXing.BarcodeFormat>() {
+            //    ZXing.BarcodeFormat.QR_CODE
+            //};
 
-            var scanner = new ZXing.Mobile.MobileBarcodeScanner();
-            scanner.AutoFocus();
-            scanner.UseCustomOverlay = true;
-            scanner.CustomOverlay = GetQRCodeCustomOverlay();
+            //var scanner = new ZXing.Mobile.MobileBarcodeScanner();
+            //scanner.AutoFocus();
+            //scanner.UseCustomOverlay = true;
+            //scanner.CustomOverlay = GetQRCodeCustomOverlay();
 
-            var result = await scanner.Scan(options);
-            if (result != null)
-                LoadUrl(result.Text);
+            //var result = await scanner.Scan(options);
+            //if (result != null)
+            //    LoadUrl(result.Text);
         }
 
         private ViewGroup GetQRCodeCustomOverlay()
