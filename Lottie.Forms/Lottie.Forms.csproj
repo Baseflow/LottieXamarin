@@ -1,6 +1,6 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup Condition=" '$(TargetsToBuild)' == 'All' ">
-    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;MonoAndroid90;uap10.0.16299</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;Xamarin.Mac20;MonoAndroid90;uap10.0.16299</TargetFrameworks>
     <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;Xamarin.Mac20;MonoAndroid90</TargetFrameworks>
   </PropertyGroup>
 
@@ -15,11 +15,11 @@
     <RootNamespace>Lottie.Forms</RootNamespace>
     <Description>Render After Effects animations natively on Android, iOS, MacOS, TVOs and UWP</Description>
     <PackageId>Com.Airbnb.Xamarin.Forms.Lottie</PackageId>
-    <Version>2.7.0</Version>
+    <Version>2.7.1</Version>
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
+    <PackageReference Include="Xamarin.Forms" Version="3.4.0.1029999" />
     <Compile Remove="Platforms\**\*.cs" />
     <None Include="Platforms\**\*.cs" />
     <None Include="Resources\*.cs" />
@@ -45,7 +45,7 @@
   <ItemGroup Condition=" $(TargetFramework.StartsWith('uap')) ">
     <Compile Include="Platforms\Windows\**\*.cs" />
     <Compile Include="Platforms\Uap\**\*.cs" />
-    <PackageReference Include="LottieUWP" Version="2.8.0" />
+    <PackageReference Include="LottieUWP" Version="2.8.2" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
@@ -53,7 +53,7 @@
     <Compile Include="Platforms\Ios\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
     <PackageReference Include="Com.Airbnb.iOS.Lottie">
-      <Version>2.5.6</Version>
+      <Version>2.5.7</Version>
     </PackageReference>
 	  <!--<ProjectReference Include="..\Lottie.iOS\Lottie.iOS.csproj" />-->
   </ItemGroup>
@@ -63,7 +63,7 @@
     <Compile Include="Platforms\Mac\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
     <PackageReference Include="Com.Airbnb.iOS.Lottie">
-      <Version>2.5.6</Version>
+      <Version>2.5.7</Version>
     </PackageReference>
 	  <!--<ProjectReference Include="..\Lottie.iOS\Lottie.iOS.csproj" />-->
   </ItemGroup>
@@ -73,7 +73,7 @@
     <Compile Include="Platforms\Tvos\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
     <PackageReference Include="Com.Airbnb.iOS.Lottie">
-      <Version>2.5.6</Version>
+      <Version>2.5.7</Version>
     </PackageReference>
 	  <!--<ProjectReference Include="..\Lottie.iOS\Lottie.iOS.csproj" />-->
   </ItemGroup>
@@ -94,7 +94,7 @@
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="27.0.2" />
     <PackageReference Include="Xamarin.Build.Download" Version="0.4.11" PrivateAssets="All" />
     <PackageReference Include="Com.Airbnb.Android.Lottie">
-      <Version>2.7.0</Version>
+      <Version>2.7.1</Version>
     </PackageReference>
   </ItemGroup>
 
@@ -108,6 +108,12 @@
 
   <ItemGroup Condition=" '$(OS)' != 'Windows_NT' " Label="Package">
     <None Include="..\Dlls\uap10.0.16299\*.*" PackagePath="lib\uap10.0.16299" Pack="true" Visible="false" />
+  </ItemGroup>
+
+  <!-- There is something not working correctly w.r.t. multi-targetting so adding
+    direct reference seems to help get the build to work -->
+  <ItemGroup>
+    <Reference Include="netstandard" />
   </ItemGroup>
   
 </Project>

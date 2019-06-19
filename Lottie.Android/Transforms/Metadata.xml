@@ -12,21 +12,22 @@
 
     <attr path="/api/package[@name='com.airbnb.lottie.value']/class[@name='LottieInterpolatedValue']" name="visibility">public</attr>
     
-    <attr path="/api/package[@name='com.airbnb.lottie.animation.content']/class[@name='BaseStrokeContent']" name="visibility">public</attr>
     <attr path="/api/package[@name='com.airbnb.lottie.animation.content']/interface[@name='DrawingContent']" name="visibility">public</attr>
     <attr path="/api/package[@name='com.airbnb.lottie.animation.content']/interface[@name='DrawingContent']/method[@name='draw' and count(parameter)=3 and parameter[1][@type='android.graphics.Canvas'] and parameter[2][@type='android.graphics.Matrix'] and parameter[3][@type='int']]/parameter[@name='p0' and @type='android.graphics.Canvas']" name="name">canvas</attr>
     <attr path="/api/package[@name='com.airbnb.lottie.animation.content']/interface[@name='DrawingContent']/method[@name='draw' and count(parameter)=3 and parameter[1][@type='android.graphics.Canvas'] and parameter[2][@type='android.graphics.Matrix'] and parameter[3][@type='int']]/parameter[@name='p1' and @type='android.graphics.Matrix']" name="name">parentMatrix</attr>
     <attr path="/api/package[@name='com.airbnb.lottie.animation.content']/interface[@name='DrawingContent']/method[@name='draw' and count(parameter)=3 and parameter[1][@type='android.graphics.Canvas'] and parameter[2][@type='android.graphics.Matrix'] and parameter[3][@type='int']]/parameter[@name='p2' and @type='int']" name="name">alpha</attr>
 
-    <attr path="/api/package[@name='com.airbnb.lottie.animation.content']/interface[@name='DrawingContent']/method[@name='getBounds' and count(parameter)=2 and parameter[1][@type='android.graphics.RectF'] and parameter[2][@type='android.graphics.Matrix']]/parameter[@name='p0']" name="name">outBounds</attr>
-    <attr path="/api/package[@name='com.airbnb.lottie.animation.content']/interface[@name='DrawingContent']/method[@name='getBounds' and count(parameter)=2 and parameter[1][@type='android.graphics.RectF'] and parameter[2][@type='android.graphics.Matrix']]/parameter[@name='p1']" name="name">parentMatrix</attr>
+    <attr path="/api/package[@name='com.airbnb.lottie.animation.content']/interface[@name='DrawingContent']/method[@name='getBounds' and count(parameter)=3 and parameter[1][@type='android.graphics.RectF'] and parameter[2][@type='android.graphics.Matrix'] and parameter[3][@type='boolean']]/parameter[@name='p0']" name="name">outBounds</attr>
+    <attr path="/api/package[@name='com.airbnb.lottie.animation.content']/interface[@name='DrawingContent']/method[@name='getBounds' and count(parameter)=3 and parameter[1][@type='android.graphics.RectF'] and parameter[2][@type='android.graphics.Matrix'] and parameter[3][@type='boolean']]/parameter[@name='p1']" name="name">parentMatrix</attr>
+    <attr path="/api/package[@name='com.airbnb.lottie.animation.content']/interface[@name='DrawingContent']/method[@name='getBounds' and count(parameter)=3 and parameter[1][@type='android.graphics.RectF'] and parameter[2][@type='android.graphics.Matrix'] and parameter[3][@type='boolean']]/parameter[@name='p2']" name="name">applyParents</attr>
 
     <attr path="/api/package[@name='com.airbnb.lottie.animation.content']/interface[@name='Content']" name="visibility">public</attr>
     <attr path="/api/package[@name='com.airbnb.lottie.animation.content']/interface[@name='Content']/method[@name='setContents' and count(parameter)=2 and parameter[1][@type='java.util.List&lt;com.airbnb.lottie.animation.content.Content&gt;'] and parameter[2][@type='java.util.List&lt;com.airbnb.lottie.animation.content.Content&gt;']]/parameter[@name='p0' and @type='java.util.List&lt;com.airbnb.lottie.animation.content.Content&gt;']" name="name">contentsBefore</attr>
     <attr path="/api/package[@name='com.airbnb.lottie.animation.content']/interface[@name='Content']/method[@name='setContents' and count(parameter)=2 and parameter[1][@type='java.util.List&lt;com.airbnb.lottie.animation.content.Content&gt;'] and parameter[2][@type='java.util.List&lt;com.airbnb.lottie.animation.content.Content&gt;']]/parameter[@name='p1' and @type='java.util.List&lt;com.airbnb.lottie.animation.content.Content&gt;']" name="name">contentsAfter</attr>
 
+    <attr path="/api/package[@name='com.airbnb.lottie.animation.content']/class[@name='BaseStrokeContent']" name="visibility">public</attr>
     <attr path="/api/package[@name='com.airbnb.lottie.animation.content']/class[@name='BaseStrokeContent']/method[@name='setContents' and count(parameter)=2 and parameter[1][@type='java.util.List&lt;com.airbnb.lottie.animation.content.Content&gt;'] and parameter[2][@type='java.util.List&lt;com.airbnb.lottie.animation.content.Content&gt;']]/parameter[@name='p0']" name="name">contentsBefore</attr>
-    <attr path="/api/package[@name='com.airbnb.lottie.animation.content']/class[@name='BaseStrokeContent']/method[@name='setContents' and count(parameter)=2 and parameter[1][@type='java.util.List&lt;com.airbnb.lottie.animation.content.Content&gt;'] and parameter[2][@type='java.util.List&lt;com.airbnb.lottie.animation.content.Content&gt;']]/parameter[@name='p1' and @type='java.util.List&lt;com.airbnb.lottie.animation.content.Content&gt;']" name="name">contentsAfter</attr>
+    <attr path="/api/package[@name='com.airbnb.lottie.animation.content']/class[@name='BaseStrokeContent']/method[@name='setContents' and count(parameter)=2 and parameter[1][@type='java.util.List&lt;com.airbnb.lottie.animation.content.Content&gt;'] and parameter[2][@type='java.util.List&lt;com.airbnb.lottie.animation.content.Content&gt;']]/parameter[@name='p1']" name="name">contentsAfter</attr>
 
     <!-- All packages parameters -->
     <attr path="/api/package//parameter[@type='android.util.AttributeSet']" name="name">attrs</attr>
@@ -82,10 +83,6 @@
     <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='updateBitmap' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='android.graphics.Bitmap']]/parameter[@name='p0']" name="name">id</attr>
     <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='updateBitmap' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='android.graphics.Bitmap']]/parameter[@name='p1']" name="name">bitmap</attr>
 
-    <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='getUseHardwareAcceleration' and count(parameter)=0]" name="propertyName"></attr>
-
-    <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='useHardwareAcceleration' and count(parameter)=1 and parameter[1][@type='boolean']]/parameter[@name='p0']" name="name">use</attr>
-    <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='useExperimentalHardwareAcceleration' and count(parameter)=1 and parameter[1][@type='boolean']]/parameter[@name='p0']" name="name">use</attr>
 
     <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='setMinProgress' and count(parameter)=1 and parameter[1][@type='float']]/parameter[@name='p0']" name="name">startProgress</attr>
     <attr path="/api/package[@name='com.airbnb.lottie']/class[@name='LottieAnimationView']/method[@name='setMinFrame' and count(parameter)=1 and parameter[1][@type='int']]/parameter[@name='p0']" name="name">startFrame</attr>
