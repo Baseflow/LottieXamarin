@@ -9,13 +9,15 @@ namespace Airbnb.Lottie
         /// <summary>
         /// Asynchronously play the animation.
         /// </summary>
-        public Task<bool> PlayAsync()
+        public async Task<bool> PlayAsync()
         {
             var tcs = new TaskCompletionSource<bool>();
+            
+            this.CompletionBlock = animationFinished => tcs.SetResult(true);
+            
+            this.Play();
 
-            this.PlayWithCompletion((bool animationFinished) => tcs.SetResult(animationFinished));
-
-            return tcs.Task;
+            return await tcs.Task;
         }
 
 		/// <summary>
