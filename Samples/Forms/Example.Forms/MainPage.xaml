@@ -3,8 +3,11 @@
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms" 
+    xmlns:local="clr-namespace:Example.Forms" 
     x:Class="Example.Forms.MainPage">
-
+    <ContentPage.BindingContext>
+        <local:MainPageViewModel />
+    </ContentPage.BindingContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -19,9 +22,9 @@
             Margin="5, 0">
             
             <Button 
-                x:Name="playButton"
                 HorizontalOptions="FillAndExpand"
-                Text="Play" />
+                Text="Play" 
+                Command="{Binding StartPlayingCommand}"/>
 
             <Button 
                 x:Name="playSegmentsButton"
@@ -34,9 +37,9 @@
                 Text="Frames" />
             
             <Button 
-                x:Name="pauseButton"
                 HorizontalOptions="FillAndExpand"
-                Text="Pause" />
+                Text="Pause"
+                Command="{Binding StopPlayingCommand}" />
         </StackLayout>
 
         <forms:AnimationView 
@@ -44,7 +47,7 @@
             Grid.Row="1"
             Animation="LottieLogo1.json" 
             Loop="false" 
-            AutoPlay="false"
+            IsPlaying="{Binding IsPlaying}"
             OnFinish="Handle_OnFinish"
             PlaybackStartedCommand="{Binding PlayingCommand}"
             PlaybackFinishedCommand="{Binding FinishedCommand}" 

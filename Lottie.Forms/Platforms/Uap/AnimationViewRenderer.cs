@@ -72,7 +72,9 @@ namespace Lottie.Forms.UWP.Renderers
                     Element.Duration = TimeSpan.FromMilliseconds(_animationView.Duration);
                 }
 
-                if (e.NewElement.AutoPlay)
+#pragma warning disable CS0618 // Type or member is obsolete
+                if (e.NewElement.AutoPlay | e.NewElement.IsPlaying)
+#pragma warning restore CS0618 // Type or member is obsolete
                     _animationView.PlayAnimation();
             }
         }
@@ -168,7 +170,9 @@ namespace Lottie.Forms.UWP.Renderers
                 await _animationView.SetAnimationAsync(Element.Animation);
                 Element.Duration = TimeSpan.FromMilliseconds(_animationView.Duration);
 
-                if (Element.AutoPlay)
+#pragma warning disable CS0618 // Type or member is obsolete
+                if (Element.AutoPlay || Element.IsPlaying)
+#pragma warning restore CS0618 // Type or member is obsolete
                     _animationView.PlayAnimation();
             }
 
@@ -191,6 +195,15 @@ namespace Lottie.Forms.UWP.Renderers
             if (e.PropertyName == AnimationView.ImageAssetsFolderProperty.PropertyName && !string.IsNullOrEmpty(Element.ImageAssetsFolder))
             {
                 _animationView.ImageAssetsFolder = Element.ImageAssetsFolder;
+            }
+
+            if (e.PropertyName == AnimationView.IsPlayingProperty.PropertyName &&
+                !string.IsNullOrEmpty(Element.Animation))
+            {
+                if (Element.IsPlaying)
+                    _animationView.PlayAnimation();
+                else
+                    _animationView.PauseAnimation();
             }
 
             base.OnElementPropertyChanged(sender, e);

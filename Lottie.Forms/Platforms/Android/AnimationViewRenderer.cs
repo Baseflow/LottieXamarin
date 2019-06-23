@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using Com.Airbnb.Lottie;
 using Lottie.Forms;
@@ -74,7 +74,7 @@ namespace Lottie.Forms.Droid
                     Element.Duration = TimeSpan.FromMilliseconds(_animationView.Duration);
                 }
 
-                if (e.NewElement.AutoPlay) 
+                if (e.NewElement.AutoPlay || e.NewElement.IsPlaying) 
                     _animationView.PlayAnimation();
             }
         }
@@ -166,7 +166,7 @@ namespace Lottie.Forms.Droid
                 _animationView.SetAnimation(Element.Animation);
                 Element.Duration = TimeSpan.FromMilliseconds(_animationView.Duration);
 
-                if (Element.AutoPlay) 
+                if (Element.AutoPlay || Element.IsPlaying) 
                     _animationView.PlayAnimation();
             }
 
@@ -187,6 +187,15 @@ namespace Lottie.Forms.Droid
 
             if(e.PropertyName == AnimationView.HardwareAccelerationProperty.PropertyName)
                 _animationView.UseHardwareAcceleration(Element.HardwareAcceleration);
+
+            if (e.PropertyName == AnimationView.IsPlayingProperty.PropertyName &&
+                !string.IsNullOrEmpty(Element.Animation))
+            {
+                if (Element.IsPlaying)
+                    _animationView.PlayAnimation();
+                else
+                    _animationView.PauseAnimation();
+            }
 
             base.OnElementPropertyChanged(sender, e);
         }
