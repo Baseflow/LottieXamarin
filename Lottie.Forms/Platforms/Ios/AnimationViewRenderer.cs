@@ -156,7 +156,7 @@ namespace Lottie.Forms.iOS.Renderers
             if (_animationView != null)
             {
                 _animationView.RemoveFromSuperview();
-                _animationView?.Dispose();
+                _animationView.Dispose();
                 _animationView = null;
             }
         }
