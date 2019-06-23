@@ -39,6 +39,8 @@ namespace Lottie.Forms.iOS.Renderers
                 e.OldElement.OnPause -= OnPause;
                 e.OldElement.OnPlayProgressSegment -= OnPlayProgressSegment;
                 e.OldElement.OnPlayFrameSegment -= OnPlayFrameSegment;
+
+                CleanupResources();
             }
 
             if (e.NewElement == null) return;
@@ -48,7 +50,7 @@ namespace Lottie.Forms.iOS.Renderers
             e.NewElement.OnPlayProgressSegment += OnPlayProgressSegment;
             e.NewElement.OnPlayFrameSegment += OnPlayFrameSegment;
 
-            if (!string.IsNullOrEmpty(e.NewElement.Animation))
+            if (!string.IsNullOrWhiteSpace(e.NewElement.Animation))
             {
                 InitAnimationViewForElement(e.NewElement);
             }
@@ -85,10 +87,9 @@ namespace Lottie.Forms.iOS.Renderers
             if (Element == null)
                 return;
 
-            if (e.PropertyName == AnimationView.AnimationProperty.PropertyName && !string.IsNullOrEmpty(Element.Animation))
+            if (e.PropertyName == AnimationView.AnimationProperty.PropertyName && !string.IsNullOrWhiteSpace(Element.Animation))
             {
-                _animationView?.RemoveFromSuperview();
-                _animationView?.RemoveGestureRecognizer(_gestureRecognizer);
+                CleanupResources();
                 InitAnimationViewForElement(Element);
             }
 
@@ -131,18 +132,32 @@ namespace Lottie.Forms.iOS.Renderers
                 _animationView.PlayWithCompletion(PlaybackFinishedIfActually);
             }
 
-            if (_animationView != null)
-            {
-                SetNativeControl(_animationView);
-                SetNeedsLayout();
-            }
+            SetNativeControl(_animationView);
+            SetNeedsLayout();
         }
 
-        void PlaybackFinishedIfActually(bool animationFinished)
+        private void PlaybackFinishedIfActually(bool animationFinished)
         {
             if (animationFinished)
             {
                 Element?.PlaybackFinished();
+            }
+        }
+
+        private void CleanupResources()
+        {
+            if (_gestureRecognizer != null)
+            {
+                _animationView?.RemoveGestureRecognizer(_gestureRecognizer);
+                _gestureRecognizer.Dispose();
+                _gestureRecognizer = null;
+            }
+
+            if (_animationView != null)
+            {
+                _animationView.RemoveFromSuperview();
+                _animationView.Dispose();
+                _animationView = null;
             }
         }
     }
