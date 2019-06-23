@@ -146,14 +146,19 @@ namespace Lottie.Forms.iOS.Renderers
 
         private void CleanupResources()
         {
-            _animationView?.RemoveGestureRecognizer(_gestureRecognizer);
-            _animationView?.RemoveFromSuperview();
+            if (_gestureRecognizer != null)
+            {
+                _animationView?.RemoveGestureRecognizer(_gestureRecognizer);
+                _gestureRecognizer.Dispose();
+                _gestureRecognizer = null;
+            }
 
-            _gestureRecognizer.Dispose();
-            _gestureRecognizer = null;
-
-            _animationView?.Dispose();
-            _animationView = null;
+            if (_animationView != null)
+            {
+                _animationView.RemoveFromSuperview();
+                _animationView?.Dispose();
+                _animationView = null;
+            }
         }
     }
 }
