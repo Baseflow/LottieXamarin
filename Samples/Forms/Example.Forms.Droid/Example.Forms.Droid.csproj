@@ -18,7 +18,7 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
-    <AndroidSupportedAbis>armeabi,armeabi-v7a,x86</AndroidSupportedAbis>
+    <AndroidSupportedAbis>armeabi-v7a,x86</AndroidSupportedAbis>
     <AndroidStoreUncompressedFileExtensions />
     <MandroidI18n />
     <JavaMaximumHeapSize />
@@ -93,7 +93,7 @@
       <Version>0.4.11</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>3.4.0.1029999</Version>
+      <Version>3.6.0.539721</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

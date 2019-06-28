@@ -15,11 +15,11 @@
     <RootNamespace>Lottie.Forms</RootNamespace>
     <Description>Render After Effects animations natively on Android, iOS, MacOS, TVOs and UWP</Description>
     <PackageId>Com.Airbnb.Xamarin.Forms.Lottie</PackageId>
-    <Version>2.7.1</Version>
+    <Version>3.0.0</Version>
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.4.0.1029999" />
+    <PackageReference Include="Xamarin.Forms" Version="3.6.0.539721" />
     <Compile Remove="Platforms\**\*.cs" />
     <None Include="Platforms\**\*.cs" />
     <None Include="Resources\*.cs" />
@@ -53,7 +53,7 @@
     <Compile Include="Platforms\Ios\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
     <PackageReference Include="Com.Airbnb.iOS.Lottie">
-      <Version>2.5.7</Version>
+      <Version>2.5.8</Version>
     </PackageReference>
 	  <!--<ProjectReference Include="..\Lottie.iOS\Lottie.iOS.csproj" />-->
   </ItemGroup>
@@ -63,7 +63,7 @@
     <Compile Include="Platforms\Mac\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
     <PackageReference Include="Com.Airbnb.iOS.Lottie">
-      <Version>2.5.7</Version>
+      <Version>2.5.8</Version>
     </PackageReference>
 	  <!--<ProjectReference Include="..\Lottie.iOS\Lottie.iOS.csproj" />-->
   </ItemGroup>
@@ -73,7 +73,7 @@
     <Compile Include="Platforms\Tvos\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
     <PackageReference Include="Com.Airbnb.iOS.Lottie">
-      <Version>2.5.7</Version>
+      <Version>2.5.8</Version>
     </PackageReference>
 	  <!--<ProjectReference Include="..\Lottie.iOS\Lottie.iOS.csproj" />-->
   </ItemGroup>
@@ -87,14 +87,9 @@
   <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
     <Compile Include="Platforms\Android\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
-    <PackageReference Include="Xamarin.Android.Support.Design" Version="27.0.2" />
-    <PackageReference Include="Xamarin.Android.Support.v4" Version="27.0.2" />
-    <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="27.0.2" />
-    <PackageReference Include="Xamarin.Android.Support.v7.CardView" Version="27.0.2" />
-    <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="27.0.2" />
     <PackageReference Include="Xamarin.Build.Download" Version="0.4.11" PrivateAssets="All" />
     <PackageReference Include="Com.Airbnb.Android.Lottie">
-      <Version>2.7.1</Version>
+      <Version>3.0.3</Version>
     </PackageReference>
   </ItemGroup>
 
