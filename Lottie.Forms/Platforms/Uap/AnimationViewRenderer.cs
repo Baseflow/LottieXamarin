@@ -73,7 +73,7 @@ namespace Lottie.Forms.UWP.Renderers
                 }
 
 #pragma warning disable CS0618 // Type or member is obsolete
-                if (e.NewElement.AutoPlay | e.NewElement.IsPlaying)
+                if (e.NewElement.AutoPlay || e.NewElement.IsPlaying)
 #pragma warning restore CS0618 // Type or member is obsolete
                     _animationView.PlayAnimation();
             }
