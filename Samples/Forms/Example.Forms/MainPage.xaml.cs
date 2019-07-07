@@ -10,10 +10,9 @@ namespace Example.Forms
         {            
             InitializeComponent();
             
-            playSegmentsButton.Clicked += (sender, e) => animationView.PlayProgressSegment(0.65f, 0.0f);
-            playFramesButton.Clicked += (sender, e) => animationView.PlayFrameSegment(50, 1);
-
-            BindingContext = this;
+            // TODO: Currently, reverse playback is not supported on tizen backend. Will update when it supports.
+            playSegmentsButton.Clicked += (sender, e) => animationView.PlayProgressSegment(0.65f, (Device.RuntimePlatform != Device.Tizen) ? 0.0f : 1.0f);
+            playFramesButton.Clicked += (sender, e) => animationView.PlayFrameSegment(50, (Device.RuntimePlatform != Device.Tizen) ? 1 : 100);
 
             On<Xamarin.Forms.PlatformConfiguration.iOS>().SetUseSafeArea(true);
         }

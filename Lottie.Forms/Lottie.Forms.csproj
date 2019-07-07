@@ -1,13 +1,14 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup Condition=" '$(TargetsToBuild)' == 'All' ">
-    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;Xamarin.Mac20;MonoAndroid90;uap10.0.16299</TargetFrameworks>
-    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;Xamarin.Mac20;MonoAndroid90</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;Xamarin.Mac20;MonoAndroid90;uap10.0.16299;tizen40</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">netstandard2.0;Xamarin.iOS10;Xamarin.Mac20;MonoAndroid90;tizen40</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetsToBuild)' != 'All' ">
     <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Android' ">netstandard2.0;MonoAndroid90;</TargetFrameworks>
     <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Uap' ">netstandard2.0;uap10.0.16299</TargetFrameworks>
     <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'iOS' ">netstandard2.0;Xamarin.iOS10</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(TargetsToBuild)' == 'Tizen' ">netstandard2.0;tizen40</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -95,10 +96,10 @@
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('tizen')) ">
     <Compile Include="Platforms\Tizen\**\*.cs" />
-    <Compile Include="Platforms\Xamarin-common\**\*.cs" />
     <PackageReference Include="Tizen.NET" Version="4.0.0">
       <ExcludeAssets>Runtime</ExcludeAssets>
     </PackageReference>
+    <PackageReference Include="ElottieSharp" Version="0.9.2-preview" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(OS)' != 'Windows_NT' " Label="Package">
