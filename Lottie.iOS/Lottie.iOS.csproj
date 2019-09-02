@@ -1,7 +1,7 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
-  <PropertyGroup>
-    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">Xamarin.iOS10</TargetFrameworks>
-    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">Xamarin.iOS10;Xamarin.TVOS10;Xamarin.Mac20</TargetFrameworks>
+  <PropertyGroup>    
+    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">xamarin.ios10</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">xamarin.ios10;xamarin.mac20;xamarin.tvos10</TargetFrameworks>
     <AssemblyName>Lottie.iOS</AssemblyName>
     <RootNamespace>Lottie.iOS</RootNamespace>
     <Description>Render After Effects animations natively on Android, iOS, MacOS, TVOs and UWP</Description>
@@ -20,14 +20,14 @@
       <ObjcBindingApiDefinition Include="ApiDefinitions.Ios.cs" Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) OR $(TargetFramework.StartsWith('Xamarin.TVOS'))"/>
   </ItemGroup>
 
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.ios')) ">
     <ObjcBindingNativeLibrary Include="libLottie-ios.a" />
     <Compile Include="libLottie-ios.linkwith.cs">
       <DependentUpon>libLottie-ios.a</DependentUpon>
     </Compile>    
   </ItemGroup>
 
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.Mac')) ">
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.mac')) ">
     <ObjcBindingApiDefinition Include="ApiDefinitions.Mac.cs" />
     <ObjcBindingNativeLibrary Include="libLottie-macos.a" />
     <Compile Include="libLottie-macos.linkwith.cs">
@@ -35,7 +35,7 @@
     </Compile>
   </ItemGroup>
 
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.TVOS')) ">
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.tvos')) ">
     <ObjcBindingNativeLibrary Include="libLottie-tvos.a" />
     <Compile Include="libLottie-tvos.linkwith.cs">
       <DependentUpon>libLottie-tvos.a</DependentUpon>

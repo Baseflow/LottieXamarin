@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="4.1.0.555618" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Example.Forms\Example.Forms.csproj" />
   </ItemGroup>
 
