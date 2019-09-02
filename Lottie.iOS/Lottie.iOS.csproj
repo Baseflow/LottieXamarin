@@ -20,14 +20,14 @@
     <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
     <Compile Include="Linker.cs" />
     <Compile Include="LOTAnimationView.cs" />
-    <ObjcBindingApiDefinition Include="ApiDefinitions.Ios.cs" Condition=" $(TargetFramework.StartsWith('xamarin.ios')) OR $(TargetFramework.StartsWith('xamarin.tvos'))"/>
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.ios')) ">
+    <ObjcBindingApiDefinition Include="ApiDefinitions.Ios.cs" />
     <ObjcBindingNativeLibrary Include="libLottie-ios.a" />
     <Compile Include="libLottie-ios.linkwith.cs">
       <DependentUpon>libLottie-ios.a</DependentUpon>
-    </Compile>    
+    </Compile>
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.mac')) ">
@@ -39,6 +39,7 @@
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.tvos')) ">
+    <ObjcBindingApiDefinition Include="ApiDefinitions.Ios.cs" />
     <ObjcBindingNativeLibrary Include="libLottie-tvos.a" />
     <Compile Include="libLottie-tvos.linkwith.cs">
       <DependentUpon>libLottie-tvos.a</DependentUpon>
