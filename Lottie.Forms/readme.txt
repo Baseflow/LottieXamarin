@@ -23,4 +23,9 @@ Example :
 	VerticalOptions="FillAndExpand" 
 	HorizontalOptions="FillAndExpand" />
 
+---------------------------------
 Star on Github if this project helps you: https://github.com/martijn00/LottieXamarin
+
+Commercial support is available. Integration with your app or services, samples, feature request, etc. Email: hello@baseflow.com
+Powered by: https://baseflow.com
+---------------------------------

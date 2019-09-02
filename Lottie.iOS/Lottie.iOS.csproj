@@ -9,15 +9,18 @@
     <IsBindingProject Condition=" '$(OS)' != 'Windows_NT' ">true</IsBindingProject>
     <EnableDefaultItems>false</EnableDefaultItems>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Version>2.5.8</Version>
+    <Version>2.5.9</Version>
   </PropertyGroup>
   
+  <ItemGroup>
+    <None Include="readme.txt" pack="true" PackagePath="." />
+  </ItemGroup>
+    
   <ItemGroup Condition=" '$(OS)' != 'Windows_NT' ">
     <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
     <Compile Include="Linker.cs" />
     <Compile Include="LOTAnimationView.cs" />
-    <None Include="readme.txt" pack="true" PackagePath="." />
-      <ObjcBindingApiDefinition Include="ApiDefinitions.Ios.cs" Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) OR $(TargetFramework.StartsWith('Xamarin.TVOS'))"/>
+    <ObjcBindingApiDefinition Include="ApiDefinitions.Ios.cs" Condition=" $(TargetFramework.StartsWith('xamarin.ios')) OR $(TargetFramework.StartsWith('xamarin.tvos'))"/>
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.ios')) ">
