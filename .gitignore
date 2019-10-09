@@ -260,5 +260,3 @@ artifacts/
 
 # dotnet tools
 .store/
-
-!Dlls/**

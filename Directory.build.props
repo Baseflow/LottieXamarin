@@ -3,25 +3,26 @@
     <Copyright>Copyright (c) Martijn van Dijk</Copyright>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/martijn00/LottieXamarin</PackageProjectUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/martijn00/LottieXamarin/master/icon_lottie.png</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/martijn00/LottieXamarin/develop/icon.png</PackageIconUrl>
+    <!--<PackageIcon>icon.png</PackageIcon>-->
     <Authors>Martijn van Dijk</Authors>
     <Owners>martijn00</Owners>
     <PackageTags>xamarin, monodroid, C#, xamarin.android, Forms, android, Lottie, animation, airbnb</PackageTags>
-    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageReleaseNotes>https://github.com/martijn00/LottieXamarin/releases</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+
     <RepositoryUrl>https://github.com/martijn00/LottieXamarin</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
     <NeutralLanguage>en</NeutralLanguage>
     <Version>3.0.0</Version>
     <Platform>AnyCPU</Platform>
-    
+
     <LangVersion>7.3</LangVersion>
     <NoWarn>$(NoWarn);1591;1701;1702;1705;VSX1000;NU1603</NoWarn>
-    
+
     <IsTestProject>$(MSBuildProjectName.Contains('UnitTest'))</IsTestProject>
+    <IsLibraryProject>$(MSBuildProjectName.Contains('Lottie'))</IsLibraryProject>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -47,8 +48,8 @@
   </PropertyGroup>
 
   <ItemGroup Condition="'$(IsTestProject)' != 'true'">
-    <!--<PackageReference Include="Microsoft.CSharp" Version="4.5.0" PrivateAssets="All" />-->
-    <None Include="$(MSBuildThisFileDirectory)\LICENSE" Pack="true" PackagePath=""/>
+    <None Include="$(MSBuildThisFileDirectory)\LICENSE" Pack="true" PackagePath="\" />
+    <None Include="$(MSBuildThisFileDirectory)\icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(IsTestProject)' != 'true' and '$(SourceLinkEnabled)' != 'false' and '$(IsLibraryProject)' == 'true'">
