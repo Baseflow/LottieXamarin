@@ -4,7 +4,7 @@ using Lottie.Forms.Tizen;
 using Lottie.Forms.EventArguments;
 using Xamarin.Forms.Platform.Tizen;
 using ElottieSharp;
-using XForms = Xamarin.Forms.Platform.Tizen.Forms;
+using Xamarin.Forms;
 
 [assembly: ExportRenderer(typeof(AnimationView), typeof(AnimationViewRenderer))]
 namespace Lottie.Forms.Tizen
@@ -57,7 +57,7 @@ namespace Lottie.Forms.Tizen
         {
             if (Control == null)
             {
-                var animationView = new LottieAnimationView(XForms.NativeParent);
+                var animationView = new LottieAnimationView(Xamarin.Forms.Forms.NativeParent);
                 animationView.Finished += OnFinished;
                 SetNativeControl(animationView);
             }

@@ -106,8 +106,10 @@
       <Version>0.4.11</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>4.1.0.555618</Version>
+      <Version>4.2.0.815419</Version>
     </PackageReference>
+	<PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.3" />
+	<PackageReference Include="Xamarin.Android.Support.Core.UI" Version="28.0.0.3" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Lottie.Android\Lottie.Android.csproj">

@@ -18,7 +18,7 @@ namespace Example.Forms.Tizen
         static void Main(string[] args)
         {
             var app = new Program();
-            global::Xamarin.Forms.Platform.Tizen.Forms.Init(app, true);
+            Xamarin.Forms.Forms.Init(app, true);
             app.Run(args);
         }
     }
