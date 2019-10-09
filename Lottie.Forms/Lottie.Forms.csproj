@@ -49,7 +49,7 @@
     <Compile Include="Platforms\Apple\**\*.cs" />
     <Compile Include="Platforms\Ios\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
-    <PackageReference Include="Com.Airbnb.iOS.Lottie" Version="2.5.9" />
+    <PackageReference Include="Com.Airbnb.iOS.Lottie" Version="2.5.10" />
 	  <!--<ProjectReference Include="..\Lottie.iOS\Lottie.iOS.csproj" />-->
   </ItemGroup>
 
@@ -57,7 +57,7 @@
     <Compile Include="Platforms\Apple\**\*.cs" />
     <Compile Include="Platforms\Mac\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
-    <PackageReference Include="Com.Airbnb.iOS.Lottie" Version="2.5.9" />
+    <PackageReference Include="Com.Airbnb.iOS.Lottie" Version="2.5.10" />
 	  <!--<ProjectReference Include="..\Lottie.iOS\Lottie.iOS.csproj" />-->
   </ItemGroup>
 
@@ -65,7 +65,7 @@
     <Compile Include="Platforms\Apple\**\*.cs" />
     <Compile Include="Platforms\Tvos\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
-    <PackageReference Include="Com.Airbnb.iOS.Lottie" Version="2.5.9" />
+    <PackageReference Include="Com.Airbnb.iOS.Lottie" Version="2.5.10" />
 	  <!--<ProjectReference Include="..\Lottie.iOS\Lottie.iOS.csproj" />-->
   </ItemGroup>
 
@@ -79,7 +79,7 @@
     <Compile Include="Platforms\Android\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
     <PackageReference Include="Xamarin.Build.Download" Version="0.4.11" PrivateAssets="All" />
-    <PackageReference Include="Com.Airbnb.Android.Lottie" Version="3.0.4" />
+    <PackageReference Include="Com.Airbnb.Android.Lottie" Version="3.0.5" />
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.3" />
   </ItemGroup>
 
