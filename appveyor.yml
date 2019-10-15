@@ -4,7 +4,7 @@
         - master
         - /release\/.*/
   version: 1.0.{build}
-  image: Visual Studio 2017
+  image: Visual Studio 2019
   before_build:
   - cmd: dotnet --info
   - cmd: dotnet tool install --tool-path . SignClient
@@ -13,9 +13,11 @@
     NUGET_APIKEY:
       secure: Kse62H9lWHIwjsqpi2ih1efUnHc5R6VfIzu1Nfr/CXcJSKPkH8EGElCIxvP43/Oh
     SIGNING_USER:
-      secure: by3V38s+rierF9BmeYoxcpNY5Z8CoxTi0FpTU357vN+qmeH9IHKpxYZK8MDIUG9W
+      secure: 
     SIGNING_SECRET:
-      secure: l9ST2SDzpFtdq9H4sFHwWtWqwzYRffyHmYyUNI1VHlU=
+      secure: 
+    GITHUB_TOKEN:
+      secure: D9GQsZK1etNdnyc39Ko8wsm5C8SbAjHiOyYr5E8K0KUKqFloOYSYP9n6zrcRawal
   build_script:
   - ps: .\build.ps1
   test: off
@@ -26,18 +28,20 @@
       only:
         - develop
   version: 1.0.{build}
-  image: Visual Studio 2017
+  image: Visual Studio 2019
   before_build:
   - cmd: dotnet --info
   - cmd: dotnet tool install --tool-path . SignClient
   environment:
-    NUGET_SOURCE: https://www.myget.org/F/martijn00/api/v2/package
+    NUGET_SOURCE: https://nuget.pkg.github.com/martijn00/index.json
     NUGET_APIKEY:
       secure: 0PNC9eZWAinI1KkE9usbhPAwF1wudL5GJi6lJn9Ylb67M7SE17LIXBoMHuRKJaLE
     SIGNING_USER:
-      secure: by3V38s+rierF9BmeYoxcpNY5Z8CoxTi0FpTU357vN+qmeH9IHKpxYZK8MDIUG9W
+      secure: 
     SIGNING_SECRET:
-      secure: l9ST2SDzpFtdq9H4sFHwWtWqwzYRffyHmYyUNI1VHlU=
+      secure: 
+    GITHUB_TOKEN:
+      secure: D9GQsZK1etNdnyc39Ko8wsm5C8SbAjHiOyYr5E8K0KUKqFloOYSYP9n6zrcRawal
   build_script:
   - ps: .\build.ps1
   test: off
