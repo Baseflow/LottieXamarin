@@ -23,6 +23,8 @@
 
     <IsTestProject>$(MSBuildProjectName.Contains('UnitTest'))</IsTestProject>
     <IsLibraryProject>$(MSBuildProjectName.Contains('Lottie'))</IsLibraryProject>
+	
+    <DisableExtraReferences>true</DisableExtraReferences>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
