@@ -1,6 +1,12 @@
 # LottieXamarin
 Lottie is a mobile library for Android and iOS that parses [Adobe After Effects](http://www.adobe.com/products/aftereffects.html) animations exported as json with [Bodymovin](https://github.com/bodymovin/bodymovin) and renders them natively on mobile!
 
+# Support
+
+* Feel free to open an issue. Make sure to use one of the templates!
+* Commercial support is available. Integration with your app or services, samples, feature request, etc. Email: [hello@baseflow.com](mailto:hello@baseflow.com)
+* Powered by: [baseflow.com](https://baseflow.com)
+
 ## Download
 
 Android: [![NuGet Badge](https://buildstats.info/nuget/Com.Airbnb.Android.Lottie)](https://www.nuget.org/packages/Com.Airbnb.Android.Lottie/)
