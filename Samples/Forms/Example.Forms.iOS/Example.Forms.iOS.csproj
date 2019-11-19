@@ -135,6 +135,10 @@
       <Project>{ba40e6bd-f568-4301-a402-3846f176d49e}</Project>
       <Name>Example.Forms</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Lottie.Forms\Lottie.Forms.csproj">
+      <Project>{F03D2DD6-BBDA-45B9-982E-4DCA43FCB8E1}</Project>
+      <Name>Lottie.Forms</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
