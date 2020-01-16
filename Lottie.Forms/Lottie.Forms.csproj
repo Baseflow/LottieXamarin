@@ -41,6 +41,7 @@
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('uap')) ">
   	<PackageReference Include="Microsoft.Toolkit.Uwp.UI.Lottie" Version="6.0.0" />
+	<PackageReference Include="Microsoft.UI.Xaml" Version="2.2.190917002" />
     <Compile Include="Platforms\Windows\**\*.cs" />
     <Compile Include="Platforms\Uap\**\*.cs" />
   </ItemGroup>
