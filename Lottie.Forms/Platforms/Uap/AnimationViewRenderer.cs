@@ -1,19 +1,21 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
+using System.Threading.Tasks;
 using Lottie.Forms;
 using Lottie.Forms.EventArguments;
 using Lottie.Forms.UWP.Renderers;
-using LottieUWP;
-using LottieUWP.Utils;
+using Microsoft.Toolkit.Uwp.UI.Lottie;
+using Microsoft.UI.Xaml.Controls;
 using Xamarin.Forms.Platform.UWP;
 
 [assembly: ExportRenderer(typeof(AnimationView), typeof(AnimationViewRenderer))]
 
 namespace Lottie.Forms.UWP.Renderers
 {
-    public class AnimationViewRenderer : ViewRenderer<AnimationView, LottieAnimationView>
+    public class AnimationViewRenderer : ViewRenderer<AnimationView, AnimatedVisualPlayer>
     {
-        private LottieAnimationView _animationView;
+        private AnimatedVisualPlayer _animationView;
         private bool _needToReverseAnimationSpeed;
         private bool _needToResetFrames;
 
@@ -34,7 +36,7 @@ namespace Lottie.Forms.UWP.Renderers
 
             if (Control == null && e.NewElement != null)
             {
-                _animationView = new LottieAnimationView();
+                _animationView = new AnimatedVisualPlayer();
 
                 SetNativeControl(_animationView);
             }
@@ -47,9 +49,6 @@ namespace Lottie.Forms.UWP.Renderers
                 e.OldElement.OnPlayFrameSegment -= OnPlayFrameSegment;
 
                 _animationView.Tapped -= AnimationViewTapped;
-
-                _animationView.AnimatorUpdate -= PlaybackFinishedIfProgressReachesOne;
-
                 _animationView = null;
             }
 
@@ -60,22 +59,20 @@ namespace Lottie.Forms.UWP.Renderers
                 e.NewElement.OnPlayProgressSegment += OnPlayProgressSegment;
                 e.NewElement.OnPlayFrameSegment += OnPlayFrameSegment;
 
-                _animationView.RepeatCount = e.NewElement.Loop ? -1 : 0;
-                _animationView.Speed = e.NewElement.Speed;
-                _animationView.ImageAssetsFolder = e.NewElement.ImageAssetsFolder;
+                //_animationView.RepeatCount = e.NewElement.Loop ? -1 : 0;
+                //_animationView.Speed = e.NewElement.Speed;
                 _animationView.Tapped += AnimationViewTapped;
-                _animationView.AnimatorUpdate += PlaybackFinishedIfProgressReachesOne;
 
                 if (!string.IsNullOrEmpty(e.NewElement.Animation))
                 {
-                    await _animationView.SetAnimationAsync(e.NewElement.Animation);
-                    Element.Duration = TimeSpan.FromMilliseconds(_animationView.Duration);
+                    SetAnimation(e.NewElement.Animation);
+                    Element.Duration = _animationView.Duration;
                 }
 
 #pragma warning disable CS0618 // Type or member is obsolete
-                if (e.NewElement.AutoPlay || e.NewElement.IsPlaying)
+                if(e.NewElement.AutoPlay || e.NewElement.IsPlaying)
 #pragma warning restore CS0618 // Type or member is obsolete
-                    _animationView.PlayAnimation();
+                    await _animationView.PlayAsync(0, 1, Element.Loop);
             }
         }
 
@@ -84,32 +81,24 @@ namespace Lottie.Forms.UWP.Renderers
             Element?.Click();
         }
 
-        private void PlaybackFinishedIfProgressReachesOne(object sender, ValueAnimator.ValueAnimatorUpdateEventArgs e)
-        {
-            if (((LottieValueAnimator)e.Animation).AnimatedValueAbsolute >= 1)
-            {
-                Element?.PlaybackFinished();
-            }
-        }
-
-        private void OnPlay(object sender, EventArgs e)
+        private async void OnPlay(object sender, EventArgs e)
         {
             if (_animationView != null)
             {
-                if (_animationView.Progress > 0f)
+                if (_animationView.PlaybackRate > 0f)
                 {
-                    _animationView.ResumeAnimation();
+                    //_animationView.ResumeAnimation();
                 }
                 else
                 {
                     ResetReverse();
-                    _animationView.PlayAnimation();
+                    await _animationView.PlayAsync(0, 1, Element.Loop);
                 }
                 Element.IsPlaying = true;
             }
         }
 
-        private void PrepareReverseAnimation(Action<float, float> action,
+        private async Task PrepareReverseAnimation(Action<float, float> action,
                                              float from, float to)
         {
             var minValue = Math.Min(from, to);
@@ -121,10 +110,10 @@ namespace Lottie.Forms.UWP.Renderers
             if (needReverse && !_needToReverseAnimationSpeed)
             {
                 _needToReverseAnimationSpeed = true;
-                _animationView.ReverseAnimationSpeed();
+                //_animationView.ReverseAnimationSpeed();
             }
 
-            _animationView.PlayAnimation();
+            await _animationView.PlayAsync(0, 1, Element.Loop);
             Element.IsPlaying = true;
         }
 
@@ -132,10 +121,10 @@ namespace Lottie.Forms.UWP.Renderers
         {
             if (_animationView != null)
             {
-                PrepareReverseAnimation((min, max) =>
-                {
-                    _animationView.SetMinAndMaxProgress(min, max);
-                }, e.From, e.To);
+                //PrepareReverseAnimation((min, max) =>
+                //{
+                //    _animationView.SetProgress(min, max);
+                //}, e.From, e.To);
             }
         }
 
@@ -143,11 +132,11 @@ namespace Lottie.Forms.UWP.Renderers
         {
             if (_animationView != null)
             {
-                PrepareReverseAnimation((min, max) =>
-                {
-                    _animationView.SetMinAndMaxFrame((int)min, (int)max);
-                    _needToResetFrames = true;
-                }, e.From, e.To);
+                //PrepareReverseAnimation((min, max) =>
+                //{
+                //    _animationView.SetMinAndMaxFrame((int)min, (int)max);
+                //    _needToResetFrames = true;
+                //}, e.From, e.To);
             }
         }
 
@@ -155,7 +144,7 @@ namespace Lottie.Forms.UWP.Renderers
         {
             if (_animationView != null)
             {
-                _animationView.PauseAnimation();
+                _animationView.Pause();
                 Element.IsPlaying = false;
             }
         }
@@ -167,43 +156,38 @@ namespace Lottie.Forms.UWP.Renderers
 
             if (e.PropertyName == AnimationView.AnimationProperty.PropertyName && !string.IsNullOrEmpty(Element.Animation))
             {
-                await _animationView.SetAnimationAsync(Element.Animation);
-                Element.Duration = TimeSpan.FromMilliseconds(_animationView.Duration);
+                SetAnimation(Element.Animation);
+                Element.Duration = _animationView.Duration;
 
 #pragma warning disable CS0618 // Type or member is obsolete
                 if (Element.AutoPlay || Element.IsPlaying)
 #pragma warning restore CS0618 // Type or member is obsolete
-                    _animationView.PlayAnimation();
+                    await _animationView.PlayAsync(0, 1, Element.Loop);
             }
 
             if (e.PropertyName == AnimationView.ProgressProperty.PropertyName)
             {
-                _animationView.PauseAnimation();
-                _animationView.Progress = Element.Progress;
+                _animationView.Pause();
+                _animationView.SetProgress(Element.Progress);
             }
 
             if (e.PropertyName == AnimationView.LoopProperty.PropertyName)
             {
-                _animationView.RepeatCount = Element.Loop ? -1 : 0;
+                //_animationView.RepeatCount = Element.Loop ? -1 : 0;
             }
 
             if (e.PropertyName == AnimationView.SpeedProperty.PropertyName)
             {
-                _animationView.Speed = Element.Speed;
-            }
-
-            if (e.PropertyName == AnimationView.ImageAssetsFolderProperty.PropertyName && !string.IsNullOrEmpty(Element.ImageAssetsFolder))
-            {
-                _animationView.ImageAssetsFolder = Element.ImageAssetsFolder;
+                //_animationView.Speed = Element.Speed;
             }
 
             if (e.PropertyName == AnimationView.IsPlayingProperty.PropertyName &&
                 !string.IsNullOrEmpty(Element.Animation))
             {
                 if (Element.IsPlaying)
-                    _animationView.PlayAnimation();
+                    await _animationView.PlayAsync(0,1,Element.Loop);
                 else
-                    _animationView.PauseAnimation();
+                    _animationView.Pause();
             }
 
             base.OnElementPropertyChanged(sender, e);
@@ -211,19 +195,29 @@ namespace Lottie.Forms.UWP.Renderers
 
         private void ResetReverse()
         {
-            if (_needToResetFrames)
-            {
-                var composition = _animationView.Composition;
+            //if (_needToResetFrames)
+            //{
+            //    var composition = _animationView.Composition;
 
-                _animationView.SetMinAndMaxFrame((int)composition.StartFrame, (int)composition.EndFrame);
-                _needToResetFrames = false;
-            }
+            //    _animationView.SetMinAndMaxFrame((int)composition.StartFrame, (int)composition.EndFrame);
+            //    _needToResetFrames = false;
+            //}
 
-            if (_needToReverseAnimationSpeed)
+            //if (_needToReverseAnimationSpeed)
+            //{
+            //    _needToReverseAnimationSpeed = false;
+            //    _animationView.ReverseAnimationSpeed();
+            //}
+        }
+
+        private void SetAnimation(string animation, string imageAssetsFolder = "")
+        {
+            var path = Path.Combine("ms-appx:///", string.IsNullOrEmpty(imageAssetsFolder) ? Element.ImageAssetsFolder : imageAssetsFolder, animation);
+
+            _animationView.Source = new LottieVisualSource()
             {
-                _needToReverseAnimationSpeed = false;
-                _animationView.ReverseAnimationSpeed();
-            }
+                UriSource = new Uri(path)
+            };
         }
     }
 }
