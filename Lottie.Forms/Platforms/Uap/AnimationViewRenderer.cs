@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.IO;
-using System.Threading.Tasks;
+using Windows.UI.Xaml.Input;
 using Lottie.Forms;
 using Lottie.Forms.EventArguments;
 using Lottie.Forms.UWP.Renderers;
@@ -30,14 +30,13 @@ namespace Lottie.Forms.UWP.Renderers
 #pragma warning restore 0219
         }
 
-        protected override async void OnElementChanged(ElementChangedEventArgs<AnimationView> e)
+        protected override void OnElementChanged(ElementChangedEventArgs<AnimationView> e)
         {
             base.OnElementChanged(e);
 
             if (Control == null && e.NewElement != null)
             {
-                _animationView = new AnimatedVisualPlayer();
-
+                _animationView = new AnimatedVisualPlayer { AutoPlay = false };
                 SetNativeControl(_animationView);
             }
 
@@ -45,22 +44,24 @@ namespace Lottie.Forms.UWP.Renderers
             {
                 e.OldElement.OnPlay -= OnPlay;
                 e.OldElement.OnPause -= OnPause;
+                e.OldElement.OnFinish -= OnFinish;
                 e.OldElement.OnPlayProgressSegment -= OnPlayProgressSegment;
                 e.OldElement.OnPlayFrameSegment -= OnPlayFrameSegment;
 
+                _animationView.Stop();
                 _animationView.Tapped -= AnimationViewTapped;
-                _animationView = null;
+                RestAnimation();
             }
 
             if (e.NewElement != null)
             {
                 e.NewElement.OnPlay += OnPlay;
                 e.NewElement.OnPause += OnPause;
+                e.NewElement.OnFinish += OnFinish;
                 e.NewElement.OnPlayProgressSegment += OnPlayProgressSegment;
                 e.NewElement.OnPlayFrameSegment += OnPlayFrameSegment;
 
-                //_animationView.RepeatCount = e.NewElement.Loop ? -1 : 0;
-                //_animationView.Speed = e.NewElement.Speed;
+                _animationView.PlaybackRate = e.NewElement.Speed;
                 _animationView.Tapped += AnimationViewTapped;
 
                 if (!string.IsNullOrEmpty(e.NewElement.Animation))
@@ -68,156 +69,183 @@ namespace Lottie.Forms.UWP.Renderers
                     SetAnimation(e.NewElement.Animation);
                     Element.Duration = _animationView.Duration;
                 }
-
 #pragma warning disable CS0618 // Type or member is obsolete
-                if(e.NewElement.AutoPlay || e.NewElement.IsPlaying)
+                if (e.NewElement.AutoPlay || e.NewElement.IsPlaying)
 #pragma warning restore CS0618 // Type or member is obsolete
-                    await _animationView.PlayAsync(0, 1, Element.Loop);
+                {
+                    _ = _animationView.PlayAsync(0, 1, e.NewElement.Loop).AsTask();
+                }
+                else
+                {
+                    _animationView.Stop();
+                }
             }
         }
 
-        private void AnimationViewTapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private void OnFinish(object sender, EventArgs e)
+        {
+            _animationView?.Stop();
+            if (Element != null)
+            {
+                Element.IsPlaying = false;
+            }
+        }
+
+        private void AnimationViewTapped(object sender, TappedRoutedEventArgs e)
         {
             Element?.Click();
         }
 
-        private async void OnPlay(object sender, EventArgs e)
+        private void OnPlay(object sender, EventArgs e)
         {
-            if (_animationView != null)
+            if (_animationView != null && Element != null)
             {
-                if (_animationView.PlaybackRate > 0f)
-                {
-                    //_animationView.ResumeAnimation();
-                }
-                else
-                {
-                    ResetReverse();
-                    await _animationView.PlayAsync(0, 1, Element.Loop);
-                }
-                Element.IsPlaying = true;
+                Play();
             }
         }
 
-        private async Task PrepareReverseAnimation(Action<float, float> action,
-                                             float from, float to)
+        private void PrepareReverseAnimation(Action<float, float> action, float from, float to)
         {
-            var minValue = Math.Min(from, to);
-            var maxValue = Math.Max(from, to);
-            var needReverse = from > to;
+            float minValue = Math.Min(from, to);
+            float maxValue = Math.Max(from, to);
+            bool needReverse = from > to;
 
             action(minValue, maxValue);
 
             if (needReverse && !_needToReverseAnimationSpeed)
             {
                 _needToReverseAnimationSpeed = true;
-                //_animationView.ReverseAnimationSpeed();
+                _animationView.PlaybackRate = -1;
             }
 
-            await _animationView.PlayAsync(0, 1, Element.Loop);
-            Element.IsPlaying = true;
+            Play(minValue, maxValue);
         }
 
         private void OnPlayProgressSegment(object sender, ProgressSegmentEventArgs e)
         {
-            if (_animationView != null)
+            if (_animationView != null && Element != null)
             {
-                //PrepareReverseAnimation((min, max) =>
-                //{
-                //    _animationView.SetProgress(min, max);
-                //}, e.From, e.To);
+                PrepareReverseAnimation((min, max) => Play(min, max), e.From, e.To);
             }
         }
 
         private void OnPlayFrameSegment(object sender, FrameSegmentEventArgs e)
         {
-            if (_animationView != null)
+            if (_animationView != null && Element != null)
             {
-                //PrepareReverseAnimation((min, max) =>
-                //{
-                //    _animationView.SetMinAndMaxFrame((int)min, (int)max);
-                //    _needToResetFrames = true;
-                //}, e.From, e.To);
+                PrepareReverseAnimation((min, max) =>
+                {
+                    Play(min, max);
+                    _needToResetFrames = true;
+                }, e.From, e.To);
             }
         }
 
         private void OnPause(object sender, EventArgs e)
         {
-            if (_animationView != null)
+            if (_animationView != null && Element != null)
             {
                 _animationView.Pause();
                 Element.IsPlaying = false;
             }
         }
 
-        protected override async void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (_animationView == null || Element == null)
-                return;
+            base.OnElementPropertyChanged(sender, e);
 
-            if (e.PropertyName == AnimationView.AnimationProperty.PropertyName && !string.IsNullOrEmpty(Element.Animation))
+            if (_animationView == null || Element == null)
             {
+
+                return;
+            }
+
+            if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
+            {
+                if (string.IsNullOrEmpty(Element.Animation))
+                {
+                    _animationView.Stop();
+                    RestAnimation();
+                    Element.Duration = TimeSpan.Zero;
+                    Element.IsPlaying = false;
+                    return;
+                }
+
                 SetAnimation(Element.Animation);
                 Element.Duration = _animationView.Duration;
 
 #pragma warning disable CS0618 // Type or member is obsolete
                 if (Element.AutoPlay || Element.IsPlaying)
 #pragma warning restore CS0618 // Type or member is obsolete
-                    await _animationView.PlayAsync(0, 1, Element.Loop);
+                {
+                    Play();
+                }
+                else
+                {
+                    _animationView.Stop();
+                }
             }
-
-            if (e.PropertyName == AnimationView.ProgressProperty.PropertyName)
+            else if (e.PropertyName == AnimationView.ProgressProperty.PropertyName)
             {
                 _animationView.Pause();
                 _animationView.SetProgress(Element.Progress);
             }
-
-            if (e.PropertyName == AnimationView.LoopProperty.PropertyName)
+            else if (e.PropertyName == AnimationView.SpeedProperty.PropertyName)
             {
-                //_animationView.RepeatCount = Element.Loop ? -1 : 0;
+                _animationView.PlaybackRate = Element.Speed;
             }
-
-            if (e.PropertyName == AnimationView.SpeedProperty.PropertyName)
+            else if (e.PropertyName == AnimationView.IsPlayingProperty.PropertyName && !string.IsNullOrEmpty(Element.Animation))
             {
-                //_animationView.Speed = Element.Speed;
-            }
-
-            if (e.PropertyName == AnimationView.IsPlayingProperty.PropertyName &&
-                !string.IsNullOrEmpty(Element.Animation))
-            {
-                if (Element.IsPlaying)
-                    await _animationView.PlayAsync(0,1,Element.Loop);
+                if (Element?.IsPlaying == true)
+                {
+                    Play();
+                }
                 else
-                    _animationView.Pause();
+                {
+                    _animationView?.Pause();
+                }
             }
-
-            base.OnElementPropertyChanged(sender, e);
         }
 
         private void ResetReverse()
         {
-            //if (_needToResetFrames)
-            //{
-            //    var composition = _animationView.Composition;
-
-            //    _animationView.SetMinAndMaxFrame((int)composition.StartFrame, (int)composition.EndFrame);
-            //    _needToResetFrames = false;
-            //}
-
-            //if (_needToReverseAnimationSpeed)
-            //{
-            //    _needToReverseAnimationSpeed = false;
-            //    _animationView.ReverseAnimationSpeed();
-            //}
+            _animationView.PlaybackRate = _animationView.PlaybackRate * -1;
         }
 
         private void SetAnimation(string animation, string imageAssetsFolder = "")
         {
-            var path = Path.Combine("ms-appx:///", string.IsNullOrEmpty(imageAssetsFolder) ? Element.ImageAssetsFolder : imageAssetsFolder, animation);
+            var assets = "Assets";
 
-            _animationView.Source = new LottieVisualSource()
+            if (!string.IsNullOrEmpty(imageAssetsFolder))
             {
-                UriSource = new Uri(path)
-            };
+                assets = imageAssetsFolder;
+            }
+
+            if (!string.IsNullOrEmpty(Element.ImageAssetsFolder))
+            {
+                assets = Element.ImageAssetsFolder;
+            }
+
+            string path = Path.Combine("ms-appx:///", assets, animation);
+
+            _animationView.Source = new LottieVisualSource { UriSource = new Uri(path) };
+        }
+
+        private void RestAnimation()
+        {
+            _animationView.Source = null;
+        }
+
+        private void Play(double from = 0, double to = 1)
+        {
+            if (_animationView == null || Element == null)
+            {
+                return;
+            }
+
+            _ = _animationView.PlayAsync(from, to, Element.Loop).AsTask();
+
+            Element.IsPlaying = true;
         }
     }
 }
