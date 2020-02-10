@@ -7,12 +7,12 @@
     <PackageId>Com.Airbnb.Android.Lottie</PackageId>
     <IsBindingProject>true</IsBindingProject>
     <EnableDefaultItems>false</EnableDefaultItems>
-    <Version>3.0.5</Version>
+    <Version>3.0.6</Version>
   </PropertyGroup>
   
   <ItemGroup>
 	  <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.3" />
-	  <PackageReference Include="Xamarin.Build.Download" Version="0.4.11" PrivateAssets="All" />
+	  <PackageReference Include="Xamarin.Build.Download" Version="0.8.0" PrivateAssets="All" />
     <!-- None Include="Additions\*;Jars\*;Transforms\*" /-->
     <LibraryProjectZip Include="Jars\*.aar" />
     <TransformFile Include="Transforms\*.xml" />
