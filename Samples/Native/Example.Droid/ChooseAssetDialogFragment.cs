@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Android.Content;
-using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
-using DialogFragment = Android.Support.V4.App.DialogFragment;
+using AndroidX.Fragment.App;
+using AndroidX.RecyclerView.Widget;
+//using DialogFragment = Android.Support.V4.App.DialogFragment;
 
 namespace LottieSamples.Droid
 {

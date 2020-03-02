@@ -8,19 +8,19 @@ using Android.Animation;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
-using Android.Support.V4.App;
-using Android.Support.V7.App;
-using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
-using Toolbar = Android.Support.V7.Widget.Toolbar;
-using DialogFragment = Android.Support.V4.App.DialogFragment;
+using Toolbar = AndroidX.AppCompat.Widget.Toolbar;
+//using DialogFragment = Android.Support.V4.App.DialogFragment;
 using Uri = Android.Net.Uri;
-using Android.Support.Design.Widget;
 using Android.Database;
 using Square.OkHttp3;
 using Org.Json;
 using Android.Util;
+using AndroidX.Fragment.App;
+using AndroidX.AppCompat.Widget;
+using AndroidX.AppCompat.App;
+using Google.Android.Material.Snackbar;
 
 namespace LottieSamples.Droid
 {

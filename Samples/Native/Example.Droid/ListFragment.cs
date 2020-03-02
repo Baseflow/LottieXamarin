@@ -3,9 +3,9 @@ using System;
 
 using Android.Content;
 using Android.OS;
-using Android.Support.V4.App;
-using Android.Support.V7.Widget;
 using Android.Views;
+using AndroidX.Fragment.App;
+using AndroidX.RecyclerView.Widget;
 using Com.Airbnb.Lottie;
 
 namespace LottieSamples.Droid
