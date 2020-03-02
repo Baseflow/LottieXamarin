@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>LottieSamples.Droid</RootNamespace>
     <AssemblyName>LottieSamples.Droid</AssemblyName>
-    <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v10.0</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -28,6 +28,7 @@
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <AndroidLinkMode>None</AndroidLinkMode>
     <EmbedAssembliesIntoApk>false</EmbedAssembliesIntoApk>
     <AndroidSupportedAbis>armeabi-v7a;x86</AndroidSupportedAbis>
@@ -36,6 +37,7 @@
     <AndroidUseAapt2>true</AndroidUseAapt2>
     <AndroidDexTool>d8</AndroidDexTool>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
+    <Nullable></Nullable>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,6 +52,7 @@
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
     <JavaMaximumHeapSize>1G</JavaMaximumHeapSize>
     <AndroidSupportedAbis>armeabi-v7a;arm64-v8a</AndroidSupportedAbis>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -144,18 +147,18 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Square.OkHttp3">
-      <Version>3.14.2</Version>
+      <Version>4.2.2</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Build.Download">
-      <Version>0.8.0</Version>
+      <Version>0.9.0</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Android.Support.Design">
-      <Version>28.0.0.3</Version>
+    <PackageReference Include="Xamarin.Google.Android.Material">
+      <Version>1.0.0</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Android.Support.v7.AppCompat">
-      <Version>28.0.0.3</Version>
+    <PackageReference Include="Xamarin.AndroidX.AppCompat">
+      <Version>1.1.0</Version>
     </PackageReference>
-  </ItemGroup>
+  <PackageReference Include="Xamarin.AndroidX.Migration" Version="1.0.0" /></ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\9squares-AlBoardman.json" />
     <AndroidAsset Include="Assets\EmptyState.json" />
