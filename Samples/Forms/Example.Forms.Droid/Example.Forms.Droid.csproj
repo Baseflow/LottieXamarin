@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -98,13 +98,18 @@
     <PackageReference Include="Xamarin.Forms">
       <Version>4.5.0.356</Version>
     </PackageReference>
-	<PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.1.0" />
-	<PackageReference Include="Xamarin.AndroidX.Legacy.Support.Core.UI" Version="1.0.0" />
-  <PackageReference Include="Xamarin.AndroidX.Migration" Version="1.0.0" /></ItemGroup>
+    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.1.0" />
+    <PackageReference Include="Xamarin.AndroidX.Legacy.Support.Core.UI" Version="1.0.0" />
+    <PackageReference Include="Xamarin.AndroidX.Migration" Version="1.0.0" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Lottie.Android\Lottie.Android.csproj">
       <Project>{284c8e3c-3352-41af-8a5a-ac2cfd918737}</Project>
       <Name>Lottie.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Lottie.Forms\Lottie.Forms.csproj">
+      <Project>{f03d2dd6-bbda-45b9-982e-4dca43fcb8e1}</Project>
+      <Name>Lottie.Forms</Name>
     </ProjectReference>
     <ProjectReference Include="..\Example.Forms\Example.Forms.csproj">
       <Project>{ba40e6bd-f568-4301-a402-3846f176d49e}</Project>
