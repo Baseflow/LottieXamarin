@@ -8,7 +8,6 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
 [assembly: ExportRenderer(typeof(AnimationView), typeof(AnimationViewRenderer))]
-
 namespace Lottie.Forms.Droid
 {
 #pragma warning disable 0618
