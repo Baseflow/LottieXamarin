@@ -1,9 +1,8 @@
 ﻿using System;
-using Foundation;
-using AppKit;
-using System.Linq;
 using System.IO;
-using Airbnb.Lottie;
+using System.Linq;
+using AppKit;
+using Foundation;
 
 
 namespace Example.macOS
@@ -28,7 +27,7 @@ namespace Example.macOS
         }
 
         // Shared initialization code
-        void Initialize()
+        private void Initialize()
         {
             RegisterForDraggedTypes(new string[] { NSPasteboard.NSFilenamesType });
 
@@ -93,7 +92,7 @@ namespace Example.macOS
             }
             else if (Array.IndexOf(pboard.Types, NSPasteboard.NSFilenamesType) > -1)
             {
-                string[] files =
+                var files =
                     NSArray.StringArrayFromHandle(pboard.GetPropertyListForType(NSPasteboard.NSFilenamesType).Handle);
 
                 var jsonFile = files.FirstOrDefault(
@@ -134,44 +133,46 @@ namespace Example.macOS
             this.lottieLogo.LoopAnimation = !this.lottieLogo.LoopAnimation;
         }
 
-		public void OpenAnimationUrl(NSUrl url)
-		{
-			this.lottieLogo.RemoveFromSuperview();
-			this.lottieLogo = null;
+        public void OpenAnimationUrl(NSUrl url)
+        {
+            this.lottieLogo.RemoveFromSuperview();
+            this.lottieLogo = null;
 
-			this.lottieLogo = new LOTAnimationView(url);
-			setDefaultViewProperties();
-		}
+            this.lottieLogo = new LOTAnimationView(url);
+            setDefaultViewProperties();
+        }
 
         public nfloat AnimationProgress
         {
-            get {
+            get
+            {
                 return this.lottieLogo.AnimationProgress;
             }
 
-            set {
+            set
+            {
                 this.lottieLogo.AnimationProgress = value;
             }
         }
 
-        private void OpenAnimationFile(string file) 
+        private void OpenAnimationFile(string file)
         {
             this.lottieLogo.RemoveFromSuperview();
             this.lottieLogo = null;
 
             this.lottieLogo = LOTAnimationView.AnimationWithFilePath(file);
             setDefaultViewProperties();
-		}
+        }
 
         private void setDefaultViewProperties()
         {
-			this.lottieLogo.ContentMode = LOTViewContentMode.ScaleAspectFit;
-			this.lottieLogo.Frame = this.Bounds;
-			this.lottieLogo.AutoresizingMask = NSViewResizingMask.WidthSizable |
-				NSViewResizingMask.HeightSizable;
+            this.lottieLogo.ContentMode = LOTViewContentMode.ScaleAspectFit;
+            this.lottieLogo.Frame = this.Bounds;
+            this.lottieLogo.AutoresizingMask = NSViewResizingMask.WidthSizable |
+                NSViewResizingMask.HeightSizable;
 
-			this.AddSubview(this.lottieLogo, place: NSWindowOrderingMode.Below, otherView: null);
-			this.lottieLogo.Play();
+            this.AddSubview(this.lottieLogo, place: NSWindowOrderingMode.Below, otherView: null);
+            this.lottieLogo.Play();
         }
     }
 }

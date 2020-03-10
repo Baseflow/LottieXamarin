@@ -19,7 +19,7 @@ namespace LottieSamples.Droid
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            View view = inflater.Inflate(Resource.Layout.fragment_list, container, false);
+            var view = inflater.Inflate(Resource.Layout.fragment_list, container, false);
 
             this.recyclerView = view.FindViewById<RecyclerView>(Resource.Id.recycler_view);
             this.animationView = view.FindViewById<LottieAnimationView>(Resource.Id.animation_view);
@@ -43,7 +43,7 @@ namespace LottieSamples.Droid
             this.animationView.CancelAnimation();
         }
 
-        void Adapter_ItemClick(object sender, string e)
+        private void Adapter_ItemClick(object sender, string e)
         {
             if (FileAdapter.TagViewer.Equals(e))
             {
@@ -57,12 +57,12 @@ namespace LottieSamples.Droid
 
         private void ShowFragment(Fragment fragment)
         {
-                FragmentManager.BeginTransaction()
-                               .AddToBackStack(null)
-                               .SetCustomAnimations(Resource.Animation.slide_in_right, Resource.Animation.hold, Resource.Animation.hold, Resource.Animation.slide_out_right)
-                               .Remove(this)
-                               .Replace(Resource.Id.content_2, fragment)
-                               .Commit();
+            FragmentManager.BeginTransaction()
+                           .AddToBackStack(null)
+                           .SetCustomAnimations(Resource.Animation.slide_in_right, Resource.Animation.hold, Resource.Animation.hold, Resource.Animation.slide_out_right)
+                           .Remove(this)
+                           .Replace(Resource.Id.content_2, fragment)
+                           .Commit();
         }
 
 
@@ -78,14 +78,14 @@ namespace LottieSamples.Droid
 
             public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
             {
-                View view = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.view_holder_file, parent, false);
+                var view = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.view_holder_file, parent, false);
                 return new StringViewHolder(view, OnClick);
             }
 
             public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
             {
 
-                StringViewHolder vh = holder as StringViewHolder;
+                var vh = holder as StringViewHolder;
 
                 switch (position)
                 {

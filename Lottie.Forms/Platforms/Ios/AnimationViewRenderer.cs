@@ -21,7 +21,7 @@ namespace Lottie.Forms.iOS.Renderers
         /// <summary>
         ///   Used for registration with dependency service
         /// </summary>
-        public new static void Init()
+        public static new void Init()
         {
             // needed because of this linker issue: https://bugzilla.xamarin.com/show_bug.cgi?id=31076
 #pragma warning disable 0219

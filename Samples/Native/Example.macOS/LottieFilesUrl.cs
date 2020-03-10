@@ -10,7 +10,7 @@ namespace Example.macOS
         private static string LottieFilesHost = "www.lottiefiles.com";
         private const string DownloadUrl = "https://www.lottiefiles.com/download/";
 
-		public int Id { get; }
+        public int Id { get; }
         public NSUrl JsonUrl { get; }
         public string AnimationName;
 
@@ -20,9 +20,9 @@ namespace Example.macOS
             var fileIdRegExp = Regex.Match(url.LastPathComponent, @"^\d+", RegexOptions.Singleline);
             if (fileIdRegExp.Success)
             {
-                this.Id = Int32.Parse(fileIdRegExp.Value);
+                this.Id = int.Parse(fileIdRegExp.Value);
 
-                this.JsonUrl = new NSUrl(String.Concat(DownloadUrl, this.Id));
+                this.JsonUrl = new NSUrl(string.Concat(DownloadUrl, this.Id));
 
                 this.AnimationName = GetAnimationName(
                     url.LastPathComponent.Substring(fileIdRegExp.Length + 1)
@@ -35,10 +35,10 @@ namespace Example.macOS
             if (url == null)
                 return false;
 
-            bool isValidUrl = url.Host.Equals(LottieFilesHost, 
+            var isValidUrl = url.Host.Equals(LottieFilesHost,
                                     StringComparison.InvariantCultureIgnoreCase);
 
-            isValidUrl &= Regex.Match(url.LastPathComponent, @"^\d+", 
+            isValidUrl &= Regex.Match(url.LastPathComponent, @"^\d+",
                                       RegexOptions.Singleline).Success;
 
             return isValidUrl;
@@ -47,7 +47,7 @@ namespace Example.macOS
         private string GetAnimationName(string title)
         {
             title = title.Replace('-', ' ');
-			return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(title);
-		}
+            return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(title);
+        }
     }
 }

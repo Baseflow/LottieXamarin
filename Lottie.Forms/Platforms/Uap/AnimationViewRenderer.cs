@@ -1,12 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
 using System.IO;
-using Windows.UI.Xaml.Input;
 using Lottie.Forms;
 using Lottie.Forms.EventArguments;
 using Lottie.Forms.UWP.Renderers;
 using Microsoft.Toolkit.Uwp.UI.Lottie;
 using Microsoft.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Xamarin.Forms.Platform.UWP;
 
 [assembly: ExportRenderer(typeof(AnimationView), typeof(AnimationViewRenderer))]
@@ -106,9 +106,9 @@ namespace Lottie.Forms.UWP.Renderers
 
         private void PrepareReverseAnimation(Action<float, float> action, float from, float to)
         {
-            float minValue = Math.Min(from, to);
-            float maxValue = Math.Max(from, to);
-            bool needReverse = from > to;
+            var minValue = Math.Min(from, to);
+            var maxValue = Math.Max(from, to);
+            var needReverse = from > to;
 
             action(minValue, maxValue);
 
@@ -226,7 +226,7 @@ namespace Lottie.Forms.UWP.Renderers
                 assets = Element.ImageAssetsFolder;
             }
 
-            string path = Path.Combine("ms-appx:///", assets, animation);
+            var path = Path.Combine("ms-appx:///", assets, animation);
 
             _animationView.Source = new LottieVisualSource { UriSource = new Uri(path) };
         }

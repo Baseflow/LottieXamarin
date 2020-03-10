@@ -1,26 +1,22 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Com.Airbnb.Lottie;
 using Android.Animation;
 using Android.Content;
+using Android.Database;
 using Android.OS;
-using Android.Runtime;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
+using AndroidX.AppCompat.App;
+using AndroidX.AppCompat.Widget;
+using AndroidX.Fragment.App;
+using Com.Airbnb.Lottie;
+using Google.Android.Material.Snackbar;
+using Square.OkHttp3;
 using Toolbar = AndroidX.AppCompat.Widget.Toolbar;
 //using DialogFragment = Android.Support.V4.App.DialogFragment;
 using Uri = Android.Net.Uri;
-using Android.Database;
-using Square.OkHttp3;
-using Org.Json;
-using Android.Util;
-using AndroidX.Fragment.App;
-using AndroidX.AppCompat.Widget;
-using AndroidX.AppCompat.App;
-using Google.Android.Material.Snackbar;
 
 namespace LottieSamples.Droid
 {
@@ -30,7 +26,7 @@ namespace LottieSamples.Droid
         private const int RcFile = 1338;
         private const int RcUrl = 1339;
         public const string ExtraAnimationName = "animation_name";
-        private readonly IDictionary<String, String> assetFolders = new Dictionary<String, String>() 
+        private readonly IDictionary<string, string> assetFolders = new Dictionary<string, string>()
         {
             {"WeAccept.json", "Images/WeAccept"}
         };
@@ -55,7 +51,7 @@ namespace LottieSamples.Droid
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            View view = inflater.Inflate(Resource.Layout.fragment_animation, container, false);
+            var view = inflater.Inflate(Resource.Layout.fragment_animation, container, false);
 
             this.toolbar = view.FindViewById<Toolbar>(Resource.Id.toolbar);
             this.instructionsContainer = view.FindViewById<ViewGroup>(Resource.Id.instructions);
@@ -71,11 +67,11 @@ namespace LottieSamples.Droid
             this.loopButton = view.FindViewById<ImageButton>(Resource.Id.loop);
             this.animationNameView = view.FindViewById<TextView>(Resource.Id.animation_name);
 
-            ImageButton restartButton = view.FindViewById<ImageButton>(Resource.Id.restart);
-            ImageButton loadAssetButton = view.FindViewById<ImageButton>(Resource.Id.load_asset);
-            ImageButton qrscanButton = view.FindViewById<ImageButton>(Resource.Id.qrscan);
-            ImageButton loadFieButton = view.FindViewById<ImageButton>(Resource.Id.load_file);
-            ImageButton loadUrlButton = view.FindViewById<ImageButton>(Resource.Id.load_url);
+            var restartButton = view.FindViewById<ImageButton>(Resource.Id.restart);
+            var loadAssetButton = view.FindViewById<ImageButton>(Resource.Id.load_asset);
+            var qrscanButton = view.FindViewById<ImageButton>(Resource.Id.qrscan);
+            var loadFieButton = view.FindViewById<ImageButton>(Resource.Id.load_file);
+            var loadUrlButton = view.FindViewById<ImageButton>(Resource.Id.load_url);
 
             playButton.Click += PlayButton_Click;
             restartButton.Click += RestartButton_Click;
@@ -108,7 +104,7 @@ namespace LottieSamples.Droid
             this.scaleSeekBar.ProgressChanged += (sender, e) =>
             {
                 this.animationView.Scale = e.Progress / ScaleSliderFactor;
-                this.scaleTextView.Text = String.Format("{0:0.00}", this.animationView.Scale);
+                this.scaleTextView.Text = string.Format("{0:0.00}", this.animationView.Scale);
             };
 
             return view;
@@ -137,11 +133,11 @@ namespace LottieSamples.Droid
                 case Resource.Id.hardware_acceleration:
                     this.animationView.SetRenderMode(item.IsChecked ? RenderMode.Hardware : RenderMode.Software);
                     return true;
-                
+
                 case Resource.Id.merge_paths:
                     this.animationView.EnableMergePathsForKitKatAndAbove(item.IsChecked);
                     return true;
-                    
+
                 default:
                     return base.OnOptionsItemSelected(item);
             }
@@ -155,7 +151,7 @@ namespace LottieSamples.Droid
             switch (requestCode)
             {
                 case RcAsset:
-                    string assetName = data.GetStringExtra(ExtraAnimationName);
+                    var assetName = data.GetStringExtra(ExtraAnimationName);
                     string assetFolder = null;
                     assetFolders.TryGetValue(assetName, out assetFolder);
                     animationView.ImageAssetsFolder = assetFolder;
@@ -166,10 +162,10 @@ namespace LottieSamples.Droid
                     break;
 
                 case RcFile:
-                    Uri uri = data.Data;
+                    var uri = data.Data;
                     try
                     {
-                        string path = GetPath(uri);
+                        var path = GetPath(uri);
 
                     }
                     catch (Exception ex)
@@ -183,14 +179,14 @@ namespace LottieSamples.Droid
             }
         }
 
-        void PlayButton_Click(object sender, EventArgs e)
+        private void PlayButton_Click(object sender, EventArgs e)
         {
             if (animationView.IsAnimating)
             {
                 animationView.PauseAnimation();
                 PostUpdatePlayButtonText();
             }
-            else 
+            else
             {
                 if (animationView.Progress == 1f)
                 {
@@ -201,9 +197,9 @@ namespace LottieSamples.Droid
             }
         }
 
-        void RestartButton_Click(object sender, EventArgs e)
+        private void RestartButton_Click(object sender, EventArgs e)
         {
-            bool restart = animationView.IsAnimating;
+            var restart = animationView.IsAnimating;
             animationView.CancelAnimation();
             animationView.Progress = 0f;
             if (restart)
@@ -212,13 +208,13 @@ namespace LottieSamples.Droid
             }
         }
 
-        void LoopButton_Click(object sender, EventArgs e)
+        private void LoopButton_Click(object sender, EventArgs e)
         {
             loopButton.Activated = !loopButton.Activated;
             animationView.Loop(loopButton.Activated);
         }
 
-        void InvertButton_Click(object sender, EventArgs e)
+        private void InvertButton_Click(object sender, EventArgs e)
         {
             animationContainer.Activated = !animationContainer.Activated;
             invertButton.Activated = animationContainer.Activated;
@@ -235,7 +231,7 @@ namespace LottieSamples.Droid
         private void LoadFileButton_Click(object sender, EventArgs e)
         {
             animationView.CancelAnimation();
-            Intent intent = new Intent(Intent.ActionGetContent);
+            var intent = new Intent(Intent.ActionGetContent);
             intent.SetType("*/*.json");
             intent.AddCategory(Intent.CategoryOpenable);
 
@@ -253,7 +249,7 @@ namespace LottieSamples.Droid
         private void LoadUrlButton_Click(object sender, EventArgs e)
         {
             animationView.CancelAnimation();
-            EditText urlView = new EditText(this.Context);
+            var urlView = new EditText(this.Context);
             new AlertDialog.Builder(this.Context)
                            .SetTitle("Enter a URL")
                            .SetView(urlView)
@@ -264,8 +260,8 @@ namespace LottieSamples.Droid
                            })
                            .SetNegativeButton("Cancel", (dialog, ev) =>
                            {
-                ((AlertDialog)dialog).Dismiss();
-                
+                               ((AlertDialog)dialog).Dismiss();
+
                            })
                            .Show();
         }
@@ -293,13 +289,13 @@ namespace LottieSamples.Droid
         {
             if (this.qrcodeOverlay != null)
                 return this.qrcodeOverlay;
-            
+
             this.qrcodeOverlay = new RelativeLayout(this.Activity);
 
-            TextView title = new TextView(this.Activity);
+            var title = new TextView(this.Activity);
             title.SetTextColor(Android.Graphics.Color.White);
             title.SetText(Resource.String.scan_prompt);
-            RelativeLayout.LayoutParams tl = new RelativeLayout.LayoutParams(
+            var tl = new RelativeLayout.LayoutParams(
                 ViewGroup.LayoutParams.WrapContent,
                 ViewGroup.LayoutParams.WrapContent);
             tl.TopMargin = (int)TypedValue.ApplyDimension(ComplexUnitType.Dip, 80, Context.Resources.DisplayMetrics);
@@ -309,11 +305,11 @@ namespace LottieSamples.Droid
 
             this.qrcodeOverlay.AddView(title);
 
-            int pixel = (int)TypedValue.ApplyDimension(ComplexUnitType.Dip, 200, Context.Resources.DisplayMetrics);
-            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(pixel, pixel);
+            var pixel = (int)TypedValue.ApplyDimension(ComplexUnitType.Dip, 200, Context.Resources.DisplayMetrics);
+            var lp = new RelativeLayout.LayoutParams(pixel, pixel);
             lp.AddRule(LayoutRules.CenterInParent);
 
-            AppCompatImageView img = new AppCompatImageView(this.Activity);
+            var img = new AppCompatImageView(this.Activity);
             img.SetImageResource(Resource.Drawable.ic_qr_overlay);
             img.LayoutParameters = lp;
 
@@ -335,12 +331,12 @@ namespace LottieSamples.Droid
 
         public void OnAnimationRepeat(Animator animation)
         {
-            
+
         }
 
         public void OnAnimationStart(Animator animation)
         {
-            
+
         }
         #endregion
 
@@ -356,13 +352,13 @@ namespace LottieSamples.Droid
         {
             if ("content".Equals(uri.Scheme, StringComparison.InvariantCultureIgnoreCase))
             {
-                String[] projection = { "_data" };
+                string[] projection = { "_data" };
                 ICursor cursor = null;
 
                 try
                 {
                     cursor = Context.ContentResolver.Query(uri, projection, null, null, null);
-                    int column_index = cursor.GetColumnIndexOrThrow("_data");
+                    var column_index = cursor.GetColumnIndexOrThrow("_data");
                     if (cursor.MoveToFirst())
                     {
                         return cursor.GetString(column_index);
@@ -388,7 +384,7 @@ namespace LottieSamples.Droid
             return null;
         }
 
-        private void LoadUrl(String url)
+        private void LoadUrl(string url)
         {
             Request request;
             try
@@ -429,17 +425,17 @@ namespace LottieSamples.Droid
             },
                                             (ICall call, Java.IO.IOException e) => OnLoadError());
         }
-    
-        private void SetComposition(LottieComposition composition, String name)
+
+        private void SetComposition(LottieComposition composition, string name)
         {
             instructionsContainer.Visibility = ViewStates.Gone;
             seekBar.Progress = 0;
-            animationView.Composition =composition;
+            animationView.Composition = composition;
             animationNameView.Text = name;
-            this.scaleTextView.Text = String.Format("{0:0.00}", animationView.Scale);
+            this.scaleTextView.Text = string.Format("{0:0.00}", animationView.Scale);
             this.scaleSeekBar.Progress = (int)(animationView.Scale * ScaleSliderFactor);
         }
-    
+
         private void PostUpdatePlayButtonText()
         {
             new Handler().Post(UpdatePlayButtonText);

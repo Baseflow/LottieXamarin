@@ -1,17 +1,17 @@
 ﻿using System;
-using Lottie.Forms;
-using Lottie.Forms.Tizen;
-using Lottie.Forms.EventArguments;
-using Xamarin.Forms.Platform.Tizen;
 using ElottieSharp;
+using Lottie.Forms;
+using Lottie.Forms.EventArguments;
+using Lottie.Forms.Tizen;
 using Xamarin.Forms;
+using Xamarin.Forms.Platform.Tizen;
 
 [assembly: ExportRenderer(typeof(AnimationView), typeof(AnimationViewRenderer))]
 namespace Lottie.Forms.Tizen
 {
     public class AnimationViewRenderer : ViewRenderer<AnimationView, LottieAnimationView>
     {
-        bool _isReady;
+        private bool _isReady;
 
         public AnimationViewRenderer()
         {
@@ -153,7 +153,7 @@ namespace Lottie.Forms.Tizen
 
         private void UpdateSpeed()
         {
-            Control.Speed = (double) new decimal(Element.Speed);
+            Control.Speed = (double)new decimal(Element.Speed);
         }
 
     }

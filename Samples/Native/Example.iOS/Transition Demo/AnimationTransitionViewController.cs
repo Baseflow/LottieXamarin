@@ -1,13 +1,11 @@
-﻿using System;
-using Airbnb.Lottie;
-using CoreGraphics;
+﻿using CoreGraphics;
 using Foundation;
+using System;
 using UIKit;
 
 namespace LottieSamples.iOS
 {
-
-    partial class AnimationTransitionViewController : UIViewController, IUIViewControllerTransitioningDelegate
+    internal partial class AnimationTransitionViewController : UIViewController, IUIViewControllerTransitioningDelegate
     {
         private UIButton button1;
         private UIButton closeButton;

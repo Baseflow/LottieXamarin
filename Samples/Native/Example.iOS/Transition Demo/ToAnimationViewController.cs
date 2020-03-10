@@ -1,12 +1,12 @@
-﻿using System;
-using CoreGraphics;
+﻿using CoreGraphics;
 using Foundation;
+using System;
 using UIKit;
 
 namespace LottieSamples.iOS
 {
     [Register("ToAnimationViewController")]
-    public  class ToAnimationViewController : UIViewController
+    public class ToAnimationViewController : UIViewController
     {
         private UIButton button1;
 

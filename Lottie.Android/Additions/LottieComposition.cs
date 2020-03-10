@@ -2,19 +2,17 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Android.Content;
-using Android.Content.Res;
-using Org.Json;
 
 namespace Com.Airbnb.Lottie
 {
-    partial class LottieComposition
+    public partial class LottieComposition
     {
-        partial class Factory
+        public partial class Factory
         {
             /// <summary>
             /// Asynchronously loads a composition from a file stored in /assets.
             /// </summary>
-            public static ICancellable FromAssetFileName(Context context, String fileName, Action<LottieComposition> onLoaded)
+            public static ICancellable FromAssetFileName(Context context, string fileName, Action<LottieComposition> onLoaded)
             {
                 return Factory.FromAssetFileName(context, fileName, new ActionCompositionLoaded(onLoaded));
             }
@@ -30,7 +28,7 @@ namespace Com.Airbnb.Lottie
             /// <summary>
             ///  Asynchronously loads a composition from a json string. This is useful for animations loaded from the network.
             /// </summary>
-            public static ICancellable FromJsonString(String jsonString, Action<LottieComposition> onLoaded)
+            public static ICancellable FromJsonString(string jsonString, Action<LottieComposition> onLoaded)
             {
                 return Factory.FromJsonString(jsonString, new ActionCompositionLoaded(onLoaded));
             }
@@ -38,7 +36,7 @@ namespace Com.Airbnb.Lottie
             ///// <summary>
             ///// Asynchronously loads a composition from a file stored in /assets.
             ///// </summary>
-            public static Task<LottieComposition> FromAssetFileNameAsync(Context context, String fileName)
+            public static Task<LottieComposition> FromAssetFileNameAsync(Context context, string fileName)
             {
                 return FromAssetFileNameAsync(context, fileName, CancellationToken.None);
             }
@@ -46,7 +44,7 @@ namespace Com.Airbnb.Lottie
             /////// <summary>
             /////// Asynchronously loads a composition from a file stored in /assets.
             /////// </summary>
-            public static Task<LottieComposition> FromAssetFileNameAsync(Context context, String fileName, CancellationToken cancellationToken)
+            public static Task<LottieComposition> FromAssetFileNameAsync(Context context, string fileName, CancellationToken cancellationToken)
             {
                 if (cancellationToken.IsCancellationRequested)
                     return Task.FromCanceled<LottieComposition>(cancellationToken);
@@ -108,7 +106,7 @@ namespace Com.Airbnb.Lottie
             ///// <summary>
             /////  Asynchronously loads a composition from a raw json object. This is useful for animations loaded from the network.
             ///// </summary>
-            public static Task<LottieComposition> FromJsonStringAsync(String jsonString)
+            public static Task<LottieComposition> FromJsonStringAsync(string jsonString)
             {
                 return FromJsonStringAsync(jsonString, CancellationToken.None);
             }
@@ -116,7 +114,7 @@ namespace Com.Airbnb.Lottie
             ///// <summary>
             /////  Asynchronously loads a composition from a raw json object. This is useful for animations loaded from the network.
             ///// </summary>
-            public static Task<LottieComposition> FromJsonStringAsync(String jsonString, CancellationToken cancellationToken)
+            public static Task<LottieComposition> FromJsonStringAsync(string jsonString, CancellationToken cancellationToken)
             {
                 if (cancellationToken.IsCancellationRequested)
                     return Task.FromCanceled<LottieComposition>(cancellationToken);

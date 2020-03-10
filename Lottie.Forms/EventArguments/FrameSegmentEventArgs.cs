@@ -8,7 +8,7 @@ namespace Lottie.Forms.EventArguments
         public int To { get; set; }
 
         public FrameSegmentEventArgs()
-            :base()
+            : base()
         {
         }
 

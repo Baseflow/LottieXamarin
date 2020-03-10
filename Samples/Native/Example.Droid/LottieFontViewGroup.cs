@@ -1,15 +1,10 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using Android.Content;
-using Android.Widget;
-
-
-using System.Collections.Generic;
 using Android.Util;
 using Android.Views;
-
-using Com.Airbnb.Lottie;
-using Com.Airbnb.Lottie;
 using Android.Views.InputMethods;
+using Android.Widget;
+using Com.Airbnb.Lottie;
 
 namespace LottieSamples.Droid
 {
@@ -28,7 +23,7 @@ namespace LottieSamples.Droid
         {
         }
 
-        public LottieFontViewGroup(Context context, IAttributeSet attrs, int defStyleAttr) : base (context, attrs, defStyleAttr)
+        public LottieFontViewGroup(Context context, IAttributeSet attrs, int defStyleAttr) : base(context, attrs, defStyleAttr)
         {
             Init();
         }
@@ -40,7 +35,7 @@ namespace LottieSamples.Droid
             {
                 views.Add(child);
             }
-            else 
+            else
             {
                 views.Insert(index, child);
             }
@@ -53,12 +48,12 @@ namespace LottieSamples.Droid
             if (views.Count == 0)
                 return;
 
-            int currentX = PaddingTop;
-            int currenty = PaddingLeft;
+            var currentX = PaddingTop;
+            var currenty = PaddingLeft;
 
-            for (int i = 0; i < views.Count; i++)
+            for (var i = 0; i < views.Count; i++)
             {
-                View view = this.views[i];
+                var view = this.views[i];
                 if (!FitsOnCurrentLine(currentX, view))
                 {
                     if (view.Tag != null && view.Tag.ToString().Equals("Space"))
@@ -81,12 +76,12 @@ namespace LottieSamples.Droid
             if (views.Count == 0)
                 return;
 
-            int currentX = PaddingTop;
-            int currentY = PaddingLeft;
+            var currentX = PaddingTop;
+            var currentY = PaddingLeft;
 
-            for (int i = 0; i < views.Count; i++)
+            for (var i = 0; i < views.Count; i++)
             {
-                View view = views[i];
+                var view = views[i];
                 if (!FitsOnCurrentLine(currentX, view))
                 {
                     if (view.Tag != null && view.Tag.ToString().Equals("Space"))
@@ -104,7 +99,7 @@ namespace LottieSamples.Droid
 
         public override Android.Views.InputMethods.IInputConnection OnCreateInputConnection(Android.Views.InputMethods.EditorInfo outAttrs)
         {
-            BaseInputConnection fic = new BaseInputConnection(this, false);
+            var fic = new BaseInputConnection(this, false);
             outAttrs.ActionLabel = null;
             outAttrs.InputType = Android.Text.InputTypes.Null;
             outAttrs.ImeOptions = ImeFlags.NavigateNext;
@@ -134,8 +129,8 @@ namespace LottieSamples.Droid
                 return base.OnKeyUp(keyCode, e);
 
 
-            string letter = Char.ToUpper((char)e.UnicodeChar).ToString();
-            string fileName = "Mobilo/" + letter + ".json";
+            var letter = char.ToUpper((char)e.UnicodeChar).ToString();
+            var fileName = "Mobilo/" + letter + ".json";
             if (compositionMap.ContainsKey(fileName))
             {
                 AddComposition(compositionMap[fileName]);
@@ -153,7 +148,7 @@ namespace LottieSamples.Droid
             }
 
             return true;
-                
+
         }
 
         private void Init()
@@ -175,7 +170,7 @@ namespace LottieSamples.Droid
 
         private void AddSpace()
         {
-            int index = IndexOfChild(cursorView);
+            var index = IndexOfChild(cursorView);
             AddView(CreateSpaceView(), index);
         }
 
@@ -183,7 +178,7 @@ namespace LottieSamples.Droid
         {
             if (views.Count > 1)
             {
-                int position = views.Count - 2;
+                var position = views.Count - 2;
                 RemoveView(views[position]);
                 views.RemoveAt(position);
             }
@@ -201,20 +196,21 @@ namespace LottieSamples.Droid
 
         private void AddComposition(LottieComposition composition)
         {
-            LottieAnimationView lottieAnimationView = new LottieAnimationView(this.Context);
+            var lottieAnimationView = new LottieAnimationView(this.Context);
             lottieAnimationView.LayoutParameters = new LottieFontViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.WrapContent,
                 ViewGroup.LayoutParams.WrapContent
             );
-            
+
             lottieAnimationView.Composition = composition;
             lottieAnimationView.PlayAnimation();
             if (cursorView == null)
             {
                 AddView(lottieAnimationView);
             }
-            else {
-                int index = IndexOfChild(cursorView);
+            else
+            {
+                var index = IndexOfChild(cursorView);
                 AddView(lottieAnimationView, index);
             }
         }
@@ -226,9 +222,9 @@ namespace LottieSamples.Droid
 
         private View CreateSpaceView()
         {
-            View spaceView = new View(this.Context);
+            var spaceView = new View(this.Context);
             spaceView.LayoutParameters = new LayoutParams(
-                Resources.GetDimensionPixelSize(Resource.Dimension.font_space_width), 
+                Resources.GetDimensionPixelSize(Resource.Dimension.font_space_width),
                 ViewGroup.LayoutParams.WrapContent
             );
             spaceView.Tag = "Space";

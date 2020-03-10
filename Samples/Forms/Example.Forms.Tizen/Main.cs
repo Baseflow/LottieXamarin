@@ -1,8 +1,6 @@
-﻿using Tizen;
-
-namespace Example.Forms.Tizen
+﻿namespace Example.Forms.Tizen
 {
-    class Program : global::Xamarin.Forms.Platform.Tizen.FormsApplication
+    internal class Program : global::Xamarin.Forms.Platform.Tizen.FormsApplication
     {
         protected override void OnCreate()
         {
@@ -15,7 +13,7 @@ namespace Example.Forms.Tizen
             base.OnTerminate();
         }
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             var app = new Program();
             Xamarin.Forms.Forms.Init(app, true);

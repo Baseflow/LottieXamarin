@@ -11,7 +11,7 @@
     <AssemblyName>Example.Forms.UWP</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17763.0</TargetPlatformVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.18362.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -136,6 +136,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Lottie.Forms\Lottie.Forms.csproj">
+      <Project>{f03d2dd6-bbda-45b9-982e-4dca43fcb8e1}</Project>
+      <Name>Lottie.Forms</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Example.Forms\Example.Forms.csproj">
       <Project>{ba40e6bd-f568-4301-a402-3846f176d49e}</Project>
       <Name>Example.Forms</Name>

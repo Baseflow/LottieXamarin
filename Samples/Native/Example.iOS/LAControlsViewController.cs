@@ -1,6 +1,5 @@
-﻿using System;
-using Airbnb.Lottie;
-using CoreGraphics;
+﻿using CoreGraphics;
+using System;
 using UIKit;
 
 namespace LottieSamples.iOS
@@ -11,9 +10,9 @@ namespace LottieSamples.iOS
         {
         }
 
-		public LAControlsViewController(IntPtr handle) : base(handle)
-		{
-		}
+        public LAControlsViewController(IntPtr handle) : base(handle)
+        {
+        }
 
         public override void ViewDidLoad()
         {
@@ -24,7 +23,7 @@ namespace LottieSamples.iOS
             closeButton.SetTitle("Close", UIControlState.Normal);
             closeButton.TouchUpInside += CloseButton_TouchUpInside;
             this.View.AddSubview(closeButton);
-            var buttonSize = closeButton.SizeThatFits(this.View.Bounds.Size);
+            CGSize buttonSize = closeButton.SizeThatFits(this.View.Bounds.Size);
             closeButton.Frame = new CGRect(10, 30, buttonSize.Width, 50);
 
 
@@ -37,21 +36,21 @@ namespace LottieSamples.iOS
             this.View.AddSubview(toggle1);
 
 
-			/// An animated 'like' or 'heart' button.
-			/// Clicking toggles the Like or Heart state.
-			/// The animation runs from 0-1, progress 0 is off, progress 1 is on
+            /// An animated 'like' or 'heart' button.
+            /// Clicking toggles the Like or Heart state.
+            /// The animation runs from 0-1, progress 0 is off, progress 1 is on
             LOTAnimatedSwitch heartIcon = LOTAnimatedSwitch.SwitchNamed("TwitterHeart");
             heartIcon.ValueChanged += Switch_ValueChanged;
             this.View.AddSubview(heartIcon);
 
 
-			/// This is a switch that also has a Disabled state animation.
-			/// When the switch is disabled then the disabled layer is displayed.
-			LOTAnimatedSwitch statefulSwitch = LOTAnimatedSwitch.SwitchNamed("Switch_States");
-			statefulSwitch.SetProgressRangeForOnState(1f, 0f);
-			statefulSwitch.SetProgressRangeForOffState(0f, 1f);
+            /// This is a switch that also has a Disabled state animation.
+            /// When the switch is disabled then the disabled layer is displayed.
+            LOTAnimatedSwitch statefulSwitch = LOTAnimatedSwitch.SwitchNamed("Switch_States");
+            statefulSwitch.SetProgressRangeForOnState(1f, 0f);
+            statefulSwitch.SetProgressRangeForOffState(0f, 1f);
 
-			statefulSwitch.SetLayerName("Button", UIControlState.Normal);
+            statefulSwitch.SetLayerName("Button", UIControlState.Normal);
             statefulSwitch.SetLayerName("Disabled", UIControlState.Disabled);
 
             // Changes visual appearance by switching animation layer to "Disabled"
@@ -62,25 +61,24 @@ namespace LottieSamples.iOS
 
             statefulSwitch.ValueChanged += Switch_ValueChanged;
 
-			statefulSwitch.ValueChanged += Switch_ValueChanged;
-			this.View.AddSubview(statefulSwitch);
+            statefulSwitch.ValueChanged += Switch_ValueChanged;
+            this.View.AddSubview(statefulSwitch);
 
             // Layout
-			toggle1.Center = new CGPoint(this.View.Bounds.GetMidX(), 90);
-			heartIcon.Bounds = new CGRect(0, 0, 200, 200);
+            toggle1.Center = new CGPoint(this.View.Bounds.GetMidX(), 90);
+            heartIcon.Bounds = new CGRect(0, 0, 200, 200);
             heartIcon.Center = new CGPoint(this.View.Bounds.GetMidX(), toggle1.Frame.GetMaxY() + (heartIcon.Bounds.Size.Height * 0.5));
-			statefulSwitch.Center = new CGPoint(this.View.Bounds.GetMidX(), heartIcon.Frame.GetMaxY() + (statefulSwitch.Bounds.Size.Height * 0.5));
+            statefulSwitch.Center = new CGPoint(this.View.Bounds.GetMidX(), heartIcon.Frame.GetMaxY() + (statefulSwitch.Bounds.Size.Height * 0.5));
 
-		}
+        }
 
-
-        void Switch_ValueChanged(object sender, EventArgs e)
+        private void Switch_ValueChanged(object sender, EventArgs e)
         {
             var animatedSwitch = sender as LOTAnimatedSwitch;
             Console.WriteLine("The switch is " + (animatedSwitch.On ? "ON" : "OFF"));
         }
 
-        void CloseButton_TouchUpInside(object sender, EventArgs e)
+        private void CloseButton_TouchUpInside(object sender, EventArgs e)
         {
             this.PresentingViewController.DismissViewController(true, null);
         }

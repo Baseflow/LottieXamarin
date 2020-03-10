@@ -27,9 +27,9 @@ namespace LottieSamples.iOS
             this.tableView = new UITableView(this.View.Bounds);
             this.tableView.RegisterClassForCellReuse(typeof(UITableViewCell), "cell");
 
-            var source = new TableSource(this.jsonFiles);
+            TableSource source = new TableSource(this.jsonFiles);
             source.ItemSelected += Source_ItemSelected;
-            this.tableView.Source = source;    
+            this.tableView.Source = source;
 
             this.View.AddSubview(this.tableView);
 
@@ -99,7 +99,7 @@ namespace LottieSamples.iOS
                 tableView.DeselectRow(indexPath, animated: true);
             }
         }
-       
+
     }
 }
 

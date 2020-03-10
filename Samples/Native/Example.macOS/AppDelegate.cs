@@ -12,9 +12,9 @@ namespace Example.macOS
 
         public override void DidFinishLaunching(NSNotification notification)
         {
-			// Disable automatice item enabling on the Edit menu
-			editMenu.AutoEnablesItems = false;
-			editMenu.Delegate = new EditMenuDelegate();
+            // Disable automatice item enabling on the Edit menu
+            editMenu.AutoEnablesItems = false;
+            editMenu.Delegate = new EditMenuDelegate();
         }
 
         public override void WillTerminate(NSNotification notification)

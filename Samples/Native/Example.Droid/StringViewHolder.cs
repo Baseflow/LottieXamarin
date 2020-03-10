@@ -16,7 +16,7 @@ namespace LottieSamples.Droid
             view.Click += (sender, e) => listener(((TextView)((ViewGroup)sender).GetChildAt(0)).Tag.ToString());
         }
 
-        public void Bind(String title, String tag)
+        public void Bind(string title, string tag)
         {
             titleView.Text = title;
             titleView.Tag = tag;

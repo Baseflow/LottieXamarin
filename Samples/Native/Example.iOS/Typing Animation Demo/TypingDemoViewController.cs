@@ -1,5 +1,4 @@
-﻿using System;
-using CoreGraphics;
+﻿using CoreGraphics;
 using Foundation;
 using UIKit;
 
@@ -23,7 +22,7 @@ namespace LottieSamples.iOS
 
             this.closeButton = new UIButton(UIButtonType.System);
             this.closeButton.SetTitle("Close", UIControlState.Normal);
-            this.closeButton.TouchUpInside += (sender, e) => 
+            this.closeButton.TouchUpInside += (sender, e) =>
             {
                 this.typingField.ResignFirstResponder();
                 this.PresentingViewController.DismissViewController(true, null);
@@ -52,7 +51,7 @@ namespace LottieSamples.iOS
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
-            this.kbShowNotification =  UIKeyboard.Notifications.ObserveWillShow(KeyboardChangeHandler);
+            this.kbShowNotification = UIKeyboard.Notifications.ObserveWillShow(KeyboardChangeHandler);
             this.kbHideNotification = UIKeyboard.Notifications.ObserveWillHide(KeyboardChangeHandler);
         }
 

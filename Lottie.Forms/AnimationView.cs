@@ -26,17 +26,17 @@ namespace Lottie.Forms
         [Obsolete("AutoPlay is obsolete, use IsPlaying instead")]
         public static readonly BindableProperty AutoPlayProperty = BindableProperty.Create(nameof(AutoPlay),
             typeof(bool), typeof(AnimationView), default(bool));
-        
+
         public static readonly BindableProperty SpeedProperty = BindableProperty.Create(nameof(Speed),
             typeof(float), typeof(AnimationView), 1.0f);
 
         public static readonly BindableProperty PlaybackStartedCommandProperty = BindableProperty.Create(nameof(PlaybackStartedCommand),
             typeof(ICommand), typeof(AnimationView));
 
-        public static readonly BindableProperty PlaybackFinishedCommandProperty = BindableProperty.Create(nameof(PlaybackFinishedCommand), 
+        public static readonly BindableProperty PlaybackFinishedCommandProperty = BindableProperty.Create(nameof(PlaybackFinishedCommand),
             typeof(ICommand), typeof(AnimationView));
 
-        public static readonly BindableProperty ClickedCommandProperty = BindableProperty.Create(nameof(ClickedCommand), 
+        public static readonly BindableProperty ClickedCommandProperty = BindableProperty.Create(nameof(ClickedCommand),
             typeof(ICommand), typeof(AnimationView));
 
         public static readonly BindableProperty ImageAssetsFolderProperty = BindableProperty.Create(nameof(ImageAssetsFolder),
@@ -47,25 +47,25 @@ namespace Lottie.Forms
 
         public float Progress
         {
-            get { return (float) GetValue(ProgressProperty); }
+            get { return (float)GetValue(ProgressProperty); }
             set { SetValue(ProgressProperty, value); }
         }
 
         public string Animation
         {
-            get { return (string) GetValue(AnimationProperty); }
+            get { return (string)GetValue(AnimationProperty); }
             set { SetValue(AnimationProperty, value); }
         }
 
         public TimeSpan Duration
         {
-            get { return (TimeSpan) GetValue(DurationProperty); }
+            get { return (TimeSpan)GetValue(DurationProperty); }
             set { SetValue(DurationProperty, value); }
         }
 
         public bool Loop
         {
-            get { return (bool) GetValue(LoopProperty); }
+            get { return (bool)GetValue(LoopProperty); }
             set { SetValue(LoopProperty, value); }
         }
 
@@ -78,13 +78,13 @@ namespace Lottie.Forms
 
         public bool IsPlaying
         {
-            get { return (bool) GetValue(IsPlayingProperty); }
+            get { return (bool)GetValue(IsPlayingProperty); }
             set { SetValue(IsPlayingProperty, value); }
         }
-        
+
         public float Speed
         {
-            get { return (float) GetValue(SpeedProperty); }
+            get { return (float)GetValue(SpeedProperty); }
             set { SetValue(SpeedProperty, value); }
         }
 
@@ -139,7 +139,7 @@ namespace Lottie.Forms
 
             if (to < 0f || to > 1f)
                 throw new ArgumentException($"Parameter {nameof(to)} should have a valid value.", nameof(to));
-            
+
             OnPlayProgressSegment?.Invoke(this, new ProgressSegmentEventArgs(from, to));
 
             ExecuteCommandIfPossible(PlaybackStartedCommand);

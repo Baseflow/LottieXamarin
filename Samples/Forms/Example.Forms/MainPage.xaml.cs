@@ -5,11 +5,10 @@ namespace Example.Forms
 {
     public partial class MainPage : ContentPage
     {
-
         public MainPage()
-        {            
+        {
             InitializeComponent();
-            
+
             // TODO: Currently, reverse playback is not supported on tizen backend. Will update when it supports.
             playSegmentsButton.Clicked += (sender, e) =>
             {
@@ -23,12 +22,12 @@ namespace Example.Forms
             On<Xamarin.Forms.PlatformConfiguration.iOS>().SetUseSafeArea(true);
         }
 
-        void Slider_OnValueChanged(object sender, ValueChangedEventArgs e)
+        private void Slider_OnValueChanged(object sender, ValueChangedEventArgs e)
         {
-            animationView.Progress = (float) e.NewValue;
+            animationView.Progress = (float)e.NewValue;
         }
 
-        void Handle_OnFinish(object sender, System.EventArgs e)
+        private void Handle_OnFinish(object sender, System.EventArgs e)
         {
             DisplayAlert(string.Empty, $"{nameof(animationView.OnFinish)} invoked!", "OK");
         }

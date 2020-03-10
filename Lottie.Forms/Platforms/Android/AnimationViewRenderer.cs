@@ -74,7 +74,7 @@ namespace Lottie.Forms.Droid
                     Element.Duration = TimeSpan.FromMilliseconds(_animationView.Duration);
                 }
 
-                if (e.NewElement.AutoPlay || e.NewElement.IsPlaying) 
+                if (e.NewElement.AutoPlay || e.NewElement.IsPlaying)
                     _animationView.PlayAnimation();
             }
         }
@@ -99,17 +99,17 @@ namespace Lottie.Forms.Droid
 
         private void OnPlayProgressSegment(object sender, ProgressSegmentEventArgs e)
         {
-            if (_animationView != null 
+            if (_animationView != null
                 && _animationView.Handle != IntPtr.Zero)
             {
-                PrepareReverseAnimation((min, max) => 
+                PrepareReverseAnimation((min, max) =>
                 {
                     _animationView.SetMinAndMaxProgress(min, max);
                 }, e.From, e.To);
             }
         }
 
-        private void PrepareReverseAnimation(Action<float, float> action, 
+        private void PrepareReverseAnimation(Action<float, float> action,
                                              float from, float to)
         {
             var minValue = Math.Min(from, to);
@@ -166,7 +166,7 @@ namespace Lottie.Forms.Droid
                 _animationView.SetAnimation(Element.Animation);
                 Element.Duration = TimeSpan.FromMilliseconds(_animationView.Duration);
 
-                if (Element.AutoPlay || Element.IsPlaying) 
+                if (Element.AutoPlay || Element.IsPlaying)
                     _animationView.PlayAnimation();
             }
 
@@ -179,13 +179,13 @@ namespace Lottie.Forms.Droid
                 _animationView.Progress = Element.Progress;
             }
 
-            if (e.PropertyName == AnimationView.LoopProperty.PropertyName) 
+            if (e.PropertyName == AnimationView.LoopProperty.PropertyName)
                 _animationView.Loop(Element.Loop);
 
             if (e.PropertyName == AnimationView.ImageAssetsFolderProperty.PropertyName && !string.IsNullOrEmpty(Element.ImageAssetsFolder))
                 _animationView.ImageAssetsFolder = Element.ImageAssetsFolder;
 
-            if(e.PropertyName == AnimationView.HardwareAccelerationProperty.PropertyName)
+            if (e.PropertyName == AnimationView.HardwareAccelerationProperty.PropertyName)
                 _animationView.SetRenderMode(Element.HardwareAcceleration ? RenderMode.Hardware : RenderMode.Software);
 
             if (e.PropertyName == AnimationView.IsPlayingProperty.PropertyName &&
@@ -209,7 +209,7 @@ namespace Lottie.Forms.Droid
                 _animationView.SetMinAndMaxFrame((int)composition.StartFrame, (int)composition.EndFrame);
                 _needToResetFrames = false;
             }
-                          
+
             if (_needToReverseAnimationSpeed)
             {
                 _animationView.ReverseAnimationSpeed();

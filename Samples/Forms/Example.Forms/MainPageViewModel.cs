@@ -19,9 +19,9 @@ namespace Example.Forms
             ClickedCommand = new Command(() => DisplayAlert($"{nameof(AnimationView.ClickedCommand)} executed!"));
         }
 
-        void DisplayAlert(string message) => Application.Current.MainPage.DisplayAlert(string.Empty, message, "OK");
+        private void DisplayAlert(string message) => Application.Current.MainPage.DisplayAlert(string.Empty, message, "OK");
 
-        bool Set<T>(ref T field, T value, [CallerMemberName]string propertyName = null)
+        private bool Set<T>(ref T field, T value, [CallerMemberName]string propertyName = null)
         {
             if (Equals(field, value)) return false;
 
@@ -30,7 +30,7 @@ namespace Example.Forms
             return true;
         }
 
-        bool _isPlaying;
+        private bool _isPlaying;
         public bool IsPlaying
         {
             get => _isPlaying;

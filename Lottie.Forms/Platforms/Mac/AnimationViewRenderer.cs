@@ -1,10 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using Airbnb.Lottie;
-using Foundation;
-using Lottie.Forms;
-using Xamarin.Forms;
-
+﻿
 //Disable Mac for Xamarin.Forms until Nuget packages are fixed by Xamarin
 /*
 [assembly: ExportRenderer(typeof(AnimationView), typeof(AnimationViewRenderer))]

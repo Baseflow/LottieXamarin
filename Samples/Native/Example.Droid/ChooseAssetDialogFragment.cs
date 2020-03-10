@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Android.Content;
 using Android.Views;
-using Android.Widget;
 using AndroidX.Fragment.App;
 using AndroidX.RecyclerView.Widget;
 //using DialogFragment = Android.Support.V4.App.DialogFragment;
@@ -16,7 +15,7 @@ namespace LottieSamples.Droid
 
         public override Android.Views.View OnCreateView(LayoutInflater inflater, ViewGroup container, Android.OS.Bundle savedInstanceState)
         {
-            View view = inflater.Inflate(Resource.Layout.fragment_choose_asset, container, false);
+            var view = inflater.Inflate(Resource.Layout.fragment_choose_asset, container, false);
             this.Dialog.SetTitle("Choose an Asset");
 
             this.recyclerView = view.FindViewById<RecyclerView>(Resource.Id.recycler_view);
@@ -57,15 +56,15 @@ namespace LottieSamples.Droid
 
             public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
             {
-                View view = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.view_holder_file, parent, false);
+                var view = LayoutInflater.From(parent.Context).Inflate(Resource.Layout.view_holder_file, parent, false);
                 return new StringViewHolder(view, OnClick);
             }
 
             public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
             {
-                StringViewHolder vh = holder as StringViewHolder;
+                var vh = holder as StringViewHolder;
 
-                string fileName = files[position];
+                var fileName = files[position];
                 vh.Bind(fileName, fileName);
             }
 

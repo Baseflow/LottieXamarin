@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Android.Content;
 using System.Linq;
+using Android.Content;
 
 namespace LottieSamples.Droid
 {
@@ -9,7 +9,7 @@ namespace LottieSamples.Droid
     {
         public static IList<string> GetJsonAssets(Context context, string path)
         {
-            string [] assetList = context.Assets.List(path);
+            var assetList = context.Assets.List(path);
             return assetList.Where(item => item.EndsWith(".json", StringComparison.InvariantCultureIgnoreCase)).ToList();
         }
     }

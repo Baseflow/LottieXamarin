@@ -1,7 +1,6 @@
-﻿using System;
+﻿using CoreGraphics;
+using System;
 using System.Collections.Generic;
-using Airbnb.Lottie;
-using CoreGraphics;
 using UIKit;
 
 namespace LottieSamples.iOS
@@ -31,7 +30,7 @@ namespace LottieSamples.iOS
 
             this.tableView = new UITableView(CGRect.Empty, UITableViewStyle.Plain);
 
-            var source = new TableSource();
+            TableSource source = new TableSource();
             source.ItemSelected += Source_ItemSelected;
             this.tableView.Source = source;
             this.View.Add(this.tableView);
@@ -85,11 +84,11 @@ namespace LottieSamples.iOS
 
             public TableSource()
             {
-                this.listItems.Add(new Tuple<string, Type >("Animation Explorer", typeof(AnimationExplorerViewController)));
+                this.listItems.Add(new Tuple<string, Type>("Animation Explorer", typeof(AnimationExplorerViewController)));
                 this.listItems.Add(new Tuple<string, Type>("Animated Keyboard", typeof(TypingDemoViewController)));
-				this.listItems.Add(new Tuple<string, Type>("Animated Transitions Demo", typeof(AnimationTransitionViewController)));
-				this.listItems.Add(new Tuple<string, Type>("Animated UIControls Demo", typeof(LAControlsViewController)));
-			}
+                this.listItems.Add(new Tuple<string, Type>("Animated Transitions Demo", typeof(AnimationTransitionViewController)));
+                this.listItems.Add(new Tuple<string, Type>("Animated UIControls Demo", typeof(LAControlsViewController)));
+            }
 
 
             public override nint RowsInSection(UITableView tableview, nint section)
@@ -103,13 +102,13 @@ namespace LottieSamples.iOS
 
                 if (cell == null)
                 {
-                   cell = new UITableViewCell(UITableViewCellStyle.Default, CellIdentifier);
+                    cell = new UITableViewCell(UITableViewCellStyle.Default, CellIdentifier);
                 }
 
                 cell.TextLabel.Text = this.listItems[indexPath.Row].Item1;
 
                 return cell;
-                    
+
             }
 
             public override nfloat GetHeightForRow(UITableView tableView, Foundation.NSIndexPath indexPath)

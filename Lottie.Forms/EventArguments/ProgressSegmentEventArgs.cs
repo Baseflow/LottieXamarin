@@ -8,7 +8,7 @@ namespace Lottie.Forms.EventArguments
         public float To { get; set; }
 
         public ProgressSegmentEventArgs()
-            :base()
+            : base()
         {
         }
 

@@ -3,7 +3,7 @@ using Android.Graphics;
 
 namespace Com.Airbnb.Lottie
 {
-    partial class LottieAnimationView
+    public partial class LottieAnimationView
     {
         /// <summary>
         /// Delegate to handle the loading of bitmaps that are not packaged in the assets of your app.

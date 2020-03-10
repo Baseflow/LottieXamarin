@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections;
+﻿using CoreGraphics;
+using Foundation;
+using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text;
-using CoreGraphics;
-using Foundation;
 using UIKit;
 
 namespace LottieSamples.iOS
@@ -25,12 +23,9 @@ namespace LottieSamples.iOS
         private IList<CGSize> letterSizes = new List<CGSize>();
 
 
-        public UIEdgeInsets ScrollInsets 
-        { 
-            get 
-            {
-                return this.collectionView.ContentInset;
-            }
+        public UIEdgeInsets ScrollInsets
+        {
+            get => this.collectionView.ContentInset;
             set
             {
                 this.collectionView.ContentInset = value;
@@ -40,10 +35,7 @@ namespace LottieSamples.iOS
 
         public int FontSize
         {
-            get
-            {
-                return this.fontSize;
-            }
+            get => this.fontSize;
 
             set
             {
@@ -56,15 +48,9 @@ namespace LottieSamples.iOS
 
         public string Text
         {
-            get
-            {
-                return this.text;
-            }
+            get => this.text;
 
-            set
-            {
-                SetText(value);
-            }
+            set => SetText(value);
         }
 
 
@@ -157,7 +143,7 @@ namespace LottieSamples.iOS
                 () =>
             {
                 if (addIndices != null && addIndices.Count > 0)
-                    this.collectionView.InsertItems(addIndices.ToArray());    
+                    this.collectionView.InsertItems(addIndices.ToArray());
 
                 if (updateIndices != null && updateIndices.Count > 0)
                     this.collectionView.ReloadItems(updateIndices.ToArray());
@@ -165,7 +151,7 @@ namespace LottieSamples.iOS
                 if (removeIndices != null && removeIndices.Count > 0)
                     this.collectionView.DeleteItems(removeIndices.ToArray());
 
-            }, 
+            },
                 (finished) =>
             {
                 updatingCells = false;
@@ -203,7 +189,7 @@ namespace LottieSamples.iOS
                         CGSize nextWordLength = SizeOfString(new NSString(words[0]));
                         if (currentWidth + nextWordLength.Width + letterSize.Width > width)
                         {
-                            letterSize.Width = (nfloat) Math.Floor(width - currentWidth);
+                            letterSize.Width = (nfloat)Math.Floor(width - currentWidth);
                             currentWidth = 0;
                         }
                         else
@@ -241,7 +227,7 @@ namespace LottieSamples.iOS
 
             textSize.Width += text.Length * 2;
             return textSize;
-                                                   
+
         }
 
         #region UICollevtionViewDataSource
@@ -270,7 +256,7 @@ namespace LottieSamples.iOS
             {
                 cell.SetCharacter("BlinkingCursor");
                 cell.LoopAnimation();
-                cell.DisplayCharacter(animated:true);
+                cell.DisplayCharacter(animated: true);
             }
         }
 
@@ -286,13 +272,13 @@ namespace LottieSamples.iOS
         }
 
         [Export("collectionView:layout:minimumInteritemSpacingForSectionAtIndex:")]
-        public Single GetMinimumInteritemSpacingForSection(UICollectionView collectionView, UICollectionViewLayout layout, Int32 section)
+        public float GetMinimumInteritemSpacingForSection(UICollectionView collectionView, UICollectionViewLayout layout, int section)
         {
             return 0;
         }
 
         [Export("collectionView:layout:minimumLineSpacingForSectionAtIndex:")]
-        public Single GetMinimumLineSpacingForSection(UICollectionView collectionView, UICollectionViewLayout layout, Int32 section)
+        public float GetMinimumLineSpacingForSection(UICollectionView collectionView, UICollectionViewLayout layout, int section)
         {
             return 0;
         }
