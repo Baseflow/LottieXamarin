@@ -50,24 +50,24 @@
     <Compile Include="Platforms\Apple\**\*.cs" />
     <Compile Include="Platforms\Ios\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
-    <PackageReference Condition=" '$(Configuration)' == 'Release' " Include="Com.Airbnb.iOS.Lottie" Version="2.5.10" />
-	  <ProjectReference Condition=" '$(Configuration)' == 'Debug' " Include="..\Lottie.iOS\Lottie.iOS.csproj" />
+    <PackageReference Condition=" '$(OS)' == 'Windows_NT' " Include="Com.Airbnb.iOS.Lottie" Version="2.5.10" />
+	  <ProjectReference Condition=" '$(Configuration)' == 'Debug' And '$(OS)' != 'Windows_NT' " Include="..\Lottie.iOS\Lottie.iOS.csproj" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.mac')) ">
     <Compile Include="Platforms\Apple\**\*.cs" />
     <Compile Include="Platforms\Mac\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
-    <PackageReference Condition=" '$(Configuration)' == 'Release' " Include="Com.Airbnb.iOS.Lottie" Version="2.5.10" />
-    <ProjectReference Condition=" '$(Configuration)' == 'Debug' " Include="..\Lottie.iOS\Lottie.iOS.csproj" />
+    <PackageReference Condition=" '$(OS)' == 'Windows_NT' " Include="Com.Airbnb.iOS.Lottie" Version="2.5.10" />
+    <ProjectReference Condition=" '$(Configuration)' == 'Debug' And '$(OS)' != 'Windows_NT' " Include="..\Lottie.iOS\Lottie.iOS.csproj" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.tvos')) ">
     <Compile Include="Platforms\Apple\**\*.cs" />
     <Compile Include="Platforms\Tvos\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
-    <PackageReference Condition=" '$(Configuration)' == 'Release' " Include="Com.Airbnb.iOS.Lottie" Version="2.5.10" />
-    <ProjectReference Condition=" '$(Configuration)' == 'Debug' " Include="..\Lottie.iOS\Lottie.iOS.csproj" />
+    <PackageReference Condition=" '$(OS)' == 'Windows_NT' " Include="Com.Airbnb.iOS.Lottie" Version="2.5.10" />
+    <ProjectReference Condition=" '$(Configuration)' == 'Debug' And '$(OS)' != 'Windows_NT' " Include="..\Lottie.iOS\Lottie.iOS.csproj" />
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.watchos')) ">
