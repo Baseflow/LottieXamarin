@@ -29,7 +29,7 @@ namespace Lottie.Forms.UWP.Renderers
             var dummy = new AnimationViewRenderer();
 #pragma warning restore 0219
         }
-
+/*
         protected override void OnElementChanged(ElementChangedEventArgs<AnimationView> e)
         {
             base.OnElementChanged(e);
@@ -246,6 +246,6 @@ namespace Lottie.Forms.UWP.Renderers
             _ = _animationView.PlayAsync(from, to, Element.Loop);
 
             Element.IsPlaying = true;
-        }
+        }*/
     }
 }

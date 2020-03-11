@@ -15,11 +15,11 @@ namespace Lottie.Forms.Tizen
 
         public AnimationViewRenderer()
         {
-            RegisterPropertyHandler(AnimationView.ProgressProperty, UpdateProgress);
+            /*RegisterPropertyHandler(AnimationView.ProgressProperty, UpdateProgress);
             RegisterPropertyHandler(AnimationView.LoopProperty, UpdateLoop);
             RegisterPropertyHandler(AnimationView.SpeedProperty, UpdateSpeed);
             RegisterPropertyHandler(AnimationView.AnimationProperty, UpdateAnimation);
-            RegisterPropertyHandler(AnimationView.IsPlayingProperty, UpdateIsPlaying);
+            RegisterPropertyHandler(AnimationView.IsPlayingProperty, UpdateIsPlaying);*/
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Lottie.Forms.Tizen
 #pragma warning restore 0219
         }
 
-        protected override void Dispose(bool disposing)
+        /*protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
@@ -154,7 +154,7 @@ namespace Lottie.Forms.Tizen
         private void UpdateSpeed()
         {
             Control.Speed = (double)new decimal(Element.Speed);
-        }
+        }*/
 
     }
 }

@@ -12,11 +12,11 @@ namespace Example.Forms
 
         public MainPageViewModel()
         {
-            StartPlayingCommand = new Command(() => IsPlaying = true);
-            StopPlayingCommand = new Command(() => IsPlaying = false);
-            PlayingCommand = new Command(() => DisplayAlert($"{nameof(AnimationView.PlaybackStartedCommand)} executed!"));
-            FinishedCommand = new Command(() => DisplayAlert($"{nameof(AnimationView.PlaybackFinishedCommand)} executed!"));
-            ClickedCommand = new Command(() => DisplayAlert($"{nameof(AnimationView.ClickedCommand)} executed!"));
+            PlayCommand = new Command(() => IsAnimating = true);
+            //StopPlayingCommand = new Command(() => IsPlaying = false);
+            //PlayingCommand = new Command(() => DisplayAlert($"{nameof(AnimationView.PlaybackStartedCommand)} executed!"));
+            //FinishedCommand = new Command(() => DisplayAlert($"{nameof(AnimationView.PlaybackFinishedCommand)} executed!"));
+            //ClickedCommand = new Command(() => DisplayAlert($"{nameof(AnimationView.Command)} executed!"));
         }
 
         private void DisplayAlert(string message) => Application.Current.MainPage.DisplayAlert(string.Empty, message, "OK");
@@ -30,17 +30,17 @@ namespace Example.Forms
             return true;
         }
 
-        private bool _isPlaying;
-        public bool IsPlaying
+        private bool _isAnimating;
+        public bool IsAnimating
         {
-            get => _isPlaying;
-            set => Set(ref _isPlaying, value);
+            get => _isAnimating;
+            set => Set(ref _isAnimating, value);
         }
 
-        public ICommand StartPlayingCommand { get; }
-        public ICommand StopPlayingCommand { get; }
-        public ICommand PlayingCommand { get; }
-        public ICommand FinishedCommand { get; }
-        public ICommand ClickedCommand { get; }
+        public ICommand PlayCommand { get; }
+        public ICommand PauseCommand { get; }
+        public ICommand CancelCommand { get; }
+        public ICommand ResumeCommand { get; }
+        public ICommand ClickCommand { get; }
     }
 }

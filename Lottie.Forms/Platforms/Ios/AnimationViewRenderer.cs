@@ -29,7 +29,7 @@ namespace Lottie.Forms.iOS.Renderers
 #pragma warning restore 0219
         }
 
-        protected override void OnElementChanged(ElementChangedEventArgs<AnimationView> e)
+        /*protected override void OnElementChanged(ElementChangedEventArgs<AnimationView> e)
         {
             base.OnElementChanged(e);
 
@@ -170,6 +170,6 @@ namespace Lottie.Forms.iOS.Renderers
                 _animationView.Dispose();
                 _animationView = null;
             }
-        }
+        }*/
     }
 }

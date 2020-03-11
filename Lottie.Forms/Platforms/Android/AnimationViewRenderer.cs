@@ -2,13 +2,13 @@
 using System.ComponentModel;
 using Com.Airbnb.Lottie;
 using Lottie.Forms;
-using Lottie.Forms.Droid;
+using Lottie.Forms.Platforms.Android;
 using Lottie.Forms.EventArguments;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
 [assembly: ExportRenderer(typeof(AnimationView), typeof(AnimationViewRenderer))]
-namespace Lottie.Forms.Droid
+namespace Lottie.Forms.Platforms.Android
 {
 #pragma warning disable 0618
     public class AnimationViewRenderer : Xamarin.Forms.Platform.Android.AppCompat.ViewRenderer<AnimationView,
@@ -16,8 +16,13 @@ namespace Lottie.Forms.Droid
     {
         private LottieAnimationView _animationView;
         private AnimatorListener _animatorListener;
-        private bool _needToReverseAnimationSpeed;
-        private bool _needToResetFrames;
+        private AnimatorUpdateListener _animatorUpdateListener;
+        private LottieOnCompositionLoadedListener _lottieOnCompositionLoadedListener;
+        private LottieFailureListener _lottieFailureListener;
+        private ClickListener _clickListener;
+
+        //private bool _needToReverseAnimationSpeed;
+        //private bool _needToResetFrames;
 
         /// <summary>
         ///     Used for registration with dependency service
@@ -37,51 +42,77 @@ namespace Lottie.Forms.Droid
             if (Control == null)
             {
                 _animationView = new LottieAnimationView(Context);
-                _animatorListener = new AnimatorListener(PlaybackFinished);
+                _animatorListener = new AnimatorListener();
+                _animatorUpdateListener = new AnimatorUpdateListener();
+                _lottieOnCompositionLoadedListener = new LottieOnCompositionLoadedListener();
+                _lottieFailureListener = new LottieFailureListener();
+
                 _animationView.AddAnimatorListener(_animatorListener);
+                _animationView.AddAnimatorUpdateListener(_animatorUpdateListener);
+                _animationView.AddLottieOnCompositionLoadedListener(_lottieOnCompositionLoadedListener);
+                _animationView.SetFailureListener(_lottieFailureListener);
 
                 SetNativeControl(_animationView);
             }
 
             if (e.OldElement != null)
             {
-                e.OldElement.OnPlay -= OnPlay;
+                /*e.OldElement.OnPlay -= OnPlay;
                 e.OldElement.OnPause -= OnPause;
                 e.OldElement.OnPlayProgressSegment -= OnPlayProgressSegment;
-                e.OldElement.OnPlayFrameSegment -= OnPlayFrameSegment;
+                e.OldElement.OnPlayFrameSegment -= OnPlayFrameSegment;*/
 
                 _animationView.SetOnClickListener(null);
+                _animationView.SetFailureListener(null);
             }
 
             if (e.NewElement != null)
             {
-                e.NewElement.OnPlay += OnPlay;
-                e.NewElement.OnPause += OnPause;
-                e.NewElement.OnPlayProgressSegment += OnPlayProgressSegment;
-                e.NewElement.OnPlayFrameSegment += OnPlayFrameSegment;
+                _animatorListener.OnAnimationCancelImpl = () => e.NewElement.InvokeCancelAnimation();
+                _animatorListener.OnAnimationEndImpl = () => e.NewElement.InvokePlaybackEnded();
+                _animatorListener.OnAnimationPauseImpl = () => e.NewElement.InvokePauseAnimation();
+                _animatorListener.OnAnimationRepeatImpl = () => e.NewElement.InvokeRepeatAnimation();
+                _animatorListener.OnAnimationResumeImpl = () => e.NewElement.InvokeResumeAnimation();
+                _animatorListener.OnAnimationStartImpl = () => e.NewElement.InvokePlayAnimation();
 
-                _animationView.SetRenderMode(e.NewElement.HardwareAcceleration ? RenderMode.Hardware : RenderMode.Software);
-                _animationView.Speed = e.NewElement.Speed;
-                _animationView.Loop(e.NewElement.Loop);
-                _animationView.ImageAssetsFolder = e.NewElement.ImageAssetsFolder;
+                _animatorUpdateListener.OnAnimationUpdateImpl = () => e.NewElement.InvokeAnimatorUpdate();
 
-                _animationView.SetOnClickListener(new ClickListener(e.NewElement));
+                _lottieOnCompositionLoadedListener.OnCompositionLoadedImpl = (composition) => e.NewElement.InvokeCompositionLoaded(composition);
+
+                _lottieFailureListener.OnResultImpl = (result) => e.NewElement.InvokeFailure(new Exception("Failed"));
 
                 if (!string.IsNullOrEmpty(e.NewElement.Animation))
                 {
                     _animationView.SetAnimation(e.NewElement.Animation);
-                    Element.Duration = TimeSpan.FromMilliseconds(_animationView.Duration);
+                    Element.Duration = _animationView.Duration;
                 }
 
-                if (e.NewElement.AutoPlay || e.NewElement.IsPlaying)
+                _clickListener = new ClickListener
+                {
+                    OnClickImpl = () => e.NewElement.Click()
+                };
+                _animationView.SetOnClickListener(_clickListener);
+
+                e.NewElement.NativePlayCommand = new Command(() => _animationView.PlayAnimation());
+                e.NewElement.NativePauseCommand = new Command(() => _animationView.PauseAnimation());
+                e.NewElement.NativeResumeCommand = new Command(() => _animationView.ResumeAnimation());
+                e.NewElement.NativeCancelCommand = new Command(() => _animationView.CancelAnimation());
+
+                _animationView.Speed = e.NewElement.Speed;
+                _animationView.ImageAssetsFolder = e.NewElement.ImageAssetsFolder;
+
+                if (e.NewElement.AutoPlay)
                     _animationView.PlayAnimation();
+
+                //_animationView.SetRenderMode(e.NewElement.HardwareAcceleration ? RenderMode.Hardware : RenderMode.Software);
+                //_animationView.Loop(e.NewElement.Loop);
             }
         }
 
-        private void OnPlay(object sender, EventArgs e)
+        /*
+        private void OnPlayAnimation(object sender, EventArgs e)
         {
-            if (_animationView != null
-                && _animationView.Handle != IntPtr.Zero)
+            if (_animationView != null && _animationView.Handle != IntPtr.Zero)
             {
                 if (_animationView.Progress > 0f)
                 {
@@ -89,10 +120,18 @@ namespace Lottie.Forms.Droid
                 }
                 else
                 {
-                    ResetReverse();
                     _animationView.PlayAnimation();
                 }
-                Element.IsPlaying = true;
+                Element.IsAnimating = true;
+            }
+        }
+
+        private void OnPauseAnimation(object sender, EventArgs e)
+        {
+            if (_animationView != null && _animationView.Handle != IntPtr.Zero)
+            {
+                _animationView.PauseAnimation();
+                Element.IsAnimating = false;
             }
         }
 
@@ -140,15 +179,7 @@ namespace Lottie.Forms.Droid
             }
         }
 
-        private void OnPause(object sender, EventArgs e)
-        {
-            if (_animationView != null
-                && _animationView.Handle != IntPtr.Zero)
-            {
-                _animationView.PauseAnimation();
-                Element.IsPlaying = false;
-            }
-        }
+
 
         private void PlaybackFinished()
         {
@@ -198,7 +229,7 @@ namespace Lottie.Forms.Droid
 
             base.OnElementPropertyChanged(sender, e);
         }
-
+        
         private void ResetReverse()
         {
             if (_needToResetFrames)
@@ -214,22 +245,7 @@ namespace Lottie.Forms.Droid
                 _animationView.ReverseAnimationSpeed();
                 _needToReverseAnimationSpeed = false;
             }
-        }
-
-        public class ClickListener : Java.Lang.Object, IOnClickListener
-        {
-            private readonly AnimationView _animationView;
-
-            public ClickListener(AnimationView animationView)
-            {
-                _animationView = animationView;
-            }
-
-            public void OnClick(Android.Views.View v)
-            {
-                _animationView.Click();
-            }
-        }
+        }*/
     }
 #pragma warning restore 0618
 }

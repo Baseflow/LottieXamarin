@@ -63,7 +63,13 @@ namespace Lottie.Forms
         public static readonly BindableProperty DurationProperty = BindableProperty.Create(nameof(Duration),
         typeof(long), typeof(AnimationView), default(long));
 
-        public static readonly BindableProperty ClickCommandProperty = BindableProperty.Create(nameof(ClickCommand),
+        public static readonly BindableProperty AutoPlayProperty = BindableProperty.Create(nameof(AutoPlay),
+            typeof(bool), typeof(AnimationView), true);
+
+        public static readonly BindableProperty CommandProperty = BindableProperty.Create(nameof(Command),
+            typeof(ICommand), typeof(AnimationView));
+
+        public static readonly BindableProperty PlayAnimationCommandProperty = BindableProperty.Create(nameof(PlayAnimationCommand),
             typeof(ICommand), typeof(AnimationView));
 
         // void setMinAndMaxFrame(int minFrame, int maxFrame)
@@ -184,30 +190,72 @@ namespace Lottie.Forms
             set { SetValue(ProgressProperty, value); }
         }
 
-        public ICommand ClickCommand
+        public bool AutoPlay
         {
-            get { return (ICommand)GetValue(ClickCommandProperty); }
-            set { SetValue(ClickCommandProperty, value); }
+            get { return (bool)GetValue(AutoPlayProperty); }
+            set { SetValue(AutoPlayProperty, value); }
+        }
+
+        public ICommand Command
+        {
+            get { return (ICommand)GetValue(CommandProperty); }
+            set { SetValue(CommandProperty, value); }
+        }
+
+        public ICommand PlayAnimationCommand
+        {
+            get { return (ICommand)GetValue(PlayAnimationCommandProperty); }
+            set { SetValue(PlayAnimationCommandProperty, value); }
         }
 
         public void PlayAnimation()
         {
-            OnPlayAnimation?.Invoke(this, EventArgs.Empty);
+            NativePlayCommand.ExecuteCommandIfPossible();
         }
 
         public void ResumeAnimation()
         {
-            OnResumeAnimation?.Invoke(this, EventArgs.Empty);
+            NativeResumeCommand.ExecuteCommandIfPossible();
         }
 
         public void CancelAnimation()
         {
-            OnCancelAnimation?.Invoke(this, EventArgs.Empty);
+            NativeCancelCommand.ExecuteCommandIfPossible();
         }
 
         public void PauseAnimation()
         {
+            NativePauseCommand.ExecuteCommandIfPossible();
+        }
+
+        internal ICommand NativePlayCommand { get; set; }
+        internal ICommand NativeResumeCommand { get; set; }
+        internal ICommand NativeCancelCommand { get; set; }
+        internal ICommand NativePauseCommand { get; set; }
+
+        internal void InvokePlayAnimation()
+        {
+            OnPlayAnimation?.Invoke(this, EventArgs.Empty);
+        }
+
+        internal void InvokeResumeAnimation()
+        {
+            OnResumeAnimation?.Invoke(this, EventArgs.Empty);
+        }
+
+        internal void InvokeCancelAnimation()
+        {
+            OnCancelAnimation?.Invoke(this, EventArgs.Empty);
+        }
+
+        internal void InvokePauseAnimation()
+        {
             OnPauseAnimation?.Invoke(this, EventArgs.Empty);
+        }
+
+        internal void InvokeRepeatAnimation()
+        {
+            OnRepeatAnimation?.Invoke(this, EventArgs.Empty);
         }
 
         public event EventHandler OnPlayAnimation;
@@ -218,6 +266,29 @@ namespace Lottie.Forms
 
         public event EventHandler OnPauseAnimation;
 
+        public event EventHandler OnRepeatAnimation;
+
+        internal void InvokeAnimatorUpdate()
+        {
+            OnAnimatorUpdate?.Invoke(this, EventArgs.Empty);
+        }
+
+        internal void InvokeAnimator()
+        {
+            OnAnimator?.Invoke(this, EventArgs.Empty);
+        }
+
+        internal void InvokeCompositionLoaded(object composition)
+        {
+            //TODO: use composition
+            OnCompositionLoaded?.Invoke(this, EventArgs.Empty);
+        }
+
+        internal void InvokeFailure(Exception ex)
+        {
+            OnFailure?.Invoke(this, EventArgs.Empty);
+        }
+
         public event EventHandler OnAnimatorUpdate;
 
         public event EventHandler OnAnimator;
@@ -225,6 +296,21 @@ namespace Lottie.Forms
         public event EventHandler OnCompositionLoaded;
 
         public event EventHandler OnFailure;
+
+        public void Click()
+        {
+            OnClick?.Invoke(this, EventArgs.Empty);
+            Command.ExecuteCommandIfPossible();
+        }
+
+        public event EventHandler OnClick;
+
+        internal void InvokePlaybackEnded()
+        {
+            OnEnded?.Invoke(this, EventArgs.Empty);
+        }
+
+        public event EventHandler OnEnded;
 
         //PerformanceTrackingEnabled
 
@@ -242,10 +328,6 @@ namespace Lottie.Forms
         public static readonly BindableProperty IsPlayingProperty = BindableProperty.Create(nameof(IsPlaying),
             typeof(bool), typeof(AnimationView), default(bool));
 
-        [Obsolete("AutoPlay is obsolete, use IsPlaying instead")]
-        public static readonly BindableProperty AutoPlayProperty = BindableProperty.Create(nameof(AutoPlay),
-            typeof(bool), typeof(AnimationView), default(bool));
-
         public static readonly BindableProperty PlaybackStartedCommandProperty = BindableProperty.Create(nameof(PlaybackStartedCommand),
             typeof(ICommand), typeof(AnimationView));
 
@@ -261,13 +343,6 @@ namespace Lottie.Forms
         {
             get { return (bool)GetValue(LoopProperty); }
             set { SetValue(LoopProperty, value); }
-        }
-
-        [Obsolete("AutoPlay is obsolete, use IsPlaying instead")]
-        public bool AutoPlay
-        {
-            get { return (bool)GetValue(AutoPlayProperty); }
-            set { SetValue(AutoPlayProperty, value); }
         }
 
         public bool IsPlaying
@@ -349,31 +424,10 @@ namespace Lottie.Forms
             OnPause?.Invoke(this, new EventArgs());
         }
 
-        public event EventHandler OnClick;
+        
 
-        public void Click()
-        {
-            OnClick?.Invoke(this, new EventArgs());
+        
 
-            ExecuteCommandIfPossible(ClickedCommand);
-        }
-
-        public event EventHandler OnFinish;
-
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public void PlaybackFinished()
-        {
-            OnFinish?.Invoke(this, EventArgs.Empty);
-
-            ExecuteCommandIfPossible(PlaybackFinishedCommand);
-        }
-
-        private void ExecuteCommandIfPossible(ICommand command)
-        {
-            if (command != null && command.CanExecute(null))
-            {
-                command.Execute(null);
-            }
-        }*/
+        */
     }
 }

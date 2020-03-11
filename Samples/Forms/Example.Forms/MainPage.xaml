@@ -24,7 +24,22 @@
             <Button 
                 HorizontalOptions="FillAndExpand"
                 Text="Play" 
-                Command="{Binding StartPlayingCommand}"/>
+                Command="{Binding PlayCommand}"/>
+            
+            <Button 
+                HorizontalOptions="FillAndExpand"
+                Text="Pause" 
+                Command="{Binding PauseCommand}"/>
+
+            <Button 
+                HorizontalOptions="FillAndExpand"
+                Text="Cancel" 
+                Command="{Binding CancelCommand}"/>
+
+            <Button 
+                HorizontalOptions="FillAndExpand"
+                Text="Resume" 
+                Command="{Binding ResumeCommand}"/>
 
             <Button 
                 x:Name="playSegmentsButton"
@@ -35,23 +50,14 @@
                 x:Name="playFramesButton"
                 HorizontalOptions="FillAndExpand"
                 Text="Frames" />
-            
-            <Button 
-                HorizontalOptions="FillAndExpand"
-                Text="Pause"
-                Command="{Binding StopPlayingCommand}" />
         </StackLayout>
 
         <forms:AnimationView 
             x:Name="animationView" 
             Grid.Row="1"
-            Animation="LottieLogo1.json" 
-            Loop="false" 
-            IsPlaying="{Binding IsPlaying}"
-            OnFinish="Handle_OnFinish"
-            PlaybackStartedCommand="{Binding PlayingCommand}"
-            PlaybackFinishedCommand="{Binding FinishedCommand}" 
-            ClickedCommand="{Binding ClickedCommand}"
+            Animation="LottieLogo1.json"
+            IsAnimating="{Binding IsAnimating}"
+            Command="{Binding ClickCommand}"
             VerticalOptions="FillAndExpand" 
             HorizontalOptions="FillAndExpand" />
 
