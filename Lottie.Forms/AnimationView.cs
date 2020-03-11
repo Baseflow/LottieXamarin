@@ -1,7 +1,5 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Windows.Input;
-using Lottie.Forms.EventArguments;
 using Xamarin.Forms;
 
 namespace Lottie.Forms
@@ -28,10 +26,10 @@ namespace Lottie.Forms
 
         public static readonly BindableProperty MinProgressProperty = BindableProperty.Create(nameof(MinProgress),
             typeof(float), typeof(AnimationView), default(float));
-        
+
         public static readonly BindableProperty MaxFrameProperty = BindableProperty.Create(nameof(MaxFrame),
             typeof(int), typeof(AnimationView), default(int));
-        
+
         public static readonly BindableProperty MaxProgressProperty = BindableProperty.Create(nameof(MaxProgress),
             typeof(float), typeof(AnimationView), default(float));
 
@@ -321,39 +319,5 @@ namespace Lottie.Forms
         //ApplyingOpacityToLayersEnabled
 
         //disableExtraScaleModeInFitXY
-
-       
-            /*
-        public event EventHandler<ProgressSegmentEventArgs> OnPlayProgressSegment;
-
-        public void PlayProgressSegment(float from, float to)
-        {
-            if (from < 0f || from > 1f)
-                throw new ArgumentException($"Parameter {nameof(from)} should have a valid value.", nameof(from));
-
-            if (to < 0f || to > 1f)
-                throw new ArgumentException($"Parameter {nameof(to)} should have a valid value.", nameof(to));
-
-            OnPlayProgressSegment?.Invoke(this, new ProgressSegmentEventArgs(from, to));
-
-            ExecuteCommandIfPossible(PlaybackStartedCommand);
-        }
-
-        public event EventHandler<FrameSegmentEventArgs> OnPlayFrameSegment;
-
-        public void PlayFrameSegment(int from, int to)
-        {
-            if (from < 0)
-                throw new ArgumentException($"Parameter {nameof(from)} should have a valid value.", nameof(from));
-
-            if (to < 0)
-                throw new ArgumentException($"Parameter {nameof(to)} should have a valid value.", nameof(to));
-
-            OnPlayFrameSegment?.Invoke(this, new FrameSegmentEventArgs(from, to));
-
-            ExecuteCommandIfPossible(PlaybackStartedCommand);
-        }
-
-        */
     }
 }

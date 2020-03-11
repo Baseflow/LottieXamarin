@@ -1,6 +1,6 @@
 ﻿
 using Foundation;
-using Lottie.Forms.iOS.Renderers;
+using Lottie.Forms.Platforms.Ios;
 using UIKit;
 
 namespace Example.Forms.iOS

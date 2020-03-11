@@ -3,7 +3,6 @@ using System.ComponentModel;
 using Com.Airbnb.Lottie;
 using Lottie.Forms;
 using Lottie.Forms.Platforms.Android;
-using Lottie.Forms.EventArguments;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
@@ -21,9 +20,6 @@ namespace Lottie.Forms.Platforms.Android
         private LottieFailureListener _lottieFailureListener;
         private ClickListener _clickListener;
 
-        //private bool _needToReverseAnimationSpeed;
-        //private bool _needToResetFrames;
-
         /// <summary>
         ///     Used for registration with dependency service
         /// </summary>
@@ -38,6 +34,9 @@ namespace Lottie.Forms.Platforms.Android
         protected override void OnElementChanged(ElementChangedEventArgs<AnimationView> e)
         {
             base.OnElementChanged(e);
+
+            if (e == null)
+                return;
 
             if (e.OldElement != null)
             {
@@ -87,7 +86,7 @@ namespace Lottie.Forms.Platforms.Android
 
                     if (!string.IsNullOrEmpty(e.NewElement.Animation))
                     {
-                        if(int.TryParse(e.NewElement.Animation, out int intAnimation))
+                        if (int.TryParse(e.NewElement.Animation, out int intAnimation))
                             _animationView.SetAnimation(intAnimation);
                         else
                             _animationView.SetAnimation(e.NewElement.Animation);
@@ -99,7 +98,7 @@ namespace Lottie.Forms.Platforms.Android
                     e.NewElement.CancelCommand = new Command(() => _animationView.CancelAnimation());
                     e.NewElement.SetMinAndMaxFrameCommand = new Command((object paramter) =>
                     {
-                        if(paramter is (int minFrame, int maxFrame))
+                        if (paramter is (int minFrame, int maxFrame))
                             _animationView.SetMinAndMaxFrame(minFrame, maxFrame);
                     });
                     e.NewElement.SetMinAndMaxProgressCommand = new Command((object paramter) =>
@@ -119,7 +118,7 @@ namespace Lottie.Forms.Platforms.Android
                     _animationView.Speed = e.NewElement.Speed;
                     _animationView.RepeatMode = (int)e.NewElement.RepeatMode;
                     _animationView.RepeatCount = e.NewElement.RepeatCount;
-                    if(!string.IsNullOrEmpty(e.NewElement.ImageAssetsFolder))
+                    if (!string.IsNullOrEmpty(e.NewElement.ImageAssetsFolder))
                         _animationView.ImageAssetsFolder = e.NewElement.ImageAssetsFolder;
                     _animationView.Scale = e.NewElement.Scale;
                     _animationView.Frame = e.NewElement.Frame;
