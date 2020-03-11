@@ -11,6 +11,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -24,45 +25,55 @@
             <Button 
                 HorizontalOptions="FillAndExpand"
                 Text="Play" 
-                Command="{Binding PlayCommand}"/>
+                Clicked="Play_Clicked" />
             
             <Button 
                 HorizontalOptions="FillAndExpand"
                 Text="Pause" 
-                Command="{Binding PauseCommand}"/>
+                Clicked="Pause_Clicked" />
 
             <Button 
                 HorizontalOptions="FillAndExpand"
                 Text="Cancel" 
-                Command="{Binding CancelCommand}"/>
+                Clicked="Cancel_Clicked" />
 
             <Button 
                 HorizontalOptions="FillAndExpand"
                 Text="Resume" 
-                Command="{Binding ResumeCommand}"/>
+                Clicked="Resume_Clicked" />
+        </StackLayout>
 
+        <StackLayout
+            Grid.Row="1"
+            Orientation="Horizontal"
+            HorizontalOptions="FillAndExpand"
+            Margin="5, 0">
             <Button 
                 x:Name="playSegmentsButton"
                 HorizontalOptions="FillAndExpand"
-                Text="Segment" />
+                Text="Segment"
+                Clicked="Segment_Clicked" />
 
             <Button 
                 x:Name="playFramesButton"
                 HorizontalOptions="FillAndExpand"
-                Text="Frames" />
+                Text="Frames"
+                Clicked="Frames_Clicked" />
         </StackLayout>
 
         <forms:AnimationView 
             x:Name="animationView" 
-            Grid.Row="1"
-            Animation="LottieLogo1.json"
+            Grid.Row="2"
+            Animation="LottieLogo11.json"
+            MinFrame="20"
+            MaxFrame="80"
             IsAnimating="{Binding IsAnimating}"
             Command="{Binding ClickCommand}"
             VerticalOptions="FillAndExpand" 
             HorizontalOptions="FillAndExpand" />
 
         <Slider 
-            Grid.Row="2"
+            Grid.Row="3"
             Margin="5, 0"
             ValueChanged="Slider_OnValueChanged" />
     </Grid>

@@ -12,7 +12,6 @@ namespace Example.Forms
 
         public MainPageViewModel()
         {
-            PlayCommand = new Command(() => IsAnimating = true);
             //StopPlayingCommand = new Command(() => IsPlaying = false);
             //PlayingCommand = new Command(() => DisplayAlert($"{nameof(AnimationView.PlaybackStartedCommand)} executed!"));
             //FinishedCommand = new Command(() => DisplayAlert($"{nameof(AnimationView.PlaybackFinishedCommand)} executed!"));
@@ -37,10 +36,16 @@ namespace Example.Forms
             set => Set(ref _isAnimating, value);
         }
 
-        public ICommand PlayCommand { get; }
-        public ICommand PauseCommand { get; }
-        public ICommand CancelCommand { get; }
-        public ICommand ResumeCommand { get; }
-        public ICommand ClickCommand { get; }
+        private ICommand _playCommand;
+        public ICommand PlayCommand
+        {
+            get => _playCommand;
+            set => Set(ref _playCommand, value);
+        }
+
+        public ICommand PauseCommand { get; set; }
+        public ICommand CancelCommand { get; set; }
+        public ICommand ResumeCommand { get; set; }
+        public ICommand ClickCommand { get; set; }
     }
 }

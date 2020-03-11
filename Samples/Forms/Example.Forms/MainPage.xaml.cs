@@ -9,18 +9,6 @@ namespace Example.Forms
         {
             InitializeComponent();
 
-
-
-            // TODO: Currently, reverse playback is not supported on tizen backend. Will update when it supports.
-            /*playSegmentsButton.Clicked += (sender, e) =>
-            {
-                animationView.PlayProgressSegment(0.65f, (Device.RuntimePlatform != Device.Tizen) ? 0.0f : 1.0f);
-            };
-            playFramesButton.Clicked += (sender, e) =>
-            {
-                animationView.PlayFrameSegment(50, (Device.RuntimePlatform != Device.Tizen) ? 1 : 100);
-            };*/
-
             On<Xamarin.Forms.PlatformConfiguration.iOS>().SetUseSafeArea(true);
         }
 
@@ -32,6 +20,36 @@ namespace Example.Forms
         private void Handle_OnFinish(object sender, System.EventArgs e)
         {
             DisplayAlert(string.Empty, $"{nameof(animationView.OnEnded)} invoked!", "OK");
+        }
+
+        private void Play_Clicked(object sender, System.EventArgs e)
+        {
+            animationView.PlayAnimation();
+        }
+
+        private void Pause_Clicked(object sender, System.EventArgs e)
+        {
+            animationView.PauseAnimation();
+        }
+
+        private void Resume_Clicked(object sender, System.EventArgs e)
+        {
+            animationView.ResumeAnimation();
+        }
+
+        private void Cancel_Clicked(object sender, System.EventArgs e)
+        {
+            animationView.CancelAnimation();
+        }
+
+        private void Frames_Clicked(object sender, System.EventArgs e)
+        {
+            animationView.SetMinAndMaxFrame(50, 100);
+        }
+
+        private void Segment_Clicked(object sender, System.EventArgs e)
+        {
+            animationView.SetMinAndMaxProgress(0.65f, 1.0f);
         }
     }
 }

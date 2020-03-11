@@ -39,213 +39,157 @@ namespace Lottie.Forms.Platforms.Android
         {
             base.OnElementChanged(e);
 
-            if (Control == null)
-            {
-                _animationView = new LottieAnimationView(Context);
-                _animatorListener = new AnimatorListener();
-                _animatorUpdateListener = new AnimatorUpdateListener();
-                _lottieOnCompositionLoadedListener = new LottieOnCompositionLoadedListener();
-                _lottieFailureListener = new LottieFailureListener();
-
-                _animationView.AddAnimatorListener(_animatorListener);
-                _animationView.AddAnimatorUpdateListener(_animatorUpdateListener);
-                _animationView.AddLottieOnCompositionLoadedListener(_lottieOnCompositionLoadedListener);
-                _animationView.SetFailureListener(_lottieFailureListener);
-
-                SetNativeControl(_animationView);
-            }
-
             if (e.OldElement != null)
             {
-                /*e.OldElement.OnPlay -= OnPlay;
-                e.OldElement.OnPause -= OnPause;
-                e.OldElement.OnPlayProgressSegment -= OnPlayProgressSegment;
-                e.OldElement.OnPlayFrameSegment -= OnPlayFrameSegment;*/
-
-                _animationView.SetOnClickListener(null);
+                _animationView.RemoveAnimatorListener(_animatorListener);
+                _animationView.RemoveAllUpdateListeners();
+                _animationView.RemoveLottieOnCompositionLoadedListener(_lottieOnCompositionLoadedListener);
                 _animationView.SetFailureListener(null);
+                _animationView.SetOnClickListener(null);
             }
 
             if (e.NewElement != null)
             {
-                _animatorListener.OnAnimationCancelImpl = () => e.NewElement.InvokeCancelAnimation();
-                _animatorListener.OnAnimationEndImpl = () => e.NewElement.InvokePlaybackEnded();
-                _animatorListener.OnAnimationPauseImpl = () => e.NewElement.InvokePauseAnimation();
-                _animatorListener.OnAnimationRepeatImpl = () => e.NewElement.InvokeRepeatAnimation();
-                _animatorListener.OnAnimationResumeImpl = () => e.NewElement.InvokeResumeAnimation();
-                _animatorListener.OnAnimationStartImpl = () => e.NewElement.InvokePlayAnimation();
-
-                _animatorUpdateListener.OnAnimationUpdateImpl = () => e.NewElement.InvokeAnimatorUpdate();
-
-                _lottieOnCompositionLoadedListener.OnCompositionLoadedImpl = (composition) => e.NewElement.InvokeCompositionLoaded(composition);
-
-                _lottieFailureListener.OnResultImpl = (result) => e.NewElement.InvokeFailure(new Exception("Failed"));
-
-                if (!string.IsNullOrEmpty(e.NewElement.Animation))
+                if (Control == null)
                 {
-                    _animationView.SetAnimation(e.NewElement.Animation);
-                    Element.Duration = _animationView.Duration;
+                    _animationView = new LottieAnimationView(Context);
+                    _animatorListener = new AnimatorListener
+                    {
+                        OnAnimationCancelImpl = () => e.NewElement.InvokeCancelAnimation(),
+                        OnAnimationEndImpl = () => e.NewElement.InvokePlaybackEnded(),
+                        OnAnimationPauseImpl = () => e.NewElement.InvokePauseAnimation(),
+                        OnAnimationRepeatImpl = () => e.NewElement.InvokeRepeatAnimation(),
+                        OnAnimationResumeImpl = () => e.NewElement.InvokeResumeAnimation(),
+                        OnAnimationStartImpl = () => e.NewElement.InvokePlayAnimation()
+                    };
+                    _animatorUpdateListener = new AnimatorUpdateListener
+                    {
+                        OnAnimationUpdateImpl = () => e.NewElement.InvokeAnimatorUpdate()
+                    };
+                    _lottieOnCompositionLoadedListener = new LottieOnCompositionLoadedListener
+                    {
+                        OnCompositionLoadedImpl = (composition) => e.NewElement.InvokeCompositionLoaded(composition)
+                    };
+                    _lottieFailureListener = new LottieFailureListener
+                    {
+                        OnResultImpl = (exception) => e.NewElement.InvokeFailure(exception)
+                    };
+                    _clickListener = new ClickListener
+                    {
+                        OnClickImpl = () => e.NewElement.Click()
+                    };
+
+                    _animationView.AddAnimatorListener(_animatorListener);
+                    _animationView.AddAnimatorUpdateListener(_animatorUpdateListener);
+                    _animationView.AddLottieOnCompositionLoadedListener(_lottieOnCompositionLoadedListener);
+                    _animationView.SetFailureListener(_lottieFailureListener);
+                    _animationView.SetOnClickListener(_clickListener);
+
+                    if (!string.IsNullOrEmpty(e.NewElement.Animation))
+                    {
+                        if(int.TryParse(e.NewElement.Animation, out int intAnimation))
+                            _animationView.SetAnimation(intAnimation);
+                        else
+                            _animationView.SetAnimation(e.NewElement.Animation);
+                    }
+
+                    e.NewElement.PlayCommand = new Command(() => _animationView.PlayAnimation());
+                    e.NewElement.PauseCommand = new Command(() => _animationView.PauseAnimation());
+                    e.NewElement.ResumeCommand = new Command(() => _animationView.ResumeAnimation());
+                    e.NewElement.CancelCommand = new Command(() => _animationView.CancelAnimation());
+                    e.NewElement.SetMinAndMaxFrameCommand = new Command((object paramter) =>
+                    {
+                        if(paramter is (int minFrame, int maxFrame))
+                            _animationView.SetMinAndMaxFrame(minFrame, maxFrame);
+                    });
+                    e.NewElement.SetMinAndMaxProgressCommand = new Command((object paramter) =>
+                    {
+                        if (paramter is (float minProgress, float maxProgress))
+                            _animationView.SetMinAndMaxProgress(minProgress, maxProgress);
+                    });
+                    e.NewElement.ReverseAnimationSpeedCommand = new Command(() => _animationView.ReverseAnimationSpeed());
+
+                    _animationView.SetCacheComposition(e.NewElement.CacheComposition);
+                    //_animationView.SetFallbackResource(e.NewElement.FallbackResource.);
+                    //_animationView.Composition = e.NewElement.Composition;
+                    _animationView.SetMinFrame(e.NewElement.MinFrame);
+                    _animationView.SetMinProgress(e.NewElement.MinProgress);
+                    _animationView.SetMaxFrame(e.NewElement.MaxFrame);
+                    _animationView.SetMaxProgress(e.NewElement.MaxProgress);
+                    _animationView.Speed = e.NewElement.Speed;
+                    _animationView.RepeatMode = (int)e.NewElement.RepeatMode;
+                    _animationView.RepeatCount = e.NewElement.RepeatCount;
+                    if(!string.IsNullOrEmpty(e.NewElement.ImageAssetsFolder))
+                        _animationView.ImageAssetsFolder = e.NewElement.ImageAssetsFolder;
+                    _animationView.Scale = e.NewElement.Scale;
+                    _animationView.Frame = e.NewElement.Frame;
+                    _animationView.Progress = e.NewElement.Progress;
+
+                    SetNativeControl(_animationView);
+
+                    if (e.NewElement.AutoPlay || e.NewElement.IsAnimating)
+                        _animationView.PlayAnimation();
+
+                    e.NewElement.Duration = _animationView.Duration;
+                    e.NewElement.IsAnimating = _animationView.IsAnimating;
                 }
-
-                _clickListener = new ClickListener
-                {
-                    OnClickImpl = () => e.NewElement.Click()
-                };
-                _animationView.SetOnClickListener(_clickListener);
-
-                e.NewElement.NativePlayCommand = new Command(() => _animationView.PlayAnimation());
-                e.NewElement.NativePauseCommand = new Command(() => _animationView.PauseAnimation());
-                e.NewElement.NativeResumeCommand = new Command(() => _animationView.ResumeAnimation());
-                e.NewElement.NativeCancelCommand = new Command(() => _animationView.CancelAnimation());
-
-                _animationView.Speed = e.NewElement.Speed;
-                _animationView.ImageAssetsFolder = e.NewElement.ImageAssetsFolder;
-
-                if (e.NewElement.AutoPlay)
-                    _animationView.PlayAnimation();
-
-                //_animationView.SetRenderMode(e.NewElement.HardwareAcceleration ? RenderMode.Hardware : RenderMode.Software);
-                //_animationView.Loop(e.NewElement.Loop);
             }
-        }
-
-        /*
-        private void OnPlayAnimation(object sender, EventArgs e)
-        {
-            if (_animationView != null && _animationView.Handle != IntPtr.Zero)
-            {
-                if (_animationView.Progress > 0f)
-                {
-                    _animationView.ResumeAnimation();
-                }
-                else
-                {
-                    _animationView.PlayAnimation();
-                }
-                Element.IsAnimating = true;
-            }
-        }
-
-        private void OnPauseAnimation(object sender, EventArgs e)
-        {
-            if (_animationView != null && _animationView.Handle != IntPtr.Zero)
-            {
-                _animationView.PauseAnimation();
-                Element.IsAnimating = false;
-            }
-        }
-
-        private void OnPlayProgressSegment(object sender, ProgressSegmentEventArgs e)
-        {
-            if (_animationView != null
-                && _animationView.Handle != IntPtr.Zero)
-            {
-                PrepareReverseAnimation((min, max) =>
-                {
-                    _animationView.SetMinAndMaxProgress(min, max);
-                }, e.From, e.To);
-            }
-        }
-
-        private void PrepareReverseAnimation(Action<float, float> action,
-                                             float from, float to)
-        {
-            var minValue = Math.Min(from, to);
-            var maxValue = Math.Max(from, to);
-            var needReverse = from > to;
-
-            action(minValue, maxValue);
-
-            if (needReverse && !_needToReverseAnimationSpeed)
-            {
-                _needToReverseAnimationSpeed = true;
-                _animationView.ReverseAnimationSpeed();
-            }
-
-            _animationView.PlayAnimation();
-            Element.IsPlaying = true;
-        }
-
-        private void OnPlayFrameSegment(object sender, FrameSegmentEventArgs e)
-        {
-            if (_animationView != null
-                && _animationView.Handle != IntPtr.Zero)
-            {
-                PrepareReverseAnimation((min, max) =>
-                {
-                    _animationView.SetMinAndMaxFrame((int)min, (int)max);
-                    _needToResetFrames = true;
-                }, e.From, e.To);
-            }
-        }
-
-
-
-        private void PlaybackFinished()
-        {
-            Element?.PlaybackFinished();
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (_animationView == null || Element == null)
+            if (_animationView == null || Element == null || e == null)
                 return;
 
             if (e.PropertyName == AnimationView.AnimationProperty.PropertyName && !string.IsNullOrEmpty(Element.Animation))
             {
                 _animationView.SetAnimation(Element.Animation);
-                Element.Duration = TimeSpan.FromMilliseconds(_animationView.Duration);
 
-                if (Element.AutoPlay || Element.IsPlaying)
+                if (Element.AutoPlay || Element.IsAnimating)
                     _animationView.PlayAnimation();
             }
+
+            if (e.PropertyName == AnimationView.CacheCompositionProperty.PropertyName)
+                _animationView.SetCacheComposition(Element.CacheComposition);
+
+            //_animationView.SetFallbackResource(e.NewElement.FallbackResource.);
+            //_animationView.Composition = e.NewElement.Composition;
+
+            if (e.PropertyName == AnimationView.MinFrameProperty.PropertyName)
+                _animationView.SetMinFrame(Element.MinFrame);
+
+            if (e.PropertyName == AnimationView.MinProgressProperty.PropertyName)
+                _animationView.SetMinProgress(Element.MinProgress);
+
+            if (e.PropertyName == AnimationView.MaxFrameProperty.PropertyName)
+                _animationView.SetMaxFrame(Element.MaxFrame);
+
+            if (e.PropertyName == AnimationView.SpeedProperty.PropertyName)
+                _animationView.SetMaxProgress(Element.MaxProgress);
 
             if (e.PropertyName == AnimationView.SpeedProperty.PropertyName)
                 _animationView.Speed = Element.Speed;
 
-            if (e.PropertyName == AnimationView.ProgressProperty.PropertyName)
-            {
-                _animationView.PauseAnimation();
-                _animationView.Progress = Element.Progress;
-            }
+            if (e.PropertyName == AnimationView.RepeatModeProperty.PropertyName)
+                _animationView.RepeatMode = (int)Element.RepeatMode;
 
-            if (e.PropertyName == AnimationView.LoopProperty.PropertyName)
-                _animationView.Loop(Element.Loop);
+            if (e.PropertyName == AnimationView.RepeatCountProperty.PropertyName)
+                _animationView.RepeatCount = Element.RepeatCount;
 
             if (e.PropertyName == AnimationView.ImageAssetsFolderProperty.PropertyName && !string.IsNullOrEmpty(Element.ImageAssetsFolder))
                 _animationView.ImageAssetsFolder = Element.ImageAssetsFolder;
 
-            if (e.PropertyName == AnimationView.HardwareAccelerationProperty.PropertyName)
-                _animationView.SetRenderMode(Element.HardwareAcceleration ? RenderMode.Hardware : RenderMode.Software);
+            if (e.PropertyName == AnimationView.ScaleProperty.PropertyName)
+                _animationView.Scale = Element.Scale;
 
-            if (e.PropertyName == AnimationView.IsPlayingProperty.PropertyName &&
-                !string.IsNullOrEmpty(Element.Animation))
-            {
-                if (Element.IsPlaying)
-                    _animationView.PlayAnimation();
-                else
-                    _animationView.PauseAnimation();
-            }
+            if (e.PropertyName == AnimationView.FrameProperty.PropertyName)
+                _animationView.Frame = Element.Frame;
+
+            if (e.PropertyName == AnimationView.ProgressProperty.PropertyName)
+                _animationView.Progress = Element.Progress;
 
             base.OnElementPropertyChanged(sender, e);
         }
-        
-        private void ResetReverse()
-        {
-            if (_needToResetFrames)
-            {
-                var composition = _animationView.Composition;
-
-                _animationView.SetMinAndMaxFrame((int)composition.StartFrame, (int)composition.EndFrame);
-                _needToResetFrames = false;
-            }
-
-            if (_needToReverseAnimationSpeed)
-            {
-                _animationView.ReverseAnimationSpeed();
-                _needToReverseAnimationSpeed = false;
-            }
-        }*/
     }
 #pragma warning restore 0618
 }

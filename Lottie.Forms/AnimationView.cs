@@ -8,8 +8,8 @@ namespace Lottie.Forms
 {
     public class AnimationView : View
     {
-        public static readonly BindableProperty ImageProperty = BindableProperty.Create(nameof(Image),
-            typeof(ImageSource), typeof(AnimationView), default(ImageSource));
+        //public static readonly BindableProperty ImageProperty = BindableProperty.Create(nameof(Image),
+        //    typeof(ImageSource), typeof(AnimationView), default(ImageSource));
 
         public static readonly BindableProperty AnimationProperty = BindableProperty.Create(nameof(Animation),
             typeof(string), typeof(AnimationView), default(string));
@@ -69,29 +69,10 @@ namespace Lottie.Forms
         public static readonly BindableProperty CommandProperty = BindableProperty.Create(nameof(Command),
             typeof(ICommand), typeof(AnimationView));
 
-        public static readonly BindableProperty PlayAnimationCommandProperty = BindableProperty.Create(nameof(PlayAnimationCommand),
-            typeof(ICommand), typeof(AnimationView));
-
-        // void setMinAndMaxFrame(int minFrame, int maxFrame)
-
-        // void setMinAndMaxProgress(float minProgress, float maxProgress)
-
-        // void reverseAnimationSpeed
-
-        // Bitmap updateBitmap(String id, @Nullable Bitmap bitmap)
-
-        // setImageAssetDelegate(ImageAssetDelegate assetDelegate) {
-
-        // setFontAssetDelegate(
-
-        // setTextDelegate(TextDelegate textDelegate)
-
-        //setScaleType
-
         public long Duration
         {
             get { return (long)GetValue(ProgressProperty); }
-            set { SetValue(ProgressProperty, value); }
+            internal set { SetValue(ProgressProperty, value); }
         }
 
         public bool CacheComposition
@@ -163,7 +144,7 @@ namespace Lottie.Forms
         public bool IsAnimating
         {
             get { return (bool)GetValue(IsAnimatingProperty); }
-            set { SetValue(IsAnimatingProperty, value); }
+            internal set { SetValue(IsAnimatingProperty, value); }
         }
 
         public string ImageAssetsFolder
@@ -201,37 +182,6 @@ namespace Lottie.Forms
             get { return (ICommand)GetValue(CommandProperty); }
             set { SetValue(CommandProperty, value); }
         }
-
-        public ICommand PlayAnimationCommand
-        {
-            get { return (ICommand)GetValue(PlayAnimationCommandProperty); }
-            set { SetValue(PlayAnimationCommandProperty, value); }
-        }
-
-        public void PlayAnimation()
-        {
-            NativePlayCommand.ExecuteCommandIfPossible();
-        }
-
-        public void ResumeAnimation()
-        {
-            NativeResumeCommand.ExecuteCommandIfPossible();
-        }
-
-        public void CancelAnimation()
-        {
-            NativeCancelCommand.ExecuteCommandIfPossible();
-        }
-
-        public void PauseAnimation()
-        {
-            NativePauseCommand.ExecuteCommandIfPossible();
-        }
-
-        internal ICommand NativePlayCommand { get; set; }
-        internal ICommand NativeResumeCommand { get; set; }
-        internal ICommand NativeCancelCommand { get; set; }
-        internal ICommand NativePauseCommand { get; set; }
 
         internal void InvokePlayAnimation()
         {
@@ -299,11 +249,11 @@ namespace Lottie.Forms
 
         public void Click()
         {
-            OnClick?.Invoke(this, EventArgs.Empty);
+            Clicked?.Invoke(this, EventArgs.Empty);
             Command.ExecuteCommandIfPossible();
         }
 
-        public event EventHandler OnClick;
+        public event EventHandler Clicked;
 
         internal void InvokePlaybackEnded()
         {
@@ -311,6 +261,58 @@ namespace Lottie.Forms
         }
 
         public event EventHandler OnEnded;
+
+        public void PlayAnimation()
+        {
+            PlayCommand.ExecuteCommandIfPossible();
+        }
+
+        public void ResumeAnimation()
+        {
+            ResumeCommand.ExecuteCommandIfPossible();
+        }
+
+        public void CancelAnimation()
+        {
+            CancelCommand.ExecuteCommandIfPossible();
+        }
+
+        public void PauseAnimation()
+        {
+            PauseCommand.ExecuteCommandIfPossible();
+        }
+
+        public void SetMinAndMaxFrame(int minFrame, int maxFrame)
+        {
+            SetMinAndMaxFrameCommand.ExecuteCommandIfPossible((minFrame, maxFrame));
+        }
+
+        public void SetMinAndMaxProgress(float minProgress, float maxProgress)
+        {
+            SetMinAndMaxProgressCommand.ExecuteCommandIfPossible((minProgress, maxProgress));
+        }
+        public void ReverseAnimationSpeed()
+        {
+            ReverseAnimationSpeedCommand.ExecuteCommandIfPossible();
+        }
+
+        internal ICommand PlayCommand { get; set; }
+        internal ICommand ResumeCommand { get; set; }
+        internal ICommand CancelCommand { get; set; }
+        internal ICommand PauseCommand { get; set; }
+        internal ICommand SetMinAndMaxFrameCommand { get; set; }
+        internal ICommand SetMinAndMaxProgressCommand { get; set; }
+        internal ICommand ReverseAnimationSpeedCommand { get; set; }
+
+        // Bitmap updateBitmap(String id, @Nullable Bitmap bitmap)
+
+        // setImageAssetDelegate(ImageAssetDelegate assetDelegate) {
+
+        // setFontAssetDelegate(
+
+        // setTextDelegate(TextDelegate textDelegate)
+
+        // setScaleType
 
         //PerformanceTrackingEnabled
 
@@ -320,73 +322,8 @@ namespace Lottie.Forms
 
         //disableExtraScaleModeInFitXY
 
-        /*
-
-        public static readonly BindableProperty LoopProperty = BindableProperty.Create(nameof(Loop), typeof(bool),
-            typeof(AnimationView), default(bool));
-
-        public static readonly BindableProperty IsPlayingProperty = BindableProperty.Create(nameof(IsPlaying),
-            typeof(bool), typeof(AnimationView), default(bool));
-
-        public static readonly BindableProperty PlaybackStartedCommandProperty = BindableProperty.Create(nameof(PlaybackStartedCommand),
-            typeof(ICommand), typeof(AnimationView));
-
-        public static readonly BindableProperty PlaybackFinishedCommandProperty = BindableProperty.Create(nameof(PlaybackFinishedCommand),
-            typeof(ICommand), typeof(AnimationView));
-
-        
-
-        public static readonly BindableProperty HardwareAccelerationProperty = BindableProperty.Create(nameof(HardwareAcceleration),
-            typeof(bool), typeof(AnimationView), default(bool));
-
-        public bool Loop
-        {
-            get { return (bool)GetValue(LoopProperty); }
-            set { SetValue(LoopProperty, value); }
-        }
-
-        public bool IsPlaying
-        {
-            get { return (bool)GetValue(IsPlayingProperty); }
-            set { SetValue(IsPlayingProperty, value); }
-        }
-
-        public ICommand PlaybackStartedCommand
-        {
-            get { return (ICommand)GetValue(PlaybackStartedCommandProperty); }
-            set { SetValue(PlaybackStartedCommandProperty, value); }
-        }
-
-        public ICommand PlaybackFinishedCommand
-        {
-            get { return (ICommand)GetValue(PlaybackFinishedCommandProperty); }
-            set { SetValue(PlaybackFinishedCommandProperty, value); }
-        }
-
-        public ICommand ClickedCommand
-        {
-            get { return (ICommand)GetValue(ClickedCommandProperty); }
-            set { SetValue(ClickedCommandProperty, value); }
-        }
-
-        /// <summary>
-        /// Where possible/supported render the animation using hardware (GPU) rather than software (CPU) More information: https://airbnb.io/lottie/android/performance.html#hardware-acceleration
-        /// No Effect on iOS
-        /// </summary>
-        public bool HardwareAcceleration
-        {
-            get { return (bool)GetValue(HardwareAccelerationProperty); }
-            set { SetValue(HardwareAccelerationProperty, value); }
-        }
-
-        public event EventHandler OnPlay;
-
-        public void Play()
-        {
-            OnPlay?.Invoke(this, new EventArgs());
-            ExecuteCommandIfPossible(PlaybackStartedCommand);
-        }
-
+       
+            /*
         public event EventHandler<ProgressSegmentEventArgs> OnPlayProgressSegment;
 
         public void PlayProgressSegment(float from, float to)
@@ -416,17 +353,6 @@ namespace Lottie.Forms
 
             ExecuteCommandIfPossible(PlaybackStartedCommand);
         }
-
-        public event EventHandler OnPause;
-
-        public void Pause()
-        {
-            OnPause?.Invoke(this, new EventArgs());
-        }
-
-        
-
-        
 
         */
     }

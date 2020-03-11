@@ -18,11 +18,12 @@ namespace Lottie.Forms.Platforms.Android
         {
         }
 
-        public Action<object> OnResultImpl { get; set; }
+        public Action<Exception> OnResultImpl { get; set; }
 
         public void OnResult(Java.Lang.Object p0)
         {
-            OnResultImpl?.Invoke(p0);
+            var javaError = p0?.ToString();
+            OnResultImpl?.Invoke(new Exception(javaError));
         }
     }
 }

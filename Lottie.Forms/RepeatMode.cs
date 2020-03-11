@@ -3,8 +3,8 @@ namespace Lottie.Forms
 {
     public enum RepeatMode
     {
-        Restart,
-        Reverse,
-        Infinite
+        Restart = 0,
+        Reverse = 1,
+        Infinite = 2
     }
 }

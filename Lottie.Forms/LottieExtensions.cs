@@ -9,11 +9,11 @@ namespace Lottie.Forms
 {
     public static class LottieExtensions
     {
-        public static void ExecuteCommandIfPossible(this ICommand command)
+        public static void ExecuteCommandIfPossible(this ICommand command, object parameter = null)
         {
-            if (command?.CanExecute(null) == true)
+            if (command?.CanExecute(parameter) == true)
             {
-                command.Execute(null);
+                command.Execute(parameter);
             }
         }
     }
