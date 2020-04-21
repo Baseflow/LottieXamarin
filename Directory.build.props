@@ -2,25 +2,28 @@
   <PropertyGroup>
     <Copyright>Copyright (c) Martijn van Dijk</Copyright>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/martijn00/LottieXamarin</PackageProjectUrl>
-    <PackageIconUrl>https://raw.githubusercontent.com/martijn00/LottieXamarin/develop/icon.png</PackageIconUrl>
-    <!--<PackageIcon>icon.png</PackageIcon>-->
+    <PackageProjectUrl>https://github.com/Baseflow/LottieXamarin</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/Baseflow/LottieXamarin/develop/icon.png</PackageIconUrl>
+    <!--<PackageIcon>icon.png</PackageIcon>
+    <PackageIconFullPath>$(MSBuildThisFileDirectory)icon.png</PackageIconFullPath>-->
     <Authors>Martijn van Dijk</Authors>
-    <Owners>martijn00</Owners>
+    <Owners>martijn00, Baseflow</Owners>
     <PackageTags>xamarin, monodroid, C#, xamarin.android, Forms, android, Lottie, animation, airbnb</PackageTags>
-    <PackageReleaseNotes>https://github.com/martijn00/LottieXamarin/releases</PackageReleaseNotes>
+    <PackageReleaseNotes>https://github.com/Baseflow/LottieXamarin/releases</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-
-    <RepositoryUrl>https://github.com/martijn00/LottieXamarin</RepositoryUrl>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <MinClientVersion>2.12</MinClientVersion>
+	
+	<PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <RepositoryUrl>https://github.com/Baseflow/LottieXamarin</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
-    <NeutralLanguage>en</NeutralLanguage>
     <Version>3.0.0</Version>
-    <Platform>AnyCPU</Platform>
-
+	
     <!--<Nullable>enable</Nullable>-->
     <LangVersion>8.0</LangVersion>
-    <NoWarn>$(NoWarn);1591;1701;1702;1705;VSX1000;NU1603</NoWarn>
+    <NoWarn>$(NoWarn);1591;1701;1702;1705;VSX1000;CS0109;CS0108;CS0618;CS0114;NU1603</NoWarn>
+    <Platform>AnyCPU</Platform>
 
     <IsTestProject>$(MSBuildProjectName.Contains('UnitTest'))</IsTestProject>
     <IsLibraryProject>$(MSBuildProjectName.Contains('Lottie'))</IsLibraryProject>
@@ -29,11 +32,22 @@
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <!--<SymbolPackageFormat>snupkg</SymbolPackageFormat>-->
+    <IncludeSymbols>true</IncludeSymbols>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+
     <DesignTimeBuild>false</DesignTimeBuild>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <GeneratePackageOnBuild Condition=" '$(IsTestProject)' != 'true'">true</GeneratePackageOnBuild>
     <DebugType>portable</DebugType>
     <DebugSymbols>true</DebugSymbols>
+
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GeneratePackageOnBuild Condition=" '$(IsTestProject)' != 'true'">true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(IsTestProject)' != 'true' and'$(TF_BUILD)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -41,16 +55,7 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' And '$(OS)' == 'Windows_NT' ">
-    <!--<IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>-->
-
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
-  </PropertyGroup>
-
-  <ItemGroup Condition="'$(IsTestProject)' != 'true'">
+  <ItemGroup Condition="'$(IsLibraryProject)' == 'true'">
     <None Include="$(MSBuildThisFileDirectory)\LICENSE" Pack="true" PackagePath="\" />
     <None Include="$(MSBuildThisFileDirectory)\icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
@@ -59,17 +64,14 @@
     <PackageReference Include="SourceLink.Create.CommandLine" Version="2.8.3" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
   </ItemGroup>
-  
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <TargetsToBuild>All</TargetsToBuild> 
-    <!--<TargetsToBuild>Android</TargetsToBuild>-->
-    <!--<TargetsToBuild>Uap</TargetsToBuild>--> 
-    <!--<TargetsToBuild>iOS</TargetsToBuild>--> 
+
+  <PropertyGroup>
+    <TargetFrameworkMonikerAssemblyAttributesPath>$([System.IO.Path]::Combine('$(IntermediateOutputPath)','$(TargetFrameworkMoniker).AssemblyAttributes$(DefaultLanguageSourceExtension)'))</TargetFrameworkMonikerAssemblyAttributesPath>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)' != 'Debug' ">
-    <TargetsToBuild>All</TargetsToBuild>
-  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedFiles Include="$(GeneratedAssemblyInfoFile)"/>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Roslynator.Analyzers" Version="2.3.0">
@@ -80,10 +82,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="IDisposableAnalyzers" Version="3.3.1">
+    <!--<PackageReference Include="IDisposableAnalyzers" Version="3.3.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+    </PackageReference>-->
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
