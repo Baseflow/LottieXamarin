@@ -104,7 +104,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <Content Include="LottieLogo1.json" />
+    <Content Include="Assets\LottieLogo1.json" />
     <None Include="Example.Forms.UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

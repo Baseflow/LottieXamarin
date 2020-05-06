@@ -226,7 +226,7 @@ namespace Lottie.Forms.UWP.Renderers
                 assets = Element.ImageAssetsFolder;
             }
 
-            var path = Path.Combine("ms-appx:///", assets, animation);
+            var path = $"ms-appx:///{assets}/{animation}";
 
             _animationView.Source = new LottieVisualSource { UriSource = new Uri(path) };
         }
@@ -242,8 +242,8 @@ namespace Lottie.Forms.UWP.Renderers
             {
                 return;
             }
-
-            _ = _animationView.PlayAsync(from, to, Element.Loop).AsTask();
+            
+            _ = _animationView.PlayAsync(from, to, Element.Loop);
 
             Element.IsPlaying = true;
         }
