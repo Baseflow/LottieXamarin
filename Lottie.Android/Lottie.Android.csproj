@@ -7,7 +7,7 @@
     <PackageId>Com.Airbnb.Android.Lottie</PackageId>
     <IsBindingProject>true</IsBindingProject>
     <EnableDefaultItems>false</EnableDefaultItems>
-    <Version>3.4.1</Version>
+    <Version>3.4.2</Version>
     
     <AndroidCodegenTarget>XAJavaInterop1</AndroidCodegenTarget>
     <_EnableInterfaceMembers>true</_EnableInterfaceMembers>
@@ -19,7 +19,7 @@
   <ItemGroup>
     <PackageReference Include="Square.OkIO" Version="1.17.4" />
     <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.1.0" />
-	  <PackageReference Include="Xamarin.Build.Download" Version="0.9.0" PrivateAssets="All" />
+	  <PackageReference Include="Xamarin.Build.Download" Version="0.10.0" PrivateAssets="All" />
     <!-- None Include="Additions\*;Jars\*;Transforms\*" /-->
     <LibraryProjectZip Include="Jars\*.aar" />
     <TransformFile Include="Transforms\*.xml" />
