@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
 using System.IO;
+using System.Threading.Tasks;
 using Lottie.Forms;
 using Lottie.Forms.EventArguments;
+using Lottie.Forms.PlatformConfiguration.UWPSpecific;
 using Lottie.Forms.UWP.Renderers;
 using Microsoft.Toolkit.Uwp.UI.Lottie;
 using Microsoft.UI.Xaml.Controls;
@@ -37,6 +39,7 @@ namespace Lottie.Forms.UWP.Renderers
             if (Control == null && e.NewElement != null)
             {
                 _animationView = new AnimatedVisualPlayer { AutoPlay = false };
+                _animationView.Loaded += AnimationLoaded;
                 SetNativeControl(_animationView);
             }
 
@@ -50,6 +53,7 @@ namespace Lottie.Forms.UWP.Renderers
 
                 _animationView.Stop();
                 _animationView.Tapped -= AnimationViewTapped;
+                _animationView.Loaded -= AnimationLoaded;
                 RestAnimation();
             }
 
@@ -69,16 +73,23 @@ namespace Lottie.Forms.UWP.Renderers
                     SetAnimation(e.NewElement.Animation);
                     Element.Duration = _animationView.Duration;
                 }
+            }
+        }
+
+        private async void AnimationLoaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
 #pragma warning disable CS0618 // Type or member is obsolete
-                if (e.NewElement.AutoPlay || e.NewElement.IsPlaying)
+            if (Element.AutoPlay || Element.IsPlaying)
 #pragma warning restore CS0618 // Type or member is obsolete
-                {
-                    _ = _animationView.PlayAsync(0, 1, e.NewElement.Loop).AsTask();
-                }
-                else
-                {
-                    _animationView.Stop();
-                }
+            {
+#pragma warning disable CA2007 // Consider calling ConfigureAwait on the awaited task
+                await Task.Delay(Element.On<Xamarin.Forms.PlatformConfiguration.Windows>().DelayBeforeLoadMilliseconds());
+                await _animationView.PlayAsync(0, 1, Element.Loop).AsTask();
+#pragma warning restore CA2007 // Consider calling ConfigureAwait on the awaited task
+            }
+            else
+            {
+                _animationView.Stop();
             }
         }
 
@@ -244,8 +255,6 @@ namespace Lottie.Forms.UWP.Renderers
             }
             
             _ = _animationView.PlayAsync(from, to, Element.Loop);
-
-            Element.IsPlaying = true;
         }
     }
 }

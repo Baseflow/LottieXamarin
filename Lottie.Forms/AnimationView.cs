@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
 using Lottie.Forms.EventArguments;
@@ -6,7 +7,7 @@ using Xamarin.Forms;
 
 namespace Lottie.Forms
 {
-    public class AnimationView : View
+    public class AnimationView : View, IElementConfiguration<AnimationView>
     {
         public static readonly BindableProperty ProgressProperty = BindableProperty.Create(nameof(Progress),
             typeof(float), typeof(AnimationView), default(float));
@@ -44,6 +45,13 @@ namespace Lottie.Forms
 
         public static readonly BindableProperty HardwareAccelerationProperty = BindableProperty.Create(nameof(HardwareAcceleration),
             typeof(bool), typeof(AnimationView), default(bool));
+
+        readonly Lazy<Dictionary<Type, object>> _platformSpecifics;
+
+        public AnimationView()
+        {
+            _platformSpecifics = new Lazy<Dictionary<Type, object>>();
+        }
 
         public float Progress
         {
@@ -192,6 +200,16 @@ namespace Lottie.Forms
             {
                 command.Execute(null);
             }
+        }
+
+        public IPlatformElementConfiguration<T, AnimationView> On<T>() where T : IConfigPlatform
+        {
+            if (_platformSpecifics.Value.ContainsKey(typeof(T)))
+                return (IPlatformElementConfiguration<T, AnimationView>)_platformSpecifics.Value[typeof(T)];
+
+            var emptyConfig = Configuration<T, AnimationView>.Create(this);
+            _platformSpecifics.Value.Add(typeof(T), emptyConfig);
+            return emptyConfig;
         }
     }
 }
