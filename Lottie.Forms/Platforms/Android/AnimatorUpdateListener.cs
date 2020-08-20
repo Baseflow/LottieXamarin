@@ -14,11 +14,11 @@ namespace Lottie.Forms.Platforms.Android
         {
         }
 
-        public Action OnAnimationUpdateImpl { get; set; }
+        public Action<float> OnAnimationUpdateImpl { get; set; }
 
         public void OnAnimationUpdate(ValueAnimator animation)
         {
-            OnAnimationUpdateImpl?.Invoke();
+            OnAnimationUpdateImpl?.Invoke(((float)animation.AnimatedValue));
         }
     }
 }

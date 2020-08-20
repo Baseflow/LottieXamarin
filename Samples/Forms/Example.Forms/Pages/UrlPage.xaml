@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms" 
+    xmlns:local="clr-namespace:Example.Forms" 
+    x:Class="Example.Forms.UrlPage">
+    <ContentPage.BindingContext>
+        <local:UrlViewModel />
+    </ContentPage.BindingContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackLayout
+            Grid.Row="0"
+            Orientation="Horizontal"
+            HorizontalOptions="FillAndExpand"
+            Margin="5, 0">
+            
+            <Button 
+                HorizontalOptions="FillAndExpand"
+                Text="Play" 
+                Command="{Binding PlayCommand}"
+                CommandParameter="{x:Reference animationView}" />
+            
+            <Button 
+                HorizontalOptions="FillAndExpand"
+                Text="Pause" 
+                Command="{Binding PauseCommand}"
+                CommandParameter="{x:Reference animationView}" />
+
+            <Button 
+                HorizontalOptions="FillAndExpand"
+                Text="Cancel" 
+                Command="{Binding CancelCommand}"
+                CommandParameter="{x:Reference animationView}" />
+
+            <Button 
+                HorizontalOptions="FillAndExpand"
+                Text="Resume" 
+                Command="{Binding ResumeCommand}"
+                CommandParameter="{x:Reference animationView}" />
+
+            
+        </StackLayout>
+
+        <Entry Text="{Binding Url}" />
+
+        <forms:AnimationView 
+            x:Name="animationView" 
+            Grid.Row="2" 
+            BackgroundColor="Red"
+            Animation="{Binding Url}"
+            AnimationType="Url"
+            VerticalOptions="FillAndExpand" 
+            HorizontalOptions="FillAndExpand" />
+    </Grid>
+</ContentPage>

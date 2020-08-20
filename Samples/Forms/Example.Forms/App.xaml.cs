@@ -9,7 +9,7 @@ namespace Example.Forms
         {
             InitializeComponent();
 
-            MainPage = new Example.Forms.MainPage();
+            MainPage = new NavigationPage(new Example.Forms.MainPage());
         }
 
         protected override void OnStart()

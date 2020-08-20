@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms" 
+    xmlns:local="clr-namespace:Example.Forms" 
+    x:Class="Example.Forms.AssetPage">
+    <ContentPage.BindingContext>
+        <local:AssetViewModel />
+    </ContentPage.BindingContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackLayout
+            Grid.Row="0"
+            Orientation="Horizontal"
+            HorizontalOptions="FillAndExpand"
+            Margin="5, 0">
+            
+            <Button 
+                HorizontalOptions="FillAndExpand"
+                Text="Play" 
+                Command="{Binding PlayCommand}"
+                CommandParameter="{x:Reference animationView}" />
+            
+            <Button 
+                HorizontalOptions="FillAndExpand"
+                Text="Pause" 
+                Command="{Binding PauseCommand}"
+                CommandParameter="{x:Reference animationView}" />
+
+            <Button 
+                HorizontalOptions="FillAndExpand"
+                Text="Cancel" 
+                Command="{Binding CancelCommand}"
+                CommandParameter="{x:Reference animationView}" />
+
+            <Button 
+                HorizontalOptions="FillAndExpand"
+                Text="Resume" 
+                Command="{Binding ResumeCommand}"
+                CommandParameter="{x:Reference animationView}" />
+        </StackLayout>
+
+        <StackLayout
+            Grid.Row="1"
+            Orientation="Horizontal"
+            HorizontalOptions="FillAndExpand"
+            Margin="5, 0">
+            <Button 
+                HorizontalOptions="FillAndExpand"
+                Text="MinAndMaxFrame"
+                Command="{Binding MinAndMaxFrameCommand}"
+                CommandParameter="{x:Reference animationView}" />
+
+            <Button 
+                HorizontalOptions="FillAndExpand"
+                Text="MinAndMaxProgress"
+                Command="{Binding MinAndMaxProgressCommand}"
+                CommandParameter="{x:Reference animationView}" />
+        </StackLayout>
+
+        <forms:AnimationView 
+            x:Name="animationView" 
+            Grid.Row="2" 
+            BackgroundColor="Red"
+            Animation="LottieLogo1.json"
+            MinFrame="20"
+            MaxFrame="80"
+            IsAnimating="{Binding IsAnimating}"
+            Command="{Binding ClickCommand}"
+            VerticalOptions="FillAndExpand" 
+            HorizontalOptions="FillAndExpand" />
+
+        <Slider 
+            Grid.Row="3"
+            Margin="5, 0"
+            ValueChanged="Slider_OnValueChanged" />
+    </Grid>
+</ContentPage>

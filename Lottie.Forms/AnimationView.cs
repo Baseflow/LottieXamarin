@@ -12,6 +12,9 @@ namespace Lottie.Forms
         public static readonly BindableProperty AnimationProperty = BindableProperty.Create(nameof(Animation),
             typeof(object), typeof(AnimationView), default(object));
 
+        public static readonly BindableProperty AnimationTypeProperty = BindableProperty.Create(nameof(AnimationType),
+            typeof(AnimationType), typeof(AnimationView), default(AnimationType));
+
         public static readonly BindableProperty CacheCompositionProperty = BindableProperty.Create(nameof(CacheComposition),
             typeof(bool), typeof(AnimationView), default(bool));
 
@@ -83,6 +86,12 @@ namespace Lottie.Forms
         {
             get { return (object)GetValue(AnimationProperty); }
             set { SetValue(AnimationProperty, value); }
+        }
+
+        public AnimationType AnimationType
+        {
+            get { return (AnimationType)GetValue(AnimationTypeProperty); }
+            set { SetValue(AnimationTypeProperty, value); }
         }
 
         public ImageSource FallbackResource
@@ -229,9 +238,10 @@ namespace Lottie.Forms
 
         public event EventHandler Clicked;
 
-        internal void InvokeAnimatorUpdate()
+        internal void InvokeAnimatorUpdate(float progress)
         {
-            OnAnimatorUpdate?.Invoke(this, EventArgs.Empty);
+            //TODO: Pass on to event handler
+            OnAnimatorUpdate?.Invoke(this, progress);
         }
 
         internal void InvokeAnimator()
@@ -250,7 +260,7 @@ namespace Lottie.Forms
             OnFailure?.Invoke(this, EventArgs.Empty);
         }
 
-        public event EventHandler OnAnimatorUpdate;
+        public event EventHandler<float> OnAnimatorUpdate;
 
         public event EventHandler OnAnimator;
 

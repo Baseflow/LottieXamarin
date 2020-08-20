@@ -6,11 +6,9 @@ using Xamarin.Forms;
 
 namespace Example.Forms
 {
-    public class MainPageViewModel : INotifyPropertyChanged
+    public class StreamViewModel : BaseViewModel
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public MainPageViewModel()
+        public StreamViewModel()
         {
             PlayCommand = new Command<AnimationView>((animationView) => {
                 animationView.PlayAnimation();
@@ -33,15 +31,6 @@ namespace Example.Forms
             MinAndMaxProgressCommand = new Command<AnimationView>((animationView) => {
                 animationView.SetMinAndMaxProgress(0.65f, 1.0f);
             });
-        }
-
-        private bool Set<T>(ref T field, T value, [CallerMemberName]string propertyName = null)
-        {
-            if (Equals(field, value)) return false;
-
-            field = value;
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            return true;
         }
 
         private bool _isAnimating;
