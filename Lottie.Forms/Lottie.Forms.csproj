@@ -42,7 +42,7 @@
     <Compile Include="Platforms\Apple\**\*.cs" />
     <Compile Include="Platforms\Ios\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
-    <PackageReference Condition=" '$(OS)' == 'Windows_NT' " Include="Com.Airbnb.iOS.Lottie" Version="2.5.11" />
+    <PackageReference Condition=" '$(OS)' == 'Windows_NT' " Include="Com.Airbnb.iOS.Lottie" Version="2.5.12" />
 	  <ProjectReference Condition=" '$(Configuration)' == 'Debug' And '$(OS)' != 'Windows_NT' " Include="..\Lottie.iOS\Lottie.iOS.csproj" />
   </ItemGroup>
 
@@ -50,7 +50,7 @@
     <Compile Include="Platforms\Apple\**\*.cs" />
     <Compile Include="Platforms\Mac\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
-    <PackageReference Condition=" '$(OS)' == 'Windows_NT' " Include="Com.Airbnb.iOS.Lottie" Version="2.5.11" />
+    <PackageReference Condition=" '$(OS)' == 'Windows_NT' " Include="Com.Airbnb.iOS.Lottie" Version="2.5.12" />
     <ProjectReference Condition=" '$(Configuration)' == 'Debug' And '$(OS)' != 'Windows_NT' " Include="..\Lottie.iOS\Lottie.iOS.csproj" />
   </ItemGroup>
 
@@ -58,7 +58,7 @@
     <Compile Include="Platforms\Apple\**\*.cs" />
     <Compile Include="Platforms\Tvos\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
-    <PackageReference Condition=" '$(OS)' == 'Windows_NT' " Include="Com.Airbnb.iOS.Lottie" Version="2.5.11" />
+    <PackageReference Condition=" '$(OS)' == 'Windows_NT' " Include="Com.Airbnb.iOS.Lottie" Version="2.5.12" />
     <ProjectReference Condition=" '$(Configuration)' == 'Debug' And '$(OS)' != 'Windows_NT' " Include="..\Lottie.iOS\Lottie.iOS.csproj" />
   </ItemGroup>
 
