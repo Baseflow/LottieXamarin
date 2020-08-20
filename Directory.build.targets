@@ -2,6 +2,9 @@
   <PropertyGroup Condition="$(TargetFramework.StartsWith('netstandard'))">
     <DefineConstants>$(DefineConstants);NETSTANDARD;PORTABLE</DefineConstants>
   </PropertyGroup>
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('netstandard2.0'))">
+    <DefineConstants>$(DefineConstants);NETSTANDARD20</DefineConstants>
+  </PropertyGroup>
   <PropertyGroup Condition="$(TargetFramework.StartsWith('net4'))">
     <DefineConstants>$(DefineConstants);NET;WPF;XAML</DefineConstants>
   </PropertyGroup>
