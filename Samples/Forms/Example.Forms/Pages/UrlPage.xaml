@@ -48,7 +48,7 @@
             
         </StackLayout>
 
-        <Entry Text="{Binding Url}" />
+        <Entry Grid.Row="1" Text="{Binding Url}" />
 
         <forms:AnimationView 
             x:Name="animationView" 
