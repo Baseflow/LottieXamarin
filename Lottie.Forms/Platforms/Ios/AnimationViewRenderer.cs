@@ -73,7 +73,7 @@ namespace Lottie.Forms.Platforms.Ios
             if (_animationView == null || Element == null || e == null)
                 return;
 
-            if (e.PropertyName == AnimationView.AnimationProperty.PropertyName && !string.IsNullOrEmpty(Element.Animation))
+            if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
             {
                 CleanupResources();
                 InitAnimationViewForElement(Element);
@@ -124,46 +124,50 @@ namespace Lottie.Forms.Platforms.Ios
         private void InitAnimationViewForElement(AnimationView element)
         {
             _animationCompletionBlock = new LOTAnimationCompletionBlock(AnimationCompletionBlock);
-            _animationView = new LOTAnimationView(NSUrl.FromFilename(element.Animation))
-            {
-                AutoresizingMask = UIViewAutoresizing.All,
-                ContentMode = UIViewContentMode.ScaleAspectFit,
-                LoopAnimation = element.RepeatMode == RepeatMode.Infinite,
-                AnimationSpeed = element.Speed,
-                AnimationProgress = element.Progress,
-                CacheEnable = element.CacheComposition,
-                CompletionBlock = _animationCompletionBlock
-            };
-            //_animationView.SetAnimationRepeatCount(e.NewElement.RepeatCount);
 
-            element.PlayCommand = new Command(() => _animationView.Play());
-            element.PauseCommand = new Command(() => _animationView.Pause());
-            element.ResumeCommand = new Command(() => _animationView.Play());
-            element.CancelCommand = new Command(() => _animationView.Stop());
-            element.SetMinAndMaxFrameCommand = new Command((object paramter) =>
+            if (element.Animation is string animation)
             {
+                _animationView = new LOTAnimationView(NSUrl.FromFilename(animation))
+                {
+                    AutoresizingMask = UIViewAutoresizing.All,
+                    ContentMode = UIViewContentMode.ScaleAspectFit,
+                    LoopAnimation = element.RepeatMode == RepeatMode.Infinite,
+                    AnimationSpeed = element.Speed,
+                    AnimationProgress = element.Progress,
+                    CacheEnable = element.CacheComposition,
+                    CompletionBlock = _animationCompletionBlock
+                };
+                //_animationView.SetAnimationRepeatCount(e.NewElement.RepeatCount);
+
+                element.PlayCommand = new Command(() => _animationView.Play());
+                element.PauseCommand = new Command(() => _animationView.Pause());
+                element.ResumeCommand = new Command(() => _animationView.Play());
+                element.CancelCommand = new Command(() => _animationView.Stop());
+                element.SetMinAndMaxFrameCommand = new Command((object paramter) =>
+                {
                 //if (paramter is (int minFrame, int maxFrame))
                 //    _animationView.SetMinAndMaxFrame(minFrame, maxFrame);
             });
-            element.SetMinAndMaxProgressCommand = new Command((object paramter) =>
-            {
+                element.SetMinAndMaxProgressCommand = new Command((object paramter) =>
+                {
                 //if (paramter is (float minProgress, float maxProgress))
                 //    _animationView.SetMinAndMaxProgress(minProgress, maxProgress);
             });
-            //e.NewElement.ReverseAnimationSpeedCommand = new Command(() => _animationView.ReverseAnimationSpeed());
+                //e.NewElement.ReverseAnimationSpeedCommand = new Command(() => _animationView.ReverseAnimationSpeed());
 
-            _gestureRecognizer = new UITapGestureRecognizer(element.Click);
-            _animationView.AddGestureRecognizer(_gestureRecognizer);
+                _gestureRecognizer = new UITapGestureRecognizer(element.Click);
+                _animationView.AddGestureRecognizer(_gestureRecognizer);
 
-            if (element.AutoPlay || element.IsAnimating)
-            {
-                _animationView.Play();
+                if (element.AutoPlay || element.IsAnimating)
+                {
+                    _animationView.Play();
+                }
+
+                //e.NewElement.Duration = _animationView.AnimationDuration;
+
+                SetNativeControl(_animationView);
+                SetNeedsLayout();
             }
-
-            //e.NewElement.Duration = _animationView.AnimationDuration;
-
-            SetNativeControl(_animationView);
-            SetNeedsLayout();
         }
 
         private void AnimationCompletionBlock(bool animationFinished)

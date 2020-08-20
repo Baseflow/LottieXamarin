@@ -12,13 +12,28 @@ namespace Example.Forms
 
         public MainPageViewModel()
         {
-            //StopPlayingCommand = new Command(() => IsPlaying = false);
-            //PlayingCommand = new Command(() => DisplayAlert($"{nameof(AnimationView.PlaybackStartedCommand)} executed!"));
-            //FinishedCommand = new Command(() => DisplayAlert($"{nameof(AnimationView.PlaybackFinishedCommand)} executed!"));
-            //ClickedCommand = new Command(() => DisplayAlert($"{nameof(AnimationView.Command)} executed!"));
+            PlayCommand = new Command<AnimationView>((animationView) => {
+                animationView.PlayAnimation();
+            });
+            PauseCommand = new Command<AnimationView>((animationView) => {
+                animationView.PauseAnimation();
+            });
+            CancelCommand = new Command<AnimationView>((animationView) => {
+                animationView.CancelAnimation();
+            });
+            ResumeCommand = new Command<AnimationView>((animationView) => {
+                animationView.ResumeAnimation();
+            });
+            ClickCommand = new Command<AnimationView>((animationView) => {
+                //TODO: Show message it is clicked
+            });
+            MinAndMaxFrameCommand = new Command<AnimationView>((animationView) => {
+                animationView.SetMinAndMaxFrame(50, 100);
+            });
+            MinAndMaxProgressCommand = new Command<AnimationView>((animationView) => {
+                animationView.SetMinAndMaxProgress(0.65f, 1.0f);
+            });
         }
-
-        private void DisplayAlert(string message) => Application.Current.MainPage.DisplayAlert(string.Empty, message, "OK");
 
         private bool Set<T>(ref T field, T value, [CallerMemberName]string propertyName = null)
         {
@@ -43,9 +58,46 @@ namespace Example.Forms
             set => Set(ref _playCommand, value);
         }
 
-        public ICommand PauseCommand { get; set; }
-        public ICommand CancelCommand { get; set; }
-        public ICommand ResumeCommand { get; set; }
-        public ICommand ClickCommand { get; set; }
+        private ICommand _pauseCommand;
+        public ICommand PauseCommand
+        {
+            get => _pauseCommand;
+            set => Set(ref _pauseCommand, value);
+        }
+
+        private ICommand _cancelCommand;
+        public ICommand CancelCommand
+        {
+            get => _cancelCommand;
+            set => Set(ref _cancelCommand, value);
+        }
+
+        private ICommand _resumeCommand;
+        public ICommand ResumeCommand
+        {
+            get => _resumeCommand;
+            set => Set(ref _resumeCommand, value);
+        }
+
+        private ICommand _clickCommand;
+        public ICommand ClickCommand
+        {
+            get => _clickCommand;
+            set => Set(ref _clickCommand, value);
+        }
+
+        private ICommand _minAndMaxFrameCommand;
+        public ICommand MinAndMaxFrameCommand
+        {
+            get => _minAndMaxFrameCommand;
+            set => Set(ref _minAndMaxFrameCommand, value);
+        }
+
+        private ICommand _minAndMaxProgressCommand;
+        public ICommand MinAndMaxProgressCommand
+        {
+            get => _minAndMaxProgressCommand;
+            set => Set(ref _minAndMaxProgressCommand, value);
+        }
     }
 }

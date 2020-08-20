@@ -10,7 +10,7 @@ namespace Lottie.Forms
         //    typeof(ImageSource), typeof(AnimationView), default(ImageSource));
 
         public static readonly BindableProperty AnimationProperty = BindableProperty.Create(nameof(Animation),
-            typeof(string), typeof(AnimationView), default(string));
+            typeof(object), typeof(AnimationView), default(object));
 
         public static readonly BindableProperty CacheCompositionProperty = BindableProperty.Create(nameof(CacheComposition),
             typeof(bool), typeof(AnimationView), default(bool));
@@ -79,9 +79,9 @@ namespace Lottie.Forms
             set { SetValue(CacheCompositionProperty, value); }
         }
 
-        public string Animation
+        public object Animation
         {
-            get { return (string)GetValue(AnimationProperty); }
+            get { return (object)GetValue(AnimationProperty); }
             set { SetValue(AnimationProperty, value); }
         }
 
@@ -206,6 +206,17 @@ namespace Lottie.Forms
             OnRepeatAnimation?.Invoke(this, EventArgs.Empty);
         }
 
+        internal void InvokeClick()
+        {
+            Clicked?.Invoke(this, EventArgs.Empty);
+            Command.ExecuteCommandIfPossible(this);
+        }
+
+        public void Click()
+        {
+            ClickCommand.ExecuteCommandIfPossible(this);
+        }
+
         public event EventHandler OnPlayAnimation;
 
         public event EventHandler OnResumeAnimation;
@@ -215,6 +226,8 @@ namespace Lottie.Forms
         public event EventHandler OnPauseAnimation;
 
         public event EventHandler OnRepeatAnimation;
+
+        public event EventHandler Clicked;
 
         internal void InvokeAnimatorUpdate()
         {
@@ -243,15 +256,7 @@ namespace Lottie.Forms
 
         public event EventHandler OnCompositionLoaded;
 
-        public event EventHandler OnFailure;
-
-        public void Click()
-        {
-            Clicked?.Invoke(this, EventArgs.Empty);
-            Command.ExecuteCommandIfPossible();
-        }
-
-        public event EventHandler Clicked;
+        public event EventHandler OnFailure;        
 
         internal void InvokePlaybackEnded()
         {
@@ -298,6 +303,7 @@ namespace Lottie.Forms
         internal ICommand ResumeCommand { get; set; }
         internal ICommand CancelCommand { get; set; }
         internal ICommand PauseCommand { get; set; }
+        internal ICommand ClickCommand { get; set; }
         internal ICommand SetMinAndMaxFrameCommand { get; set; }
         internal ICommand SetMinAndMaxProgressCommand { get; set; }
         internal ICommand ReverseAnimationSpeedCommand { get; set; }
@@ -319,5 +325,11 @@ namespace Lottie.Forms
         //ApplyingOpacityToLayersEnabled
 
         //disableExtraScaleModeInFitXY
+
+        //SetAnimationFromJson
+
+        //SetAnimationFromUrl
+
+        //SetAnimationFromStream
     }
 }

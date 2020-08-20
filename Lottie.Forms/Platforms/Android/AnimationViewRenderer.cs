@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
 using Com.Airbnb.Lottie;
 using Lottie.Forms;
 using Lottie.Forms.Platforms.Android;
@@ -75,7 +76,7 @@ namespace Lottie.Forms.Platforms.Android
                     };
                     _clickListener = new ClickListener
                     {
-                        OnClickImpl = () => e.NewElement.Click()
+                        OnClickImpl = () => e.NewElement.InvokeClick()
                     };
 
                     _animationView.AddAnimatorListener(_animatorListener);
@@ -84,18 +85,20 @@ namespace Lottie.Forms.Platforms.Android
                     _animationView.SetFailureListener(_lottieFailureListener);
                     _animationView.SetOnClickListener(_clickListener);
 
-                    if (!string.IsNullOrEmpty(e.NewElement.Animation))
+                    if (e.NewElement.Animation is string asset)
                     {
-                        if (int.TryParse(e.NewElement.Animation, out int intAnimation))
-                            _animationView.SetAnimation(intAnimation);
-                        else
-                            _animationView.SetAnimation(e.NewElement.Animation);
+                        _animationView.SetAnimation(asset);
                     }
+
+                    //TODO: Maybe move into extension method
+                    //TrySetAnimation(_animationView, e.NewElement.Animation);
 
                     e.NewElement.PlayCommand = new Command(() => _animationView.PlayAnimation());
                     e.NewElement.PauseCommand = new Command(() => _animationView.PauseAnimation());
                     e.NewElement.ResumeCommand = new Command(() => _animationView.ResumeAnimation());
                     e.NewElement.CancelCommand = new Command(() => _animationView.CancelAnimation());
+                    e.NewElement.ClickCommand = new Command(() => _animationView.PerformClick());
+
                     e.NewElement.SetMinAndMaxFrameCommand = new Command((object paramter) =>
                     {
                         if (paramter is (int minFrame, int maxFrame))
@@ -123,7 +126,7 @@ namespace Lottie.Forms.Platforms.Android
                     _animationView.Scale = e.NewElement.Scale;
                     _animationView.Frame = e.NewElement.Frame;
                     _animationView.Progress = e.NewElement.Progress;
-
+                    
                     SetNativeControl(_animationView);
 
                     if (e.NewElement.AutoPlay || e.NewElement.IsAnimating)
@@ -135,14 +138,41 @@ namespace Lottie.Forms.Platforms.Android
             }
         }
 
+        private void TrySetAnimation(LottieAnimationView animationView, object animation)
+        {
+            switch(animation)
+            {
+                case int intAnimation:
+                    animationView.SetAnimation(intAnimation);
+                    break;
+                case string stringAnimation:
+
+                    //TODO: check if json
+                    //animationView.SetAnimationFromJson(stringAnimation);
+                    //TODO: check if url
+                    //animationView.SetAnimationFromUrl(stringAnimation);
+
+                    animationView.SetAnimation(stringAnimation);
+                    break;
+                case Stream streamAnimation:
+                    animationView.SetAnimation(streamAnimation, animationView.Id.ToString());
+                    break;
+                case null:
+                    //animationView.ClearAnimation();
+                    break;
+                default:
+                    break;
+            }
+        }
+
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (_animationView == null || Element == null || e == null)
                 return;
 
-            if (e.PropertyName == AnimationView.AnimationProperty.PropertyName && !string.IsNullOrEmpty(Element.Animation))
+            if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
             {
-                _animationView.SetAnimation(Element.Animation);
+                TrySetAnimation(_animationView, Element.Animation);
 
                 if (Element.AutoPlay || Element.IsAnimating)
                     _animationView.PlayAnimation();

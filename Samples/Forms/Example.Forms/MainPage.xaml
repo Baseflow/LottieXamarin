@@ -25,22 +25,26 @@
             <Button 
                 HorizontalOptions="FillAndExpand"
                 Text="Play" 
-                Clicked="Play_Clicked" />
+                Command="{Binding PlayCommand}"
+                CommandParameter="{x:Reference animationView}" />
             
             <Button 
                 HorizontalOptions="FillAndExpand"
                 Text="Pause" 
-                Clicked="Pause_Clicked" />
+                Command="{Binding PauseCommand}"
+                CommandParameter="{x:Reference animationView}" />
 
             <Button 
                 HorizontalOptions="FillAndExpand"
                 Text="Cancel" 
-                Clicked="Cancel_Clicked" />
+                Command="{Binding CancelCommand}"
+                CommandParameter="{x:Reference animationView}" />
 
             <Button 
                 HorizontalOptions="FillAndExpand"
                 Text="Resume" 
-                Clicked="Resume_Clicked" />
+                Command="{Binding ResumeCommand}"
+                CommandParameter="{x:Reference animationView}" />
         </StackLayout>
 
         <StackLayout
@@ -49,22 +53,23 @@
             HorizontalOptions="FillAndExpand"
             Margin="5, 0">
             <Button 
-                x:Name="playSegmentsButton"
                 HorizontalOptions="FillAndExpand"
-                Text="Segment"
-                Clicked="Segment_Clicked" />
+                Text="MinAndMaxFrame"
+                Command="{Binding MinAndMaxFrameCommand}"
+                CommandParameter="{x:Reference animationView}" />
 
             <Button 
-                x:Name="playFramesButton"
                 HorizontalOptions="FillAndExpand"
-                Text="Frames"
-                Clicked="Frames_Clicked" />
+                Text="MinAndMaxProgress"
+                Command="{Binding MinAndMaxProgressCommand}"
+                CommandParameter="{x:Reference animationView}" />
         </StackLayout>
 
         <forms:AnimationView 
             x:Name="animationView" 
-            Grid.Row="2"
-            Animation="LottieLogo11.json"
+            Grid.Row="2" 
+            BackgroundColor="Red"
+            Animation="LottieLogo1.json"
             MinFrame="20"
             MaxFrame="80"
             IsAnimating="{Binding IsAnimating}"
