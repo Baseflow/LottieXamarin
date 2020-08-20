@@ -55,7 +55,7 @@ namespace Lottie.Forms
         typeof(int), typeof(AnimationView), default(int));
 
         public static readonly BindableProperty ProgressProperty = BindableProperty.Create(nameof(Progress),
-        typeof(float), typeof(AnimationView), 1.0f);
+        typeof(float), typeof(AnimationView), 0.0f);
 
         //TODO: Maybe make TimeSpan
         public static readonly BindableProperty DurationProperty = BindableProperty.Create(nameof(Duration),
@@ -256,7 +256,7 @@ namespace Lottie.Forms
 
         public event EventHandler OnCompositionLoaded;
 
-        public event EventHandler OnFailure;        
+        public event EventHandler OnFailure;
 
         internal void InvokePlaybackEnded()
         {
@@ -294,6 +294,7 @@ namespace Lottie.Forms
         {
             SetMinAndMaxProgressCommand.ExecuteCommandIfPossible((minProgress, maxProgress));
         }
+
         public void ReverseAnimationSpeed()
         {
             ReverseAnimationSpeedCommand.ExecuteCommandIfPossible();

@@ -85,20 +85,14 @@ namespace Lottie.Forms.Platforms.Android
                     _animationView.SetFailureListener(_lottieFailureListener);
                     _animationView.SetOnClickListener(_clickListener);
 
-                    if (e.NewElement.Animation is string asset)
-                    {
-                        _animationView.SetAnimation(asset);
-                    }
-
-                    //TODO: Maybe move into extension method
-                    //TrySetAnimation(_animationView, e.NewElement.Animation);
-
+                    _animationView.TrySetAnimation(e.NewElement.Animation);
+                    
                     e.NewElement.PlayCommand = new Command(() => _animationView.PlayAnimation());
                     e.NewElement.PauseCommand = new Command(() => _animationView.PauseAnimation());
                     e.NewElement.ResumeCommand = new Command(() => _animationView.ResumeAnimation());
                     e.NewElement.CancelCommand = new Command(() => _animationView.CancelAnimation());
                     e.NewElement.ClickCommand = new Command(() => _animationView.PerformClick());
-
+                    
                     e.NewElement.SetMinAndMaxFrameCommand = new Command((object paramter) =>
                     {
                         if (paramter is (int minFrame, int maxFrame))
@@ -110,14 +104,17 @@ namespace Lottie.Forms.Platforms.Android
                             _animationView.SetMinAndMaxProgress(minProgress, maxProgress);
                     });
                     e.NewElement.ReverseAnimationSpeedCommand = new Command(() => _animationView.ReverseAnimationSpeed());
-
+                    
                     _animationView.SetCacheComposition(e.NewElement.CacheComposition);
                     //_animationView.SetFallbackResource(e.NewElement.FallbackResource.);
                     //_animationView.Composition = e.NewElement.Composition;
-                    _animationView.SetMinFrame(e.NewElement.MinFrame);
-                    _animationView.SetMinProgress(e.NewElement.MinProgress);
-                    _animationView.SetMaxFrame(e.NewElement.MaxFrame);
-                    _animationView.SetMaxProgress(e.NewElement.MaxProgress);
+
+                    //TODO: makes animation stop with current default values
+                    //_animationView.SetMinFrame(e.NewElement.MinFrame);
+                    //_animationView.SetMinProgress(e.NewElement.MinProgress);
+                    //_animationView.SetMaxFrame(e.NewElement.MaxFrame);
+                    //_animationView.SetMaxProgress(e.NewElement.MaxProgress);
+
                     _animationView.Speed = e.NewElement.Speed;
                     _animationView.RepeatMode = (int)e.NewElement.RepeatMode;
                     _animationView.RepeatCount = e.NewElement.RepeatCount;
@@ -138,33 +135,6 @@ namespace Lottie.Forms.Platforms.Android
             }
         }
 
-        private void TrySetAnimation(LottieAnimationView animationView, object animation)
-        {
-            switch(animation)
-            {
-                case int intAnimation:
-                    animationView.SetAnimation(intAnimation);
-                    break;
-                case string stringAnimation:
-
-                    //TODO: check if json
-                    //animationView.SetAnimationFromJson(stringAnimation);
-                    //TODO: check if url
-                    //animationView.SetAnimationFromUrl(stringAnimation);
-
-                    animationView.SetAnimation(stringAnimation);
-                    break;
-                case Stream streamAnimation:
-                    animationView.SetAnimation(streamAnimation, animationView.Id.ToString());
-                    break;
-                case null:
-                    //animationView.ClearAnimation();
-                    break;
-                default:
-                    break;
-            }
-        }
-
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (_animationView == null || Element == null || e == null)
@@ -172,17 +142,23 @@ namespace Lottie.Forms.Platforms.Android
 
             if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
             {
-                TrySetAnimation(_animationView, Element.Animation);
+                _animationView.TrySetAnimation(Element.Animation);
 
                 if (Element.AutoPlay || Element.IsAnimating)
                     _animationView.PlayAnimation();
             }
 
+            //if (e.PropertyName == AnimationView.AutoPlayProperty.PropertyName)
+            //    _animationView.AutoPlay = (Element.AutoPlay);
+
             if (e.PropertyName == AnimationView.CacheCompositionProperty.PropertyName)
                 _animationView.SetCacheComposition(Element.CacheComposition);
 
-            //_animationView.SetFallbackResource(e.NewElement.FallbackResource.);
-            //_animationView.Composition = e.NewElement.Composition;
+            //if (e.PropertyName == AnimationView.FallbackResource.PropertyName)
+            //    _animationView.SetFallbackResource(e.NewElement.FallbackResource);
+
+            //if (e.PropertyName == AnimationView.Composition.PropertyName)
+            //    _animationView.Composition = e.NewElement.Composition;
 
             if (e.PropertyName == AnimationView.MinFrameProperty.PropertyName)
                 _animationView.SetMinFrame(Element.MinFrame);
