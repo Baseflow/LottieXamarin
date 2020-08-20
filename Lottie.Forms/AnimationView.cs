@@ -327,8 +327,11 @@ namespace Lottie.Forms
 
         //disableExtraScaleModeInFitXY
 
-        //SetAnimationFromJson
+        //public void SetAnimationFromJson(string json)
+        //{
 
+        //}
+    
         //SetAnimationFromUrl
 
         //SetAnimationFromStream

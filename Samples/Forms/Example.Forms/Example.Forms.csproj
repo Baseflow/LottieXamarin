@@ -16,4 +16,8 @@
     <ProjectReference Include="..\..\..\Lottie.Forms\Lottie.Forms.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\" />
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
 </Project>
