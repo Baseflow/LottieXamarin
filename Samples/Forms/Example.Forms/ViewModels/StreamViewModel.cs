@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Lottie.Forms;
@@ -25,19 +26,6 @@ namespace Example.Forms
             ClickCommand = new Command<AnimationView>((animationView) => {
                 //TODO: Show message it is clicked
             });
-            MinAndMaxFrameCommand = new Command<AnimationView>((animationView) => {
-                animationView.SetMinAndMaxFrame(50, 100);
-            });
-            MinAndMaxProgressCommand = new Command<AnimationView>((animationView) => {
-                animationView.SetMinAndMaxProgress(0.65f, 1.0f);
-            });
-        }
-
-        private bool _isAnimating;
-        public bool IsAnimating
-        {
-            get => _isAnimating;
-            set => Set(ref _isAnimating, value);
         }
 
         private ICommand _playCommand;
@@ -75,18 +63,11 @@ namespace Example.Forms
             set => Set(ref _clickCommand, value);
         }
 
-        private ICommand _minAndMaxFrameCommand;
-        public ICommand MinAndMaxFrameCommand
+        private Stream _lottieStream;
+        public Stream LottieStream
         {
-            get => _minAndMaxFrameCommand;
-            set => Set(ref _minAndMaxFrameCommand, value);
-        }
-
-        private ICommand _minAndMaxProgressCommand;
-        public ICommand MinAndMaxProgressCommand
-        {
-            get => _minAndMaxProgressCommand;
-            set => Set(ref _minAndMaxProgressCommand, value);
+            get => _lottieStream;
+            set => Set(ref _lottieStream, value);
         }
     }
 }

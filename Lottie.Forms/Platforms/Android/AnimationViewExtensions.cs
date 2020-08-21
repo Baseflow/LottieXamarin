@@ -1,6 +1,7 @@
 ﻿using System;
 using Com.Airbnb.Lottie;
 using System.IO;
+using System.Reflection;
 
 namespace Lottie.Forms.Platforms.Android
 {
@@ -19,13 +20,24 @@ namespace Lottie.Forms.Platforms.Android
                     break;
                 case AnimationType.Json:
                     if (animation is string jsonAnimation)
-                        animationView.SetAnimationFromJson(jsonAnimation, animationView.Id.ToString());
+                        animationView.SetAnimationFromJson(jsonAnimation, null);
                     break;
                 case AnimationType.Stream:
                     animationView.TrySetAnimation(animation);
                     break;
-                case AnimationType.Embedded:
-                    //TODO
+                case AnimationType.EmbeddedResource:
+                    if (animation is string embeddedAnimation)
+                    {
+                        var assembly = Xamarin.Forms.Application.Current.GetType().Assembly;
+                        var stream = assembly.GetManifestResourceStream($"{assembly.GetName().Name}.{embeddedAnimation}");
+
+                        if (stream == null)
+                        {
+                            return;
+                            //throw new FileNotFoundException("Cannot find file.", embeddedAnimation);
+                        }
+                        animationView.TrySetAnimation(stream);
+                    }
                     break;
                 default:
                     break;
@@ -49,7 +61,7 @@ namespace Lottie.Forms.Platforms.Android
                     animationView.SetAnimation(stringAnimation);
                     break;
                 case Stream streamAnimation:
-                    animationView.SetAnimation(streamAnimation, animationView.Id.ToString());
+                    animationView.SetAnimation(streamAnimation, null);
                     break;
                 case null:
                     animationView.ClearAnimation();

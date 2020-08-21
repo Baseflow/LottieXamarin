@@ -6,6 +6,6 @@
         Url,
         Json,
         Stream,
-        Embedded
+        EmbeddedResource
     }
 }

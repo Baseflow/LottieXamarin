@@ -13,7 +13,6 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <StackLayout
@@ -21,13 +20,13 @@
             Orientation="Horizontal"
             HorizontalOptions="FillAndExpand"
             Margin="5, 0">
-            
+
             <Button 
                 HorizontalOptions="FillAndExpand"
                 Text="Play" 
                 Command="{Binding PlayCommand}"
                 CommandParameter="{x:Reference animationView}" />
-            
+
             <Button 
                 HorizontalOptions="FillAndExpand"
                 Text="Pause" 
@@ -45,41 +44,17 @@
                 Text="Resume" 
                 Command="{Binding ResumeCommand}"
                 CommandParameter="{x:Reference animationView}" />
-        </StackLayout>
 
-        <StackLayout
-            Grid.Row="1"
-            Orientation="Horizontal"
-            HorizontalOptions="FillAndExpand"
-            Margin="5, 0">
-            <Button 
-                HorizontalOptions="FillAndExpand"
-                Text="MinAndMaxFrame"
-                Command="{Binding MinAndMaxFrameCommand}"
-                CommandParameter="{x:Reference animationView}" />
 
-            <Button 
-                HorizontalOptions="FillAndExpand"
-                Text="MinAndMaxProgress"
-                Command="{Binding MinAndMaxProgressCommand}"
-                CommandParameter="{x:Reference animationView}" />
         </StackLayout>
 
         <forms:AnimationView 
             x:Name="animationView" 
             Grid.Row="2" 
             BackgroundColor="Red"
-            Animation="LottieLogo1.json"
-            MinFrame="20"
-            MaxFrame="80"
-            IsAnimating="{Binding IsAnimating}"
-            Command="{Binding ClickCommand}"
+            Animation="{Binding LottieStream}"
+            AnimationType="Stream"
             VerticalOptions="FillAndExpand" 
             HorizontalOptions="FillAndExpand" />
-
-        <Slider 
-            Grid.Row="3"
-            Margin="5, 0"
-            ValueChanged="Slider_OnValueChanged" />
     </Grid>
 </ContentPage>

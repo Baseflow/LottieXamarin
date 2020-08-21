@@ -26,14 +26,7 @@ namespace Example.Forms
                 //TODO: Show message it is clicked
             });
 
-            Url = "https://assets9.lottiefiles.com/packages/lf20_ra9B32.json";
-        }
-
-        private bool _isAnimating;
-        public bool IsAnimating
-        {
-            get => _isAnimating;
-            set => Set(ref _isAnimating, value);
+            Url = "https://assets10.lottiefiles.com/packages/lf20_2LdLki.json";
         }
 
         private ICommand _playCommand;
