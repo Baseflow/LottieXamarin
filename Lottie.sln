@@ -10,8 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 	ProjectSection(SolutionItems) = preProject
 		appveyor.yml = appveyor.yml
 		build.cake = build.cake
-		Directory.build.props = Directory.build.props
-		Directory.build.targets = Directory.build.targets
+		Directory.Build.props = Directory.Build.props
+		Directory.Build.targets = Directory.Build.targets
 		global.json = global.json
 		LICENSE = LICENSE
 	EndProjectSection
@@ -20,15 +20,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lottie.Android", "Lottie.An
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{6FFBECD5-AC8D-4B60-9D5E-C847AC0DC22A}"
 	ProjectSection(SolutionItems) = preProject
-		Samples\Directory.build.props = Samples\Directory.build.props
-		Samples\Directory.build.targets = Samples\Directory.build.targets
+		Samples\Directory.Build.props = Samples\Directory.Build.props
+		Samples\Directory.Build.targets = Samples\Directory.Build.targets
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Forms", "Forms", "{DD5FE1BA-D2FC-4AF7-860F-C7C8AF0C17B4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Native", "Native", "{46FDD0BB-356C-450A-A0F7-5AF6F4B3C082}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.Forms", "Samples\Forms\Example.Forms\Example.Forms.csproj", "{BA40E6BD-F568-4301-A402-3846F176D49E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example.Forms", "Samples\Forms\Example.Forms\Example.Forms.csproj", "{BA40E6BD-F568-4301-A402-3846F176D49E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.Forms.Droid", "Samples\Forms\Example.Forms.Droid\Example.Forms.Droid.csproj", "{7E32A11A-AA96-4DAA-9181-FCB6C36250EC}"
 EndProject
