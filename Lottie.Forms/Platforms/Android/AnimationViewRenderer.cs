@@ -55,7 +55,7 @@ namespace Lottie.Forms.Platforms.Android
                     _animationView = new LottieAnimationView(Context);
                     _animatorListener = new AnimatorListener
                     {
-                        OnAnimationCancelImpl = () => e.NewElement.InvokeCancelAnimation(),
+                        OnAnimationCancelImpl = () => e.NewElement.InvokeStopAnimation(),
                         OnAnimationEndImpl = () => e.NewElement.InvokePlaybackEnded(),
                         OnAnimationPauseImpl = () => e.NewElement.InvokePauseAnimation(),
                         OnAnimationRepeatImpl = () => e.NewElement.InvokeRepeatAnimation(),
@@ -90,7 +90,7 @@ namespace Lottie.Forms.Platforms.Android
                     e.NewElement.PlayCommand = new Command(() => _animationView.PlayAnimation());
                     e.NewElement.PauseCommand = new Command(() => _animationView.PauseAnimation());
                     e.NewElement.ResumeCommand = new Command(() => _animationView.ResumeAnimation());
-                    e.NewElement.CancelCommand = new Command(() => _animationView.CancelAnimation());
+                    e.NewElement.StopCommand = new Command(() => _animationView.CancelAnimation());
                     e.NewElement.ClickCommand = new Command(() => _animationView.PerformClick());
                     
                     e.NewElement.SetMinAndMaxFrameCommand = new Command((object paramter) =>

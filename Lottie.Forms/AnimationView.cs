@@ -200,9 +200,9 @@ namespace Lottie.Forms
             OnResumeAnimation?.Invoke(this, EventArgs.Empty);
         }
 
-        internal void InvokeCancelAnimation()
+        internal void InvokeStopAnimation()
         {
-            OnCancelAnimation?.Invoke(this, EventArgs.Empty);
+            OnStopAnimation?.Invoke(this, EventArgs.Empty);
         }
 
         internal void InvokePauseAnimation()
@@ -228,11 +228,11 @@ namespace Lottie.Forms
 
         public event EventHandler OnPlayAnimation;
 
+        public event EventHandler OnPauseAnimation;
+
         public event EventHandler OnResumeAnimation;
 
-        public event EventHandler OnCancelAnimation;
-
-        public event EventHandler OnPauseAnimation;
+        public event EventHandler OnStopAnimation;
 
         public event EventHandler OnRepeatAnimation;
 
@@ -285,9 +285,9 @@ namespace Lottie.Forms
             ResumeCommand.ExecuteCommandIfPossible();
         }
 
-        public void CancelAnimation()
+        public void StopAnimation()
         {
-            CancelCommand.ExecuteCommandIfPossible();
+            StopCommand.ExecuteCommandIfPossible();
         }
 
         public void PauseAnimation()
@@ -311,9 +311,9 @@ namespace Lottie.Forms
         }
 
         internal ICommand PlayCommand { get; set; }
-        internal ICommand ResumeCommand { get; set; }
-        internal ICommand CancelCommand { get; set; }
         internal ICommand PauseCommand { get; set; }
+        internal ICommand ResumeCommand { get; set; }
+        internal ICommand StopCommand { get; set; }
         internal ICommand ClickCommand { get; set; }
         internal ICommand SetMinAndMaxFrameCommand { get; set; }
         internal ICommand SetMinAndMaxProgressCommand { get; set; }

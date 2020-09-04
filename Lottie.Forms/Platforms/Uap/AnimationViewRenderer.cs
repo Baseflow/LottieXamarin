@@ -66,8 +66,11 @@ namespace Lottie.Forms.UWP.Renderers
                     e.NewElement.PlayCommand = new Command(() => _animationView.PlayAsync(0, 1, Element.RepeatMode == RepeatMode.Infinite).AsTask());
                     e.NewElement.PauseCommand = new Command(() => _animationView.Pause());
                     e.NewElement.ResumeCommand = new Command(() => _animationView.Resume());
-                    e.NewElement.CancelCommand = new Command(() => _animationView.Stop());
-                    //e.NewElement.ClickCommand = new Command(() => _animationView.Click());
+                    e.NewElement.StopCommand = new Command(() => _animationView.Stop());
+                    e.NewElement.ClickCommand = new Command(() =>
+                    {
+                        //_animationView.Click();
+                    });
 
                     e.NewElement.SetMinAndMaxFrameCommand = new Command((object paramter) =>
                     {

@@ -44,7 +44,71 @@ namespace Lottie.Forms.Platforms.Ios
             {
                 if (Control == null)
                 {
-                    InitAnimationViewForElement(e.NewElement);
+                    _animationCompletionBlock = new LOTAnimationCompletionBlock(AnimationCompletionBlock);
+
+                    _animationView = new LOTAnimationView()
+                    {
+                        AutoresizingMask = UIViewAutoresizing.All,
+                        ContentMode = UIViewContentMode.ScaleAspectFit,
+                        LoopAnimation = e.NewElement.RepeatMode == RepeatMode.Infinite,
+                        AnimationSpeed = e.NewElement.Speed,
+                        AnimationProgress = e.NewElement.Progress,
+                        CacheEnable = e.NewElement.CacheComposition,
+                        CompletionBlock = _animationCompletionBlock
+                    };
+
+                    _animationView.SceneModel.TrySetAnimation(e.NewElement.Animation, e.NewElement.AnimationType);
+
+                    e.NewElement.PlayCommand = new Command(() => _animationView.Play());
+                    e.NewElement.PauseCommand = new Command(() => _animationView.Pause());
+                    e.NewElement.ResumeCommand = new Command(() => _animationView.Play());
+                    e.NewElement.StopCommand = new Command(() => _animationView.Stop());
+                    e.NewElement.ClickCommand = new Command(() =>
+                    {
+                        //_animationView.Click();
+                    });
+
+                    e.NewElement.SetMinAndMaxFrameCommand = new Command((object paramter) =>
+                    {
+                        //if (paramter is (int minFrame, int maxFrame))
+                        //    _animationView.SetMinAndMaxFrame(minFrame, maxFrame);
+                    });
+                    e.NewElement.SetMinAndMaxProgressCommand = new Command((object paramter) =>
+                    {
+                        //if (paramter is (float minProgress, float maxProgress))
+                        //    _animationView.SetMinAndMaxProgress(minProgress, maxProgress);
+                    });
+                    e.NewElement.ReverseAnimationSpeedCommand = new Command(() => _animationView.AutoReverseAnimation = !_animationView.AutoReverseAnimation);
+
+                    _animationView.CacheEnable = e.NewElement.CacheComposition;
+                    //_animationView.SetFallbackResource(e.NewElement.FallbackResource.);
+                    //_animationView.Composition = e.NewElement.Composition;
+
+                    //TODO: makes animation stop with current default values
+                    //_animationView.SetMinFrame(e.NewElement.MinFrame);
+                    //_animationView.SetMinProgress(e.NewElement.MinProgress);
+                    //_animationView.SetMaxFrame(e.NewElement.MaxFrame);
+                    //_animationView.SetMaxProgress(e.NewElement.MaxProgress);
+
+                    _animationView.AnimationSpeed = e.NewElement.Speed;
+                    _animationView.LoopAnimation = e.NewElement.RepeatMode == RepeatMode.Infinite;
+                    //_animationView.RepeatCount = e.NewElement.RepeatCount;
+                    //if (!string.IsNullOrEmpty(e.NewElement.ImageAssetsFolder))
+                    //    _animationView.ImageAssetsFolder = e.NewElement.ImageAssetsFolder;
+                    _animationView.ContentScaleFactor = e.NewElement.Scale;
+                    //_animationView.Frame = e.NewElement.Frame;
+                    _animationView.AnimationProgress = e.NewElement.Progress;
+
+                    _gestureRecognizer = new UITapGestureRecognizer(e.NewElement.Click);
+                    _animationView.AddGestureRecognizer(_gestureRecognizer);
+
+                    SetNativeControl(_animationView);
+                    SetNeedsLayout();
+
+                    if (e.NewElement.AutoPlay || e.NewElement.IsAnimating)
+                        _animationView.Play();
+
+                    //InitAnimationViewForElement(e.NewElement);
                 }
             }
         }
@@ -76,7 +140,7 @@ namespace Lottie.Forms.Platforms.Ios
             if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
             {
                 CleanupResources();
-                InitAnimationViewForElement(Element);
+                _animationView.SceneModel.TrySetAnimation(Element.Animation, Element.AnimationType);
             }
 
             if (e.PropertyName == AnimationView.CacheCompositionProperty.PropertyName)
@@ -120,7 +184,7 @@ namespace Lottie.Forms.Platforms.Ios
 
             base.OnElementPropertyChanged(sender, e);
         }
-
+        /*
         private void InitAnimationViewForElement(AnimationView element)
         {
             _animationCompletionBlock = new LOTAnimationCompletionBlock(AnimationCompletionBlock);
@@ -142,7 +206,7 @@ namespace Lottie.Forms.Platforms.Ios
                 element.PlayCommand = new Command(() => _animationView.Play());
                 element.PauseCommand = new Command(() => _animationView.Pause());
                 element.ResumeCommand = new Command(() => _animationView.Play());
-                element.CancelCommand = new Command(() => _animationView.Stop());
+                element.StopCommand = new Command(() => _animationView.Stop());
                 element.SetMinAndMaxFrameCommand = new Command((object paramter) =>
                 {
                 //if (paramter is (int minFrame, int maxFrame))
@@ -168,7 +232,7 @@ namespace Lottie.Forms.Platforms.Ios
                 SetNativeControl(_animationView);
                 SetNeedsLayout();
             }
-        }
+        }*/
 
         private void AnimationCompletionBlock(bool animationFinished)
         {

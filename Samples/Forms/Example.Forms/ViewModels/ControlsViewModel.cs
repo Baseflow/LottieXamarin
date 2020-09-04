@@ -17,7 +17,7 @@ namespace Example.Forms
                 animationView.PauseAnimation();
             });
             CancelCommand = new Command<AnimationView>((animationView) => {
-                animationView.CancelAnimation();
+                animationView.StopAnimation();
             });
             ResumeCommand = new Command<AnimationView>((animationView) => {
                 animationView.ResumeAnimation();
