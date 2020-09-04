@@ -2,12 +2,12 @@
 using ElottieSharp;
 using Lottie.Forms;
 using Lottie.Forms.EventArguments;
-using Lottie.Forms.Tizen;
+using Lottie.Forms.Platforms.Tizen;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Tizen;
 
 [assembly: ExportRenderer(typeof(AnimationView), typeof(AnimationViewRenderer))]
-namespace Lottie.Forms.Tizen
+namespace Lottie.Forms.Platforms.Tizen
 {
     public class AnimationViewRenderer : ViewRenderer<AnimationView, LottieAnimationView>
     {
