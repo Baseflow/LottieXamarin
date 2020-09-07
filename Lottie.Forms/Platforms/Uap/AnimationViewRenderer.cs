@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Lottie.Forms;
 using Lottie.Forms.EventArguments;
 using Lottie.Forms.Platforms.Uap;
-using Lottie.Forms.UWP.Renderers;
 using Microsoft.Toolkit.Uwp.UI.Lottie;
 using Microsoft.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -14,7 +13,7 @@ using Xamarin.Forms.Platform.UWP;
 
 [assembly: ExportRenderer(typeof(AnimationView), typeof(AnimationViewRenderer))]
 
-namespace Lottie.Forms.UWP.Renderers
+namespace Lottie.Forms.Platforms.Uap
 {
     public class AnimationViewRenderer : ViewRenderer<AnimationView, AnimatedVisualPlayer>
     {
@@ -97,7 +96,7 @@ namespace Lottie.Forms.UWP.Renderers
 
         private void _animationView_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            Element.InvokeClick();
+            Element?.InvokeClick();
         }
 
         private async void _animationView_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
