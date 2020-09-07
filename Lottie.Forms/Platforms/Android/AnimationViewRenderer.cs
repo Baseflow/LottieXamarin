@@ -63,11 +63,11 @@ namespace Lottie.Forms.Platforms.Android
                     };
                     _animatorUpdateListener = new AnimatorUpdateListener
                     {
-                        OnAnimationUpdateImpl = (progress) => e.NewElement.InvokeAnimatorUpdate(progress)
+                        OnAnimationUpdateImpl = (progress) => e.NewElement.InvokeAnimationUpdate(progress)
                     };
                     _lottieOnCompositionLoadedListener = new LottieOnCompositionLoadedListener
                     {
-                        OnCompositionLoadedImpl = (composition) => e.NewElement.InvokeCompositionLoaded(composition)
+                        OnCompositionLoadedImpl = (composition) => e.NewElement.InvokeAnimationLoaded(composition)
                     };
                     _lottieFailureListener = new LottieFailureListener
                     {

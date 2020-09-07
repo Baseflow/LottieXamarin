@@ -59,13 +59,30 @@ namespace Lottie.Forms.Platforms.Uap
 
                     _animationView.Source = e.NewElement.GetAnimation();
 
-                    e.NewElement.PlayCommand = new Command(() => _animationView.PlayAsync(0, 1, Element.RepeatMode == RepeatMode.Infinite).AsTask());
-                    e.NewElement.PauseCommand = new Command(() => _animationView.Pause());
-                    e.NewElement.ResumeCommand = new Command(() => _animationView.Resume());
-                    e.NewElement.StopCommand = new Command(() => _animationView.Stop());
+                    e.NewElement.PlayCommand = new Command(() =>
+                    {
+                        _animationView.PlayAsync(0, 1, Element.RepeatMode == RepeatMode.Infinite).AsTask();
+                        e.NewElement.InvokePlayAnimation();
+                    });
+                    e.NewElement.PauseCommand = new Command(() =>
+                    {
+                        _animationView.Pause();
+                        e.NewElement.InvokePauseAnimation();
+                    });
+                    e.NewElement.ResumeCommand = new Command(() =>
+                    {
+                        _animationView.Resume();
+                        e.NewElement.InvokeResumeAnimation();
+                    });
+                    e.NewElement.StopCommand = new Command(() =>
+                    {
+                        _animationView.Stop();
+                        e.NewElement.InvokeStopAnimation();
+                    });
                     e.NewElement.ClickCommand = new Command(() =>
                     {
                         //_animationView.Click();
+                        //e.NewElement.InvokeClick();
                     });
 
                     e.NewElement.SetMinAndMaxFrameCommand = new Command((object paramter) =>

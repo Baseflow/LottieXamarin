@@ -61,13 +61,30 @@ namespace Lottie.Forms.Platforms.Ios
 
                     _animationView.SceneModel = e.NewElement.GetAnimation();
 
-                    e.NewElement.PlayCommand = new Command(() => _animationView.Play());
-                    e.NewElement.PauseCommand = new Command(() => _animationView.Pause());
-                    e.NewElement.ResumeCommand = new Command(() => _animationView.Play());
-                    e.NewElement.StopCommand = new Command(() => _animationView.Stop());
+                    e.NewElement.PlayCommand = new Command(() =>
+                    {
+                        _animationView.Play();
+                        e.NewElement.InvokePlayAnimation();
+                    });
+                    e.NewElement.PauseCommand = new Command(() =>
+                    {
+                        _animationView.Pause();
+                        e.NewElement.InvokePauseAnimation();
+                    });
+                    e.NewElement.ResumeCommand = new Command(() =>
+                    {
+                        _animationView.Play();
+                        e.NewElement.InvokeResumeAnimation();
+                    });
+                    e.NewElement.StopCommand = new Command(() =>
+                    {
+                        _animationView.Stop();
+                        e.NewElement.InvokeStopAnimation();
+                    });
                     e.NewElement.ClickCommand = new Command(() =>
                     {
                         //_animationView.Click();
+                        //e.NewElement.InvokeClick();
                     });
 
                     e.NewElement.SetMinAndMaxFrameCommand = new Command((object paramter) =>

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Reflection;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -190,6 +192,28 @@ namespace Lottie.Forms
             set { SetValue(CommandProperty, value); }
         }
 
+        public event EventHandler OnPlayAnimation;
+
+        public event EventHandler OnPauseAnimation;
+
+        public event EventHandler OnResumeAnimation;
+
+        public event EventHandler OnStopAnimation;
+
+        public event EventHandler OnRepeatAnimation;
+
+        public event EventHandler Clicked;
+
+        public event EventHandler<float> OnAnimationUpdate;
+
+        public event EventHandler OnAnimator;
+
+        public event EventHandler<object> OnAnimationLoaded;
+
+        public event EventHandler<Exception> OnFailure;
+
+        public event EventHandler OnEnded;
+
         internal void InvokePlayAnimation()
         {
             OnPlayAnimation?.Invoke(this, EventArgs.Empty);
@@ -215,33 +239,9 @@ namespace Lottie.Forms
             OnRepeatAnimation?.Invoke(this, EventArgs.Empty);
         }
 
-        internal void InvokeClick()
+        internal void InvokeAnimationUpdate(float progress)
         {
-            Clicked?.Invoke(this, EventArgs.Empty);
-            Command.ExecuteCommandIfPossible(this);
-        }
-
-        public void Click()
-        {
-            ClickCommand.ExecuteCommandIfPossible(this);
-        }
-
-        public event EventHandler OnPlayAnimation;
-
-        public event EventHandler OnPauseAnimation;
-
-        public event EventHandler OnResumeAnimation;
-
-        public event EventHandler OnStopAnimation;
-
-        public event EventHandler OnRepeatAnimation;
-
-        public event EventHandler Clicked;
-
-        internal void InvokeAnimatorUpdate(float progress)
-        {
-            //TODO: Pass on to event handler
-            OnAnimatorUpdate?.Invoke(this, progress);
+            OnAnimationUpdate?.Invoke(this, progress);
         }
 
         internal void InvokeAnimator()
@@ -249,31 +249,40 @@ namespace Lottie.Forms
             OnAnimator?.Invoke(this, EventArgs.Empty);
         }
 
-        internal void InvokeCompositionLoaded(object composition)
+        internal void InvokeAnimationLoaded(object animation)
         {
-            //TODO: use composition
-            OnCompositionLoaded?.Invoke(this, EventArgs.Empty);
+            OnAnimationLoaded?.Invoke(this, animation);
         }
 
         internal void InvokeFailure(Exception ex)
         {
-            OnFailure?.Invoke(this, EventArgs.Empty);
+            OnFailure?.Invoke(this, ex);
         }
-
-        public event EventHandler<float> OnAnimatorUpdate;
-
-        public event EventHandler OnAnimator;
-
-        public event EventHandler OnCompositionLoaded;
-
-        public event EventHandler OnFailure;
 
         internal void InvokePlaybackEnded()
         {
             OnEnded?.Invoke(this, EventArgs.Empty);
         }
 
-        public event EventHandler OnEnded;
+        internal void InvokeClick()
+        {
+            Clicked?.Invoke(this, EventArgs.Empty);
+            Command.ExecuteCommandIfPossible(this);
+        }
+
+        internal ICommand PlayCommand { get; set; }
+        internal ICommand PauseCommand { get; set; }
+        internal ICommand ResumeCommand { get; set; }
+        internal ICommand StopCommand { get; set; }
+        internal ICommand ClickCommand { get; set; }
+        internal ICommand SetMinAndMaxFrameCommand { get; set; }
+        internal ICommand SetMinAndMaxProgressCommand { get; set; }
+        internal ICommand ReverseAnimationSpeedCommand { get; set; }
+
+        public void Click()
+        {
+            ClickCommand.ExecuteCommandIfPossible(this);
+        }
 
         public void PlayAnimation()
         {
@@ -310,16 +319,36 @@ namespace Lottie.Forms
             ReverseAnimationSpeedCommand.ExecuteCommandIfPossible();
         }
 
-        internal ICommand PlayCommand { get; set; }
-        internal ICommand PauseCommand { get; set; }
-        internal ICommand ResumeCommand { get; set; }
-        internal ICommand StopCommand { get; set; }
-        internal ICommand ClickCommand { get; set; }
-        internal ICommand SetMinAndMaxFrameCommand { get; set; }
-        internal ICommand SetMinAndMaxProgressCommand { get; set; }
-        internal ICommand ReverseAnimationSpeedCommand { get; set; }
+        public void SetAnimationFromAssetOrBundle(string path)
+        {
+            AnimationSource = AnimationSource.AssetOrBundle;
+            Animation = path;
+        }
 
-        // Bitmap updateBitmap(String id, @Nullable Bitmap bitmap)
+        public void SetAnimationFromEmbeddedResource(string name, Assembly assembly = null)
+        {
+            AnimationSource = AnimationSource.EmbeddedResource;
+            //TODO: use assembly
+            Animation = name;
+        }
+
+        public void SetAnimationFromJson(string json)
+        {
+            AnimationSource = AnimationSource.Json;
+            Animation = json;
+        }
+
+        public void SetAnimationFromUrl(string url)
+        {
+            AnimationSource = AnimationSource.Url;
+            Animation = url;
+        }
+
+        public void SetAnimationFromStream(Stream stream)
+        {
+            AnimationSource = AnimationSource.Stream;
+            Animation = stream;
+        }
 
         // setImageAssetDelegate(ImageAssetDelegate assetDelegate) {
 
@@ -332,18 +361,5 @@ namespace Lottie.Forms
         //PerformanceTrackingEnabled
 
         //RenderMode
-
-        //ApplyingOpacityToLayersEnabled
-
-        //disableExtraScaleModeInFitXY
-
-        //public void SetAnimationFromJson(string json)
-        //{
-
-        //}
-
-        //SetAnimationFromUrl
-
-        //SetAnimationFromStream
     }
 }

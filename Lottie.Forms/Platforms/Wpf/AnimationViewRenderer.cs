@@ -53,13 +53,30 @@ namespace Lottie.Forms.Platforms.Wpf
                     //_animationView.FileName = e.NewElement.Animation as string;
                     _animationView.Composition = e.NewElement.GetAnimation();
 
-                    e.NewElement.PlayCommand = new Command(() => _animationView.PlayAnimation());
-                    e.NewElement.PauseCommand = new Command(() => _animationView.PauseAnimation());
-                    e.NewElement.ResumeCommand = new Command(() => _animationView.ResumeAnimation());
-                    e.NewElement.StopCommand = new Command(() => _animationView.CancelAnimation());
+                    e.NewElement.PlayCommand = new Command(() =>
+                    {
+                        _animationView.PlayAnimation();
+                        e.NewElement.InvokePlayAnimation();
+                    });
+                    e.NewElement.PauseCommand = new Command(() =>
+                    {
+                        _animationView.PauseAnimation();
+                        e.NewElement.InvokePauseAnimation();
+                    });
+                    e.NewElement.ResumeCommand = new Command(() =>
+                    {
+                        _animationView.ResumeAnimation();
+                        e.NewElement.InvokeResumeAnimation();
+                    });
+                    e.NewElement.StopCommand = new Command(() =>
+                    {
+                        _animationView.CancelAnimation();
+                        e.NewElement.InvokeStopAnimation();
+                    });
                     e.NewElement.ClickCommand = new Command(() =>
                     {
                         //_animationView.Click();
+                        //e.NewElement.InvokeClick();
                     });
 
                     e.NewElement.SetMinAndMaxFrameCommand = new Command((object paramter) =>
