@@ -143,8 +143,8 @@ namespace Lottie.Forms.Platforms.Ios
 
             if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
             {
-                CleanupResources();
-                //_animationView.SceneModel.TrySetAnimation(Element.Animation, Element.AnimationSource);
+                //CleanupResources();
+                _animationView.SceneModel = Element.GetAnimation();
             }
 
             if (e.PropertyName == AnimationView.CacheCompositionProperty.PropertyName)
@@ -257,9 +257,9 @@ namespace Lottie.Forms.Platforms.Ios
 
             if (_animationView != null)
             {
-                //_animationView.RemoveFromSuperview();
-                //_animationView.Dispose();
-                //_animationView = null;
+                _animationView.RemoveFromSuperview();
+                _animationView.Dispose();
+                _animationView = null;
             }
         }
     }
