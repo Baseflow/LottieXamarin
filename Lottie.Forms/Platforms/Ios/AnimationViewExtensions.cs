@@ -11,14 +11,15 @@ namespace Lottie.Forms.Platforms.Ios
 {
     public static class AnimationViewExtensions
     {
-        public static void TrySetAnimation(this LOTComposition composition, object animation, AnimationType animationType)
+        public static LOTComposition TrySetAnimation(object animation, AnimationType animationType)
         {
+            LOTComposition composition = null;
             switch (animationType)
             {
                 case AnimationType.AssetOrBundle:
                     //TODO: get the bundle based on ImageAssetsFolderProperty
                     if (animation is string bundleAnimation)
-                        composition = LOTComposition.AnimationNamed(bundleAnimation, NSBundle.MainBundle);
+                        composition = LOTComposition.AnimationNamed(bundleAnimation);
                     break;
                 case AnimationType.Url:
                     if (animation is string stringAnimation)
@@ -39,7 +40,7 @@ namespace Lottie.Forms.Platforms.Ios
 
                         if (stream == null)
                         {
-                            return;
+                            return null;
                             //throw new FileNotFoundException("Cannot find file.", embeddedAnimation);
                         }
                         composition.TrySetAnimation(stream);
@@ -48,6 +49,7 @@ namespace Lottie.Forms.Platforms.Ios
                 default:
                     break;
             }
+            return composition;
         }
 
         public static void TrySetAnimation(this LOTComposition composition, object animation)

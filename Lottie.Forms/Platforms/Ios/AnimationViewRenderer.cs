@@ -46,6 +46,7 @@ namespace Lottie.Forms.Platforms.Ios
                 {
                     _animationCompletionBlock = new LOTAnimationCompletionBlock(AnimationCompletionBlock);
 
+                    //_animationView = new LOTAnimationView(NSUrl.FromFilename(e.NewElement.Animation as string))
                     _animationView = new LOTAnimationView()
                     {
                         AutoresizingMask = UIViewAutoresizing.All,
@@ -56,8 +57,11 @@ namespace Lottie.Forms.Platforms.Ios
                         CacheEnable = e.NewElement.CacheComposition,
                         CompletionBlock = _animationCompletionBlock
                     };
+                    //_animationView.SetAnimationNamed(e.NewElement.Animation as string);
 
-                    _animationView.SceneModel.TrySetAnimation(e.NewElement.Animation, e.NewElement.AnimationType);
+                    //_animationView.SceneModel = LOTComposition.AnimationNamed(e.NewElement.Animation as string);
+
+                    _animationView.SceneModel = AnimationViewExtensions.TrySetAnimation(e.NewElement.Animation, e.NewElement.AnimationType);
 
                     e.NewElement.PlayCommand = new Command(() => _animationView.Play());
                     e.NewElement.PauseCommand = new Command(() => _animationView.Pause());
@@ -140,7 +144,7 @@ namespace Lottie.Forms.Platforms.Ios
             if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
             {
                 CleanupResources();
-                _animationView.SceneModel.TrySetAnimation(Element.Animation, Element.AnimationType);
+                //_animationView.SceneModel.TrySetAnimation(Element.Animation, Element.AnimationType);
             }
 
             if (e.PropertyName == AnimationView.CacheCompositionProperty.PropertyName)
@@ -253,9 +257,9 @@ namespace Lottie.Forms.Platforms.Ios
 
             if (_animationView != null)
             {
-                _animationView.RemoveFromSuperview();
-                _animationView.Dispose();
-                _animationView = null;
+                //_animationView.RemoveFromSuperview();
+                //_animationView.Dispose();
+                //_animationView = null;
             }
         }
     }
