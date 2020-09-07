@@ -22,7 +22,7 @@ namespace Lottie.Forms
             typeof(ImageSource), typeof(AnimationView), default(ImageSource));
 
         public static readonly BindableProperty CompositionProperty = BindableProperty.Create(nameof(Composition),
-            typeof(object), typeof(AnimationView), default(object));
+            typeof(ILottieComposition), typeof(AnimationView), default(ILottieComposition));
 
         public static readonly BindableProperty MinFrameProperty = BindableProperty.Create(nameof(MinFrame),
             typeof(int), typeof(AnimationView), default(int));
@@ -100,9 +100,9 @@ namespace Lottie.Forms
             set { SetValue(FallbackResourceProperty, value); }
         }
 
-        public object Composition
+        public ILottieComposition Composition
         {
-            get { return (object)GetValue(CompositionProperty); }
+            get { return (ILottieComposition)GetValue(CompositionProperty); }
             set { SetValue(CompositionProperty, value); }
         }
 

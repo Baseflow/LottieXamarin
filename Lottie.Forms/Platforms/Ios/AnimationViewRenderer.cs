@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using Airbnb.Lottie;
 using Foundation;
 using Lottie.Forms;
@@ -58,7 +59,6 @@ namespace Lottie.Forms.Platforms.Ios
                         CompletionBlock = _animationCompletionBlock
                     };
                     //_animationView.SetAnimationNamed(e.NewElement.Animation as string);
-
                     //_animationView.SceneModel = LOTComposition.AnimationNamed(e.NewElement.Animation as string);
 
                     _animationView.SceneModel = e.NewElement.GetAnimation();
@@ -112,7 +112,7 @@ namespace Lottie.Forms.Platforms.Ios
                     if (e.NewElement.AutoPlay || e.NewElement.IsAnimating)
                         _animationView.Play();
 
-                    //InitAnimationViewForElement(e.NewElement);
+                    //e.NewElement.Duration = TimeSpan.FromMilliseconds(_animationView.AnimationDuration);
                 }
             }
         }
@@ -188,55 +188,6 @@ namespace Lottie.Forms.Platforms.Ios
 
             base.OnElementPropertyChanged(sender, e);
         }
-        /*
-        private void InitAnimationViewForElement(AnimationView element)
-        {
-            _animationCompletionBlock = new LOTAnimationCompletionBlock(AnimationCompletionBlock);
-
-            if (element.Animation is string animation)
-            {
-                _animationView = new LOTAnimationView(NSUrl.FromFilename(animation))
-                {
-                    AutoresizingMask = UIViewAutoresizing.All,
-                    ContentMode = UIViewContentMode.ScaleAspectFit,
-                    LoopAnimation = element.RepeatMode == RepeatMode.Infinite,
-                    AnimationSpeed = element.Speed,
-                    AnimationProgress = element.Progress,
-                    CacheEnable = element.CacheComposition,
-                    CompletionBlock = _animationCompletionBlock
-                };
-                //_animationView.SetAnimationRepeatCount(e.NewElement.RepeatCount);
-
-                element.PlayCommand = new Command(() => _animationView.Play());
-                element.PauseCommand = new Command(() => _animationView.Pause());
-                element.ResumeCommand = new Command(() => _animationView.Play());
-                element.StopCommand = new Command(() => _animationView.Stop());
-                element.SetMinAndMaxFrameCommand = new Command((object paramter) =>
-                {
-                //if (paramter is (int minFrame, int maxFrame))
-                //    _animationView.SetMinAndMaxFrame(minFrame, maxFrame);
-            });
-                element.SetMinAndMaxProgressCommand = new Command((object paramter) =>
-                {
-                //if (paramter is (float minProgress, float maxProgress))
-                //    _animationView.SetMinAndMaxProgress(minProgress, maxProgress);
-            });
-                //e.NewElement.ReverseAnimationSpeedCommand = new Command(() => _animationView.ReverseAnimationSpeed());
-
-                _gestureRecognizer = new UITapGestureRecognizer(element.Click);
-                _animationView.AddGestureRecognizer(_gestureRecognizer);
-
-                if (element.AutoPlay || element.IsAnimating)
-                {
-                    _animationView.Play();
-                }
-
-                //e.NewElement.Duration = _animationView.AnimationDuration;
-
-                SetNativeControl(_animationView);
-                SetNeedsLayout();
-            }
-        }*/
 
         private void AnimationCompletionBlock(bool animationFinished)
         {
