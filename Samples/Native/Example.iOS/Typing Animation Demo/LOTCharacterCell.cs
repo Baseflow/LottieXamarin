@@ -1,6 +1,6 @@
-﻿using CoreGraphics;
+﻿using System.Text.RegularExpressions;
+using CoreGraphics;
 using Foundation;
-using System.Text.RegularExpressions;
 using UIKit;
 
 namespace LottieSamples.iOS

@@ -1,6 +1,6 @@
-﻿using CoreGraphics;
+﻿using System;
+using CoreGraphics;
 using Foundation;
-using System;
 using UIKit;
 
 namespace LottieSamples.iOS

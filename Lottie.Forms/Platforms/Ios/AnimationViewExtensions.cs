@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 using Airbnb.Lottie;
 using Foundation;
 
@@ -21,7 +16,7 @@ namespace Lottie.Forms.Platforms.Ios
                 case AnimationSource.AssetOrBundle:
                     if (animation is string bundleAnimation)
                     {
-                        if(!string.IsNullOrEmpty(animationView.ImageAssetsFolder))
+                        if (!string.IsNullOrEmpty(animationView.ImageAssetsFolder))
                             composition = LOTComposition.AnimationNamed(bundleAnimation, NSBundle.FromPath(animationView.ImageAssetsFolder));
                         else
                             composition = LOTComposition.AnimationNamed(bundleAnimation);
@@ -61,7 +56,7 @@ namespace Lottie.Forms.Platforms.Ios
             }
             return composition;
         }
-        
+
         public static LOTComposition GetAnimation(this AnimationView animationView, object animation)
         {
             LOTComposition composition = null;

@@ -1,7 +1,4 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows.Input;
-using Lottie.Forms;
+﻿using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace Example.Forms
@@ -10,19 +7,24 @@ namespace Example.Forms
     {
         public MainViewModel()
         {
-            AssetCommand = new Command(() => {
+            AssetCommand = new Command(() =>
+            {
                 Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new AssetPage());
             });
-            ControlsCommand = new Command(() => {
+            ControlsCommand = new Command(() =>
+            {
                 Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new ControlsPage());
             });
-            EmbeddedCommand = new Command(() => {
+            EmbeddedCommand = new Command(() =>
+            {
                 Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new EmbeddedPage());
             });
-            StreamCommand = new Command(() => {
+            StreamCommand = new Command(() =>
+            {
                 Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new StreamPage());
             });
-            UrlCommand = new Command(() => {
+            UrlCommand = new Command(() =>
+            {
                 Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(new UrlPage());
             });
         }

@@ -1,7 +1,5 @@
-﻿using System;
-using ElottieSharp;
+﻿using ElottieSharp;
 using Lottie.Forms;
-using Lottie.Forms.EventArguments;
 using Lottie.Forms.Platforms.Tizen;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Tizen;

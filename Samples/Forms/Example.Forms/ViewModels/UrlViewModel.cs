@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Lottie.Forms;
 using Xamarin.Forms;
 
@@ -10,19 +8,24 @@ namespace Example.Forms
     {
         public UrlViewModel()
         {
-            PlayCommand = new Command<AnimationView>((animationView) => {
+            PlayCommand = new Command<AnimationView>((animationView) =>
+            {
                 animationView.PlayAnimation();
             });
-            PauseCommand = new Command<AnimationView>((animationView) => {
+            PauseCommand = new Command<AnimationView>((animationView) =>
+            {
                 animationView.PauseAnimation();
             });
-            CancelCommand = new Command<AnimationView>((animationView) => {
+            CancelCommand = new Command<AnimationView>((animationView) =>
+            {
                 animationView.StopAnimation();
             });
-            ResumeCommand = new Command<AnimationView>((animationView) => {
+            ResumeCommand = new Command<AnimationView>((animationView) =>
+            {
                 animationView.ResumeAnimation();
             });
-            ClickCommand = new Command<AnimationView>((animationView) => {
+            ClickCommand = new Command<AnimationView>((animationView) =>
+            {
                 //TODO: Show message it is clicked
             });
 

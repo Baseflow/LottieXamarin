@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.IO;
 using Com.Airbnb.Lottie;
 using Lottie.Forms;
 using Lottie.Forms.Platforms.Android;
@@ -86,13 +85,13 @@ namespace Lottie.Forms.Platforms.Android
                     _animationView.SetOnClickListener(_clickListener);
 
                     _animationView.TrySetAnimation(e.NewElement.Animation, e.NewElement.AnimationSource);
-                    
+
                     e.NewElement.PlayCommand = new Command(() => _animationView.PlayAnimation());
                     e.NewElement.PauseCommand = new Command(() => _animationView.PauseAnimation());
                     e.NewElement.ResumeCommand = new Command(() => _animationView.ResumeAnimation());
                     e.NewElement.StopCommand = new Command(() => _animationView.CancelAnimation());
                     e.NewElement.ClickCommand = new Command(() => _animationView.PerformClick());
-                    
+
                     e.NewElement.SetMinAndMaxFrameCommand = new Command((object paramter) =>
                     {
                         if (paramter is (int minFrame, int maxFrame))
@@ -104,7 +103,7 @@ namespace Lottie.Forms.Platforms.Android
                             _animationView.SetMinAndMaxProgress(minProgress, maxProgress);
                     });
                     e.NewElement.ReverseAnimationSpeedCommand = new Command(() => _animationView.ReverseAnimationSpeed());
-                    
+
                     _animationView.SetCacheComposition(e.NewElement.CacheComposition);
                     //_animationView.SetFallbackResource(e.NewElement.FallbackResource.);
                     //_animationView.Composition = e.NewElement.Composition;
@@ -123,7 +122,7 @@ namespace Lottie.Forms.Platforms.Android
                     _animationView.Scale = e.NewElement.Scale;
                     _animationView.Frame = e.NewElement.Frame;
                     _animationView.Progress = e.NewElement.Progress;
-                    
+
                     SetNativeControl(_animationView);
 
                     if (e.NewElement.AutoPlay || e.NewElement.IsAnimating)

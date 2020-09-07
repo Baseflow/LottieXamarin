@@ -1,8 +1,5 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows.Input;
-using Lottie.Forms;
-using Xamarin.Forms;
 
 namespace Example.Forms
 {
@@ -14,7 +11,7 @@ namespace Example.Forms
         {
         }
 
-        protected bool Set<T>(ref T field, T value, [CallerMemberName]string propertyName = null)
+        protected bool Set<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
             if (Equals(field, value)) return false;
 

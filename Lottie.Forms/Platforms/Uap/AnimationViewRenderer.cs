@@ -1,11 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
-using System.IO;
 using System.Threading.Tasks;
 using Lottie.Forms;
-using Lottie.Forms.EventArguments;
 using Lottie.Forms.Platforms.Uap;
-using Microsoft.Toolkit.Uwp.UI.Lottie;
 using Microsoft.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Xamarin.Forms;
@@ -74,12 +71,12 @@ namespace Lottie.Forms.Platforms.Uap
                     e.NewElement.SetMinAndMaxFrameCommand = new Command((object paramter) =>
                     {
                         //if (paramter is (int minFrame, int maxFrame))
-                            //_animationView.SetMinAndMaxFrame(minFrame, maxFrame);
+                        //_animationView.SetMinAndMaxFrame(minFrame, maxFrame);
                     });
                     e.NewElement.SetMinAndMaxProgressCommand = new Command((object paramter) =>
                     {
                         //if (paramter is (float minProgress, float maxProgress))
-                            //_animationView.SetMinAndMaxProgress(minProgress, maxProgress);
+                        //_animationView.SetMinAndMaxProgress(minProgress, maxProgress);
                     });
                     e.NewElement.ReverseAnimationSpeedCommand = new Command(() =>
                     {

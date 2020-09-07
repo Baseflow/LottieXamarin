@@ -1,9 +1,9 @@
-﻿using CoreAnimation;
-using CoreGraphics;
-using Foundation;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CoreAnimation;
+using CoreGraphics;
+using Foundation;
 using UIKit;
 using ZXing.Mobile;
 

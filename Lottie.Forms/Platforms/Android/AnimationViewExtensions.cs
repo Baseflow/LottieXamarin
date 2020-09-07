@@ -1,7 +1,5 @@
-﻿using System;
+﻿using System.IO;
 using Com.Airbnb.Lottie;
-using System.IO;
-using System.Reflection;
 
 namespace Lottie.Forms.Platforms.Android
 {
@@ -15,7 +13,7 @@ namespace Lottie.Forms.Platforms.Android
                     animationView.TrySetAnimation(animation);
                     break;
                 case AnimationSource.Url:
-                    if(animation is string stringAnimation)
+                    if (animation is string stringAnimation)
                         animationView.SetAnimationFromUrl(stringAnimation, stringAnimation);
                     break;
                 case AnimationSource.Json:
@@ -43,7 +41,7 @@ namespace Lottie.Forms.Platforms.Android
                     break;
             }
         }
-        
+
         public static void TrySetAnimation(this LottieAnimationView animationView, object animation)
         {
             switch (animation)

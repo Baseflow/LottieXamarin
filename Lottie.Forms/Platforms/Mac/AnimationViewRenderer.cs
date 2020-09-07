@@ -1,8 +1,6 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using Airbnb.Lottie;
 using AppKit;
-using Foundation;
 using Lottie.Forms;
 using Lottie.Forms.Platforms.Mac;
 using Xamarin.Forms;

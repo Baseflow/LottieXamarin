@@ -1,8 +1,6 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
-using Microsoft.UI.Xaml.Controls;
+﻿using System.IO;
 using Microsoft.Toolkit.Uwp.UI.Lottie;
+using Microsoft.UI.Xaml.Controls;
 
 namespace Lottie.Forms.Platforms.Uap
 {
@@ -28,7 +26,7 @@ namespace Lottie.Forms.Platforms.Uap
                     }
                     break;
                 case AnimationSource.Url:
-                    if(animationView.Animation is string stringAnimation)
+                    if (animationView.Animation is string stringAnimation)
                         animatedVisualSource = animationView.GetAnimation(stringAnimation);
                     break;
                 case AnimationSource.Json:
@@ -57,14 +55,14 @@ namespace Lottie.Forms.Platforms.Uap
             }
             return animatedVisualSource;
         }
-        
+
         public static IAnimatedVisualSource GetAnimation(this AnimationView animationView, object animation)
         {
             IAnimatedVisualSource animatedVisualSource = null;
             switch (animation)
             {
                 //case int intAnimation:
-                    //animatedVisualSource = new LottieVisualSource { UriSource = new Uri(intAnimation) };
+                //animatedVisualSource = new LottieVisualSource { UriSource = new Uri(intAnimation) };
                 //    break;
                 case string stringAnimation:
                     animatedVisualSource = LottieVisualSource.CreateFromString(stringAnimation);
