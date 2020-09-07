@@ -11,28 +11,38 @@ namespace Lottie.Forms.Platforms.Ios
 {
     public static class AnimationViewExtensions
     {
-        public static LOTComposition TrySetAnimation(object animation, AnimationType animationType)
+        public static LOTComposition GetAnimation(this AnimationView animationView)
         {
+            var animation = animationView.Animation;
+
             LOTComposition composition = null;
-            switch (animationType)
+            switch (animationView.AnimationSource)
             {
-                case AnimationType.AssetOrBundle:
-                    //TODO: get the bundle based on ImageAssetsFolderProperty
+                case AnimationSource.AssetOrBundle:
                     if (animation is string bundleAnimation)
-                        composition = LOTComposition.AnimationNamed(bundleAnimation);
+                    {
+                        if(!string.IsNullOrEmpty(animationView.ImageAssetsFolder))
+                            composition = LOTComposition.AnimationNamed(bundleAnimation, NSBundle.FromPath(animationView.ImageAssetsFolder));
+                        else
+                            composition = LOTComposition.AnimationNamed(bundleAnimation);
+                    }
                     break;
-                case AnimationType.Url:
+                case AnimationSource.Url:
                     if (animation is string stringAnimation)
                         composition = LOTComposition.AnimationNamed(stringAnimation);
                     break;
-                case AnimationType.Json:
+                case AnimationSource.Json:
+                    //TODO: parse to NSDictionary if json is string
                     //if (animation is string jsonAnimation)
-                        //composition = LOTComposition.AnimationFromJSON(jsonAnimation);
+                    //composition = LOTComposition.AnimationFromJSON(jsonAnimation);
+
+                    if (animation is NSDictionary dictAnimation)
+                        composition = LOTComposition.AnimationFromJSON(dictAnimation);
                     break;
-                case AnimationType.Stream:
-                    composition.TrySetAnimation(animation);
+                case AnimationSource.Stream:
+                    composition = animationView.GetAnimation(animation);
                     break;
-                case AnimationType.EmbeddedResource:
+                case AnimationSource.EmbeddedResource:
                     if (animation is string embeddedAnimation)
                     {
                         var assembly = Xamarin.Forms.Application.Current.GetType().Assembly;
@@ -43,7 +53,7 @@ namespace Lottie.Forms.Platforms.Ios
                             return null;
                             //throw new FileNotFoundException("Cannot find file.", embeddedAnimation);
                         }
-                        composition.TrySetAnimation(stream);
+                        composition = animationView.GetAnimation(stream);
                     }
                     break;
                 default:
@@ -51,9 +61,10 @@ namespace Lottie.Forms.Platforms.Ios
             }
             return composition;
         }
-
-        public static void TrySetAnimation(this LOTComposition composition, object animation)
+        
+        public static LOTComposition GetAnimation(this AnimationView animationView, object animation)
         {
+            LOTComposition composition = null;
             switch (animation)
             {
                 case int intAnimation:
@@ -77,6 +88,7 @@ namespace Lottie.Forms.Platforms.Ios
                 default:
                     break;
             }
+            return composition;
         }
     }
 }

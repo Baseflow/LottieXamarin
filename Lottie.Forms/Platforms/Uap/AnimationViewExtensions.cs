@@ -8,11 +8,11 @@ namespace Lottie.Forms.Platforms.Uap
 {
     public static class AnimationViewExtensions
     {
-        public static void TrySetAnimation(this IAnimatedVisualSource animatedVisualSource, object animation, AnimationType animationType, string imageAssetsFolder = null)
+        public static void TrySetAnimation(this IAnimatedVisualSource animatedVisualSource, object animation, AnimationSource animationSource, string imageAssetsFolder = null)
         {
-            switch (animationType)
+            switch (animationSource)
             {
-                case AnimationType.AssetOrBundle:
+                case AnimationSource.AssetOrBundle:
                     var assets = "Assets";
 
                     if (!string.IsNullOrEmpty(imageAssetsFolder))
@@ -23,18 +23,18 @@ namespace Lottie.Forms.Platforms.Uap
                     var path = $"ms-appx:///{assets}/{animation}";
                     animatedVisualSource.TrySetAnimation(path);
                     break;
-                case AnimationType.Url:
+                case AnimationSource.Url:
                     if(animation is string stringAnimation)
                         animatedVisualSource = LottieVisualSource.CreateFromString(stringAnimation);
                     break;
-                case AnimationType.Json:
+                case AnimationSource.Json:
                     //if (animation is string jsonAnimation)
                     //    animatedVisualSource = LottieVisualSource.CreateFromString(jsonAnimation);
                     break;
-                case AnimationType.Stream:
+                case AnimationSource.Stream:
                     animatedVisualSource.TrySetAnimation(animation);
                     break;
-                case AnimationType.EmbeddedResource:
+                case AnimationSource.EmbeddedResource:
                     if (animation is string embeddedAnimation)
                     {
                         var assembly = Xamarin.Forms.Application.Current.GetType().Assembly;

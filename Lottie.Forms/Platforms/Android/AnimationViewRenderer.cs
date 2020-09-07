@@ -85,7 +85,7 @@ namespace Lottie.Forms.Platforms.Android
                     _animationView.SetFailureListener(_lottieFailureListener);
                     _animationView.SetOnClickListener(_clickListener);
 
-                    _animationView.TrySetAnimation(e.NewElement.Animation, e.NewElement.AnimationType);
+                    _animationView.TrySetAnimation(e.NewElement.Animation, e.NewElement.AnimationSource);
                     
                     e.NewElement.PlayCommand = new Command(() => _animationView.PlayAnimation());
                     e.NewElement.PauseCommand = new Command(() => _animationView.PauseAnimation());
@@ -142,7 +142,7 @@ namespace Lottie.Forms.Platforms.Android
 
             if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
             {
-                _animationView.TrySetAnimation(Element.Animation, Element.AnimationType);
+                _animationView.TrySetAnimation(Element.Animation, Element.AnimationSource);
 
                 if (Element.AutoPlay || Element.IsAnimating)
                     _animationView.PlayAnimation();

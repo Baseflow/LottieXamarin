@@ -61,7 +61,7 @@ namespace Lottie.Forms.Platforms.Ios
 
                     //_animationView.SceneModel = LOTComposition.AnimationNamed(e.NewElement.Animation as string);
 
-                    _animationView.SceneModel = AnimationViewExtensions.TrySetAnimation(e.NewElement.Animation, e.NewElement.AnimationType);
+                    _animationView.SceneModel = e.NewElement.GetAnimation();
 
                     e.NewElement.PlayCommand = new Command(() => _animationView.Play());
                     e.NewElement.PauseCommand = new Command(() => _animationView.Pause());
@@ -144,7 +144,7 @@ namespace Lottie.Forms.Platforms.Ios
             if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
             {
                 CleanupResources();
-                //_animationView.SceneModel.TrySetAnimation(Element.Animation, Element.AnimationType);
+                //_animationView.SceneModel.TrySetAnimation(Element.Animation, Element.AnimationSource);
             }
 
             if (e.PropertyName == AnimationView.CacheCompositionProperty.PropertyName)

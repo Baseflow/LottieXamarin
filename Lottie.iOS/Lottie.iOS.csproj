@@ -13,6 +13,7 @@
   </PropertyGroup>
   
   <ItemGroup>
+    <None Include="**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
     <None Include="readme.txt" pack="true" PackagePath="." />
   </ItemGroup>
     

@@ -7,25 +7,25 @@ namespace Lottie.Forms.Platforms.Android
 {
     public static class AnimationViewExtensions
     {
-        public static void TrySetAnimation(this LottieAnimationView animationView, object animation, AnimationType animationType)
+        public static void TrySetAnimation(this LottieAnimationView animationView, object animation, AnimationSource animationSource)
         {
-            switch (animationType)
+            switch (animationSource)
             {
-                case AnimationType.AssetOrBundle:
+                case AnimationSource.AssetOrBundle:
                     animationView.TrySetAnimation(animation);
                     break;
-                case AnimationType.Url:
+                case AnimationSource.Url:
                     if(animation is string stringAnimation)
                         animationView.SetAnimationFromUrl(stringAnimation, stringAnimation);
                     break;
-                case AnimationType.Json:
+                case AnimationSource.Json:
                     if (animation is string jsonAnimation)
                         animationView.SetAnimationFromJson(jsonAnimation, null);
                     break;
-                case AnimationType.Stream:
+                case AnimationSource.Stream:
                     animationView.TrySetAnimation(animation);
                     break;
-                case AnimationType.EmbeddedResource:
+                case AnimationSource.EmbeddedResource:
                     if (animation is string embeddedAnimation)
                     {
                         var assembly = Xamarin.Forms.Application.Current.GetType().Assembly;

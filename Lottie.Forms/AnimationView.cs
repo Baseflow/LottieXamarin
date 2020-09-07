@@ -12,8 +12,8 @@ namespace Lottie.Forms
         public static readonly BindableProperty AnimationProperty = BindableProperty.Create(nameof(Animation),
             typeof(object), typeof(AnimationView), default(object));
 
-        public static readonly BindableProperty AnimationTypeProperty = BindableProperty.Create(nameof(AnimationType),
-            typeof(AnimationType), typeof(AnimationView), default(AnimationType));
+        public static readonly BindableProperty AnimationSourceProperty = BindableProperty.Create(nameof(Forms.AnimationSource),
+            typeof(AnimationSource), typeof(AnimationView), default(AnimationSource));
 
         public static readonly BindableProperty CacheCompositionProperty = BindableProperty.Create(nameof(CacheComposition),
             typeof(bool), typeof(AnimationView), default(bool));
@@ -88,10 +88,10 @@ namespace Lottie.Forms
             set { SetValue(AnimationProperty, value); }
         }
 
-        public AnimationType AnimationType
+        public AnimationSource AnimationSource
         {
-            get { return (AnimationType)GetValue(AnimationTypeProperty); }
-            set { SetValue(AnimationTypeProperty, value); }
+            get { return (AnimationSource)GetValue(AnimationSourceProperty); }
+            set { SetValue(AnimationSourceProperty, value); }
         }
 
         public ImageSource FallbackResource

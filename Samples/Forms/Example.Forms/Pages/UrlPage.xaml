@@ -55,7 +55,7 @@
             Grid.Row="2" 
             BackgroundColor="Red"
             Animation="{Binding Url}"
-            AnimationType="Url"
+            AnimationSource="Url"
             VerticalOptions="FillAndExpand" 
             HorizontalOptions="FillAndExpand" />
     </Grid>

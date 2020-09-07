@@ -1,6 +1,6 @@
 ﻿namespace Lottie.Forms
 {
-    public enum AnimationType
+    public enum AnimationSource
     {
         AssetOrBundle,
         Url,

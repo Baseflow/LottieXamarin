@@ -53,7 +53,7 @@
             Grid.Row="2" 
             BackgroundColor="Red"
             Animation="LottieLogo1.json"
-            AnimationType="AssetOrBundle"
+            AnimationSource="AssetOrBundle"
             VerticalOptions="FillAndExpand" 
             HorizontalOptions="FillAndExpand" />
     </Grid>

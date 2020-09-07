@@ -53,7 +53,7 @@
             Grid.Row="2" 
             BackgroundColor="Red"
             Animation="{Binding LottieStream}"
-            AnimationType="Stream"
+            AnimationSource="Stream"
             VerticalOptions="FillAndExpand" 
             HorizontalOptions="FillAndExpand" />
     </Grid>

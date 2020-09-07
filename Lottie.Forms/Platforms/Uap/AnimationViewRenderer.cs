@@ -61,7 +61,7 @@ namespace Lottie.Forms.UWP.Renderers
                     _animationView.Loaded += _animationView_Loaded;
                     _animationView.Tapped += _animationView_Tapped;
 
-                    _animationView.Source.TrySetAnimation(e.NewElement.Animation, e.NewElement.AnimationType, e.NewElement.ImageAssetsFolder);
+                    _animationView.Source.TrySetAnimation(e.NewElement.Animation, e.NewElement.AnimationSource, e.NewElement.ImageAssetsFolder);
 
                     e.NewElement.PlayCommand = new Command(() => _animationView.PlayAsync(0, 1, Element.RepeatMode == RepeatMode.Infinite).AsTask());
                     e.NewElement.PauseCommand = new Command(() => _animationView.Pause());
@@ -119,7 +119,7 @@ namespace Lottie.Forms.UWP.Renderers
 
             if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
             {
-                _animationView.Source.TrySetAnimation(Element.Animation, Element.AnimationType, Element.ImageAssetsFolder);
+                _animationView.Source.TrySetAnimation(Element.Animation, Element.AnimationSource, Element.ImageAssetsFolder);
             }
 
             if (e.PropertyName == AnimationView.AutoPlayProperty.PropertyName)
