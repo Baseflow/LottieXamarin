@@ -61,7 +61,7 @@ namespace Lottie.Forms.UWP.Renderers
                     _animationView.Loaded += _animationView_Loaded;
                     _animationView.Tapped += _animationView_Tapped;
 
-                    _animationView.Source.TrySetAnimation(e.NewElement.Animation, e.NewElement.AnimationSource, e.NewElement.ImageAssetsFolder);
+                    _animationView.Source = e.NewElement.GetAnimation();
 
                     e.NewElement.PlayCommand = new Command(() => _animationView.PlayAsync(0, 1, Element.RepeatMode == RepeatMode.Infinite).AsTask());
                     e.NewElement.PauseCommand = new Command(() => _animationView.Pause());
@@ -102,6 +102,9 @@ namespace Lottie.Forms.UWP.Renderers
 
         private async void _animationView_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
+            if (_animationView == null || Element == null || e == null)
+                return;
+
             if (Element.AutoPlay || Element.IsAnimating)
             {
                 await Task.Delay(PlayDelay);
@@ -119,7 +122,7 @@ namespace Lottie.Forms.UWP.Renderers
 
             if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
             {
-                _animationView.Source.TrySetAnimation(Element.Animation, Element.AnimationSource, Element.ImageAssetsFolder);
+                _animationView.Source = Element.GetAnimation();
             }
 
             if (e.PropertyName == AnimationView.AutoPlayProperty.PropertyName)
@@ -171,58 +174,7 @@ namespace Lottie.Forms.UWP.Renderers
         }
 
         /*
-                protected override void OnElementChanged(ElementChangedEventArgs<AnimationView> e)
-                {
-                    base.OnElementChanged(e);
-
-                    if (Control == null && e.NewElement != null)
-                    {
-                        _animationView = new AnimatedVisualPlayer { AutoPlay = false };
-                        SetNativeControl(_animationView);
-                    }
-
-                    if (e.OldElement != null)
-                    {
-                        e.OldElement.OnPlay -= OnPlay;
-                        e.OldElement.OnPause -= OnPause;
-                        e.OldElement.OnFinish -= OnFinish;
-                        e.OldElement.OnPlayProgressSegment -= OnPlayProgressSegment;
-                        e.OldElement.OnPlayFrameSegment -= OnPlayFrameSegment;
-
-                        _animationView.Stop();
-                        _animationView.Tapped -= AnimationViewTapped;
-                        RestAnimation();
-                    }
-
-                    if (e.NewElement != null)
-                    {
-                        e.NewElement.OnPlay += OnPlay;
-                        e.NewElement.OnPause += OnPause;
-                        e.NewElement.OnFinish += OnFinish;
-                        e.NewElement.OnPlayProgressSegment += OnPlayProgressSegment;
-                        e.NewElement.OnPlayFrameSegment += OnPlayFrameSegment;
-
-                        _animationView.PlaybackRate = e.NewElement.Speed;
-                        _animationView.Tapped += AnimationViewTapped;
-
-                        if (!string.IsNullOrEmpty(e.NewElement.Animation))
-                        {
-                            SetAnimation(e.NewElement.Animation);
-                            Element.Duration = _animationView.Duration;
-                        }
-        #pragma warning disable CS0618 // Type or member is obsolete
-                        if (e.NewElement.AutoPlay || e.NewElement.IsPlaying)
-        #pragma warning restore CS0618 // Type or member is obsolete
-                        {
-                            _ = _animationView.PlayAsync(0, 1, e.NewElement.Loop).AsTask();
-                        }
-                        else
-                        {
-                            _animationView.Stop();
-                        }
-                    }
-                }
-
+                
                 private void PrepareReverseAnimation(Action<float, float> action, float from, float to)
                 {
                     var minValue = Math.Min(from, to);

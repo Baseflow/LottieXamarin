@@ -8,53 +8,59 @@ namespace Lottie.Forms.Platforms.Uap
 {
     public static class AnimationViewExtensions
     {
-        public static void TrySetAnimation(this IAnimatedVisualSource animatedVisualSource, object animation, AnimationSource animationSource, string imageAssetsFolder = null)
+        public static IAnimatedVisualSource GetAnimation(this AnimationView animationView)
         {
-            switch (animationSource)
+            IAnimatedVisualSource animatedVisualSource = null;
+            switch (animationView.AnimationSource)
             {
                 case AnimationSource.AssetOrBundle:
-                    var assets = "Assets";
-
-                    if (!string.IsNullOrEmpty(imageAssetsFolder))
+                    if (animationView.Animation is string assetAnnimation)
                     {
-                        assets = imageAssetsFolder;
-                    }
+                        var assets = "Assets";
 
-                    var path = $"ms-appx:///{assets}/{animation}";
-                    animatedVisualSource.TrySetAnimation(path);
+                        if (!string.IsNullOrEmpty(animationView.ImageAssetsFolder))
+                        {
+                            assets = animationView.ImageAssetsFolder;
+                        }
+
+                        var path = $"ms-appx:///{assets}/{assetAnnimation}";
+                        animatedVisualSource = animationView.GetAnimation(path);
+                    }
                     break;
                 case AnimationSource.Url:
-                    if(animation is string stringAnimation)
-                        animatedVisualSource = LottieVisualSource.CreateFromString(stringAnimation);
+                    if(animationView.Animation is string stringAnimation)
+                        animatedVisualSource = animationView.GetAnimation(stringAnimation);
                     break;
                 case AnimationSource.Json:
                     //if (animation is string jsonAnimation)
                     //    animatedVisualSource = LottieVisualSource.CreateFromString(jsonAnimation);
                     break;
                 case AnimationSource.Stream:
-                    animatedVisualSource.TrySetAnimation(animation);
+                    animatedVisualSource = animationView.GetAnimation(animationView.Animation);
                     break;
                 case AnimationSource.EmbeddedResource:
-                    if (animation is string embeddedAnimation)
+                    if (animationView.Animation is string embeddedAnimation)
                     {
                         var assembly = Xamarin.Forms.Application.Current.GetType().Assembly;
                         var stream = assembly.GetManifestResourceStream($"{assembly.GetName().Name}.{embeddedAnimation}");
 
                         if (stream == null)
                         {
-                            return;
+                            return null;
                             //throw new FileNotFoundException("Cannot find file.", embeddedAnimation);
                         }
-                        animatedVisualSource.TrySetAnimation(stream);
+                        animatedVisualSource = animationView.GetAnimation(stream);
                     }
                     break;
                 default:
                     break;
             }
+            return animatedVisualSource;
         }
         
-        public static void TrySetAnimation(this IAnimatedVisualSource animatedVisualSource, object animation)
+        public static IAnimatedVisualSource GetAnimation(this AnimationView animationView, object animation)
         {
+            IAnimatedVisualSource animatedVisualSource = null;
             switch (animation)
             {
                 //case int intAnimation:
@@ -75,6 +81,7 @@ namespace Lottie.Forms.Platforms.Uap
                 default:
                     break;
             }
+            return animatedVisualSource;
         }
     }
 }
