@@ -50,7 +50,8 @@ namespace Lottie.Forms.Platforms.Wpf
                     _animationView.Loaded += _animationView_Loaded;
                     _animationView.MouseDown += _animationView_MouseDown;
 
-                    _animationView.FileName = e.NewElement.Animation as string; // = e.NewElement.GetAnimation();
+                    //_animationView.FileName = e.NewElement.Animation as string;
+                    _animationView.Composition = e.NewElement.GetAnimation();
 
                     e.NewElement.PlayCommand = new Command(() => _animationView.PlayAnimation());
                     e.NewElement.PauseCommand = new Command(() => _animationView.PauseAnimation());

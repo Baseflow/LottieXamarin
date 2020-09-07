@@ -1,12 +1,13 @@
 ﻿using System.IO;
+using LottieSharp;
 
 namespace Lottie.Forms.Platforms.Wpf
 {
     public static class AnimationViewExtensions
     {
-        public static IAnimatedVisualSource GetAnimation(this AnimationView animationView)
+        public static LottieComposition GetAnimation(this AnimationView animationView)
         {
-            IAnimatedVisualSource animatedVisualSource = null;
+            LottieComposition composition = null;
             switch (animationView.AnimationSource)
             {
                 case AnimationSource.AssetOrBundle:
@@ -20,19 +21,19 @@ namespace Lottie.Forms.Platforms.Wpf
                         }
 
                         var path = $"ms-appx:///{assets}/{assetAnnimation}";
-                        animatedVisualSource = animationView.GetAnimation(path);
+                        composition = animationView.GetAnimation(path);
                     }
                     break;
                 case AnimationSource.Url:
                     if (animationView.Animation is string stringAnimation)
-                        animatedVisualSource = animationView.GetAnimation(stringAnimation);
+                        composition = animationView.GetAnimation(stringAnimation);
                     break;
                 case AnimationSource.Json:
                     //if (animation is string jsonAnimation)
                     //    animatedVisualSource = LottieVisualSource.CreateFromString(jsonAnimation);
                     break;
                 case AnimationSource.Stream:
-                    animatedVisualSource = animationView.GetAnimation(animationView.Animation);
+                    composition = animationView.GetAnimation(animationView.Animation);
                     break;
                 case AnimationSource.EmbeddedResource:
                     if (animationView.Animation is string embeddedAnimation)
@@ -45,25 +46,25 @@ namespace Lottie.Forms.Platforms.Wpf
                             return null;
                             //throw new FileNotFoundException("Cannot find file.", embeddedAnimation);
                         }
-                        animatedVisualSource = animationView.GetAnimation(stream);
+                        composition = animationView.GetAnimation(stream);
                     }
                     break;
                 default:
                     break;
             }
-            return animatedVisualSource;
+            return composition;
         }
 
-        public static IAnimatedVisualSource GetAnimation(this AnimationView animationView, object animation)
+        public static LottieComposition GetAnimation(this AnimationView animationView, object animation)
         {
-            IAnimatedVisualSource animatedVisualSource = null;
+            LottieComposition composition = null;
             switch (animation)
             {
                 //case int intAnimation:
                 //animatedVisualSource = new LottieVisualSource { UriSource = new Uri(intAnimation) };
                 //    break;
                 case string stringAnimation:
-                    animatedVisualSource = LottieVisualSource.CreateFromString(stringAnimation);
+                    composition = LottieComposition.Factory.FromFileSync(stringAnimation);
                     break;
                 case Stream streamAnimation:
                     //TODO: api for this will be added in next Lottie UWP update
@@ -72,12 +73,12 @@ namespace Lottie.Forms.Platforms.Wpf
                     //animatedVisualSource = source;
                     break;
                 case null:
-                    animatedVisualSource = null;
+                    composition = null;
                     break;
                 default:
                     break;
             }
-            return animatedVisualSource;
+            return composition;
         }
     }
 }
