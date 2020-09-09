@@ -9,7 +9,7 @@
     <RootNamespace>Lottie.Forms</RootNamespace>
     <Description>Render After Effects animations natively on Android, iOS, MacOS, TVOs and UWP</Description>
     <PackageId>Com.Airbnb.Xamarin.Forms.Lottie</PackageId>
-    <Version>4.0.0-alpha2</Version>
+    <Version>4.0.0-alpha3</Version>
     <UseWPF Condition=" '$(OS)' == 'Windows_NT' ">true</UseWPF>
   </PropertyGroup>
   

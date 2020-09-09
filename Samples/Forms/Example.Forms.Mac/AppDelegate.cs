@@ -1,5 +1,6 @@
 ﻿using AppKit;
 using Foundation;
+using Xamarin.Forms.Platform.MacOS;
 
 namespace Example.Forms.Mac
 {
@@ -24,7 +25,7 @@ namespace Example.Forms.Mac
 
         public override void DidFinishLaunching(NSNotification notification)
         {
-            Forms.Init();
+            Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
             base.DidFinishLaunching(notification);
         }
