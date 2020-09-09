@@ -5,49 +5,38 @@ namespace Lottie.Forms.Platforms.Android
 {
     public static class AnimationViewExtensions
     {
-        public static void TrySetAnimation(this LottieAnimationView animationView, object animation, AnimationSource animationSource)
+        public static void TrySetAnimation(this LottieAnimationView lottieAnimationView, AnimationView animationView)
         {
-            switch (animationSource)
+            switch (animationView.AnimationSource)
             {
                 case AnimationSource.AssetOrBundle:
-                    animationView.TrySetAnimation(animation);
+                    lottieAnimationView.TrySetAnimation(animationView, animationView.Animation);
                     break;
                 case AnimationSource.Url:
-                    if (animation is string stringAnimation)
-                        animationView.SetAnimationFromUrl(stringAnimation, stringAnimation);
+                    if (animationView.Animation is string stringAnimation)
+                        lottieAnimationView.SetAnimationFromUrl(stringAnimation);
                     break;
                 case AnimationSource.Json:
-                    if (animation is string jsonAnimation)
-                        animationView.SetAnimationFromJson(jsonAnimation, null);
+                    if (animationView.Animation is string jsonAnimation)
+                        lottieAnimationView.SetAnimationFromJson(jsonAnimation);
                     break;
                 case AnimationSource.Stream:
-                    animationView.TrySetAnimation(animation);
+                    lottieAnimationView.TrySetAnimation(animationView, animationView.Animation);
                     break;
                 case AnimationSource.EmbeddedResource:
-                    if (animation is string embeddedAnimation)
-                    {
-                        var assembly = Xamarin.Forms.Application.Current.GetType().Assembly;
-                        var stream = assembly.GetManifestResourceStream($"{assembly.GetName().Name}.{embeddedAnimation}");
-
-                        if (stream == null)
-                        {
-                            return;
-                            //throw new FileNotFoundException("Cannot find file.", embeddedAnimation);
-                        }
-                        animationView.TrySetAnimation(stream);
-                    }
+                    lottieAnimationView.TrySetAnimation(animationView, animationView.GetStreamFromAssembly());
                     break;
                 default:
                     break;
             }
         }
 
-        public static void TrySetAnimation(this LottieAnimationView animationView, object animation)
+        public static void TrySetAnimation(this LottieAnimationView lottieAnimationView, AnimationView animationView, object animation)
         {
             switch (animation)
             {
                 case int intAnimation:
-                    animationView.SetAnimation(intAnimation);
+                    lottieAnimationView.SetAnimation(intAnimation);
                     break;
                 case string stringAnimation:
 
@@ -56,13 +45,13 @@ namespace Lottie.Forms.Platforms.Android
                     //TODO: check if url
                     //animationView.SetAnimationFromUrl(stringAnimation);
 
-                    animationView.SetAnimation(stringAnimation);
+                    lottieAnimationView.SetAnimation(stringAnimation);
                     break;
                 case Stream streamAnimation:
-                    animationView.SetAnimation(streamAnimation, null);
+                    lottieAnimationView.SetAnimation(streamAnimation, null);
                     break;
                 case null:
-                    animationView.ClearAnimation();
+                    lottieAnimationView.ClearAnimation();
                     break;
                 default:
                     break;

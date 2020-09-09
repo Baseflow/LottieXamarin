@@ -37,18 +37,7 @@ namespace Lottie.Forms.Platforms.Uap
                     animatedVisualSource = animationView.GetAnimation(animationView.Animation);
                     break;
                 case AnimationSource.EmbeddedResource:
-                    if (animationView.Animation is string embeddedAnimation)
-                    {
-                        var assembly = Xamarin.Forms.Application.Current.GetType().Assembly;
-                        var stream = assembly.GetManifestResourceStream($"{assembly.GetName().Name}.{embeddedAnimation}");
-
-                        if (stream == null)
-                        {
-                            return null;
-                            //throw new FileNotFoundException("Cannot find file.", embeddedAnimation);
-                        }
-                        animatedVisualSource = animationView.GetAnimation(stream);
-                    }
+                    animatedVisualSource = animationView.GetAnimation(animationView.GetStreamFromAssembly());
                     break;
                 default:
                     break;
@@ -61,9 +50,6 @@ namespace Lottie.Forms.Platforms.Uap
             IAnimatedVisualSource animatedVisualSource = null;
             switch (animation)
             {
-                //case int intAnimation:
-                //animatedVisualSource = new LottieVisualSource { UriSource = new Uri(intAnimation) };
-                //    break;
                 case string stringAnimation:
                     animatedVisualSource = LottieVisualSource.CreateFromString(stringAnimation);
                     break;

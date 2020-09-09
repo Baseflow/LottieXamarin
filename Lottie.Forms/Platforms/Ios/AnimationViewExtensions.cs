@@ -27,29 +27,20 @@ namespace Lottie.Forms.Platforms.Ios
                         composition = LOTComposition.AnimationNamed(stringAnimation);
                     break;
                 case AnimationSource.Json:
-                    //TODO: parse to NSDictionary if json is string
-                    //if (animation is string jsonAnimation)
-                    //composition = LOTComposition.AnimationFromJSON(jsonAnimation);
-
-                    if (animation is NSDictionary dictAnimation)
+                    if (animation is string jsonAnimation)
+                    {
+                        NSData objectData = NSData.FromString(jsonAnimation);
+                        NSDictionary jsonData = (NSDictionary)NSJsonSerialization.Deserialize(objectData, NSJsonReadingOptions.MutableContainers, out NSError error);
+                        composition = LOTComposition.AnimationFromJSON(jsonData);
+                    }
+                    else if (animation is NSDictionary dictAnimation)
                         composition = LOTComposition.AnimationFromJSON(dictAnimation);
                     break;
                 case AnimationSource.Stream:
                     composition = animationView.GetAnimation(animation);
                     break;
                 case AnimationSource.EmbeddedResource:
-                    if (animation is string embeddedAnimation)
-                    {
-                        var assembly = Xamarin.Forms.Application.Current.GetType().Assembly;
-                        var stream = assembly.GetManifestResourceStream($"{assembly.GetName().Name}.{embeddedAnimation}");
-
-                        if (stream == null)
-                        {
-                            return null;
-                            //throw new FileNotFoundException("Cannot find file.", embeddedAnimation);
-                        }
-                        composition = animationView.GetAnimation(stream);
-                    }
+                    composition = animationView.GetAnimation(animationView.GetStreamFromAssembly());
                     break;
                 default:
                     break;
@@ -62,9 +53,6 @@ namespace Lottie.Forms.Platforms.Ios
             LOTComposition composition = null;
             switch (animation)
             {
-                case int intAnimation:
-                    //composition = LOTComposition.AnimationNamed(intAnimation);
-                    break;
                 case string stringAnimation:
 
                     //TODO: check if json

@@ -36,18 +36,7 @@ namespace Lottie.Forms.Platforms.Wpf
                     composition = animationView.GetAnimation(animationView.Animation);
                     break;
                 case AnimationSource.EmbeddedResource:
-                    if (animationView.Animation is string embeddedAnimation)
-                    {
-                        var assembly = Xamarin.Forms.Application.Current.GetType().Assembly;
-                        var stream = assembly.GetManifestResourceStream($"{assembly.GetName().Name}.{embeddedAnimation}");
-
-                        if (stream == null)
-                        {
-                            return null;
-                            //throw new FileNotFoundException("Cannot find file.", embeddedAnimation);
-                        }
-                        composition = animationView.GetAnimation(stream);
-                    }
+                    composition = animationView.GetAnimation(animationView.GetStreamFromAssembly());
                     break;
                 default:
                     break;
@@ -60,9 +49,6 @@ namespace Lottie.Forms.Platforms.Wpf
             LottieComposition composition = null;
             switch (animation)
             {
-                //case int intAnimation:
-                //animatedVisualSource = new LottieVisualSource { UriSource = new Uri(intAnimation) };
-                //    break;
                 case string stringAnimation:
                     composition = LottieComposition.Factory.FromFileSync(stringAnimation);
                     break;

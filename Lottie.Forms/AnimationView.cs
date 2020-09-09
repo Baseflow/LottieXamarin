@@ -325,11 +325,15 @@ namespace Lottie.Forms
             Animation = path;
         }
 
-        public void SetAnimationFromEmbeddedResource(string name, Assembly assembly = null)
+        public void SetAnimationFromEmbeddedResource(string resourceName, Assembly assembly = null)
         {
             AnimationSource = AnimationSource.EmbeddedResource;
-            //TODO: use assembly
-            Animation = name;
+
+            if(assembly == null)
+                assembly = Xamarin.Forms.Application.Current.GetType().Assembly;
+
+            var uri = $"resource://{resourceName}?assembly={Uri.EscapeUriString(assembly.FullName)}";
+            Animation = uri;
         }
 
         public void SetAnimationFromJson(string json)
