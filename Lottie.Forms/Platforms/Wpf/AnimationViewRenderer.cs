@@ -79,19 +79,25 @@ namespace Lottie.Forms.Platforms.Wpf
                         //e.NewElement.InvokeClick();
                     });
 
-                    e.NewElement.SetMinAndMaxFrameCommand = new Command((object paramter) =>
+                    e.NewElement.PlayMinAndMaxFrameCommand = new Command((object paramter) =>
                     {
-                        //if (paramter is (int minFrame, int maxFrame))
-                        //_animationView.SetMinAndMaxFrame(minFrame, maxFrame);
+                        if (paramter is (int minFrame, int maxFrame))
+                        {
+                            _animationView.SetMinAndMaxFrame(minFrame, maxFrame);
+                            _animationView.PlayAnimation();
+                        }
                     });
-                    e.NewElement.SetMinAndMaxProgressCommand = new Command((object paramter) =>
+                    e.NewElement.PlayMinAndMaxProgressCommand = new Command((object paramter) =>
                     {
-                        //if (paramter is (float minProgress, float maxProgress))
-                        //_animationView.SetMinAndMaxProgress(minProgress, maxProgress);
+                        if (paramter is (float minProgress, float maxProgress))
+                        {
+                            _animationView.SetMinAndMaxProgress(minProgress, maxProgress);
+                            _animationView.PlayAnimation();
+                        }
                     });
                     e.NewElement.ReverseAnimationSpeedCommand = new Command(() =>
                     {
-                        _animationView.Speed = -1;
+                        _animationView.ReverseAnimationSpeed();
                     });
 
                     //e.NewElement.Duration = _animationView.Duration.Ticks;

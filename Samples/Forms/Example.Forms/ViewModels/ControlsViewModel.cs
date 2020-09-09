@@ -30,11 +30,11 @@ namespace Example.Forms
             });
             MinAndMaxFrameCommand = new Command<AnimationView>((animationView) =>
             {
-                animationView.SetMinAndMaxFrame(50, 100);
+                animationView.PlayMinAndMaxFrame(50, 100);
             });
             MinAndMaxProgressCommand = new Command<AnimationView>((animationView) =>
             {
-                animationView.SetMinAndMaxProgress(0.65f, 1.0f);
+                animationView.PlayMinAndMaxProgress(0.65f, 1.0f);
             });
         }
 

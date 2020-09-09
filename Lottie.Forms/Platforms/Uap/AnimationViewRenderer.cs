@@ -85,15 +85,19 @@ namespace Lottie.Forms.Platforms.Uap
                         //e.NewElement.InvokeClick();
                     });
 
-                    e.NewElement.SetMinAndMaxFrameCommand = new Command((object paramter) =>
+                    e.NewElement.PlayMinAndMaxFrameCommand = new Command((object paramter) =>
                     {
-                        //if (paramter is (int minFrame, int maxFrame))
-                        //_animationView.SetMinAndMaxFrame(minFrame, maxFrame);
+                        if (paramter is (int minFrame, int maxFrame))
+                        {
+                            _ = _animationView.PlayAsync(minFrame, maxFrame, Element.RepeatMode == RepeatMode.Infinite).AsTask();
+                        }
                     });
-                    e.NewElement.SetMinAndMaxProgressCommand = new Command((object paramter) =>
+                    e.NewElement.PlayMinAndMaxProgressCommand = new Command((object paramter) =>
                     {
-                        //if (paramter is (float minProgress, float maxProgress))
-                        //_animationView.SetMinAndMaxProgress(minProgress, maxProgress);
+                        if (paramter is (float minProgress, float maxProgress))
+                        {
+                            _ = _animationView.PlayAsync(minProgress, maxProgress, Element.RepeatMode == RepeatMode.Infinite).AsTask();
+                        }
                     });
                     e.NewElement.ReverseAnimationSpeedCommand = new Command(() =>
                     {

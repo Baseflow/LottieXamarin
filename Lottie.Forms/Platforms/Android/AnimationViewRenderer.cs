@@ -92,15 +92,21 @@ namespace Lottie.Forms.Platforms.Android
                     e.NewElement.StopCommand = new Command(() => _animationView.CancelAnimation());
                     e.NewElement.ClickCommand = new Command(() => _animationView.PerformClick());
 
-                    e.NewElement.SetMinAndMaxFrameCommand = new Command((object paramter) =>
+                    e.NewElement.PlayMinAndMaxFrameCommand = new Command((object paramter) =>
                     {
                         if (paramter is (int minFrame, int maxFrame))
+                        {
                             _animationView.SetMinAndMaxFrame(minFrame, maxFrame);
+                            _animationView.PlayAnimation();
+                        }
                     });
-                    e.NewElement.SetMinAndMaxProgressCommand = new Command((object paramter) =>
+                    e.NewElement.PlayMinAndMaxProgressCommand = new Command((object paramter) =>
                     {
                         if (paramter is (float minProgress, float maxProgress))
+                        {
                             _animationView.SetMinAndMaxProgress(minProgress, maxProgress);
+                            _animationView.PlayAnimation();
+                        }
                     });
                     e.NewElement.ReverseAnimationSpeedCommand = new Command(() => _animationView.ReverseAnimationSpeed());
 

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using Airbnb.Lottie;
+using Foundation;
 using Lottie.Forms;
 using Lottie.Forms.Platforms.Ios;
 using UIKit;
@@ -87,15 +88,15 @@ namespace Lottie.Forms.Platforms.Ios
                         //e.NewElement.InvokeClick();
                     });
 
-                    e.NewElement.SetMinAndMaxFrameCommand = new Command((object paramter) =>
+                    e.NewElement.PlayMinAndMaxFrameCommand = new Command((object paramter) =>
                     {
-                        //if (paramter is (int minFrame, int maxFrame))
-                        //    _animationView.SetMinAndMaxFrame(minFrame, maxFrame);
+                        if (paramter is (int minFrame, int maxFrame))
+                            _animationView.PlayFromFrame(NSNumber.FromInt32(minFrame), NSNumber.FromInt32(maxFrame), _animationCompletionBlock);
                     });
-                    e.NewElement.SetMinAndMaxProgressCommand = new Command((object paramter) =>
+                    e.NewElement.PlayMinAndMaxProgressCommand = new Command((object paramter) =>
                     {
-                        //if (paramter is (float minProgress, float maxProgress))
-                        //    _animationView.SetMinAndMaxProgress(minProgress, maxProgress);
+                        if (paramter is (float minProgress, float maxProgress))
+                            _animationView.PlayFromProgress(minProgress, maxProgress, _animationCompletionBlock);
                     });
                     e.NewElement.ReverseAnimationSpeedCommand = new Command(() => _animationView.AutoReverseAnimation = !_animationView.AutoReverseAnimation);
 

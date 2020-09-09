@@ -275,8 +275,8 @@ namespace Lottie.Forms
         internal ICommand ResumeCommand { get; set; }
         internal ICommand StopCommand { get; set; }
         internal ICommand ClickCommand { get; set; }
-        internal ICommand SetMinAndMaxFrameCommand { get; set; }
-        internal ICommand SetMinAndMaxProgressCommand { get; set; }
+        internal ICommand PlayMinAndMaxFrameCommand { get; set; }
+        internal ICommand PlayMinAndMaxProgressCommand { get; set; }
         internal ICommand ReverseAnimationSpeedCommand { get; set; }
 
         public void Click()
@@ -304,14 +304,14 @@ namespace Lottie.Forms
             PauseCommand.ExecuteCommandIfPossible();
         }
 
-        public void SetMinAndMaxFrame(int minFrame, int maxFrame)
+        public void PlayMinAndMaxFrame(int minFrame, int maxFrame)
         {
-            SetMinAndMaxFrameCommand.ExecuteCommandIfPossible((minFrame, maxFrame));
+            PlayMinAndMaxFrameCommand.ExecuteCommandIfPossible((minFrame, maxFrame));
         }
 
-        public void SetMinAndMaxProgress(float minProgress, float maxProgress)
+        public void PlayMinAndMaxProgress(float minProgress, float maxProgress)
         {
-            SetMinAndMaxProgressCommand.ExecuteCommandIfPossible((minProgress, maxProgress));
+            PlayMinAndMaxProgressCommand.ExecuteCommandIfPossible((minProgress, maxProgress));
         }
 
         public void ReverseAnimationSpeed()
