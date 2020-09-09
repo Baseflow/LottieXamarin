@@ -74,8 +74,8 @@ namespace Lottie.Forms
 
         public long Duration
         {
-            get { return (long)GetValue(ProgressProperty); }
-            internal set { SetValue(ProgressProperty, value); }
+            get { return (long)GetValue(DurationProperty); }
+            internal set { SetValue(DurationProperty, value); }
         }
 
         public bool CacheComposition
