@@ -63,7 +63,13 @@ namespace Lottie.Forms.Platforms.Mac
                     composition = LOTComposition.AnimationNamed(stringAnimation);
                     break;
                 case Stream streamAnimation:
-                    //composition = LOTComposition.AnimationNamed(streamAnimation);
+                    using (StreamReader reader = new StreamReader(streamAnimation))
+                    {
+                        string json = reader.ReadToEnd();
+                        NSData objectData = NSData.FromString(json);
+                        NSDictionary jsonData = (NSDictionary)NSJsonSerialization.Deserialize(objectData, NSJsonReadingOptions.MutableContainers, out NSError error);
+                        composition = LOTComposition.AnimationFromJSON(jsonData);
+                    }
                     break;
                 case null:
                     composition = null;
