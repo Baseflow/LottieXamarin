@@ -52,7 +52,7 @@
             x:Name="animationView" 
             Grid.Row="2" 
             BackgroundColor="Red"
-            Animation="LottieLogo1.json"
+            Animation="resource://LottieLogo1.json?assembly=Example.Forms"
             AnimationSource="EmbeddedResource"
             VerticalOptions="FillAndExpand" 
             HorizontalOptions="FillAndExpand" />

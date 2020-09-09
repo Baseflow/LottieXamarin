@@ -42,9 +42,9 @@ namespace Lottie.Forms
                     assembly = Xamarin.Forms.Application.Current.GetType().Assembly;
 
                 if (string.IsNullOrEmpty(resourceName))
-                    resourceName = $"{assembly.GetName().Name}.{embeddedAnimation}";
+                    resourceName = embeddedAnimation;
 
-                var stream = assembly.GetManifestResourceStream(resourceName);
+                var stream = assembly.GetManifestResourceStream($"{assembly.GetName().Name}.{resourceName}");
 
                 if (stream == null)
                 {
