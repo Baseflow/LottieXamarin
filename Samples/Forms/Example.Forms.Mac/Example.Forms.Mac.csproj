@@ -109,6 +109,10 @@
       <Project>{8F0CC2B2-88E2-459B-AC92-F3A74071707E}</Project>
       <Name>Lottie.iOS</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Lottie.Forms\Lottie.Forms.csproj">
+      <Project>{F03D2DD6-BBDA-45B9-982E-4DCA43FCB8E1}</Project>
+      <Name>Lottie.Forms</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms">
@@ -116,7 +120,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="LottieLogo1.json" />
+    <BundleResource Include="LottieLogo1.json" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
 </Project>
