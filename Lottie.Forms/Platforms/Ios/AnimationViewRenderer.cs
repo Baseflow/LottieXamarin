@@ -119,7 +119,7 @@ namespace Lottie.Forms.Platforms.Ios
                     //_animationView.Frame = e.NewElement.Frame;
                     _animationView.AnimationProgress = e.NewElement.Progress;
 
-                    _gestureRecognizer = new UITapGestureRecognizer(e.NewElement.Click);
+                    _gestureRecognizer = new UITapGestureRecognizer(e.NewElement.InvokeClick);
                     _animationView.AddGestureRecognizer(_gestureRecognizer);
 
                     SetNativeControl(_animationView);

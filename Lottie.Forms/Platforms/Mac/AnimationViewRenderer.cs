@@ -118,7 +118,7 @@ namespace Lottie.Forms.Platforms.Mac
                     //_animationView.Frame = e.NewElement.Frame;
                     _animationView.AnimationProgress = e.NewElement.Progress;
 
-                    _gestureRecognizer = new NSClickGestureRecognizer(e.NewElement.Click);
+                    _gestureRecognizer = new NSClickGestureRecognizer(e.NewElement.InvokeClick);
                     _animationView.AddGestureRecognizer(_gestureRecognizer);
 
                     SetNativeControl(_animationView);
