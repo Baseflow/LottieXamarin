@@ -267,13 +267,11 @@ namespace Lottie.Forms
 
         public event EventHandler<float> OnAnimationUpdate;
 
-        public event EventHandler OnAnimator;
-
         public event EventHandler<object> OnAnimationLoaded;
 
         public event EventHandler<Exception> OnFailure;
 
-        public event EventHandler OnEnded;
+        public event EventHandler OnFinishedAnimation;
 
         internal void InvokePlayAnimation()
         {
@@ -305,11 +303,6 @@ namespace Lottie.Forms
             OnAnimationUpdate?.Invoke(this, progress);
         }
 
-        internal void InvokeAnimator()
-        {
-            OnAnimator?.Invoke(this, EventArgs.Empty);
-        }
-
         internal void InvokeAnimationLoaded(object animation)
         {
             OnAnimationLoaded?.Invoke(this, animation);
@@ -320,9 +313,9 @@ namespace Lottie.Forms
             OnFailure?.Invoke(this, ex);
         }
 
-        internal void InvokePlaybackEnded()
+        internal void InvokeFinishedAnimation()
         {
-            OnEnded?.Invoke(this, EventArgs.Empty);
+            OnFinishedAnimation?.Invoke(this, EventArgs.Empty);
         }
 
         internal void InvokeClick()

@@ -45,7 +45,7 @@ namespace Lottie.Forms.Platforms.Android
                     _animatorListener = new AnimatorListener
                     {
                         OnAnimationCancelImpl = () => e.NewElement.InvokeStopAnimation(),
-                        OnAnimationEndImpl = () => e.NewElement.InvokePlaybackEnded(),
+                        OnAnimationEndImpl = () => e.NewElement.InvokeFinishedAnimation(),
                         OnAnimationPauseImpl = () => e.NewElement.InvokePauseAnimation(),
                         OnAnimationRepeatImpl = () => e.NewElement.InvokeRepeatAnimation(),
                         OnAnimationResumeImpl = () => e.NewElement.InvokeResumeAnimation(),

@@ -15,7 +15,7 @@ Using Lottie on Xamarin.Android:
 	app:lottie_autoPlay="true" />
 
 ---------------------------------
-Star on Github if this project helps you: https://github.com/martijn00/LottieXamarin
+Star on Github if this project helps you: https://github.com/Baseflow/LottieXamarin
 
 Commercial support is available. Integration with your app or services, samples, feature request, etc. Email: hello@baseflow.com
 Powered by: https://baseflow.com

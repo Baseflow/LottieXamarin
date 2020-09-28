@@ -179,7 +179,7 @@ namespace Lottie.Forms.Platforms.Mac
         {
             if (animationFinished)
             {
-                Element?.InvokePlaybackEnded();
+                Element?.InvokeFinishedAnimation();
                 if (repeatCount < Element.RepeatCount)
                 {
                     repeatCount++;
