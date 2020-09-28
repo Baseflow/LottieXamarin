@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Airbnb.Lottie;
 using CoreAnimation;
 using CoreGraphics;
 using Foundation;
@@ -24,7 +25,6 @@ namespace LottieSamples.iOS
         private UIToolbar toolbar;
         private UISlider slider;
         private LOTAnimationView laAnimation;
-
 
         public AnimationExplorerViewController() : base()
         {

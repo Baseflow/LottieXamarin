@@ -1,4 +1,5 @@
 ﻿using System;
+using Airbnb.Lottie;
 using UIKit;
 
 namespace Example.tvOS

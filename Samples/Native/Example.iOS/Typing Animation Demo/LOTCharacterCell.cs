@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using Airbnb.Lottie;
 using CoreGraphics;
 using Foundation;
 using UIKit;
