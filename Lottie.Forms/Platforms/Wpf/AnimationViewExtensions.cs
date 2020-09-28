@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using LottieSharp;
 
 namespace Lottie.Forms.Platforms.Wpf
@@ -7,6 +8,9 @@ namespace Lottie.Forms.Platforms.Wpf
     {
         public static LottieComposition GetAnimation(this AnimationView animationView)
         {
+            if (animationView == null)
+                throw new ArgumentNullException(nameof(animationView));
+
             LottieComposition composition = null;
             switch (animationView.AnimationSource)
             {
@@ -46,6 +50,9 @@ namespace Lottie.Forms.Platforms.Wpf
 
         public static LottieComposition GetAnimation(this AnimationView animationView, object animation)
         {
+            if (animationView == null)
+                throw new ArgumentNullException(nameof(animationView));
+
             LottieComposition composition = null;
             switch (animation)
             {

@@ -27,7 +27,7 @@ namespace Lottie.Forms.Platforms.Android
         {
             // needed because of this linker issue: https://bugzilla.xamarin.com/show_bug.cgi?id=31076
 #pragma warning disable 0219
-            var dummy = new AnimationViewRenderer();
+            _ = new AnimationViewRenderer();
 #pragma warning restore 0219
         }
 
@@ -114,7 +114,7 @@ namespace Lottie.Forms.Platforms.Android
                     //_animationView.SetFallbackResource(e.NewElement.FallbackResource.);
                     //_animationView.Composition = e.NewElement.Composition;
 
-                    if(e.NewElement.MinFrame != int.MinValue)
+                    if (e.NewElement.MinFrame != int.MinValue)
                         _animationView.SetMinFrame(e.NewElement.MinFrame);
                     if (e.NewElement.MinProgress != float.MinValue)
                         _animationView.SetMinProgress(e.NewElement.MinProgress);

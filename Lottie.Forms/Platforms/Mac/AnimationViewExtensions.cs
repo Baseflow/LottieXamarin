@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Airbnb.Lottie;
 using Foundation;
 
@@ -8,6 +9,9 @@ namespace Lottie.Forms.Platforms.Mac
     {
         public static LOTComposition GetAnimation(this AnimationView animationView)
         {
+            if (animationView == null)
+                throw new ArgumentNullException(nameof(animationView));
+
             var animation = animationView.Animation;
 
             LOTComposition composition = null;
@@ -30,7 +34,7 @@ namespace Lottie.Forms.Platforms.Mac
                     if (animation is string jsonAnimation)
                     {
                         NSData objectData = NSData.FromString(jsonAnimation);
-                        NSDictionary jsonData = (NSDictionary)NSJsonSerialization.Deserialize(objectData, NSJsonReadingOptions.MutableContainers, out NSError error);
+                        NSDictionary jsonData = (NSDictionary)NSJsonSerialization.Deserialize(objectData, NSJsonReadingOptions.MutableContainers, out _);
                         composition = LOTComposition.AnimationFromJSON(jsonData);
                     }
                     else if (animation is NSDictionary dictAnimation)
@@ -50,6 +54,9 @@ namespace Lottie.Forms.Platforms.Mac
 
         public static LOTComposition GetAnimation(this AnimationView animationView, object animation)
         {
+            if (animationView == null)
+                throw new ArgumentNullException(nameof(animationView));
+
             LOTComposition composition = null;
             switch (animation)
             {
@@ -67,7 +74,7 @@ namespace Lottie.Forms.Platforms.Mac
                     {
                         string json = reader.ReadToEnd();
                         NSData objectData = NSData.FromString(json);
-                        NSDictionary jsonData = (NSDictionary)NSJsonSerialization.Deserialize(objectData, NSJsonReadingOptions.MutableContainers, out NSError error);
+                        NSDictionary jsonData = (NSDictionary)NSJsonSerialization.Deserialize(objectData, NSJsonReadingOptions.MutableContainers, out _);
                         composition = LOTComposition.AnimationFromJSON(jsonData);
                     }
                     break;

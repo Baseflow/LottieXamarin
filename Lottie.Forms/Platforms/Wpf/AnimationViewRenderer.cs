@@ -20,7 +20,7 @@ namespace Lottie.Forms.Platforms.Wpf
         {
             // needed because of this linker issue: https://bugzilla.xamarin.com/show_bug.cgi?id=31076
 #pragma warning disable 0219
-            var dummy = new AnimationViewRenderer();
+            _ = new AnimationViewRenderer();
 #pragma warning restore 0219
         }
 

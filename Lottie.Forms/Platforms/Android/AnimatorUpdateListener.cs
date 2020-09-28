@@ -18,6 +18,9 @@ namespace Lottie.Forms.Platforms.Android
 
         public void OnAnimationUpdate(ValueAnimator animation)
         {
+            if (animation == null)
+                throw new ArgumentNullException(nameof(animation));
+
             OnAnimationUpdateImpl?.Invoke(((float)animation.AnimatedValue));
         }
     }

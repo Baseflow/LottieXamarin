@@ -408,7 +408,7 @@ namespace Lottie.Forms
         {
             AnimationSource = AnimationSource.EmbeddedResource;
 
-            if(assembly == null)
+            if (assembly == null)
                 assembly = Xamarin.Forms.Application.Current.GetType().Assembly;
 
             Animation = $"resource://{resourceName}?assembly={Uri.EscapeUriString(assembly.FullName)}";

@@ -16,7 +16,7 @@ namespace Lottie.Forms.Platforms.Mac
         private LOTAnimationCompletionBlock _animationCompletionBlock;
         private LOTAnimationView _animationView;
         private NSClickGestureRecognizer _gestureRecognizer;
-        private int repeatCount = 0;
+        private int repeatCount;
 
         /// <summary>
         ///   Used for registration with dependency service
@@ -25,7 +25,7 @@ namespace Lottie.Forms.Platforms.Mac
         {
             // needed because of this linker issue: https://bugzilla.xamarin.com/show_bug.cgi?id=31076
 #pragma warning disable 0219
-            var dummy = new AnimationViewRenderer();
+            _ = new AnimationViewRenderer();
 #pragma warning restore 0219
         }
 

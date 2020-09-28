@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lottie.Forms
 {
@@ -12,6 +9,9 @@ namespace Lottie.Forms
     {
         public static Stream GetStreamFromAssembly(this AnimationView animationView)
         {
+            if (animationView == null)
+                throw new ArgumentNullException(nameof(animationView));
+
             if (animationView.Animation is string embeddedAnimation)
             {
                 Assembly assembly = null;
@@ -24,7 +24,7 @@ namespace Lottie.Forms
                     var parts = uri.OriginalString.Substring(11).Split('?');
                     resourceName = parts.First();
 
-                    if (parts.Count() > 1)
+                    if (parts.Length > 1)
                     {
                         var name = Uri.UnescapeDataString(uri.Query.Substring(10));
                         var assemblyName = new AssemblyName(name);
@@ -34,7 +34,7 @@ namespace Lottie.Forms
                     if (assembly == null)
                     {
                         var callingAssemblyMethod = typeof(Assembly).GetTypeInfo().GetDeclaredMethod("GetCallingAssembly");
-                        assembly = (Assembly)callingAssemblyMethod.Invoke(null, new object[0]);
+                        assembly = (Assembly)callingAssemblyMethod.Invoke(null, Array.Empty<object>());
                     }
                 }
 

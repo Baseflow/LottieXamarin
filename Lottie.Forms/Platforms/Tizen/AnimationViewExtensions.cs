@@ -1,8 +1,9 @@
 ﻿using System;
 using System.IO;
-using Com.Airbnb.Lottie;
+using ElottieSharp;
+using Xamarin.Forms.Platform.Tizen;
 
-namespace Lottie.Forms.Platforms.Android
+namespace Lottie.Forms.Platforms.Tizen
 {
     public static class AnimationViewExtensions
     {
@@ -17,15 +18,15 @@ namespace Lottie.Forms.Platforms.Android
             switch (animationView.AnimationSource)
             {
                 case AnimationSource.AssetOrBundle:
-                    lottieAnimationView.TrySetAnimation(animationView, animationView.Animation);
+                    lottieAnimationView.TrySetAnimation(animationView, ResourcePath.GetPath(animationView.Animation as string));
                     break;
                 case AnimationSource.Url:
                     if (animationView.Animation is string stringAnimation)
-                        lottieAnimationView.SetAnimationFromUrl(stringAnimation);
+                        lottieAnimationView.SetAnimation(stringAnimation);
                     break;
                 case AnimationSource.Json:
                     if (animationView.Animation is string jsonAnimation)
-                        lottieAnimationView.SetAnimationFromJson(jsonAnimation);
+                        lottieAnimationView.SetAnimation(jsonAnimation);
                     break;
                 case AnimationSource.Stream:
                     lottieAnimationView.TrySetAnimation(animationView, animationView.Animation);
@@ -49,7 +50,7 @@ namespace Lottie.Forms.Platforms.Android
             switch (animation)
             {
                 case int intAnimation:
-                    lottieAnimationView.SetAnimation(intAnimation);
+                    //lottieAnimationView.SetAnimation(intAnimation);
                     break;
                 case string stringAnimation:
 
@@ -61,10 +62,10 @@ namespace Lottie.Forms.Platforms.Android
                     lottieAnimationView.SetAnimation(stringAnimation);
                     break;
                 case Stream streamAnimation:
-                    lottieAnimationView.SetAnimation(streamAnimation, null);
+                    //lottieAnimationView.SetAnimation(streamAnimation, null);
                     break;
                 case null:
-                    lottieAnimationView.ClearAnimation();
+                    lottieAnimationView.Stop();
                     break;
                 default:
                     break;

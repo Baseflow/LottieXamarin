@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Microsoft.Toolkit.Uwp.UI.Lottie;
 using Microsoft.UI.Xaml.Controls;
 
@@ -8,6 +9,9 @@ namespace Lottie.Forms.Platforms.Uap
     {
         public static IAnimatedVisualSource GetAnimation(this AnimationView animationView)
         {
+            if (animationView == null)
+                throw new ArgumentNullException(nameof(animationView));
+
             IAnimatedVisualSource animatedVisualSource = null;
             switch (animationView.AnimationSource)
             {
@@ -47,6 +51,9 @@ namespace Lottie.Forms.Platforms.Uap
 
         public static IAnimatedVisualSource GetAnimation(this AnimationView animationView, object animation)
         {
+            if (animationView == null)
+                throw new ArgumentNullException(nameof(animationView));
+
             IAnimatedVisualSource animatedVisualSource = null;
             switch (animation)
             {
