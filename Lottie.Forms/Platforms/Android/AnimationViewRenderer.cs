@@ -4,9 +4,10 @@ using Com.Airbnb.Lottie;
 using Lottie.Forms;
 using Lottie.Forms.Platforms.Android;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 using Xamarin.Forms.Platform.Android;
 
-[assembly: ExportRenderer(typeof(AnimationView), typeof(AnimationViewRenderer))]
+[assembly: ExportRenderer(typeof(AnimationView), typeof(AnimationViewRenderer)), Preserve(AllMembers = true)]
 namespace Lottie.Forms.Platforms.Android
 {
 #pragma warning disable 0618
@@ -19,17 +20,6 @@ namespace Lottie.Forms.Platforms.Android
         private LottieOnCompositionLoadedListener _lottieOnCompositionLoadedListener;
         private LottieFailureListener _lottieFailureListener;
         private ClickListener _clickListener;
-
-        /// <summary>
-        ///     Used for registration with dependency service
-        /// </summary>
-        public static void Init()
-        {
-            // needed because of this linker issue: https://bugzilla.xamarin.com/show_bug.cgi?id=31076
-#pragma warning disable 0219
-            _ = new AnimationViewRenderer();
-#pragma warning restore 0219
-        }
 
         protected override void OnElementChanged(ElementChangedEventArgs<AnimationView> e)
         {

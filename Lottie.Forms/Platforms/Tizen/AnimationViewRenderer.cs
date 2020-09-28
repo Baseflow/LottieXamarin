@@ -5,23 +5,12 @@ using Lottie.Forms.Platforms.Tizen;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Tizen;
 
-[assembly: ExportRenderer(typeof(AnimationView), typeof(AnimationViewRenderer))]
+[assembly: ExportRenderer(typeof(AnimationView), typeof(AnimationViewRenderer)), Xamarin.Forms.Internals.Preserve(AllMembers = true)]
 namespace Lottie.Forms.Platforms.Tizen
 {
     public class AnimationViewRenderer : ViewRenderer<AnimationView, LottieAnimationView>
     {
         private LottieAnimationView _animationView;
-
-        /// <summary>
-        /// Used for registration with dependency service
-        /// </summary>
-        public static void Init()
-        {
-            // needed because of this linker issue: https://bugzilla.xamarin.com/show_bug.cgi?id=31076
-#pragma warning disable 0219
-            _ = new AnimationViewRenderer();
-#pragma warning restore 0219
-        }
 
         protected override void OnElementChanged(ElementChangedEventArgs<AnimationView> e)
         {

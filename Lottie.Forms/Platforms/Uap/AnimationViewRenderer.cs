@@ -8,7 +8,7 @@ using Windows.UI.Xaml.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.UWP;
 
-[assembly: ExportRenderer(typeof(AnimationView), typeof(AnimationViewRenderer))]
+[assembly: ExportRenderer(typeof(AnimationView), typeof(AnimationViewRenderer)), Xamarin.Forms.Internals.Preserve(AllMembers = true)]
 
 namespace Lottie.Forms.Platforms.Uap
 {
@@ -19,17 +19,6 @@ namespace Lottie.Forms.Platforms.Uap
         //private bool _needToResetFrames;
 
         public static int PlayDelay { get; set; } = 1000;
-
-        /// <summary>
-        ///     Used for registration with dependency service
-        /// </summary>
-        public static void Init()
-        {
-            // needed because of this linker issue: https://bugzilla.xamarin.com/show_bug.cgi?id=31076
-#pragma warning disable 0219
-            _ = new AnimationViewRenderer();
-#pragma warning restore 0219
-        }
 
         protected override void OnElementChanged(ElementChangedEventArgs<AnimationView> e)
         {

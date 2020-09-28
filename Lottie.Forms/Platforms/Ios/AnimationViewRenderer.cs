@@ -7,7 +7,7 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(AnimationView), typeof(AnimationViewRenderer))]
+[assembly: ExportRenderer(typeof(AnimationView), typeof(AnimationViewRenderer)), Xamarin.Forms.Internals.Preserve(AllMembers = true)]
 
 namespace Lottie.Forms.Platforms.Ios
 {
@@ -17,16 +17,6 @@ namespace Lottie.Forms.Platforms.Ios
         private LOTAnimationView _animationView;
         private UITapGestureRecognizer _gestureRecognizer;
         private int repeatCount;
-        /// <summary>
-        ///   Used for registration with dependency service
-        /// </summary>
-        public static new void Init()
-        {
-            // needed because of this linker issue: https://bugzilla.xamarin.com/show_bug.cgi?id=31076
-#pragma warning disable 0219
-            _ = new AnimationViewRenderer();
-#pragma warning restore 0219
-        }
 
         protected override void OnElementChanged(ElementChangedEventArgs<AnimationView> e)
         {
