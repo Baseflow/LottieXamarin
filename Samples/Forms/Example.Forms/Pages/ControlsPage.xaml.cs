@@ -22,7 +22,7 @@ namespace Example.Forms
             DisplayAlert(string.Empty, $"{nameof(animationView.OnEnded)} invoked!", "OK");
         }
 
-        void animationView_OnAnimatorUpdate(System.Object sender, float e)
+        private void animationView_OnAnimationUpdate(object sender, float e)
         {
             progressSlider.Value = e;
         }

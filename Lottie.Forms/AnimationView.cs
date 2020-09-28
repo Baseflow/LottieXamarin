@@ -84,6 +84,9 @@ namespace Lottie.Forms
             set { SetValue(CacheCompositionProperty, value); }
         }
 
+        /// <summary>
+        /// Set the Animation that you want to play. This can be a URL (either local path or remote), Json string, or Stream
+        /// </summary>
         public object Animation
         {
             get { return (object)GetValue(AnimationProperty); }
@@ -108,42 +111,67 @@ namespace Lottie.Forms
         //    set { SetValue(CompositionProperty, value); }
         //}
 
+        /// <summary>
+        /// Sets or gets the minimum frame that the animation will start from when playing or looping.
+        /// </summary>
         public int MinFrame
         {
             get { return (int)GetValue(MinFrameProperty); }
             set { SetValue(MinFrameProperty, value); }
         }
 
+        /// <summary>
+        /// Sets or gets the minimum progress that the animation will start from when playing or looping.
+        /// </summary>
         public float MinProgress
         {
             get { return (float)GetValue(MinProgressProperty); }
             set { SetValue(MinProgressProperty, value); }
         }
 
+        /// <summary>
+        /// Sets or gets the maximum frame that the animation will end at when playing or looping.
+        /// </summary>
         public int MaxFrame
         {
             get { return (int)GetValue(MaxFrameProperty); }
             set { SetValue(MaxFrameProperty, value); }
         }
 
+        /// <summary>
+        /// Sets or gets the maximum progress that the animation will end at when playing or looping.
+        /// </summary>
         public float MaxProgress
         {
             get { return (float)GetValue(MaxProgressProperty); }
             set { SetValue(MaxProgressProperty, value); }
         }
 
+        /// <summary>
+        /// Returns the current playback speed. This will be < 0 if the animation is playing backwards.
+        /// </summary>
         public float Speed
         {
             get { return (float)GetValue(SpeedProperty); }
             set { SetValue(SpeedProperty, value); }
         }
 
+        /// <summary>
+        /// Defines what this animation should do when it reaches the end. 
+        /// This setting is applied only when the repeat count is either greater than 0 or INFINITE.
+        /// Defaults to RESTART.
+        /// </summary>
         public RepeatMode RepeatMode
         {
             get { return (RepeatMode)GetValue(RepeatModeProperty); }
             set { SetValue(RepeatModeProperty, value); }
         }
 
+        /// <summary>
+        /// Sets how many times the animation should be repeated. If the repeat count is 0, the animation is never repeated.
+        /// If the repeat count is greater than 0 or INFINITE, the repeat mode will be taken into account.
+        /// The repeat count is 0 by default.
+        /// </summary>
         public int RepeatCount
         {
             get { return (int)GetValue(RepeatCountProperty); }
@@ -156,18 +184,29 @@ namespace Lottie.Forms
             internal set { SetValue(IsAnimatingProperty, value); }
         }
 
+        /// <summary>
+        /// If you use image assets, you must explicitly specify the folder in assets/ in which they are located because bodymovin uses the name filenames across all compositions
+        /// </summary>
         public string ImageAssetsFolder
         {
             get { return (string)GetValue(ImageAssetsFolderProperty); }
             set { SetValue(ImageAssetsFolderProperty, value); }
         }
 
+        /// <summary>
+        /// Set the scale on the current composition. 
+        /// The only cost of this function is re-rendering the current frame so you may call it frequent to scale something up or down.
+        /// </summary>
         public new float Scale
         {
             get { return (float)GetValue(ScaleProperty); }
             set { SetValue(ScaleProperty, value); }
         }
 
+        /// <summary>
+        /// Sets the progress to the specified frame.
+        /// If the composition isn't set yet, the progress will be set to the frame when it is.
+        /// </summary>
         public int Frame
         {
             get { return (int)GetValue(FrameProperty); }
@@ -284,11 +323,17 @@ namespace Lottie.Forms
             ClickCommand.ExecuteCommandIfPossible(this);
         }
 
+        /// <summary>
+        /// Plays the animation from the beginning. If speed is < 0, it will start at the end and play towards the beginning
+        /// </summary>
         public void PlayAnimation()
         {
             PlayCommand.ExecuteCommandIfPossible();
         }
 
+        /// <summary>
+        /// Continues playing the animation from its current position. If speed < 0, it will play backwards from the current position.
+        /// </summary>
         public void ResumeAnimation()
         {
             ResumeCommand.ExecuteCommandIfPossible();
@@ -314,6 +359,9 @@ namespace Lottie.Forms
             PlayMinAndMaxProgressCommand.ExecuteCommandIfPossible((minProgress, maxProgress));
         }
 
+        /// <summary>
+        /// Reverses the current animation speed. This does NOT play the animation.
+        /// </summary>
         public void ReverseAnimationSpeed()
         {
             ReverseAnimationSpeedCommand.ExecuteCommandIfPossible();
