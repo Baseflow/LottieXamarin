@@ -19,7 +19,7 @@ namespace Example.Forms
 
         private void Handle_OnFinish(object sender, System.EventArgs e)
         {
-            DisplayAlert(string.Empty, $"{nameof(animationView.OnEnded)} invoked!", "OK");
+            DisplayAlert(string.Empty, $"{nameof(animationView.OnFinishedAnimation)} invoked!", "OK");
         }
     }
 }

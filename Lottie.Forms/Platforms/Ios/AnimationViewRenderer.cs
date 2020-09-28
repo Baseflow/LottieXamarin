@@ -190,7 +190,7 @@ namespace Lottie.Forms.Platforms.Ios
         {
             if (animationFinished)
             {
-                Element?.InvokePlaybackEnded();
+                Element?.InvokeFinishedAnimation();
                 if (repeatCount < Element.RepeatCount)
                 {
                     repeatCount++;

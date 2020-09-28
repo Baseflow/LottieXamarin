@@ -143,7 +143,7 @@ namespace Lottie.Forms.Platforms.Tizen
 
         private void _animationView_Finished(object sender, System.EventArgs e)
         {
-            Element?.InvokePlaybackEnded();
+            Element?.InvokeFinishedAnimation();
         }
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
