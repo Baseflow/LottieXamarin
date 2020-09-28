@@ -133,7 +133,7 @@ namespace Lottie.Forms.Platforms.Tizen
 
         private void _animationView_Shown(object sender, System.EventArgs e)
         {
-            
+
         }
 
         private void _animationView_Paused(object sender, System.EventArgs e)
