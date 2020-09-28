@@ -114,11 +114,14 @@ namespace Lottie.Forms.Platforms.Android
                     //_animationView.SetFallbackResource(e.NewElement.FallbackResource.);
                     //_animationView.Composition = e.NewElement.Composition;
 
-                    //TODO: makes animation stop with current default values
-                    //_animationView.SetMinFrame(e.NewElement.MinFrame);
-                    //_animationView.SetMinProgress(e.NewElement.MinProgress);
-                    //_animationView.SetMaxFrame(e.NewElement.MaxFrame);
-                    //_animationView.SetMaxProgress(e.NewElement.MaxProgress);
+                    if(e.NewElement.MinFrame != int.MinValue)
+                        _animationView.SetMinFrame(e.NewElement.MinFrame);
+                    if (e.NewElement.MinProgress != float.MinValue)
+                        _animationView.SetMinProgress(e.NewElement.MinProgress);
+                    if (e.NewElement.MaxFrame != int.MinValue)
+                        _animationView.SetMaxFrame(e.NewElement.MaxFrame);
+                    if (e.NewElement.MaxProgress != float.MinValue)
+                        _animationView.SetMaxProgress(e.NewElement.MaxProgress);
 
                     _animationView.Speed = e.NewElement.Speed;
                     _animationView.RepeatMode = (int)e.NewElement.RepeatMode;
@@ -174,7 +177,7 @@ namespace Lottie.Forms.Platforms.Android
             if (e.PropertyName == AnimationView.MaxFrameProperty.PropertyName)
                 _animationView.SetMaxFrame(Element.MaxFrame);
 
-            if (e.PropertyName == AnimationView.SpeedProperty.PropertyName)
+            if (e.PropertyName == AnimationView.MaxProgressProperty.PropertyName)
                 _animationView.SetMaxProgress(Element.MaxProgress);
 
             if (e.PropertyName == AnimationView.SpeedProperty.PropertyName)

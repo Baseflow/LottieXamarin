@@ -16,6 +16,7 @@ namespace Lottie.Forms.Platforms.Mac
         private LOTAnimationCompletionBlock _animationCompletionBlock;
         private LOTAnimationView _animationView;
         private NSClickGestureRecognizer _gestureRecognizer;
+        private int repeatCount = 0;
 
         /// <summary>
         ///   Used for registration with dependency service
@@ -46,7 +47,6 @@ namespace Lottie.Forms.Platforms.Mac
                 {
                     _animationCompletionBlock = new LOTAnimationCompletionBlock(AnimationCompletionBlock);
 
-                    //_animationView = new LOTAnimationView(NSUrl.FromFilename(e.NewElement.Animation as string))
                     _animationView = new LOTAnimationView()
                     {
                         ContentMode = LOTViewContentMode.ScaleAspectFit,
@@ -56,8 +56,6 @@ namespace Lottie.Forms.Platforms.Mac
                         CacheEnable = e.NewElement.CacheComposition,
                         CompletionBlock = _animationCompletionBlock
                     };
-                    //_animationView.SetAnimationNamed(e.NewElement.Animation as string);
-                    //_animationView.SceneModel = LOTComposition.AnimationNamed(e.NewElement.Animation as string);
 
                     _animationView.SceneModel = e.NewElement.GetAnimation();
 
@@ -110,7 +108,7 @@ namespace Lottie.Forms.Platforms.Mac
                     //_animationView.SetMaxProgress(e.NewElement.MaxProgress);
 
                     _animationView.AnimationSpeed = e.NewElement.Speed;
-                    _animationView.LoopAnimation = e.NewElement.RepeatMode == RepeatMode.Infinite;
+                    _animationView.LoopAnimation = e.NewElement.RepeatMode == RepeatMode.Infinite || e.NewElement.RepeatMode == RepeatMode.Restart;
                     //_animationView.RepeatCount = e.NewElement.RepeatCount;
                     //if (!string.IsNullOrEmpty(e.NewElement.ImageAssetsFolder))
                     //    _animationView.ImageAssetsFolder = e.NewElement.ImageAssetsFolder;
@@ -132,25 +130,6 @@ namespace Lottie.Forms.Platforms.Mac
             }
         }
 
-        /*
-        private void OnPlayProgressSegment(object sender, ProgressSegmentEventArgs e)
-        {
-            _animationView?.PlayFromProgress(e.From, e.To, PlaybackFinishedIfActually);
-            Element.IsPlaying = true;
-        }
-
-        private void OnPlayFrameSegment(object sender, FrameSegmentEventArgs e)
-        {
-            _animationView?.PlayFromFrame(e.From, e.To, PlaybackFinishedIfActually);
-            Element.IsPlaying = true;
-        }
-
-        private void OnPause(object sender, EventArgs e)
-        {
-            _animationView?.Pause();
-            Element.IsPlaying = false;
-        }*/
-
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (_animationView == null || Element == null || e == null)
@@ -160,6 +139,9 @@ namespace Lottie.Forms.Platforms.Mac
             {
                 //CleanupResources();
                 _animationView.SceneModel = Element.GetAnimation();
+
+                if (Element.AutoPlay || Element.IsAnimating)
+                    _animationView.Play();
             }
 
             if (e.PropertyName == AnimationView.CacheCompositionProperty.PropertyName)
@@ -177,7 +159,7 @@ namespace Lottie.Forms.Platforms.Mac
             //if (e.PropertyName == AnimationView.MaxFrameProperty.PropertyName)
             //    _animationView.SetMaxFrame(Element.MaxFrame);
 
-            //if (e.PropertyName == AnimationView.SpeedProperty.PropertyName)
+            //if (e.PropertyName == AnimationView.MaxProgressProperty.PropertyName)
             //    _animationView.SetMaxProgress(Element.MaxProgress);
 
             if (e.PropertyName == AnimationView.SpeedProperty.PropertyName)
@@ -209,11 +191,18 @@ namespace Lottie.Forms.Platforms.Mac
             if (animationFinished)
             {
                 Element?.InvokePlaybackEnded();
+                if (repeatCount < Element.RepeatCount)
+                {
+                    repeatCount++;
+                    _animationView.Play();
+                }
             }
         }
 
         private void CleanupResources()
         {
+            repeatCount = 0;
+
             if (_gestureRecognizer != null)
             {
                 _animationView?.RemoveGestureRecognizer(_gestureRecognizer);

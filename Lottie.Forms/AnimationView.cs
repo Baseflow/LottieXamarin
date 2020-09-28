@@ -14,11 +14,11 @@ namespace Lottie.Forms
         public static readonly BindableProperty AnimationProperty = BindableProperty.Create(nameof(Animation),
             typeof(object), typeof(AnimationView), default(object));
 
-        public static readonly BindableProperty AnimationSourceProperty = BindableProperty.Create(nameof(Forms.AnimationSource),
-            typeof(AnimationSource), typeof(AnimationView), default(AnimationSource));
+        public static readonly BindableProperty AnimationSourceProperty = BindableProperty.Create(nameof(Lottie.Forms.AnimationSource),
+            typeof(AnimationSource), typeof(AnimationView), Forms.AnimationSource.AssetOrBundle);
 
         public static readonly BindableProperty CacheCompositionProperty = BindableProperty.Create(nameof(CacheComposition),
-            typeof(bool), typeof(AnimationView), default(bool));
+            typeof(bool), typeof(AnimationView), true);
 
         public static readonly BindableProperty FallbackResourceProperty = BindableProperty.Create(nameof(FallbackResource),
             typeof(ImageSource), typeof(AnimationView), default(ImageSource));
@@ -27,28 +27,28 @@ namespace Lottie.Forms
         //    typeof(ILottieComposition), typeof(AnimationView), default(ILottieComposition));
 
         public static readonly BindableProperty MinFrameProperty = BindableProperty.Create(nameof(MinFrame),
-            typeof(int), typeof(AnimationView), default(int));
+            typeof(int), typeof(AnimationView), int.MinValue);
 
         public static readonly BindableProperty MinProgressProperty = BindableProperty.Create(nameof(MinProgress),
-            typeof(float), typeof(AnimationView), default(float));
+            typeof(float), typeof(AnimationView), float.MinValue);
 
         public static readonly BindableProperty MaxFrameProperty = BindableProperty.Create(nameof(MaxFrame),
-            typeof(int), typeof(AnimationView), default(int));
+            typeof(int), typeof(AnimationView), int.MinValue);
 
         public static readonly BindableProperty MaxProgressProperty = BindableProperty.Create(nameof(MaxProgress),
-            typeof(float), typeof(AnimationView), default(float));
+            typeof(float), typeof(AnimationView), float.MinValue);
 
         public static readonly BindableProperty SpeedProperty = BindableProperty.Create(nameof(Speed),
             typeof(float), typeof(AnimationView), 1.0f);
 
         public static readonly BindableProperty RepeatModeProperty = BindableProperty.Create(nameof(RepeatMode),
-            typeof(RepeatMode), typeof(AnimationView), default(RepeatMode));
+            typeof(RepeatMode), typeof(AnimationView), Lottie.Forms.RepeatMode.Restart);
 
         public static readonly BindableProperty RepeatCountProperty = BindableProperty.Create(nameof(RepeatCount),
-            typeof(int), typeof(AnimationView), default(int));
+            typeof(int), typeof(AnimationView), 0);
 
         public static readonly BindableProperty IsAnimatingProperty = BindableProperty.Create(nameof(IsAnimating),
-            typeof(bool), typeof(AnimationView), default(bool));
+            typeof(bool), typeof(AnimationView), false);
 
         public static readonly BindableProperty ImageAssetsFolderProperty = BindableProperty.Create(nameof(ImageAssetsFolder),
             typeof(string), typeof(AnimationView), default(string));
@@ -72,12 +72,18 @@ namespace Lottie.Forms
         public static readonly BindableProperty CommandProperty = BindableProperty.Create(nameof(Command),
             typeof(ICommand), typeof(AnimationView));
 
+        /// <summary>
+        /// Returns the duration of an animation (Frames / FrameRate * 1000)
+        /// </summary>
         public long Duration
         {
             get { return (long)GetValue(DurationProperty); }
             internal set { SetValue(DurationProperty, value); }
         }
 
+        /// <summary>
+        /// Indicates if a Lottie Animation should be cached
+        /// </summary>
         public bool CacheComposition
         {
             get { return (bool)GetValue(CacheCompositionProperty); }
@@ -93,12 +99,19 @@ namespace Lottie.Forms
             set { SetValue(AnimationProperty, value); }
         }
 
+        /// <summary>
+        /// Indicates where the Animation is located and from which source it should be loaded
+        /// Default value is AssetOrBundle
+        /// </summary>
         public AnimationSource AnimationSource
         {
             get { return (AnimationSource)GetValue(AnimationSourceProperty); }
             set { SetValue(AnimationSourceProperty, value); }
         }
 
+        /// <summary>
+        /// Used in case an animations fails to load
+        /// </summary>
         public ImageSource FallbackResource
         {
             get { return (ImageSource)GetValue(FallbackResourceProperty); }
@@ -178,6 +191,9 @@ namespace Lottie.Forms
             set { SetValue(RepeatCountProperty, value); }
         }
 
+        /// <summary>
+        /// Indicates if the Animation is playing
+        /// </summary>
         public bool IsAnimating
         {
             get { return (bool)GetValue(IsAnimatingProperty); }
@@ -213,6 +229,9 @@ namespace Lottie.Forms
             set { SetValue(FrameProperty, value); }
         }
 
+        /// <summary>
+        /// Returns the current progress of the animation
+        /// </summary>
         public float Progress
         {
             get { return (float)GetValue(ProgressProperty); }
@@ -225,6 +244,9 @@ namespace Lottie.Forms
             set { SetValue(AutoPlayProperty, value); }
         }
 
+        /// <summary>
+        /// Will be called when the view is clicked
+        /// </summary>
         public ICommand Command
         {
             get { return (ICommand)GetValue(CommandProperty); }
@@ -318,6 +340,9 @@ namespace Lottie.Forms
         internal ICommand PlayMinAndMaxProgressCommand { get; set; }
         internal ICommand ReverseAnimationSpeedCommand { get; set; }
 
+        /// <summary>
+        /// Simulate a click action on the view
+        /// </summary>
         public void Click()
         {
             ClickCommand.ExecuteCommandIfPossible(this);
@@ -339,11 +364,17 @@ namespace Lottie.Forms
             ResumeCommand.ExecuteCommandIfPossible();
         }
 
+        /// <summary>
+        /// Will stop and reset the currently playing animation
+        /// </summary>
         public void StopAnimation()
         {
             StopCommand.ExecuteCommandIfPossible();
         }
 
+        /// <summary>
+        /// Will pause the currently playing animation. Call ResumeAnimation to continue
+        /// </summary>
         public void PauseAnimation()
         {
             PauseCommand.ExecuteCommandIfPossible();
@@ -380,8 +411,7 @@ namespace Lottie.Forms
             if(assembly == null)
                 assembly = Xamarin.Forms.Application.Current.GetType().Assembly;
 
-            var uri = $"resource://{resourceName}?assembly={Uri.EscapeUriString(assembly.FullName)}";
-            Animation = uri;
+            Animation = $"resource://{resourceName}?assembly={Uri.EscapeUriString(assembly.FullName)}";
         }
 
         public void SetAnimationFromJson(string json)

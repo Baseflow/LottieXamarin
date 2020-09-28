@@ -104,6 +104,9 @@ namespace Lottie.Forms.Platforms.Wpf
                     //e.NewElement.IsAnimating = _animationView.IsPlaying;
 
                     SetNativeControl(_animationView);
+
+                    if (e.NewElement.AutoPlay || e.NewElement.IsAnimating)
+                        _animationView.PlayAnimation();
                 }
             }
         }
@@ -120,6 +123,8 @@ namespace Lottie.Forms.Platforms.Wpf
 
             if (Element.AutoPlay || Element.IsAnimating)
             {
+                _animationView.PlayAnimation();
+
                 //await Task.Delay(PlayDelay);
                 //_ = _animationView.PlayAsync(0, 1, Element.RepeatMode == RepeatMode.Infinite).AsTask();
 
@@ -135,14 +140,17 @@ namespace Lottie.Forms.Platforms.Wpf
 
             if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
             {
-                //_animationView.Source = Element.GetAnimation();
+                _animationView.Composition = Element.GetAnimation();
+
+                if (Element.AutoPlay || Element.IsAnimating)
+                    _animationView.PlayAnimation();
             }
 
             if (e.PropertyName == AnimationView.AutoPlayProperty.PropertyName)
                 _animationView.AutoPlay = Element.AutoPlay;
 
             //if (e.PropertyName == AnimationView.CacheCompositionProperty.PropertyName)
-            //    _animationView.SetCacheComposition(Element.CacheComposition);
+            //    _animationView.DefaultCacheStrategy = LottieAnimationView.CacheStrategy.Strong (Element.CacheComposition);
 
             //if (e.PropertyName == AnimationView.FallbackResource.PropertyName)
             //    _animationView.SetFallbackResource(e.NewElement.FallbackResource);
@@ -150,38 +158,38 @@ namespace Lottie.Forms.Platforms.Wpf
             //if (e.PropertyName == AnimationView.Composition.PropertyName)
             //    _animationView.Composition = e.NewElement.Composition;
 
-            //if (e.PropertyName == AnimationView.MinFrameProperty.PropertyName)
-            //    _animationView.SetMinFrame(Element.MinFrame);
+            if (e.PropertyName == AnimationView.MinFrameProperty.PropertyName)
+                _animationView.MinFrame = Element.MinFrame;
 
-            //if (e.PropertyName == AnimationView.MinProgressProperty.PropertyName)
-            //    _animationView.SetMinProgress(Element.MinProgress);
+            if (e.PropertyName == AnimationView.MinProgressProperty.PropertyName)
+                _animationView.MinProgress = Element.MinProgress;
 
-            //if (e.PropertyName == AnimationView.MaxFrameProperty.PropertyName)
-            //    _animationView.SetMaxFrame(Element.MaxFrame);
+            if (e.PropertyName == AnimationView.MaxFrameProperty.PropertyName)
+                _animationView.MaxFrame = Element.MaxFrame;
 
-            //if (e.PropertyName == AnimationView.SpeedProperty.PropertyName)
-            //    _animationView.SetMaxProgress(Element.MaxProgress);
+            if (e.PropertyName == AnimationView.MaxProgressProperty.PropertyName)
+                _animationView.MaxProgress = Element.MaxProgress;
 
             if (e.PropertyName == AnimationView.SpeedProperty.PropertyName)
                 _animationView.Speed = Element.Speed;
 
-            //if (e.PropertyName == AnimationView.RepeatModeProperty.PropertyName)
-            //    _animationView.RepeatMode = (int)Element.RepeatMode;
+            if (e.PropertyName == AnimationView.RepeatModeProperty.PropertyName)
+                _animationView.RepeatMode = (LottieSharp.RepeatMode)(int)Element.RepeatMode;
 
-            //if (e.PropertyName == AnimationView.RepeatCountProperty.PropertyName)
-            //    _animationView.RepeatCount = Element.RepeatCount;
+            if (e.PropertyName == AnimationView.RepeatCountProperty.PropertyName)
+                _animationView.RepeatCount = Element.RepeatCount;
 
             //if (e.PropertyName == AnimationView.ImageAssetsFolderProperty.PropertyName && !string.IsNullOrEmpty(Element.ImageAssetsFolder))
             //    _animationView.ImageAssetsFolder = Element.ImageAssetsFolder;
 
-            //if (e.PropertyName == AnimationView.ScaleProperty.PropertyName)
-            //    _animationView.Scale = Element.Scale;
+            if (e.PropertyName == AnimationView.ScaleProperty.PropertyName)
+                _animationView.Scale = Element.Scale;
 
-            //if (e.PropertyName == AnimationView.FrameProperty.PropertyName)
-            //    _animationView.Frame = Element.Frame;
+            if (e.PropertyName == AnimationView.FrameProperty.PropertyName)
+                _animationView.Frame = Element.Frame;
 
-            //if (e.PropertyName == AnimationView.ProgressProperty.PropertyName)
-            //    _animationView.SetProgress(Element.Progress);
+            if (e.PropertyName == AnimationView.ProgressProperty.PropertyName)
+                _animationView.Progress = Element.Progress;
 
             base.OnElementPropertyChanged(sender, e);
         }

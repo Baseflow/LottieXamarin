@@ -163,7 +163,7 @@ namespace Lottie.Forms.Platforms.Uap
             //if (e.PropertyName == AnimationView.MaxFrameProperty.PropertyName)
             //    _animationView.SetMaxFrame(Element.MaxFrame);
 
-            //if (e.PropertyName == AnimationView.SpeedProperty.PropertyName)
+            //if (e.PropertyName == AnimationView.MaxProgressProperty.PropertyName)
             //    _animationView.SetMaxProgress(Element.MaxProgress);
 
             if (e.PropertyName == AnimationView.SpeedProperty.PropertyName)
@@ -263,15 +263,6 @@ namespace Lottie.Forms.Platforms.Uap
                         {
                             _animationView.Stop();
                         }
-                    }
-                    else if (e.PropertyName == AnimationView.ProgressProperty.PropertyName)
-                    {
-                        _animationView.Pause();
-                        _animationView.SetProgress(Element.Progress);
-                    }
-                    else if (e.PropertyName == AnimationView.SpeedProperty.PropertyName)
-                    {
-                        _animationView.PlaybackRate = Element.Speed;
                     }
                     else if (e.PropertyName == AnimationView.IsPlayingProperty.PropertyName && !string.IsNullOrEmpty(Element.Animation))
                     {
