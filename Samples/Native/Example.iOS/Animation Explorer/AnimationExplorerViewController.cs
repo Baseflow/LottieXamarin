@@ -39,24 +39,23 @@ namespace LottieSamples.iOS
             this.laAnimation = new LOTAnimationView();
             this.toolbar = new UIToolbar(CGRect.Empty);
 
-
             UIBarButtonItem open = new UIBarButtonItem(UIBarButtonSystemItem.Bookmarks, OpenEventHandler);
-            UIBarButtonItem flx1 = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace, null);
+            UIBarButtonItem flx1 = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace, handler: null);
 
             UIBarButtonItem openWeb = new UIBarButtonItem(UIBarButtonSystemItem.Action, RemoteJsonEventHandler);
-            UIBarButtonItem flx2 = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace, null);
+            UIBarButtonItem flx2 = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace, handler: null);
 
             UIBarButtonItem play = new UIBarButtonItem(UIBarButtonSystemItem.Play, PlayEventHandler);
-            UIBarButtonItem flx3 = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace, null);
+            UIBarButtonItem flx3 = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace, handler: null);
 
             UIBarButtonItem loop = new UIBarButtonItem(UIBarButtonSystemItem.Refresh, LoopEventHandler);
-            UIBarButtonItem flx4 = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace, null);
+            UIBarButtonItem flx4 = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace, handler: null);
 
             UIBarButtonItem zoom = new UIBarButtonItem(UIBarButtonSystemItem.Add, ZoomEventHandler);
-            UIBarButtonItem flx5 = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace, null);
+            UIBarButtonItem flx5 = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace, handler: null);
 
             UIBarButtonItem bgcolor = new UIBarButtonItem(UIBarButtonSystemItem.Compose, ChangeBackgroundColorEventHandler);
-            UIBarButtonItem flx6 = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace, null);
+            UIBarButtonItem flx6 = new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace, handler: null);
 
             UIBarButtonItem close = new UIBarButtonItem(UIBarButtonSystemItem.Stop, CloseEventHandler);
 

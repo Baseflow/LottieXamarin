@@ -1,6 +1,6 @@
 ﻿<Project>
   <PropertyGroup>
-    <Copyright>Copyright (c) Martijn van Dijk</Copyright>
+    <Copyright>Copyright (c) Baseflow</Copyright>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Baseflow/LottieXamarin</PackageProjectUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/Baseflow/LottieXamarin/develop/icon.png</PackageIconUrl>

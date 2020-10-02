@@ -16,7 +16,7 @@ namespace Lottie.Forms.Platforms.Ios
         private LOTAnimationCompletionBlock _animationCompletionBlock;
         private LOTAnimationView _animationView;
         private UITapGestureRecognizer _gestureRecognizer;
-        private int repeatCount;
+        private int repeatCount = 1;
 
         protected override void OnElementChanged(ElementChangedEventArgs<AnimationView> e)
         {
@@ -78,12 +78,12 @@ namespace Lottie.Forms.Platforms.Ios
                     e.NewElement.PlayMinAndMaxFrameCommand = new Command((object paramter) =>
                     {
                         if (paramter is (int minFrame, int maxFrame))
-                            _animationView.PlayFromFrame(NSNumber.FromInt32(minFrame), NSNumber.FromInt32(maxFrame), _animationCompletionBlock);
+                            _animationView.PlayFromFrame(NSNumber.FromInt32(minFrame), NSNumber.FromInt32(maxFrame), AnimationCompletionBlock);
                     });
                     e.NewElement.PlayMinAndMaxProgressCommand = new Command((object paramter) =>
                     {
                         if (paramter is (float minProgress, float maxProgress))
-                            _animationView.PlayFromProgress(minProgress, maxProgress, _animationCompletionBlock);
+                            _animationView.PlayFromProgress(minProgress, maxProgress, AnimationCompletionBlock);
                     });
                     e.NewElement.ReverseAnimationSpeedCommand = new Command(() => _animationView.AutoReverseAnimation = !_animationView.AutoReverseAnimation);
 
@@ -98,7 +98,7 @@ namespace Lottie.Forms.Platforms.Ios
                     //_animationView.SetMaxProgress(e.NewElement.MaxProgress);
 
                     _animationView.AnimationSpeed = e.NewElement.Speed;
-                    _animationView.LoopAnimation = e.NewElement.RepeatMode == RepeatMode.Infinite || e.NewElement.RepeatMode == RepeatMode.Restart;
+                    _animationView.LoopAnimation = e.NewElement.RepeatMode == RepeatMode.Infinite;
                     //_animationView.RepeatCount = e.NewElement.RepeatCount;
                     //if (!string.IsNullOrEmpty(e.NewElement.ImageAssetsFolder))
                     //    _animationView.ImageAssetsFolder = e.NewElement.ImageAssetsFolder;
@@ -113,7 +113,7 @@ namespace Lottie.Forms.Platforms.Ios
                     SetNeedsLayout();
 
                     if (e.NewElement.AutoPlay || e.NewElement.IsAnimating)
-                        _animationView.Play();
+                        _animationView.PlayWithCompletion(AnimationCompletionBlock);
 
                     //e.NewElement.Duration = TimeSpan.FromMilliseconds(_animationView.AnimationDuration);
                 }
@@ -156,7 +156,7 @@ namespace Lottie.Forms.Platforms.Ios
                 _animationView.AnimationSpeed = Element.Speed;
 
             if (e.PropertyName == AnimationView.RepeatModeProperty.PropertyName)
-                _animationView.LoopAnimation = Element.RepeatMode == RepeatMode.Infinite || Element.RepeatMode == RepeatMode.Restart;
+                _animationView.LoopAnimation = Element.RepeatMode == RepeatMode.Infinite;
 
             //if (e.PropertyName == AnimationView.RepeatCountProperty.PropertyName)
             //    _animationView.RepeatCount = Element.RepeatCount;
@@ -181,17 +181,27 @@ namespace Lottie.Forms.Platforms.Ios
             if (animationFinished)
             {
                 Element?.InvokeFinishedAnimation();
-                if (repeatCount < Element.RepeatCount)
+                if (Element.RepeatMode == RepeatMode.Infinite)
+                {
+                    Element.InvokeRepeatAnimation();
+                    _animationView.PlayWithCompletion(AnimationCompletionBlock);
+                }
+                else if(Element.RepeatMode == RepeatMode.Restart && repeatCount < Element.RepeatCount)
                 {
                     repeatCount++;
-                    _animationView.Play();
+                    Element.InvokeRepeatAnimation();
+                    _animationView.PlayWithCompletion(AnimationCompletionBlock);
+                }
+                else if(Element.RepeatMode == RepeatMode.Restart && repeatCount == Element.RepeatCount)
+                {
+                    repeatCount = 1;
                 }
             }
         }
 
         private void CleanupResources()
         {
-            repeatCount = 0;
+            repeatCount = 1;
 
             if (_gestureRecognizer != null)
             {

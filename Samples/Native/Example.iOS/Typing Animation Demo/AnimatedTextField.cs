@@ -11,7 +11,7 @@ namespace LottieSamples.iOS
     public class AnimatedTextField : UIView, IUICollectionViewDataSource, IUICollectionViewDelegateFlowLayout
     {
         [Export("reuseIdentifier")]
-        public static new string ReuseIdentifier => "char";
+        public static string ReuseIdentifier => "char";
 
         private static NSString charToCursorSize = new NSString("W");
 

@@ -1,8 +1,8 @@
 <Project>
   <PropertyGroup>
-    <Copyright>Copyright (c) Martijn van Dijk</Copyright>
-    <Authors>Martijn van Dijk</Authors>
-    <Owners>martijn00</Owners>
+    <Copyright>Copyright (c) Baseflow</Copyright>
+    <Authors>Martijn van Dijk, Baseflow</Authors>
+    <Owners>martijn00, Baseflow</Owners>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
     <NeutralLanguage>en</NeutralLanguage>
     
