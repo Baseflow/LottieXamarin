@@ -52,7 +52,7 @@ namespace Lottie.Forms.Platforms.Mac
 
                     e.NewElement.PlayCommand = new Command(() =>
                     {
-                        _animationView.Play();
+                        _animationView.PlayWithCompletion(AnimationCompletionBlock);
                         e.NewElement.InvokePlayAnimation();
                     });
                     e.NewElement.PauseCommand = new Command(() =>
@@ -62,7 +62,7 @@ namespace Lottie.Forms.Platforms.Mac
                     });
                     e.NewElement.ResumeCommand = new Command(() =>
                     {
-                        _animationView.Play();
+                        _animationView.PlayWithCompletion(AnimationCompletionBlock);
                         e.NewElement.InvokeResumeAnimation();
                     });
                     e.NewElement.StopCommand = new Command(() =>
@@ -132,7 +132,7 @@ namespace Lottie.Forms.Platforms.Mac
                 _animationView.SceneModel = Element.GetAnimation();
 
                 if (Element.AutoPlay || Element.IsAnimating)
-                    _animationView.Play();
+                    _animationView.PlayWithCompletion(AnimationCompletionBlock);
             }
 
             if (e.PropertyName == AnimationView.CacheCompositionProperty.PropertyName)

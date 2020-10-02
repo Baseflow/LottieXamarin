@@ -238,6 +238,9 @@ namespace Lottie.Forms
             set { SetValue(ProgressProperty, value); }
         }
 
+        /// <summary>
+        /// When true the Lottie animation will automatically start playing when loaded
+        /// </summary>
         public bool AutoPlay
         {
             get { return (bool)GetValue(AutoPlayProperty); }
@@ -253,24 +256,54 @@ namespace Lottie.Forms
             set { SetValue(CommandProperty, value); }
         }
 
+        /// <summary>
+        /// Called when the Lottie animation starts playing
+        /// </summary>
         public event EventHandler OnPlayAnimation;
 
+        /// <summary>
+        /// Called when the Lottie animation is paused
+        /// </summary>
         public event EventHandler OnPauseAnimation;
 
+        /// <summary>
+        /// Called when the Lottie animation is resumed after pausing
+        /// </summary>
         public event EventHandler OnResumeAnimation;
 
+        /// <summary>
+        /// Called when the Lottie animation is stopped
+        /// </summary>
         public event EventHandler OnStopAnimation;
 
+        /// <summary>
+        /// Called when the Lottie animation is repeated
+        /// </summary>
         public event EventHandler OnRepeatAnimation;
 
+        /// <summary>
+        /// Called when the Lottie animation is clicked
+        /// </summary>
         public event EventHandler Clicked;
 
+        /// <summary>
+        /// Called when the Lottie animation is playing with the current progress
+        /// </summary>
         public event EventHandler<float> OnAnimationUpdate;
 
+        /// <summary>
+        /// Called when the Lottie animation is loaded with the Lottie Composition as parameter
+        /// </summary>
         public event EventHandler<object> OnAnimationLoaded;
 
+        /// <summary>
+        /// Called when the animation fails to load or when an exception happened when trying to play
+        /// </summary>
         public event EventHandler<Exception> OnFailure;
 
+        /// <summary>
+        /// Called when the Lottie animation is finished playing
+        /// </summary>
         public event EventHandler OnFinishedAnimation;
 
         internal void InvokePlayAnimation()
@@ -432,8 +465,6 @@ namespace Lottie.Forms
         // setTextDelegate(TextDelegate textDelegate)
 
         // setScaleType
-
-        //PerformanceTrackingEnabled
 
         //RenderMode
     }
