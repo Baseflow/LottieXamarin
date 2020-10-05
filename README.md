@@ -41,6 +41,56 @@ Or get in touch on Twitter ([gpeal8](https://twitter.com/gpeal8)) or via lottie@
 
 You can build the sample app yourself or download it from the [Play Store](https://play.google.com/store/apps/details?id=com.airbnb.lottie). The sample app includes some built in animations but also allows you to load an animation from internal storage or from a url.
 
+## Using Lottie for Xamarin.Forms
+
+A normal sample is:
+
+```c#
+<forms:AnimationView
+    x:Name="animationView"
+    Animation="LottieLogo1.json"
+    AnimationSource="AssetOrBundle"
+    Command="{Binding ClickCommand}"
+    VerticalOptions="FillAndExpand"
+    HorizontalOptions="FillAndExpand" />
+```
+
+All possible options are:
+
+```c#
+<forms:AnimationView 
+    x:Name="animationView"
+    Animation="LottieLogo1.json"
+    AnimationSource="AssetOrBundle"
+    AutoPlay="True"
+    CacheComposition="True"
+    Clicked="animationView_Clicked"
+    Command="{Binding ClickCommand}"
+    FallbackResource="{Binding Image}"
+    ImageAssetsFolder="Assets/lottie"
+    IsAnimating="{Binding IsAnimating}"
+    MaxFrame="100"
+    MaxProgress="100"
+    MinFrame="0"
+    MinProgress="0"
+    OnAnimationLoaded="animationView_OnAnimationLoaded"
+    OnAnimationUpdate="animationView_OnAnimationUpdate"
+    OnFailure="animationView_OnFailure"
+    OnFinishedAnimation="animationView_OnFinishedAnimation"
+    OnPauseAnimation="animationView_OnPauseAnimation"
+    OnPlayAnimation="animationView_OnPlayAnimation"
+    OnRepeatAnimation="animationView_OnRepeatAnimation"
+    OnResumeAnimation="animationView_OnResumeAnimation"
+    OnStopAnimation="animationView_OnStopAnimation"
+    Progress="{Binding Progress}"
+    RepeatCount="3"
+    RepeatMode="Restart"
+    Scale="1"
+    Speed="1"
+    VerticalOptions="FillAndExpand"
+    HorizontalOptions="FillAndExpand" />
+```
+
 ## Using Lottie for Xamarin Android
 Lottie supports Ice Cream Sandwich (API 14) and above.
 The simplest way to use it is with LottieAnimationView:
