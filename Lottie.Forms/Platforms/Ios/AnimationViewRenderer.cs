@@ -186,13 +186,13 @@ namespace Lottie.Forms.Platforms.Ios
                     Element.InvokeRepeatAnimation();
                     _animationView.PlayWithCompletion(AnimationCompletionBlock);
                 }
-                else if(Element.RepeatMode == RepeatMode.Restart && repeatCount < Element.RepeatCount)
+                else if (Element.RepeatMode == RepeatMode.Restart && repeatCount < Element.RepeatCount)
                 {
                     repeatCount++;
                     Element.InvokeRepeatAnimation();
                     _animationView.PlayWithCompletion(AnimationCompletionBlock);
                 }
-                else if(Element.RepeatMode == RepeatMode.Restart && repeatCount == Element.RepeatCount)
+                else if (Element.RepeatMode == RepeatMode.Restart && repeatCount == Element.RepeatCount)
                 {
                     repeatCount = 1;
                 }

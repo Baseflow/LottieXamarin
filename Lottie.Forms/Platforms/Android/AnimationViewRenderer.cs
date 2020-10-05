@@ -115,7 +115,10 @@ namespace Lottie.Forms.Platforms.Android
 
                     _animationView.Speed = e.NewElement.Speed;
                     _animationView.RepeatMode = (int)e.NewElement.RepeatMode;
-                    _animationView.RepeatCount = e.NewElement.RepeatCount;
+                    if (e.NewElement.RepeatMode == RepeatMode.Infinite)
+                        _animationView.RepeatCount = int.MaxValue;
+                    else
+                        _animationView.RepeatCount = e.NewElement.RepeatCount;
                     if (!string.IsNullOrEmpty(e.NewElement.ImageAssetsFolder))
                         _animationView.ImageAssetsFolder = e.NewElement.ImageAssetsFolder;
                     _animationView.Scale = e.NewElement.Scale;
@@ -174,7 +177,13 @@ namespace Lottie.Forms.Platforms.Android
                 _animationView.Speed = Element.Speed;
 
             if (e.PropertyName == AnimationView.RepeatModeProperty.PropertyName)
+            {
                 _animationView.RepeatMode = (int)Element.RepeatMode;
+                if (Element.RepeatMode == RepeatMode.Infinite)
+                    _animationView.RepeatCount = int.MaxValue;
+                else
+                    _animationView.RepeatCount = Element.RepeatCount;
+            }
 
             if (e.PropertyName == AnimationView.RepeatCountProperty.PropertyName)
                 _animationView.RepeatCount = Element.RepeatCount;
