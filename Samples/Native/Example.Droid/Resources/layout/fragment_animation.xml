@@ -7,15 +7,15 @@
     android:clipChildren="false"
     android:orientation="vertical"
     android:background="@android:color/white">
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
-    </android.support.design.widget.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
     <FrameLayout
         android:id="@+id/animation_container"
         android:layout_width="match_parent"
@@ -163,7 +163,7 @@
             android:layout_marginRight="16dp"
             android:gravity="right"
             android:text="Progress" />
-        <android.support.v7.widget.AppCompatSeekBar
+        <androidx.appcompat.widget.AppCompatSeekBar
             android:id="@+id/seek_bar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -186,7 +186,7 @@
             android:layout_marginRight="16dp"
             android:gravity="right"
             android:text="Scale" />
-        <android.support.v7.widget.AppCompatSeekBar
+        <androidx.appcompat.widget.AppCompatSeekBar
             android:id="@+id/scale_seek_bar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
