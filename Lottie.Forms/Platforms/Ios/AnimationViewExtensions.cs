@@ -21,7 +21,11 @@ namespace Lottie.Forms.Platforms.Ios
                     if (animation is string bundleAnimation)
                     {
                         if (!string.IsNullOrEmpty(animationView.ImageAssetsFolder))
-                            composition = LOTComposition.AnimationNamed(bundleAnimation, NSBundle.FromPath(animationView.ImageAssetsFolder));
+                        {
+                            var bundle = NSBundle.FromPath(animationView.ImageAssetsFolder);
+                            if (bundle != null)
+                                composition = LOTComposition.AnimationNamed(bundleAnimation, bundle);
+                        }
                         else
                             composition = LOTComposition.AnimationNamed(bundleAnimation);
                     }
@@ -35,7 +39,8 @@ namespace Lottie.Forms.Platforms.Ios
                     {
                         NSData objectData = NSData.FromString(jsonAnimation);
                         NSDictionary jsonData = (NSDictionary)NSJsonSerialization.Deserialize(objectData, NSJsonReadingOptions.MutableContainers, out _);
-                        composition = LOTComposition.AnimationFromJSON(jsonData);
+                        if (jsonData != null)
+                            composition = LOTComposition.AnimationFromJSON(jsonData);
                     }
                     else if (animation is NSDictionary dictAnimation)
                         composition = LOTComposition.AnimationFromJSON(dictAnimation);
@@ -75,7 +80,8 @@ namespace Lottie.Forms.Platforms.Ios
                         string json = reader.ReadToEnd();
                         NSData objectData = NSData.FromString(json);
                         NSDictionary jsonData = (NSDictionary)NSJsonSerialization.Deserialize(objectData, NSJsonReadingOptions.MutableContainers, out _);
-                        composition = LOTComposition.AnimationFromJSON(jsonData);
+                        if (jsonData != null)
+                            composition = LOTComposition.AnimationFromJSON(jsonData);
                     }
                     break;
                 case null:
