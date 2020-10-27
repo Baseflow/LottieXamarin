@@ -84,14 +84,14 @@ namespace Lottie.Forms.Platforms.Android
                 case RepeatMode.Infinite:
                     {
                         lottieAnimationView.RepeatCount = int.MaxValue;
-                        lottieAnimationView.RepeatMode = (int)ValueAnimatorRepeatMode.Restart;
+                        lottieAnimationView.RepeatMode = LottieDrawable.Infinite;
                         break;
                     }
                 case RepeatMode.Restart:
-                    lottieAnimationView.RepeatMode = (int)ValueAnimatorRepeatMode.Restart;
+                    lottieAnimationView.RepeatMode = LottieDrawable.Restart;
                     break;
                 case RepeatMode.Reverse:
-                    lottieAnimationView.RepeatMode = (int)ValueAnimatorRepeatMode.Reverse;
+                    lottieAnimationView.RepeatMode = LottieDrawable.Reverse;
                     break;
             }
         }
