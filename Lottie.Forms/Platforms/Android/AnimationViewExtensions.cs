@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Android.Animation;
 using Com.Airbnb.Lottie;
 
 namespace Lottie.Forms.Platforms.Android
@@ -67,6 +68,30 @@ namespace Lottie.Forms.Platforms.Android
                     lottieAnimationView.ClearAnimation();
                     break;
                 default:
+                    break;
+            }
+        }
+
+        public static void ConfigureRepeat(this LottieAnimationView lottieAnimationView, RepeatMode repeatMode, int repeatCount)
+        {
+            if (lottieAnimationView == null)
+                throw new ArgumentNullException(nameof(lottieAnimationView));
+
+            lottieAnimationView.RepeatCount = repeatCount;
+
+            switch (repeatMode)
+            {
+                case RepeatMode.Infinite:
+                    {
+                        lottieAnimationView.RepeatCount = int.MaxValue;
+                        lottieAnimationView.RepeatMode = (int)ValueAnimatorRepeatMode.Restart;
+                        break;
+                    }
+                case RepeatMode.Restart:
+                    lottieAnimationView.RepeatMode = (int)ValueAnimatorRepeatMode.Restart;
+                    break;
+                case RepeatMode.Reverse:
+                    lottieAnimationView.RepeatMode = (int)ValueAnimatorRepeatMode.Reverse;
                     break;
             }
         }

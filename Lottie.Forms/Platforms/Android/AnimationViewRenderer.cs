@@ -114,11 +114,9 @@ namespace Lottie.Forms.Platforms.Android
                         _animationView.SetMaxProgress(e.NewElement.MaxProgress);
 
                     _animationView.Speed = e.NewElement.Speed;
-                    _animationView.RepeatMode = (int)e.NewElement.RepeatMode;
-                    if (e.NewElement.RepeatMode == RepeatMode.Infinite)
-                        _animationView.RepeatCount = int.MaxValue;
-                    else
-                        _animationView.RepeatCount = e.NewElement.RepeatCount;
+
+                    _animationView.ConfigureRepeat(e.NewElement.RepeatMode, e.NewElement.RepeatCount);
+
                     if (!string.IsNullOrEmpty(e.NewElement.ImageAssetsFolder))
                         _animationView.ImageAssetsFolder = e.NewElement.ImageAssetsFolder;
                     _animationView.Scale = e.NewElement.Scale;
@@ -176,17 +174,8 @@ namespace Lottie.Forms.Platforms.Android
             if (e.PropertyName == AnimationView.SpeedProperty.PropertyName)
                 _animationView.Speed = Element.Speed;
 
-            if (e.PropertyName == AnimationView.RepeatModeProperty.PropertyName)
-            {
-                _animationView.RepeatMode = (int)Element.RepeatMode;
-                if (Element.RepeatMode == RepeatMode.Infinite)
-                    _animationView.RepeatCount = int.MaxValue;
-                else
-                    _animationView.RepeatCount = Element.RepeatCount;
-            }
-
-            if (e.PropertyName == AnimationView.RepeatCountProperty.PropertyName)
-                _animationView.RepeatCount = Element.RepeatCount;
+            if (e.PropertyName == AnimationView.RepeatModeProperty.PropertyName || e.PropertyName == AnimationView.RepeatCountProperty.PropertyName)
+                _animationView.ConfigureRepeat(Element.RepeatMode, Element.RepeatCount);
 
             if (e.PropertyName == AnimationView.ImageAssetsFolderProperty.PropertyName && !string.IsNullOrEmpty(Element.ImageAssetsFolder))
                 _animationView.ImageAssetsFolder = Element.ImageAssetsFolder;
