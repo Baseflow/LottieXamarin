@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using Android.Animation;
 using Com.Airbnb.Lottie;
 
 namespace Lottie.Forms.Platforms.Android
