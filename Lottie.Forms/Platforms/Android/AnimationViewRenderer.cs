@@ -119,7 +119,10 @@ namespace Lottie.Forms.Platforms.Android
 
                     if (!string.IsNullOrEmpty(e.NewElement.ImageAssetsFolder))
                         _animationView.ImageAssetsFolder = e.NewElement.ImageAssetsFolder;
-                    _animationView.Scale = e.NewElement.Scale;
+
+                    //TODO: see if this needs to be enabled
+                    //_animationView.Scale = Convert.ToSingle(e.NewElement.Scale);
+
                     _animationView.Frame = e.NewElement.Frame;
                     _animationView.Progress = e.NewElement.Progress;
 
@@ -180,8 +183,9 @@ namespace Lottie.Forms.Platforms.Android
             if (e.PropertyName == AnimationView.ImageAssetsFolderProperty.PropertyName && !string.IsNullOrEmpty(Element.ImageAssetsFolder))
                 _animationView.ImageAssetsFolder = Element.ImageAssetsFolder;
 
-            if (e.PropertyName == AnimationView.ScaleProperty.PropertyName)
-                _animationView.Scale = Element.Scale;
+            //TODO: see if this needs to be enabled
+            //if (e.PropertyName == AnimationView.ScaleProperty.PropertyName)
+            //    _animationView.Scale = Element.Scale;
 
             if (e.PropertyName == AnimationView.FrameProperty.PropertyName)
                 _animationView.Frame = Element.Frame;

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using Airbnb.Lottie;
 using Foundation;
 using Lottie.Forms;
@@ -102,7 +103,10 @@ namespace Lottie.Forms.Platforms.Ios
                     //_animationView.RepeatCount = e.NewElement.RepeatCount;
                     //if (!string.IsNullOrEmpty(e.NewElement.ImageAssetsFolder))
                     //    _animationView.ImageAssetsFolder = e.NewElement.ImageAssetsFolder;
-                    _animationView.ContentScaleFactor = e.NewElement.Scale;
+
+                    //TODO: see if this needs to be enabled
+                    //_animationView.ContentScaleFactor = Convert.ToSingle(e.NewElement.Scale);
+
                     //_animationView.Frame = e.NewElement.Frame;
                     _animationView.AnimationProgress = e.NewElement.Progress;
 

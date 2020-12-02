@@ -53,18 +53,18 @@ namespace Lottie.Forms
         public static readonly BindableProperty ImageAssetsFolderProperty = BindableProperty.Create(nameof(ImageAssetsFolder),
             typeof(string), typeof(AnimationView), default(string));
 
-        public static new readonly BindableProperty ScaleProperty = BindableProperty.Create(nameof(Scale),
-        typeof(float), typeof(AnimationView), 1.0f);
+        //public static new readonly BindableProperty ScaleProperty = BindableProperty.Create(nameof(Scale),
+        //    typeof(float), typeof(AnimationView), 1.0f);
 
         public static readonly BindableProperty FrameProperty = BindableProperty.Create(nameof(Frame),
-        typeof(int), typeof(AnimationView), default(int));
+            typeof(int), typeof(AnimationView), default(int));
 
         public static readonly BindableProperty ProgressProperty = BindableProperty.Create(nameof(Progress),
-        typeof(float), typeof(AnimationView), 0.0f);
+            typeof(float), typeof(AnimationView), 0.0f);
 
         //TODO: Maybe make TimeSpan
         public static readonly BindableProperty DurationProperty = BindableProperty.Create(nameof(Duration),
-        typeof(long), typeof(AnimationView), default(long));
+            typeof(long), typeof(AnimationView), default(long));
 
         public static readonly BindableProperty AutoPlayProperty = BindableProperty.Create(nameof(AutoPlay),
             typeof(bool), typeof(AnimationView), true);
@@ -213,11 +213,11 @@ namespace Lottie.Forms
         /// Set the scale on the current composition. 
         /// The only cost of this function is re-rendering the current frame so you may call it frequent to scale something up or down.
         /// </summary>
-        public new float Scale
-        {
-            get { return (float)GetValue(ScaleProperty); }
-            set { SetValue(ScaleProperty, value); }
-        }
+        //public new float Scale
+        //{
+        //    get { return (float)GetValue(ScaleProperty); }
+        //    set { SetValue(ScaleProperty, value); }
+        //}
 
         /// <summary>
         /// Sets the progress to the specified frame.
