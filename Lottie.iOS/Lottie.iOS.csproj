@@ -9,7 +9,7 @@
     <IsBindingProject Condition=" '$(OS)' != 'Windows_NT' ">true</IsBindingProject>
     <EnableDefaultItems>false</EnableDefaultItems>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Version>2.5.12</Version>
+    <Version>2.5.13</Version>
   </PropertyGroup>
   
   <ItemGroup>

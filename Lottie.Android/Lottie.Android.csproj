@@ -7,7 +7,7 @@
     <PackageId>Com.Airbnb.Android.Lottie</PackageId>
     <IsBindingProject>true</IsBindingProject>
     <EnableDefaultItems>false</EnableDefaultItems>
-    <Version>3.4.4</Version>
+    <Version>3.5.0</Version>
     
     <AndroidCodegenTarget>XAJavaInterop1</AndroidCodegenTarget>
     <_EnableInterfaceMembers>true</_EnableInterfaceMembers>
