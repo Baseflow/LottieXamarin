@@ -57,7 +57,7 @@ namespace Lottie.Forms.Platforms.Wpf
             switch (animation)
             {
                 case string stringAnimation:
-                    composition = LottieComposition.Factory.FromFileSync(stringAnimation);
+                    composition = LottieCompositionFactory.FromJsonStringSync(stringAnimation, null).Value;
                     break;
                 case Stream streamAnimation:
                     //TODO: api for this will be added in next Lottie UWP update

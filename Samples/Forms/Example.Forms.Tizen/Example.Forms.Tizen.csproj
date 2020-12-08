@@ -1,8 +1,8 @@
-﻿<Project Sdk="Tizen.NET.Sdk/1.0.3">
+﻿<Project Sdk="Tizen.NET.Sdk/1.0.9">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>tizen50</TargetFramework>
+    <TargetFramework>tizen80</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
