@@ -41,7 +41,9 @@ namespace Lottie.Forms.Platforms.Wpf
                     _animationView.MouseDown += _animationView_MouseDown;
 
                     //_animationView.FileName = e.NewElement.Animation as string;
-                    _animationView.Composition = e.NewElement.GetAnimation();
+                    var composition = e.NewElement.GetAnimation();
+                    _animationView.Composition = composition;
+                    e.NewElement.InvokeAnimationLoaded(composition);
 
                     e.NewElement.PlayCommand = new Command(() =>
                     {
@@ -130,7 +132,9 @@ namespace Lottie.Forms.Platforms.Wpf
 
             if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
             {
-                _animationView.Composition = Element.GetAnimation();
+                var composition = Element.GetAnimation();
+                _animationView.Composition = composition;
+                Element.InvokeAnimationLoaded(composition);
 
                 if (Element.AutoPlay || Element.IsAnimating)
                     _animationView.PlayAnimation();

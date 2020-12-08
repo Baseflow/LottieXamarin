@@ -48,7 +48,9 @@ namespace Lottie.Forms.Platforms.Mac
                         CompletionBlock = _animationCompletionBlock
                     };
 
-                    _animationView.SceneModel = e.NewElement.GetAnimation();
+                    var composition = e.NewElement.GetAnimation();
+                    _animationView.SceneModel = composition;
+                    e.NewElement.InvokeAnimationLoaded(composition);
 
                     e.NewElement.PlayCommand = new Command(() =>
                     {
@@ -129,7 +131,9 @@ namespace Lottie.Forms.Platforms.Mac
             if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
             {
                 //CleanupResources();
-                _animationView.SceneModel = Element.GetAnimation();
+                var composition = Element.GetAnimation();
+                _animationView.SceneModel = composition;
+                Element.InvokeAnimationLoaded(composition);
 
                 if (Element.AutoPlay || Element.IsAnimating)
                     _animationView.PlayWithCompletion(AnimationCompletionBlock);

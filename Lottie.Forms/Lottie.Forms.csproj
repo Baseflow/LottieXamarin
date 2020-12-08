@@ -9,7 +9,7 @@
     <RootNamespace>Lottie.Forms</RootNamespace>
     <Description>Render After Effects animations natively on Android, iOS, MacOS, TVOs and UWP</Description>
     <PackageId>Com.Airbnb.Xamarin.Forms.Lottie</PackageId>
-    <Version>4.0.7</Version>
+    <Version>4.0.8</Version>
     <UseWPF Condition=" '$(OS)' == 'Windows_NT' ">true</UseWPF>
   </PropertyGroup>
   
@@ -51,7 +51,7 @@
     <Compile Include="Platforms\Apple\**\*.cs" />
     <Compile Include="Platforms\Ios\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
-    <PackageReference Condition=" '$(OS)' == 'Windows_NT' " Include="Com.Airbnb.iOS.Lottie" Version="2.5.12" />
+    <PackageReference Condition=" '$(OS)' == 'Windows_NT' " Include="Com.Airbnb.iOS.Lottie" Version="2.5.13" />
 	  <ProjectReference Condition=" '$(Configuration)' == 'Debug' And '$(OS)' != 'Windows_NT' " Include="..\Lottie.iOS\Lottie.iOS.csproj" />
   </ItemGroup>
 
@@ -59,7 +59,7 @@
     <Compile Include="Platforms\Apple\**\*.cs" />
     <Compile Include="Platforms\Mac\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
-    <PackageReference Condition=" '$(OS)' == 'Windows_NT' " Include="Com.Airbnb.iOS.Lottie" Version="2.5.12" />
+    <PackageReference Condition=" '$(OS)' == 'Windows_NT' " Include="Com.Airbnb.iOS.Lottie" Version="2.5.13" />
     <ProjectReference Condition=" '$(Configuration)' == 'Debug' And '$(OS)' != 'Windows_NT' " Include="..\Lottie.iOS\Lottie.iOS.csproj" />
   </ItemGroup>
 
@@ -67,7 +67,7 @@
     <Compile Include="Platforms\Apple\**\*.cs" />
     <Compile Include="Platforms\Tvos\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
-    <PackageReference Condition=" '$(OS)' == 'Windows_NT' " Include="Com.Airbnb.iOS.Lottie" Version="2.5.12" />
+    <PackageReference Condition=" '$(OS)' == 'Windows_NT' " Include="Com.Airbnb.iOS.Lottie" Version="2.5.13" />
     <ProjectReference Condition=" '$(Configuration)' == 'Debug' And '$(OS)' != 'Windows_NT' " Include="..\Lottie.iOS\Lottie.iOS.csproj" />
   </ItemGroup>
 

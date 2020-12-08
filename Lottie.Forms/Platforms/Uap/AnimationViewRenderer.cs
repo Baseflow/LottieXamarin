@@ -46,7 +46,9 @@ namespace Lottie.Forms.Platforms.Uap
                     _animationView.Loaded += _animationView_Loaded;
                     _animationView.Tapped += _animationView_Tapped;
 
-                    _animationView.Source = e.NewElement.GetAnimation();
+                    var composition = e.NewElement.GetAnimation();
+                    _animationView.Source = composition;
+                    e.NewElement.InvokeAnimationLoaded(composition);
 
                     e.NewElement.PlayCommand = new Command(() =>
                     {
@@ -128,7 +130,9 @@ namespace Lottie.Forms.Platforms.Uap
 
             if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
             {
-                _animationView.Source = Element.GetAnimation();
+                var composition = Element.GetAnimation();
+                _animationView.Source = composition;
+                Element.InvokeAnimationLoaded(composition);
             }
 
             if (e.PropertyName == AnimationView.AutoPlayProperty.PropertyName)
