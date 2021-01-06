@@ -79,7 +79,11 @@ namespace Lottie.Forms.Platforms.Android
                     e.NewElement.PlayCommand = new Command(() => _animationView.PlayAnimation());
                     e.NewElement.PauseCommand = new Command(() => _animationView.PauseAnimation());
                     e.NewElement.ResumeCommand = new Command(() => _animationView.ResumeAnimation());
-                    e.NewElement.StopCommand = new Command(() => _animationView.CancelAnimation());
+                    e.NewElement.StopCommand = new Command(() =>
+                    {
+                        _animationView.CancelAnimation();
+                        _animationView.Progress = 0.0f;
+                    });
                     e.NewElement.ClickCommand = new Command(() => _animationView.PerformClick());
 
                     e.NewElement.PlayMinAndMaxFrameCommand = new Command((object paramter) =>
