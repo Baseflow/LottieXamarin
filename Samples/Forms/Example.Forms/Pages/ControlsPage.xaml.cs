@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 
 namespace Example.Forms
@@ -12,19 +13,40 @@ namespace Example.Forms
             On<Xamarin.Forms.PlatformConfiguration.iOS>().SetUseSafeArea(true);
         }
 
-        private void Slider_OnValueChanged(object sender, ValueChangedEventArgs e)
+        protected override void OnAppearing()
         {
-            //animationView.Progress = (float)e.NewValue;
+            base.OnAppearing();
+
+            if (BindingContext is ControlsViewModel controlsViewModel)
+            {
+                controlsViewModel.AnimationClicked -= ControlsViewModel_AnimationClicked;
+                controlsViewModel.AnimationClicked += ControlsViewModel_AnimationClicked;
+            }
         }
 
-        private void Handle_OnFinish(object sender, System.EventArgs e)
+        protected override void OnDisappearing()
         {
-            DisplayAlert(string.Empty, $"{nameof(animationView.OnFinishedAnimation)} invoked!", "OK");
+            base.OnDisappearing();
+
+            if (BindingContext is ControlsViewModel controlsViewModel)
+            {
+                controlsViewModel.AnimationClicked -= ControlsViewModel_AnimationClicked;
+            }
         }
 
-        private void animationView_OnAnimationUpdate(object sender, float e)
+        private void ControlsViewModel_AnimationClicked(object sender, EventArgs e)
+        {
+            DisplayAlert("Clicked", "You have clicked on the animation.", "OK");
+        }
+
+        private void AnimationView_OnAnimationUpdate(object sender, float e)
         {
             progressSlider.Value = e;
+        }
+
+        private void Slider_OnValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            animationView.Progress = (float)e.NewValue;
         }
     }
 }
