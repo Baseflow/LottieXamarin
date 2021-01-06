@@ -1,4 +1,6 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -6,10 +8,6 @@
 
   <ItemGroup>
     <EmbeddedResource Include="LottieLogo1.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="**\*.xaml.cs" DependentUpon="%(Filename)" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,7 +19,27 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\" />
-    <Folder Include="ViewModels\" />
+    <Compile Update="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\AssetPage.xaml.cs">
+      <DependentUpon>AssetPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\ControlsPage.xaml.cs">
+      <DependentUpon>AsseControlsPagetPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\EmbeddedPage.xaml.cs">
+      <DependentUpon>EmbeddedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\StreamPage.xaml.cs">
+      <DependentUpon>StreamPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\UrlPage.xaml.cs">
+      <DependentUpon>UrlPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
+
 </Project>
