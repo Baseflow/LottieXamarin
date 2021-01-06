@@ -13,6 +13,32 @@ namespace Example.Forms
             On<Xamarin.Forms.PlatformConfiguration.iOS>().SetUseSafeArea(true);
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (BindingContext is ControlsViewModel controlsViewModel)
+            {
+                controlsViewModel.AnimationClicked -= ControlsViewModel_AnimationClicked;
+                controlsViewModel.AnimationClicked += ControlsViewModel_AnimationClicked;
+            }
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            if (BindingContext is ControlsViewModel controlsViewModel)
+            {
+                controlsViewModel.AnimationClicked -= ControlsViewModel_AnimationClicked;
+            }
+        }
+
+        private void ControlsViewModel_AnimationClicked(object sender, EventArgs e)
+        {
+            DisplayAlert("Clicked", "You have clicked on the animation.", "OK");
+        }
+
         private void AnimationView_OnAnimationUpdate(object sender, float e)
         {
             progressSlider.Value = e;

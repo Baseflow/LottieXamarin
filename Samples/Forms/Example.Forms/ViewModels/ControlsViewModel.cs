@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 using Lottie.Forms;
 using Xamarin.Forms;
 
@@ -6,6 +7,8 @@ namespace Example.Forms
 {
     public class ControlsViewModel : BaseViewModel
     {
+        public event EventHandler AnimationClicked;
+
         public ControlsViewModel()
         {
             PlayCommand = new Command<AnimationView>((animationView) =>
@@ -26,7 +29,8 @@ namespace Example.Forms
             });
             ClickCommand = new Command<AnimationView>((animationView) =>
             {
-                //TODO: Show message it is clicked
+                var animationClickedHandler = AnimationClicked;
+                animationClickedHandler?.Invoke(this, EventArgs.Empty);
             });
             MinAndMaxFrameCommand = new Command<AnimationView>((animationView) =>
             {
