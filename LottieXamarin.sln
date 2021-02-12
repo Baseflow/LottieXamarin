@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29209.62
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lottie.Forms", "Lottie.Forms\Lottie.Forms.csproj", "{F03D2DD6-BBDA-45B9-982E-4DCA43FCB8E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lottie.Forms", "Lottie.Forms\Lottie.Forms.csproj", "{F03D2DD6-BBDA-45B9-982E-4DCA43FCB8E1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lottie.iOS", "Lottie.iOS\Lottie.iOS.csproj", "{8F0CC2B2-88E2-459B-AC92-F3A74071707E}"
 EndProject

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;xamarin.ios10;xamarin.mac20;monoandroid10.0;tizen40</TargetFrameworks>
-    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">uap10.0.17763;net472;netcoreapp3.1;$(TargetFrameworks)</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">uap10.0.16299;net472;netcoreapp3.1;$(TargetFrameworks)</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -9,7 +9,7 @@
     <RootNamespace>Lottie.Forms</RootNamespace>
     <Description>Render After Effects animations natively on Android, iOS, MacOS, TVOs and UWP</Description>
     <PackageId>Com.Airbnb.Xamarin.Forms.Lottie</PackageId>
-    <Version>4.0.8</Version>
+    <Version>4.0.9-alpha.0</Version>
     <UseWPF Condition=" '$(OS)' == 'Windows_NT' ">true</UseWPF>
   </PropertyGroup>
   
@@ -42,7 +42,6 @@
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('uap')) ">
-  	<PackageReference Include="Microsoft.Toolkit.Uwp.UI.Lottie" Version="6.1.0" />
     <Compile Include="Platforms\Windows\**\*.cs" />
     <Compile Include="Platforms\Uap\**\*.cs" />
   </ItemGroup>
@@ -93,6 +92,11 @@
     direct reference seems to help get the build to work -->
   <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.mac')) ">
     <Reference Include="netstandard" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'uap10.0.16299'">
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Lottie">
+      <Version>7.0.0-preview4</Version>
+    </PackageReference>
   </ItemGroup>
   
 </Project>

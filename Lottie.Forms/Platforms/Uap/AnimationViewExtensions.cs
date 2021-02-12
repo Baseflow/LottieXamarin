@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 using Microsoft.Toolkit.Uwp.UI.Lottie;
 using Microsoft.UI.Xaml.Controls;
 
@@ -7,7 +8,7 @@ namespace Lottie.Forms.Platforms.Uap
 {
     public static class AnimationViewExtensions
     {
-        public static IAnimatedVisualSource GetAnimation(this AnimationView animationView)
+        public static async Task<IAnimatedVisualSource> GetAnimationAsync(this AnimationView animationView)
         {
             if (animationView == null)
                 throw new ArgumentNullException(nameof(animationView));
@@ -26,22 +27,22 @@ namespace Lottie.Forms.Platforms.Uap
                         }
 
                         var path = $"ms-appx:///{assets}/{assetAnnimation}";
-                        animatedVisualSource = animationView.GetAnimation(path);
+                        animatedVisualSource = await animationView.GetAnimationAsync(path);
                     }
                     break;
                 case AnimationSource.Url:
                     if (animationView.Animation is string stringAnimation)
-                        animatedVisualSource = animationView.GetAnimation(stringAnimation);
+                        animatedVisualSource = await animationView.GetAnimationAsync(stringAnimation);
                     break;
                 case AnimationSource.Json:
                     //if (animation is string jsonAnimation)
                     //    animatedVisualSource = LottieVisualSource.CreateFromString(jsonAnimation);
                     break;
                 case AnimationSource.Stream:
-                    animatedVisualSource = animationView.GetAnimation(animationView.Animation);
+                    animatedVisualSource = await animationView.GetAnimationAsync(animationView.Animation);
                     break;
                 case AnimationSource.EmbeddedResource:
-                    animatedVisualSource = animationView.GetAnimation(animationView.GetStreamFromAssembly());
+                    animatedVisualSource = await animationView.GetAnimationAsync(animationView.GetStreamFromAssembly());
                     break;
                 default:
                     break;
@@ -49,7 +50,7 @@ namespace Lottie.Forms.Platforms.Uap
             return animatedVisualSource;
         }
 
-        public static IAnimatedVisualSource GetAnimation(this AnimationView animationView, object animation)
+        public static async Task<IAnimatedVisualSource> GetAnimationAsync(this AnimationView animationView, object animation)
         {
             if (animationView == null)
                 throw new ArgumentNullException(nameof(animationView));
@@ -61,10 +62,9 @@ namespace Lottie.Forms.Platforms.Uap
                     animatedVisualSource = LottieVisualSource.CreateFromString(stringAnimation);
                     break;
                 case Stream streamAnimation:
-                    //TODO: api for this will be added in next Lottie UWP update
-                    //var source = new LottieVisualSource();
-                    //source.SetSourceAsync(streamAnimation);
-                    //animatedVisualSource = source;
+                    var source = new LottieVisualSource();
+                    await source.SetSourceAsync(streamAnimation.AsInputStream());
+                    animatedVisualSource = source;
                     break;
                 case null:
                     animatedVisualSource = null;
