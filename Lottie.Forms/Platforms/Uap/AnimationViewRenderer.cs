@@ -20,7 +20,7 @@ namespace Lottie.Forms.Platforms.Uap
 
         public static int PlayDelay { get; set; } = 1000;
 
-        protected override void OnElementChanged(ElementChangedEventArgs<AnimationView> e)
+        protected override async void OnElementChanged(ElementChangedEventArgs<AnimationView> e)
         {
             base.OnElementChanged(e);
 
@@ -46,7 +46,7 @@ namespace Lottie.Forms.Platforms.Uap
                     _animationView.Loaded += _animationView_Loaded;
                     _animationView.Tapped += _animationView_Tapped;
 
-                    var composition = e.NewElement.GetAnimation();
+                    var composition = await e.NewElement.GetAnimationAsync();
                     _animationView.Source = composition;
                     e.NewElement.InvokeAnimationLoaded(composition);
 
@@ -123,14 +123,14 @@ namespace Lottie.Forms.Platforms.Uap
             }
         }
 
-        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        protected override async void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (_animationView == null || Element == null || e == null)
                 return;
 
             if (e.PropertyName == AnimationView.AnimationProperty.PropertyName)
             {
-                var composition = Element.GetAnimation();
+                var composition = await Element.GetAnimationAsync();
                 _animationView.Source = composition;
                 Element.InvokeAnimationLoaded(composition);
             }
