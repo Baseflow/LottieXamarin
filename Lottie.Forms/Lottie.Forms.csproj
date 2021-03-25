@@ -9,7 +9,7 @@
     <RootNamespace>Lottie.Forms</RootNamespace>
     <Description>Render After Effects animations natively on Android, iOS, MacOS, TVOs and UWP</Description>
     <PackageId>Com.Airbnb.Xamarin.Forms.Lottie</PackageId>
-    <Version>4.0.8</Version>
+    <Version>4.0.9</Version>
     <UseWPF Condition=" '$(OS)' == 'Windows_NT' ">true</UseWPF>
   </PropertyGroup>
   
@@ -42,7 +42,7 @@
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('uap')) ">
-  	<PackageReference Include="Microsoft.Toolkit.Uwp.UI.Lottie" Version="6.1.0" />
+  	<PackageReference Include="Microsoft.Toolkit.Uwp.UI.Lottie" Version="7.0.0" />
     <Compile Include="Platforms\Windows\**\*.cs" />
     <Compile Include="Platforms\Uap\**\*.cs" />
   </ItemGroup>
