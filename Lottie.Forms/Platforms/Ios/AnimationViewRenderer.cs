@@ -188,7 +188,10 @@ namespace Lottie.Forms.Platforms.Ios
         {
             if (animationFinished)
             {
-                Element?.InvokeFinishedAnimation();
+                if (_animationView == null || Element == null)
+                    return;
+
+                Element.InvokeFinishedAnimation();
                 if (Element.RepeatMode == RepeatMode.Infinite)
                 {
                     Element.InvokeRepeatAnimation();
