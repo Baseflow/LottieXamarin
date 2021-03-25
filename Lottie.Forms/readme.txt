@@ -32,6 +32,7 @@ All options:
     CacheComposition="True"
     Clicked="animationView_Clicked"
     Command="{Binding ClickCommand}"
+    EnableMergePathsForKitKatAndAbove="True"
     FallbackResource="{Binding Image}"
     ImageAssetsFolder="Assets/lottie"
     IsAnimating="{Binding IsAnimating}"
