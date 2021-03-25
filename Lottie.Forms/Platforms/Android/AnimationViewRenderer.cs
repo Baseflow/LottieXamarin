@@ -130,6 +130,8 @@ namespace Lottie.Forms.Platforms.Android
                     _animationView.Frame = e.NewElement.Frame;
                     _animationView.Progress = e.NewElement.Progress;
 
+                    _animationView.EnableMergePathsForKitKatAndAbove(e.NewElement.EnableMergePathsForKitKatAndAbove);
+
                     SetNativeControl(_animationView);
 
                     if (e.NewElement.AutoPlay || e.NewElement.IsAnimating)
@@ -137,8 +139,6 @@ namespace Lottie.Forms.Platforms.Android
 
                     e.NewElement.Duration = _animationView.Duration;
                     e.NewElement.IsAnimating = _animationView.IsAnimating;
-
-                    _animationView.EnableMergePathsForKitKatAndAbove(e.NewElement.EnableMergePathsForKitKatAndAbove);
                 }
             }
         }
@@ -167,6 +167,9 @@ namespace Lottie.Forms.Platforms.Android
 
             //if (e.PropertyName == AnimationView.Composition.PropertyName)
             //    _animationView.Composition = e.NewElement.Composition;
+
+            if (e.PropertyName == AnimationView.EnableMergePathsForKitKatAndAboveProperty.PropertyName)
+                _animationView.EnableMergePathsForKitKatAndAbove(Element.EnableMergePathsForKitKatAndAbove);
 
             if (e.PropertyName == AnimationView.MinFrameProperty.PropertyName)
                 _animationView.SetMinFrame(Element.MinFrame);
