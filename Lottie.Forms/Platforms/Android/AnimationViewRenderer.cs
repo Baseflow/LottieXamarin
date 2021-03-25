@@ -137,6 +137,8 @@ namespace Lottie.Forms.Platforms.Android
 
                     e.NewElement.Duration = _animationView.Duration;
                     e.NewElement.IsAnimating = _animationView.IsAnimating;
+
+                    _animationView.EnableMergePathsForKitKatAndAbove(e.NewElement.EnableMergePathsForKitKatAndAbove);
                 }
             }
         }

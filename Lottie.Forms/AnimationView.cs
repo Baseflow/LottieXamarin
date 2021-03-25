@@ -72,6 +72,9 @@ namespace Lottie.Forms
         public static readonly BindableProperty CommandProperty = BindableProperty.Create(nameof(Command),
             typeof(ICommand), typeof(AnimationView));
 
+        public static readonly BindableProperty EnableMergePathsForKitKatAndAboveProperty = BindableProperty.Create(nameof(EnableMergePathsForKitKatAndAbove),
+            typeof(bool), typeof(AnimationView), false);
+
         /// <summary>
         /// Returns the duration of an animation (Frames / FrameRate * 1000)
         /// </summary>
@@ -254,6 +257,15 @@ namespace Lottie.Forms
         {
             get { return (ICommand)GetValue(CommandProperty); }
             set { SetValue(CommandProperty, value); }
+        }
+
+        /// <summary>
+        /// When true the Lottie animation will enable merge paths for devices with KitKat and above
+        /// </summary>
+        public bool EnableMergePathsForKitKatAndAbove
+        {
+            get { return (bool)GetValue(EnableMergePathsForKitKatAndAboveProperty); }
+            set { SetValue(EnableMergePathsForKitKatAndAboveProperty, value); }
         }
 
         /// <summary>
