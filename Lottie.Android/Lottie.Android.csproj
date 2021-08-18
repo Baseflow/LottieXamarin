@@ -22,7 +22,7 @@
 	  <PackageReference Include="Xamarin.Build.Download" Version="0.10.0" PrivateAssets="All" />
     <!-- None Include="Additions\*;Jars\*;Transforms\*" /-->
     <LibraryProjectZip Include="Jars\*.aar" />
-    <JavaSourceJar Include="JavaDocs\*.jar" />
+    <!--<JavaSourceJar Include="JavaDocs\*.jar" />-->
     <TransformFile Include="Transforms\*.xml" />
     <Compile Include="Additions\*.cs" />
     <None Include="readme.txt" pack="true" PackagePath="." />
