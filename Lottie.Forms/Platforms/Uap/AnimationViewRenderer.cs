@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using Lottie.Forms;
 using Lottie.Forms.Platforms.Uap;
 using Microsoft.UI.Xaml.Controls;

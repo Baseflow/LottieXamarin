@@ -1,5 +1,4 @@
-﻿using System;
-using Android.Animation;
+﻿using Android.Animation;
 using Android.Runtime;
 
 namespace Lottie.Forms.Platforms.Android

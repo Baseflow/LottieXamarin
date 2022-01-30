@@ -1,5 +1,4 @@
-﻿using System;
-using Android.Runtime;
+﻿using Android.Runtime;
 using static Android.Views.View;
 
 namespace Lottie.Forms.Platforms.Android

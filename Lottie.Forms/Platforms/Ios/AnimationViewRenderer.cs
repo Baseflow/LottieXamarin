@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using Airbnb.Lottie;
 using Foundation;
 using Lottie.Forms;
@@ -192,12 +191,12 @@ namespace Lottie.Forms.Platforms.Ios
                     return;
 
                 Element.InvokeFinishedAnimation();
-                
+
                 // Can be null depending if the user callback is executed very quickly 
                 // and disposes the Xamarin.Forms page containing the Lottie view
                 if (_animationView == null || Element == null)
                     return;
-                
+
                 if (Element.RepeatMode == RepeatMode.Infinite)
                 {
                     Element.InvokeRepeatAnimation();

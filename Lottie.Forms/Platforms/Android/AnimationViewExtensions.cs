@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Com.Airbnb.Lottie;
 
 namespace Lottie.Forms.Platforms.Android

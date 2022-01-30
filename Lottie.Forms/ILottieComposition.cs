@@ -1,5 +1,4 @@
-﻿using System;
-namespace Lottie.Forms
+﻿namespace Lottie.Forms
 {
     public interface ILottieComposition : IDisposable
     {
