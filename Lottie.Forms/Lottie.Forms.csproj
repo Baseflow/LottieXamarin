@@ -9,12 +9,12 @@
     <RootNamespace>Lottie.Forms</RootNamespace>
     <Description>Render After Effects animations natively on Android, iOS, MacOS, TVOs and UWP</Description>
     <PackageId>Com.Airbnb.Xamarin.Forms.Lottie</PackageId>
-    <Version>4.0.11</Version>
+    <Version>4.1.0</Version>
     <UseWPF Condition=" '$(OS)' == 'Windows_NT' ">true</UseWPF>
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.5.0.657" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
     <Compile Remove="Platforms\**\*.cs" />
     <None Include="Platforms\**\*.cs" />
     <None Include="Resources\*.cs" />
@@ -32,7 +32,7 @@
     <Compile Include="Platforms\Wpf\**\*.cs" />
     <Compile Include="Platforms\Console\**\*.cs" />
     <PackageReference Include="LottieSharp" Version="1.1.3" />
-    <PackageReference Include="Xamarin.Forms.Platform.WPF" Version="4.5.0.657" />
+    <PackageReference Include="Xamarin.Forms.Platform.WPF" Version="5.0.0.2012" />
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework.StartsWith('netcoreapp')) And '$(OS)' == 'Windows_NT' ">
@@ -42,7 +42,7 @@
   </ItemGroup>
 
   <ItemGroup Condition=" $(TargetFramework.StartsWith('uap')) ">
-  	<PackageReference Include="Microsoft.Toolkit.Uwp.UI.Lottie" Version="7.0.0" />
+  	<PackageReference Include="Microsoft.Toolkit.Uwp.UI.Lottie" Version="7.1.0" />
     <Compile Include="Platforms\Windows\**\*.cs" />
     <Compile Include="Platforms\Uap\**\*.cs" />
   </ItemGroup>
