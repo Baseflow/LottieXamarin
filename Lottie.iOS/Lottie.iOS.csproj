@@ -1,7 +1,7 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup>    
     <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">xamarin.ios10;net6.0-ios</TargetFrameworks>
-    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">xamarin.ios10;xamarin.mac20;xamarin.tvos10;net6.0-ios;net6.0-macos;net6.0-maccatalyst;net6.0-tvos</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">xamarin.ios10;xamarin.mac20;xamarin.tvos10;net6.0-ios;net6.0-macos;net6.0-tvos</TargetFrameworks>
     <AssemblyName>Lottie.iOS</AssemblyName>
     <RootNamespace>Lottie.iOS</RootNamespace>
     <Description>Render After Effects animations natively on Android, iOS, MacOS, TVOs and UWP</Description>
@@ -23,7 +23,7 @@
     <Compile Include="LOTAnimationView.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.ios')) ">
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.ios')) or $(TargetFramework.StartsWith('net6.0-ios')) ">
     <ObjcBindingApiDefinition Include="ApiDefinitions.Ios.cs" />
     <ObjcBindingNativeLibrary Include="libLottie-ios.a" />
     <Compile Include="libLottie-ios.linkwith.cs">
@@ -31,7 +31,7 @@
     </Compile>
   </ItemGroup>
 
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.mac')) ">
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.mac')) or $(TargetFramework.StartsWith('net6.0-macos')) ">
     <ObjcBindingApiDefinition Include="ApiDefinitions.Mac.cs" />
     <ObjcBindingNativeLibrary Include="libLottie-macos.a" />
     <Compile Include="libLottie-macos.linkwith.cs">
@@ -39,12 +39,12 @@
     </Compile>
   </ItemGroup>
 
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.tvos')) ">
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.tvos')) or $(TargetFramework.StartsWith('net6.0-tvos')) ">
     <ObjcBindingApiDefinition Include="ApiDefinitions.Ios.cs" />
     <ObjcBindingNativeLibrary Include="libLottie-tvos.a" />
     <Compile Include="libLottie-tvos.linkwith.cs">
       <DependentUpon>libLottie-tvos.a</DependentUpon>
     </Compile>
   </ItemGroup>
-  
+
 </Project>
