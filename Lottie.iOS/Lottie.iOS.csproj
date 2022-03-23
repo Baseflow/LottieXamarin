@@ -1,7 +1,7 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup>    
-    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">xamarin.ios10</TargetFrameworks>
-    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">xamarin.ios10;xamarin.mac20;xamarin.tvos10</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">xamarin.ios10;net6.0-ios</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">xamarin.ios10;xamarin.mac20;xamarin.tvos10;net6.0-ios;net6.0-macos;net6.0-maccatalyst;net6.0-tvos</TargetFrameworks>
     <AssemblyName>Lottie.iOS</AssemblyName>
     <RootNamespace>Lottie.iOS</RootNamespace>
     <Description>Render After Effects animations natively on Android, iOS, MacOS, TVOs and UWP</Description>

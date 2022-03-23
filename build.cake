@@ -376,7 +376,7 @@ MSBuildSettings GetDefaultBuildSettings()
         ToolPath = msBuildPath,
         Verbosity = verbosity,
         ArgumentCustomization = args => args.Append("/m"),
-        ToolVersion = MSBuildToolVersion.VS2019
+        ToolVersion = MSBuildToolVersion.VS2022
     };
 
     return settings;

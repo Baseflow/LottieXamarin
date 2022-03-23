@@ -1,6 +1,6 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
   <PropertyGroup>
-    <TargetFrameworks>monoandroid10.0</TargetFrameworks>
+    <TargetFrameworks>monoandroid10.0;net6.0-android</TargetFrameworks>
     <AssemblyName>Lottie.Android</AssemblyName>
     <RootNamespace>Lottie.Android</RootNamespace>
     <Description>Render After Effects animations natively on Android, iOS, MacOS, TVOs and UWP</Description>
