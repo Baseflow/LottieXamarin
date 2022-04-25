@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+
+   <PropertyGroup>    
+     <TargetFramework>net6.0-ios</TargetFramework>
+    <Nullable>enable</Nullable>
+    <IsBindingProject>true</IsBindingProject>
+    <AssemblyName>Lottie.iOS</AssemblyName>
+    <RootNamespace>Lottie.iOS</RootNamespace>
+    <Description>Render After Effects animations natively on Android, iOS, MacOS, TVOs and UWP</Description>
+    <PackageId>Com.Airbnb.iOS.Lottie</PackageId>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Version>3.0.2</Version>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <None Include="**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+  </ItemGroup>
+    
+  <ItemGroup Condition=" '$(OS)' != 'Windows_NT' ">
+    <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
+    <Compile Include="Linker.cs" />
+    <Compile Include="LOTAnimationView.cs" />
+  </ItemGroup>
+
+   <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
+    <ObjcBindingApiDefinition Include="ApiDefinitions.Ios.cs" />
+    <Compile Include="libLottie-ios.linkwith.cs">
+      <DependentUpon>libLottie-ios.a</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+    <ItemGroup>
+      <NativeReference Include="libLottie-ios.a">
+  <Kind>Static</Kind>
+  <Frameworks>UIKit</Frameworks>
+  <SmartLink>true</SmartLink>
+  <LinkerFlags>-ObjC</LinkerFlags>
+  <ForceLoad>true</ForceLoad>
+</NativeReference>
+  </ItemGroup>  
+
+
+</Project>
+
