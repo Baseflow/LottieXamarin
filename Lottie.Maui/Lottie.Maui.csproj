@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net6.0;net6.0-android;net6.0-ios</TargetFrameworks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseMaui>true</UseMaui>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AssemblyName>Lottie.Maui</AssemblyName>
+    <RootNamespace>Lottie.Maui</RootNamespace>
+    <Description>Render After Effects animations natively on Android and iOS.</Description>
+    <PackageId>Com.Airbnb.Maui.Lottie</PackageId>
+    <Version>3.0.4</Version>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Remove="Platforms\**\*.cs" />
+    <None Include="Platforms\**\*.cs" />
+    <None Include="Resources\*.cs" />
+    <Compile Remove="Resources\*.cs" />
+    <None Include="readme.txt" pack="true" PackagePath="." />
+    <None Include="**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.Contains('-ios'))">
+    <Compile Include="Platforms\Apple\**\*.cs" />
+    <Compile Include="Platforms\Ios\**\*.cs" />
+	  <ProjectReference Include="..\Lottie.iOS.net6\Lottie.iOS.net6.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
+    <Compile Include="Platforms\Android\**\*.cs" />
+    <Compile Include="Platforms\Xamarin\**\*.cs" />
+    <ProjectReference Include="..\Lottie.Android.net6\Lottie.Android.net6.csproj" />
+    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.4.1.1" />
+  </ItemGroup>
+
+</Project>

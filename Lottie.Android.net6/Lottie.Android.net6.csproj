@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net6.0-android</TargetFrameworks>
+    <AssemblyName>Lottie.Android</AssemblyName>
+    <RootNamespace>Lottie.Android</RootNamespace>
+    <Description>Render After Effects animations natively on Android, iOS, MacOS, TVOs and UWP</Description>
+    <PackageId>Com.Airbnb.Android.Lottie</PackageId>
+    <IsBindingProject>true</IsBindingProject>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <Version>6.0.4</Version>
+    
+    <AndroidCodegenTarget>XAJavaInterop1</AndroidCodegenTarget>
+    <_EnableInterfaceMembers>true</_EnableInterfaceMembers>
+    <AndroidUseAapt2>true</AndroidUseAapt2>
+    <AndroidDexTool>d8</AndroidDexTool>
+    <AndroidLinkTool>r8</AndroidLinkTool>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Square.OkIO" Version="1.17.4" />
+    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.3.1.3" />
+	  <PackageReference Include="Xamarin.Build.Download" Version="0.10.0" PrivateAssets="All" />
+    <!-- None Include="Additions\*;Jars\*;Transforms\*" /-->
+    <LibraryProjectZip Include="Jars\*.aar" />
+    <!--<JavaSourceJar Include="JavaDocs\*.jar" />-->
+    <TransformFile Include="Transforms\*.xml" />
+    <Compile Include="Additions\*.cs" />
+    <None Include="readme.txt" pack="true" PackagePath="." />
+    <None Include="**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+  </ItemGroup>
+  
+</Project>
