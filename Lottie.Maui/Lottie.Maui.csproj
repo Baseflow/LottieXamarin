@@ -10,7 +10,7 @@
     <RootNamespace>Lottie.Maui</RootNamespace>
     <Description>Render After Effects animations natively on Android and iOS.</Description>
     <PackageId>Com.Airbnb.Maui.Lottie</PackageId>
-    <Version>3.0.2</Version>
+    <Version>3.0.4</Version>
   </PropertyGroup>
   
   <ItemGroup>
@@ -28,11 +28,10 @@
 	  <ProjectReference Include="..\Lottie.iOS.net6\Lottie.iOS.net6.csproj" />
   </ItemGroup>
 
-
   <ItemGroup Condition="$(TargetFramework.Contains('-android'))">
     <Compile Include="Platforms\Android\**\*.cs" />
     <Compile Include="Platforms\Xamarin\**\*.cs" />
-    <ProjectReference Include="..\Lottie.Android\Lottie.Android.csproj" />
+    <ProjectReference Include="..\Lottie.Android.net6\Lottie.Android.net6.csproj" />
     <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.4.1.1" />
   </ItemGroup>
 
