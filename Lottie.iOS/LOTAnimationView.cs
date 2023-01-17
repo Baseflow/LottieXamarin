@@ -5,7 +5,7 @@ using Foundation;
 namespace Airbnb.Lottie
 {
     public partial class LOTAnimationView
-    {
+    {/*
         /// <summary>
         /// Asynchronously play the animation.
         /// </summary>
@@ -59,6 +59,6 @@ namespace Airbnb.Lottie
 
 			return tcs.Task;
 		}
-
+        */
     }
 }

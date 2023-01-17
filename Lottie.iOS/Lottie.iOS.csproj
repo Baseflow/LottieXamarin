@@ -1,29 +1,27 @@
-﻿<Project Sdk="MSBuild.Sdk.Extras">
-  <PropertyGroup>    
-    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">xamarin.ios10</TargetFrameworks>
-    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">xamarin.ios10;xamarin.mac20;xamarin.tvos10</TargetFrameworks>
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net6.0-ios;net6.0-maccatalyst</TargetFrameworks>
     <AssemblyName>Lottie.iOS</AssemblyName>
     <RootNamespace>Lottie.iOS</RootNamespace>
     <Description>Render After Effects animations natively on Android, iOS, MacOS, TVOs and UWP</Description>
     <PackageId>Com.Airbnb.iOS.Lottie</PackageId>
-    <IsBindingProject Condition=" '$(OS)' != 'Windows_NT' ">true</IsBindingProject>
     <EnableDefaultItems>false</EnableDefaultItems>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Version>2.5.14</Version>
+    <Version>2.6.0</Version>
   </PropertyGroup>
   
   <ItemGroup>
     <None Include="**\*.cs" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
     <None Include="readme.txt" pack="true" PackagePath="." />
   </ItemGroup>
-    
-  <ItemGroup Condition=" '$(OS)' != 'Windows_NT' ">
+
+  <ItemGroup>
     <ObjcBindingCoreSource Include="StructsAndEnums.cs" />
     <Compile Include="Linker.cs" />
     <Compile Include="LOTAnimationView.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.ios')) ">
+  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">
     <ObjcBindingApiDefinition Include="ApiDefinitions.Ios.cs" />
     <ObjcBindingNativeLibrary Include="libLottie-ios.a" />
     <Compile Include="libLottie-ios.linkwith.cs">
@@ -31,7 +29,7 @@
     </Compile>
   </ItemGroup>
 
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.mac')) ">
+  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">
     <ObjcBindingApiDefinition Include="ApiDefinitions.Mac.cs" />
     <ObjcBindingNativeLibrary Include="libLottie-macos.a" />
     <Compile Include="libLottie-macos.linkwith.cs">
@@ -39,12 +37,15 @@
     </Compile>
   </ItemGroup>
 
-  <ItemGroup Condition=" $(TargetFramework.StartsWith('xamarin.tvos')) ">
+  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tvos'">
     <ObjcBindingApiDefinition Include="ApiDefinitions.Ios.cs" />
     <ObjcBindingNativeLibrary Include="libLottie-tvos.a" />
     <Compile Include="libLottie-tvos.linkwith.cs">
       <DependentUpon>libLottie-tvos.a</DependentUpon>
     </Compile>
   </ItemGroup>
-  
+
+  <ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'watchos'">
+  </ItemGroup>
+
 </Project>
