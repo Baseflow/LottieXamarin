@@ -1,12 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net6.0-ios;net6.0-maccatalyst</TargetFrameworks>
+    <!--<TargetFrameworks>net8.0-ios;net8.0-maccatalyst</TargetFrameworks>-->
+    <TargetFrameworks>net8.0-ios</TargetFrameworks>
     <AssemblyName>Lottie.iOS</AssemblyName>
     <RootNamespace>Lottie.iOS</RootNamespace>
     <Description>Render After Effects animations natively on Android, iOS, MacOS, TVOs and UWP</Description>
     <PackageId>Com.Airbnb.iOS.Lottie</PackageId>
     <EnableDefaultItems>false</EnableDefaultItems>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <IsBindingProject>true</IsBindingProject>
     <Version>2.6.0</Version>
   </PropertyGroup>
   

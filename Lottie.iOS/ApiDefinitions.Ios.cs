@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using CoreGraphics;
 using Foundation;
 using ObjCRuntime;
@@ -7,7 +7,7 @@ using UIKit;
 namespace Airbnb.Lottie
 {
     // @interface LOTAnimationTransitionController : NSObject <UIViewControllerAnimatedTransitioning>
-    [BaseType(typeof(NSObject))]
+    //[BaseType(typeof(NSObject))]
     interface LOTAnimationTransitionController : IUIViewControllerAnimatedTransitioning
     {
         // -(instancetype _Nonnull)initWithAnimationNamed:(NSString * _Nonnull)animation fromLayerNamed:(NSString * _Nullable)fromLayer toLayerNamed:(NSString * _Nullable)toLayer applyAnimationTransform:(BOOL)applyAnimationTransform;
@@ -72,7 +72,7 @@ namespace Airbnb.Lottie
     }
 
     // @interface LOTCacheProvider : NSObject
-    [BaseType(typeof(NSObject))]
+    //[BaseType(typeof(NSObject))]
     interface LOTCacheProvider
     {
         // +(id<LOTImageCache>)imageCache;
@@ -84,7 +84,7 @@ namespace Airbnb.Lottie
 
     // @protocol LOTImageCache <NSObject>
     [Protocol, Model]
-    [BaseType(typeof(NSObject))]
+    //[BaseType(typeof(NSObject))]
     interface LOTImageCache
     {
         // @required -(UIImage *)imageForKey:(NSString *)key;
@@ -238,14 +238,14 @@ namespace Airbnb.Lottie
 
     // @protocol LOTValueDelegate <NSObject>
     [Protocol, Model]
-    [BaseType(typeof(NSObject))]
+    ////[BaseType(typeof(NSObject))]
     interface LOTValueDelegate
     {
     }
 
     // @protocol LOTColorValueDelegate <LOTValueDelegate>
     [Protocol, Model]
-    [BaseType(typeof(LOTValueDelegate))]
+    //[BaseType(typeof(LOTValueDelegate))]
     interface LOTColorValueDelegate
     {
         // @required -(CGColorRef)colorForFrame:(CGFloat)currentFrame startKeyframe:(CGFloat)startKeyframe endKeyframe:(CGFloat)endKeyframe interpolatedProgress:(CGFloat)interpolatedProgress startColor:(CGColorRef)startColor endColor:(CGColorRef)endColor currentColor:(CGColorRef)interpolatedColor;
@@ -256,7 +256,7 @@ namespace Airbnb.Lottie
 
     // @protocol LOTNumberValueDelegate <LOTValueDelegate>
     [Protocol, Model]
-    [BaseType(typeof(LOTValueDelegate))]
+    //[BaseType(typeof(LOTValueDelegate))]
     interface LOTNumberValueDelegate
     {
         // @required -(CGFloat)floatValueForFrame:(CGFloat)currentFrame startKeyframe:(CGFloat)startKeyframe endKeyframe:(CGFloat)endKeyframe interpolatedProgress:(CGFloat)interpolatedProgress startValue:(CGFloat)startValue endValue:(CGFloat)endValue currentValue:(CGFloat)interpolatedValue;
@@ -267,7 +267,7 @@ namespace Airbnb.Lottie
 
     // @protocol LOTPointValueDelegate <LOTValueDelegate>
     [Protocol, Model]
-    [BaseType(typeof(LOTValueDelegate))]
+    //[BaseType(typeof(LOTValueDelegate))]
     interface LOTPointValueDelegate
     {
         // @required -(CGPoint)pointForFrame:(CGFloat)currentFrame startKeyframe:(CGFloat)startKeyframe endKeyframe:(CGFloat)endKeyframe interpolatedProgress:(CGFloat)interpolatedProgress startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint currentPoint:(CGPoint)interpolatedPoint;
@@ -278,7 +278,7 @@ namespace Airbnb.Lottie
 
     // @protocol LOTSizeValueDelegate <LOTValueDelegate>
     [Protocol, Model]
-    [BaseType(typeof(LOTValueDelegate))]
+    //[BaseType(typeof(LOTValueDelegate))]
     interface LOTSizeValueDelegate
     {
         // @required -(CGSize)sizeForFrame:(CGFloat)currentFrame startKeyframe:(CGFloat)startKeyframe endKeyframe:(CGFloat)endKeyframe interpolatedProgress:(CGFloat)interpolatedProgress startSize:(CGSize)startSize endSize:(CGSize)endSize currentSize:(CGSize)interpolatedSize;
@@ -289,7 +289,7 @@ namespace Airbnb.Lottie
 
     // @protocol LOTPathValueDelegate <LOTValueDelegate>
     [Protocol, Model]
-    [BaseType(typeof(LOTValueDelegate))]
+    //[BaseType(typeof(LOTValueDelegate))]
     interface LOTPathValueDelegate
     {
         // @required -(CGPathRef)pathForFrame:(CGFloat)currentFrame startKeyframe:(CGFloat)startKeyframe endKeyframe:(CGFloat)endKeyframe interpolatedProgress:(CGFloat)interpolatedProgress;
@@ -473,7 +473,7 @@ namespace Airbnb.Lottie
     }
 
     // @interface LOTAnimationCache : NSObject
-    [BaseType(typeof(NSObject))]
+    //[BaseType(typeof(NSObject))]
     interface LOTAnimationCache
     {
         // +(instancetype _Nonnull)sharedCache;
@@ -519,7 +519,7 @@ namespace Airbnb.Lottie
     unsafe delegate CGPath LOTPathValueCallbackBlock(nfloat currentFrame, nfloat startKeyFrame, nfloat endKeyFrame, nfloat interpolatedProgress);
 
     // @interface LOTColorBlockCallback : NSObject <LOTColorValueDelegate>
-    [BaseType(typeof(NSObject))]
+    //[BaseType(typeof(NSObject))]
     interface LOTColorBlockCallback : LOTColorValueDelegate
     {
         // +(instancetype _Nonnull)withBlock:(LOTColorValueCallbackBlock _Nonnull)block;
@@ -533,7 +533,7 @@ namespace Airbnb.Lottie
     }
 
     // @interface LOTNumberBlockCallback : NSObject <LOTNumberValueDelegate>
-    [BaseType(typeof(NSObject))]
+    //[BaseType(typeof(NSObject))]
     interface LOTNumberBlockCallback : LOTNumberValueDelegate
     {
         // +(instancetype _Nonnull)withBlock:(LOTNumberValueCallbackBlock _Nonnull)block;
@@ -547,7 +547,7 @@ namespace Airbnb.Lottie
     }
 
     // @interface LOTPointBlockCallback : NSObject <LOTPointValueDelegate>
-    [BaseType(typeof(NSObject))]
+    //[BaseType(typeof(NSObject))]
     interface LOTPointBlockCallback : LOTPointValueDelegate
     {
         // +(instancetype _Nonnull)withBlock:(LOTPointValueCallbackBlock _Nonnull)block;
@@ -561,7 +561,7 @@ namespace Airbnb.Lottie
     }
 
     // @interface LOTSizeBlockCallback : NSObject <LOTSizeValueDelegate>
-    [BaseType(typeof(NSObject))]
+    //[BaseType(typeof(NSObject))]
     interface LOTSizeBlockCallback : LOTSizeValueDelegate
     {
         // +(instancetype _Nonnull)withBlock:(LOTSizeValueCallbackBlock _Nonnull)block;
@@ -575,7 +575,7 @@ namespace Airbnb.Lottie
     }
 
     // @interface LOTPathBlockCallback : NSObject <LOTPathValueDelegate>
-    [BaseType(typeof(NSObject))]
+    //[BaseType(typeof(NSObject))]
     interface LOTPathBlockCallback : LOTPathValueDelegate
     {
         // +(instancetype _Nonnull)withBlock:(LOTPathValueCallbackBlock _Nonnull)block;
@@ -589,7 +589,7 @@ namespace Airbnb.Lottie
     }
 
     // @interface LOTPointInterpolatorCallback : NSObject <LOTPointValueDelegate>
-    [BaseType(typeof(NSObject))]
+    //[BaseType(typeof(NSObject))]
     interface LOTPointInterpolatorCallback : LOTPointValueDelegate
     {
         // +(instancetype _Nonnull)withFromPoint:(CGPoint)fromPoint toPoint:(CGPoint)toPoint;
@@ -611,7 +611,7 @@ namespace Airbnb.Lottie
     }
 
     // @interface LOTSizeInterpolatorCallback : NSObject <LOTSizeValueDelegate>
-    [BaseType(typeof(NSObject))]
+    //[BaseType(typeof(NSObject))]
     interface LOTSizeInterpolatorCallback : LOTSizeValueDelegate
     {
         // +(instancetype _Nonnull)withFromSize:(CGSize)fromSize toSize:(CGSize)toSize;
@@ -633,7 +633,7 @@ namespace Airbnb.Lottie
     }
 
     // @interface LOTFloatInterpolatorCallback : NSObject <LOTNumberValueDelegate>
-    [BaseType(typeof(NSObject))]
+    //[BaseType(typeof(NSObject))]
     interface LOTFloatInterpolatorCallback : LOTNumberValueDelegate
     {
         // +(instancetype _Nonnull)withFromFloat:(CGFloat)fromFloat toFloat:(CGFloat)toFloat;
@@ -655,7 +655,7 @@ namespace Airbnb.Lottie
     }
 
     // @interface LOTColorValueCallback : NSObject <LOTColorValueDelegate>
-    [BaseType(typeof(NSObject))]
+    ////[BaseType(typeof(NSObject))]
     interface LOTColorValueCallback : LOTColorValueDelegate
     {
         // +(instancetype _Nonnull)withCGColor:(CGColorRef _Nonnull)color;
@@ -669,7 +669,7 @@ namespace Airbnb.Lottie
     }
 
     // @interface LOTNumberValueCallback : NSObject <LOTNumberValueDelegate>
-    [BaseType(typeof(NSObject))]
+    //[BaseType(typeof(NSObject))]
     interface LOTNumberValueCallback : LOTNumberValueDelegate
     {
         // +(instancetype _Nonnull)withFloatValue:(CGFloat)numberValue;
@@ -683,7 +683,7 @@ namespace Airbnb.Lottie
     }
 
     // @interface LOTPointValueCallback : NSObject <LOTPointValueDelegate>
-    [BaseType(typeof(NSObject))]
+    //[BaseType(typeof(NSObject))]
     interface LOTPointValueCallback : LOTPointValueDelegate
     {
         // +(instancetype _Nonnull)withPointValue:(CGPoint)pointValue;
@@ -697,7 +697,7 @@ namespace Airbnb.Lottie
     }
 
     // @interface LOTSizeValueCallback : NSObject <LOTSizeValueDelegate>
-    [BaseType(typeof(NSObject))]
+    //[BaseType(typeof(NSObject))]
     interface LOTSizeValueCallback : LOTSizeValueDelegate
     {
         // +(instancetype _Nonnull)withPointValue:(CGSize)sizeValue;
@@ -711,7 +711,7 @@ namespace Airbnb.Lottie
     }
 
     // @interface LOTPathValueCallback : NSObject <LOTPathValueDelegate>
-    [BaseType(typeof(NSObject))]
+    //[BaseType(typeof(NSObject))]
     interface LOTPathValueCallback : LOTPathValueDelegate
     {
         // +(instancetype _Nonnull)withCGPath:(CGPathRef _Nonnull)path;

@@ -48,6 +48,8 @@ namespace Lottie.Forms.Platforms.Ios
                         CompletionBlock = _animationCompletionBlock
                     };
 
+                    _animationView.Layer.MasksToBounds = true;
+
                     var composition = e.NewElement.GetAnimation();
                     _animationView.SceneModel = composition;
                     e.NewElement.InvokeAnimationLoaded(composition);
