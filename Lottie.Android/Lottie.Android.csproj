@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net6.0-android</TargetFrameworks>
+    <TargetFramework>monoandroid12.0;net6.0-android</TargetFramework>
     <AssemblyName>Lottie.Android</AssemblyName>
     <RootNamespace>Lottie.Android</RootNamespace>
     <Description>Render After Effects animations natively on Android, iOS, MacOS, TVOs and UWP</Description>
@@ -17,7 +17,7 @@
   
   <ItemGroup>
     <PackageReference Include="Square.OkIO" Version="1.17.4" />
-    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.4.1.1" />
+    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.6.1.6" />
     <!-- None Include="Additions\*;Jars\*;Transforms\*" /-->
     <LibraryProjectZip Include="Jars\*.aar" />
     <!--<JavaSourceJar Include="JavaDocs\*.jar" />-->
